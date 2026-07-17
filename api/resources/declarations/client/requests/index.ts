@@ -1,0 +1,16 @@
+export type { PostV1DeclarationsConfigsListRequest } from "./PostV1DeclarationsConfigsListRequest.js";
+export type { PostV1DeclarationsConfigsUpdateRequest } from "./PostV1DeclarationsConfigsUpdateRequest.js";
+export type { PostV1DeclarationsEuIossComputeRequest } from "./PostV1DeclarationsEuIossComputeRequest.js";
+export type { PostV1DeclarationsEuOssComputeRequest } from "./PostV1DeclarationsEuOssComputeRequest.js";
+export type { PostV1DeclarationsLtFr0600ComputeRequest } from "./PostV1DeclarationsLtFr0600ComputeRequest.js";
+export { PostV1DeclarationsLtGpm313ComputeRequest } from "./PostV1DeclarationsLtGpm313ComputeRequest.js";
+export { PostV1DeclarationsLtIntrastatComputeRequest } from "./PostV1DeclarationsLtIntrastatComputeRequest.js";
+export type { PostV1DeclarationsLtIntrastatObligationRequest } from "./PostV1DeclarationsLtIntrastatObligationRequest.js";
+export { PostV1DeclarationsLtIsafGenerateRequest } from "./PostV1DeclarationsLtIsafGenerateRequest.js";
+export type { PostV1DeclarationsLtIvazGenerateRequest } from "./PostV1DeclarationsLtIvazGenerateRequest.js";
+export { PostV1DeclarationsLtSaftGenerateRequest } from "./PostV1DeclarationsLtSaftGenerateRequest.js";
+export type { PostV1DeclarationsLtSamComputeRequest } from "./PostV1DeclarationsLtSamComputeRequest.js";
+export { PostV1DeclarationsLtSdGenerateRequest } from "./PostV1DeclarationsLtSdGenerateRequest.js";
+export { PostV1DeclarationsSubmissionsCreateRequest } from "./PostV1DeclarationsSubmissionsCreateRequest.js";
+export { PostV1DeclarationsSubmissionsListRequest } from "./PostV1DeclarationsSubmissionsListRequest.js";
+export { PostV1DeclarationsSubmissionsMarkRequest } from "./PostV1DeclarationsSubmissionsMarkRequest.js";
