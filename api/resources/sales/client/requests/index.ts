@@ -16,3 +16,12 @@ export type { PostV1SalesInvoicesPeppolSendRequest } from "./PostV1SalesInvoices
 export type { PostV1SalesInvoicesPeppolXmlRequest } from "./PostV1SalesInvoicesPeppolXmlRequest.js";
 export { PostV1SalesInvoicesSendRequest } from "./PostV1SalesInvoicesSendRequest.js";
 export { PostV1SalesInvoicesUpdateRequest } from "./PostV1SalesInvoicesUpdateRequest.js";
+export type { PostV1SalesRecognitionComputeRequest } from "./PostV1SalesRecognitionComputeRequest.js";
+export { PostV1SalesRecognitionModifyRequest } from "./PostV1SalesRecognitionModifyRequest.js";
+export type { PostV1SalesRecognitionProgressRequest } from "./PostV1SalesRecognitionProgressRequest.js";
+export type { PostV1SalesRecognitionRunRequest } from "./PostV1SalesRecognitionRunRequest.js";
+export { PostV1SalesRecognitionRunsListRequest } from "./PostV1SalesRecognitionRunsListRequest.js";
+export { PostV1SalesRecognitionSchedulesListRequest } from "./PostV1SalesRecognitionSchedulesListRequest.js";
+export type { PostV1SalesRecognitionSummaryRequest } from "./PostV1SalesRecognitionSummaryRequest.js";
+export { PostV1SalesRefundLiabilityListRequest } from "./PostV1SalesRefundLiabilityListRequest.js";
+export type { PostV1SalesRefundLiabilityTrueUpRequest } from "./PostV1SalesRefundLiabilityTrueUpRequest.js";

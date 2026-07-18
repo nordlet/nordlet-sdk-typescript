@@ -5,6 +5,7 @@ export interface PostV1AccountCompaniesProfileResponse {
     name: string;
     code: string | null;
     vatCode: string | null;
+    smeExemptionNumber: string | null;
     isVatPayer: boolean;
     isSandbox: boolean;
     countryCode: string;

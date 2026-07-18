@@ -8,6 +8,7 @@ export interface PostV1AccountCompaniesUpdateRequest {
     name?: string;
     code?: string;
     vatCode?: string;
+    smeExemptionNumber?: string;
     isVatPayer?: boolean;
     address?: PostV1AccountCompaniesUpdateRequest.Address;
     email?: string;

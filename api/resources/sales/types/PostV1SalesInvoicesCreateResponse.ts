@@ -19,6 +19,7 @@ export interface PostV1SalesInvoicesCreateResponse {
     journalTransactionId: string | null;
     appliedToInvoiceId: string | null;
     creditedInvoiceId: string | null;
+    agreementId: string | null;
     vatScheme: PostV1SalesInvoicesCreateResponse.VatScheme | null;
     vatCountryCode: string | null;
     deemedSupplier: boolean;
@@ -56,6 +57,7 @@ export namespace PostV1SalesInvoicesCreateResponse {
         MarketplaceDeemed: "marketplace_deemed",
         Export: "export",
         OutOfScope: "out_of_scope",
+        SmeExempt: "sme_exempt",
     } as const;
     export type VatScheme = (typeof VatScheme)[keyof typeof VatScheme];
     export type Lines = Lines.Item[];
@@ -76,6 +78,32 @@ export namespace PostV1SalesInvoicesCreateResponse {
             lineVat: string;
             lineGross: string;
             sortOrder: number;
+            recognitionMethod: Item.RecognitionMethod;
+            recognitionStartDate: string | null;
+            recognitionEndDate: string | null;
+            recognitionMilestones: Item.RecognitionMilestones.Item[] | null;
+            standaloneSellingPrice: string | null;
+            allocatedNet: string | null;
+            refundEstimatePercent: string | null;
+        }
+
+        export namespace Item {
+            export const RecognitionMethod = {
+                PointInTime: "point_in_time",
+                Ratable: "ratable",
+                Milestone: "milestone",
+                PercentComplete: "percent_complete",
+            } as const;
+            export type RecognitionMethod = (typeof RecognitionMethod)[keyof typeof RecognitionMethod];
+            export type RecognitionMilestones = RecognitionMilestones.Item[];
+
+            export namespace RecognitionMilestones {
+                export interface Item {
+                    description: string;
+                    expectedDate: string | null;
+                    percent: string;
+                }
+            }
         }
     }
 }

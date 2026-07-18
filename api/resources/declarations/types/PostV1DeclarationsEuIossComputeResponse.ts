@@ -7,6 +7,8 @@ export interface PostV1DeclarationsEuIossComputeResponse {
     memberStateOfIdentification: string;
     rows: PostV1DeclarationsEuIossComputeResponse.Rows.Item[];
     totals: PostV1DeclarationsEuIossComputeResponse.Totals;
+    corrections: PostV1DeclarationsEuIossComputeResponse.Corrections.Item[];
+    correctionsTotal: PostV1DeclarationsEuIossComputeResponse.CorrectionsTotal;
     warnings: string[];
     periodMonth: number;
 }
@@ -34,6 +36,25 @@ export namespace PostV1DeclarationsEuIossComputeResponse {
     }
 
     export interface Totals {
+        taxableAmount: string;
+        vatAmount: string;
+    }
+
+    export type Corrections = Corrections.Item[];
+
+    export namespace Corrections {
+        export interface Item {
+            countryCode: string;
+            periodYear: number;
+            periodQuarter: number | null;
+            periodMonth: number | null;
+            taxableAmount: string;
+            vatAmount: string;
+            documents: number;
+        }
+    }
+
+    export interface CorrectionsTotal {
         taxableAmount: string;
         vatAmount: string;
     }

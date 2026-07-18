@@ -40,6 +40,9 @@ export namespace PostV1LedgerPostingRulesUpdateRequest {
                 SettlementsCommissionRevenue: "settlements.commissionRevenue",
                 SettlementsSellerPayable: "settlements.sellerPayable",
                 SettlementsSuspense: "settlements.suspense",
+                RevenueDeferredIncome: "revenue.deferredIncome",
+                RevenueContractAsset: "revenue.contractAsset",
+                RevenueRefundLiability: "revenue.refundLiability",
             } as const;
             export type Key = (typeof Key)[keyof typeof Key];
         }

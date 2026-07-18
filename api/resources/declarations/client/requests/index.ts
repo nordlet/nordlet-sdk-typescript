@@ -1,7 +1,14 @@
 export type { PostV1DeclarationsConfigsListRequest } from "./PostV1DeclarationsConfigsListRequest.js";
 export type { PostV1DeclarationsConfigsUpdateRequest } from "./PostV1DeclarationsConfigsUpdateRequest.js";
+export type { PostV1DeclarationsEuDistanceSalesThresholdGetRequest } from "./PostV1DeclarationsEuDistanceSalesThresholdGetRequest.js";
 export type { PostV1DeclarationsEuIossComputeRequest } from "./PostV1DeclarationsEuIossComputeRequest.js";
 export type { PostV1DeclarationsEuOssComputeRequest } from "./PostV1DeclarationsEuOssComputeRequest.js";
+export type { PostV1DeclarationsEuSmeCrossBorderReportComputeRequest } from "./PostV1DeclarationsEuSmeCrossBorderReportComputeRequest.js";
+export type { PostV1DeclarationsEuSmeThresholdGetRequest } from "./PostV1DeclarationsEuSmeThresholdGetRequest.js";
+export type { PostV1DeclarationsEuSmeThresholdsListRequest } from "./PostV1DeclarationsEuSmeThresholdsListRequest.js";
+export type { PostV1DeclarationsEuUnionTurnoverGetRequest } from "./PostV1DeclarationsEuUnionTurnoverGetRequest.js";
+export type { PostV1DeclarationsEuVatReturnComputeRequest } from "./PostV1DeclarationsEuVatReturnComputeRequest.js";
+export type { PostV1DeclarationsEuVatReturnPacksListRequest } from "./PostV1DeclarationsEuVatReturnPacksListRequest.js";
 export type { PostV1DeclarationsLtFr0600ComputeRequest } from "./PostV1DeclarationsLtFr0600ComputeRequest.js";
 export { PostV1DeclarationsLtGpm313ComputeRequest } from "./PostV1DeclarationsLtGpm313ComputeRequest.js";
 export { PostV1DeclarationsLtIntrastatComputeRequest } from "./PostV1DeclarationsLtIntrastatComputeRequest.js";

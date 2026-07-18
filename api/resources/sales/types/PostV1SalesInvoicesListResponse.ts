@@ -30,6 +30,7 @@ export namespace PostV1SalesInvoicesListResponse {
             journalTransactionId: string | null;
             appliedToInvoiceId: string | null;
             creditedInvoiceId: string | null;
+            agreementId: string | null;
             vatScheme: Item.VatScheme | null;
             vatCountryCode: string | null;
             deemedSupplier: boolean;
@@ -66,6 +67,7 @@ export namespace PostV1SalesInvoicesListResponse {
                 MarketplaceDeemed: "marketplace_deemed",
                 Export: "export",
                 OutOfScope: "out_of_scope",
+                SmeExempt: "sme_exempt",
             } as const;
             export type VatScheme = (typeof VatScheme)[keyof typeof VatScheme];
         }

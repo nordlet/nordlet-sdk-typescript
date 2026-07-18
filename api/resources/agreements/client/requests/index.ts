@@ -1,5 +1,7 @@
+export type { PostV1AgreementsAgreementsBillingRunRequest } from "./PostV1AgreementsAgreementsBillingRunRequest.js";
 export { PostV1AgreementsAgreementsCreateRequest } from "./PostV1AgreementsAgreementsCreateRequest.js";
 export type { PostV1AgreementsAgreementsDeleteRequest } from "./PostV1AgreementsAgreementsDeleteRequest.js";
+export type { PostV1AgreementsAgreementsGenerateInvoiceRequest } from "./PostV1AgreementsAgreementsGenerateInvoiceRequest.js";
 export type { PostV1AgreementsAgreementsGetRequest } from "./PostV1AgreementsAgreementsGetRequest.js";
 export { PostV1AgreementsAgreementsListRequest } from "./PostV1AgreementsAgreementsListRequest.js";
 export { PostV1AgreementsAgreementsUpdateRequest } from "./PostV1AgreementsAgreementsUpdateRequest.js";

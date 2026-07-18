@@ -17,6 +17,7 @@ export interface PostV1AgreementsAgreementsCreateRequest {
     endDate?: string;
     autoRenew?: boolean;
     value?: string;
+    billingPeriod?: PostV1AgreementsAgreementsCreateRequest.BillingPeriod;
     currency?: string;
     status?: PostV1AgreementsAgreementsCreateRequest.Status;
     notes?: string;
@@ -24,6 +25,12 @@ export interface PostV1AgreementsAgreementsCreateRequest {
 }
 
 export namespace PostV1AgreementsAgreementsCreateRequest {
+    export const BillingPeriod = {
+        Monthly: "monthly",
+        Quarterly: "quarterly",
+        Annual: "annual",
+    } as const;
+    export type BillingPeriod = (typeof BillingPeriod)[keyof typeof BillingPeriod];
     export const Status = {
         Draft: "draft",
         Active: "active",
@@ -39,6 +46,7 @@ export namespace PostV1AgreementsAgreementsCreateRequest {
             description: string;
             quantity?: string | undefined;
             unitPrice?: string | undefined;
+            vatRatePercent?: string | undefined;
         }
     }
 }

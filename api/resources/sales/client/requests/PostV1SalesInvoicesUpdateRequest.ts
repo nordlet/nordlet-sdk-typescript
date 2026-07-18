@@ -29,6 +29,7 @@ export namespace PostV1SalesInvoicesUpdateRequest {
         MarketplaceDeemed: "marketplace_deemed",
         Export: "export",
         OutOfScope: "out_of_scope",
+        SmeExempt: "sme_exempt",
     } as const;
     export type VatScheme = (typeof VatScheme)[keyof typeof VatScheme];
     export type Lines = Lines.Item[];
@@ -44,10 +45,39 @@ export namespace PostV1SalesInvoicesUpdateRequest {
             vatRatePercent?: string | undefined;
             vatClassifierCode?: string | undefined;
             costCenterId?: string | undefined;
+            recognition?: Item.Recognition | undefined;
+            standaloneSellingPrice?: string | undefined;
+            refundEstimatePercent?: string | undefined;
         }
 
         export namespace Item {
             export type Quantity = number | string;
+
+            export interface Recognition {
+                method?: Recognition.Method | undefined;
+                startDate?: string | undefined;
+                endDate?: string | undefined;
+                milestones?: Recognition.Milestones.Item[] | undefined;
+            }
+
+            export namespace Recognition {
+                export const Method = {
+                    PointInTime: "point_in_time",
+                    Ratable: "ratable",
+                    Milestone: "milestone",
+                    PercentComplete: "percent_complete",
+                } as const;
+                export type Method = (typeof Method)[keyof typeof Method];
+                export type Milestones = Milestones.Item[];
+
+                export namespace Milestones {
+                    export interface Item {
+                        description: string;
+                        expectedDate?: string | undefined;
+                        percent: string;
+                    }
+                }
+            }
         }
     }
 }

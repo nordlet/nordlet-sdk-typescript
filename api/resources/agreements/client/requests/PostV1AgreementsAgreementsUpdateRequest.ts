@@ -13,11 +13,18 @@ export interface PostV1AgreementsAgreementsUpdateRequest {
     endDate?: string | null;
     autoRenew?: boolean;
     value?: string | null;
+    billingPeriod?: PostV1AgreementsAgreementsUpdateRequest.BillingPeriod | null;
     status?: PostV1AgreementsAgreementsUpdateRequest.Status;
     notes?: string | null;
 }
 
 export namespace PostV1AgreementsAgreementsUpdateRequest {
+    export const BillingPeriod = {
+        Monthly: "monthly",
+        Quarterly: "quarterly",
+        Annual: "annual",
+    } as const;
+    export type BillingPeriod = (typeof BillingPeriod)[keyof typeof BillingPeriod];
     export const Status = {
         Draft: "draft",
         Active: "active",

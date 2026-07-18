@@ -10,6 +10,7 @@ export interface PostV1AccountCompaniesCreateRequest {
     name: string;
     code?: string;
     vatCode?: string;
+    smeExemptionNumber?: string;
     isVatPayer?: boolean;
     address?: PostV1AccountCompaniesCreateRequest.Address;
     email?: string;

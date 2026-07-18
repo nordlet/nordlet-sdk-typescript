@@ -21,6 +21,7 @@ export namespace PostV1ReferenceVatResolveResponse {
         MarketplaceDeemed: "marketplace_deemed",
         Export: "export",
         OutOfScope: "out_of_scope",
+        SmeExempt: "sme_exempt",
     } as const;
     export type Scheme = (typeof Scheme)[keyof typeof Scheme];
     export type Rates = Rates.Item[];

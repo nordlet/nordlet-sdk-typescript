@@ -6,6 +6,7 @@ export type { PostV1ReferenceComplianceVersionsListRequest } from "./PostV1Refer
 export type { PostV1ReferenceCountriesListRequest } from "./PostV1ReferenceCountriesListRequest.js";
 export { PostV1ReferenceCurrenciesListRequest } from "./PostV1ReferenceCurrenciesListRequest.js";
 export type { PostV1ReferenceEuVatRatesListRequest } from "./PostV1ReferenceEuVatRatesListRequest.js";
+export { PostV1ReferenceEuVatRatesSetOverridesRequest } from "./PostV1ReferenceEuVatRatesSetOverridesRequest.js";
 export { PostV1ReferenceExchangeRatesListRequest } from "./PostV1ReferenceExchangeRatesListRequest.js";
 export type { PostV1ReferenceExchangeRatesOverridesDeleteRequest } from "./PostV1ReferenceExchangeRatesOverridesDeleteRequest.js";
 export { PostV1ReferenceExchangeRatesOverridesListRequest } from "./PostV1ReferenceExchangeRatesOverridesListRequest.js";

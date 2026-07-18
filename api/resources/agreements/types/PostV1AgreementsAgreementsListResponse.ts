@@ -21,6 +21,7 @@ export namespace PostV1AgreementsAgreementsListResponse {
             endDate: string | null;
             autoRenew: boolean;
             value: string | null;
+            billingPeriod: Item.BillingPeriod | null;
             currency: string;
             status: Item.Status;
             notes: string | null;
@@ -28,6 +29,12 @@ export namespace PostV1AgreementsAgreementsListResponse {
         }
 
         export namespace Item {
+            export const BillingPeriod = {
+                Monthly: "monthly",
+                Quarterly: "quarterly",
+                Annual: "annual",
+            } as const;
+            export type BillingPeriod = (typeof BillingPeriod)[keyof typeof BillingPeriod];
             export const Status = {
                 Draft: "draft",
                 Active: "active",

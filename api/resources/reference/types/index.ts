@@ -6,6 +6,7 @@ export * from "./PostV1ReferenceComplianceVersionsListResponse.js";
 export * from "./PostV1ReferenceCountriesListResponse.js";
 export * from "./PostV1ReferenceCurrenciesListResponse.js";
 export * from "./PostV1ReferenceEuVatRatesListResponse.js";
+export * from "./PostV1ReferenceEuVatRatesSetOverridesResponse.js";
 export * from "./PostV1ReferenceExchangeRatesListResponse.js";
 export * from "./PostV1ReferenceExchangeRatesOverridesDeleteResponse.js";
 export * from "./PostV1ReferenceExchangeRatesOverridesListResponse.js";

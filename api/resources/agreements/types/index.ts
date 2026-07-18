@@ -1,5 +1,7 @@
+export * from "./PostV1AgreementsAgreementsBillingRunResponse.js";
 export * from "./PostV1AgreementsAgreementsCreateResponse.js";
 export * from "./PostV1AgreementsAgreementsDeleteResponse.js";
+export * from "./PostV1AgreementsAgreementsGenerateInvoiceResponse.js";
 export * from "./PostV1AgreementsAgreementsGetResponse.js";
 export * from "./PostV1AgreementsAgreementsListResponse.js";
 export * from "./PostV1AgreementsAgreementsUpdateResponse.js";
