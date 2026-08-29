@@ -6,6 +6,7 @@ export interface PostV1ProductionBomsGetResponse {
     name: string;
     finishedItemId: string;
     outputQuantity: string;
+    routingId: string | null;
     isActive: boolean;
     lines: PostV1ProductionBomsGetResponse.Lines.Item[];
 }
@@ -18,6 +19,7 @@ export namespace PostV1ProductionBomsGetResponse {
             id: string;
             componentItemId: string;
             quantity: string;
+            scrapPercent: string;
         }
     }
 }

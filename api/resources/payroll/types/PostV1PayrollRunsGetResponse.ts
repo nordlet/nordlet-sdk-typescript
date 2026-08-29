@@ -33,6 +33,7 @@ export namespace PostV1PayrollRunsGetResponse {
             contractId: string | null;
             employeeName: string;
             gross: string;
+            natura: string;
             additions: Item.Additions.Item[];
             deductions: Item.Deductions.Item[];
             taxableBase: string;

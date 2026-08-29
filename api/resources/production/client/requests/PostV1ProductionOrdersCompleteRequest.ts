@@ -8,6 +8,7 @@
  */
 export interface PostV1ProductionOrdersCompleteRequest {
     id: string;
+    scrappedQuantity?: string;
     componentsAccountCode?: string;
     finishedAccountCode?: string;
 }

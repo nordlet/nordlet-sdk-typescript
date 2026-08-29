@@ -34,6 +34,8 @@ export namespace PostV1LedgerPostingRulesUpdateRequest {
                 PurchasesDefaultExpense: "purchases.defaultExpense",
                 InventoryCogs: "inventory.cogs",
                 InventoryStock: "inventory.stock",
+                ProductionLaborApplied: "production.laborApplied",
+                ProductionScrap: "production.scrap",
                 BankFxGain: "bank.fxGain",
                 BankFxLoss: "bank.fxLoss",
                 SettlementsFees: "settlements.fees",

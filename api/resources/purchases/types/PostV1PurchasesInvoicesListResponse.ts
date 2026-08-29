@@ -28,6 +28,7 @@ export namespace PostV1PurchasesInvoicesListResponse {
             paidAmount: string;
             journalTransactionId: string | null;
             creditedInvoiceId: string | null;
+            purchaseOrderId: string | null;
             notes: string | null;
             createdAt: string;
             updatedAt: string;

@@ -18,6 +18,7 @@ export * from "./PostV1DeclarationsLtIvazGenerateResponse.js";
 export * from "./PostV1DeclarationsLtSaftGenerateResponse.js";
 export * from "./PostV1DeclarationsLtSamComputeResponse.js";
 export * from "./PostV1DeclarationsLtSdGenerateResponse.js";
+export * from "./PostV1DeclarationsPlJpkV7MGenerateResponse.js";
 export * from "./PostV1DeclarationsSubmissionsCreateResponse.js";
 export * from "./PostV1DeclarationsSubmissionsListResponse.js";
 export * from "./PostV1DeclarationsSubmissionsMarkResponse.js";

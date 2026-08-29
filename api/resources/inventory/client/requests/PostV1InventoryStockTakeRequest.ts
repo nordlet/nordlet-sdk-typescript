@@ -27,6 +27,8 @@ export namespace PostV1InventoryStockTakeRequest {
             barcode?: string | undefined;
             countedQty: string;
             unitCost?: string | undefined;
+            lotNumber?: string | undefined;
+            expiryDate?: string | undefined;
         }
     }
 }

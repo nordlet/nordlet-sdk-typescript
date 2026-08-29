@@ -3,6 +3,11 @@ export type { PostV1ConsolidationGroupsDeleteRequest } from "./PostV1Consolidati
 export type { PostV1ConsolidationGroupsGetRequest } from "./PostV1ConsolidationGroupsGetRequest.js";
 export type { PostV1ConsolidationGroupsListRequest } from "./PostV1ConsolidationGroupsListRequest.js";
 export type { PostV1ConsolidationGroupsUpdateRequest } from "./PostV1ConsolidationGroupsUpdateRequest.js";
+export type { PostV1ConsolidationIntercompanyCandidatesRequest } from "./PostV1ConsolidationIntercompanyCandidatesRequest.js";
+export type { PostV1ConsolidationIntercompanyLinksListRequest } from "./PostV1ConsolidationIntercompanyLinksListRequest.js";
+export type { PostV1ConsolidationIntercompanyLinksRemoveRequest } from "./PostV1ConsolidationIntercompanyLinksRemoveRequest.js";
+export type { PostV1ConsolidationIntercompanyLinksSetRequest } from "./PostV1ConsolidationIntercompanyLinksSetRequest.js";
+export type { PostV1ConsolidationIntercompanyReportRequest } from "./PostV1ConsolidationIntercompanyReportRequest.js";
 export { PostV1ConsolidationMembersAddRequest } from "./PostV1ConsolidationMembersAddRequest.js";
 export type { PostV1ConsolidationMembersRemoveRequest } from "./PostV1ConsolidationMembersRemoveRequest.js";
 export { PostV1ConsolidationReportRequest } from "./PostV1ConsolidationReportRequest.js";

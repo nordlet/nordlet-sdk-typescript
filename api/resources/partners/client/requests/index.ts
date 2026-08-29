@@ -30,3 +30,5 @@ export type { PostV1PartnersStatusesListRequest } from "./PostV1PartnersStatuses
 export type { PostV1PartnersStatusesUpdateRequest } from "./PostV1PartnersStatusesUpdateRequest.js";
 export { PostV1PartnersUpdateRequest } from "./PostV1PartnersUpdateRequest.js";
 export type { PostV1PartnersValidateVatRequest } from "./PostV1PartnersValidateVatRequest.js";
+export { PostV1PartnersVatReviewsListRequest } from "./PostV1PartnersVatReviewsListRequest.js";
+export { PostV1PartnersVatReviewsResolveRequest } from "./PostV1PartnersVatReviewsResolveRequest.js";

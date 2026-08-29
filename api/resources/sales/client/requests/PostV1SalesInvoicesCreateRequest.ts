@@ -54,6 +54,7 @@ export namespace PostV1SalesInvoicesCreateRequest {
             vatRatePercent?: string | undefined;
             vatClassifierCode?: string | undefined;
             costCenterId?: string | undefined;
+            projectId?: string | undefined;
             recognition?: Item.Recognition | undefined;
             standaloneSellingPrice?: string | undefined;
             refundEstimatePercent?: string | undefined;

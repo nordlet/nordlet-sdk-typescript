@@ -27,6 +27,7 @@ export namespace PostV1LedgerJournalTransactionsGetResponse {
             accountCode: string;
             accountName: string;
             costCenterId: string | null;
+            projectId: string | null;
             debit: string;
             credit: string;
             description: string | null;

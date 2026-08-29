@@ -15,6 +15,7 @@ export namespace PostV1InventoryStockMovementsListResponse {
             id: string;
             warehouseId: string;
             itemId: string;
+            lotId: string | null;
             date: string;
             direction: Item.Direction;
             quantity: string;

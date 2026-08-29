@@ -17,6 +17,7 @@ export interface PostV1ProductionBomsCreateRequest {
     name: string;
     finishedItemId: string;
     outputQuantity?: string;
+    routingId?: string;
     lines: PostV1ProductionBomsCreateRequest.Lines.Item[];
 }
 
@@ -27,6 +28,7 @@ export namespace PostV1ProductionBomsCreateRequest {
         export interface Item {
             componentItemId: string;
             quantity: string;
+            scrapPercent?: string | undefined;
         }
     }
 }

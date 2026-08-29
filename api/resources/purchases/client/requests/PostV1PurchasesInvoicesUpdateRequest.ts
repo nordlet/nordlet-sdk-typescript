@@ -13,6 +13,7 @@ export interface PostV1PurchasesInvoicesUpdateRequest {
     documentDate?: string;
     dueDate?: string;
     currency?: string;
+    purchaseOrderId?: string | null;
     notes?: string;
     lines?: PostV1PurchasesInvoicesUpdateRequest.Lines.Item[];
 }
@@ -31,6 +32,7 @@ export namespace PostV1PurchasesInvoicesUpdateRequest {
             vatRatePercent?: string | undefined;
             vatClassifierCode?: string | undefined;
             costCenterId?: string | undefined;
+            projectId?: string | undefined;
             accountCode?: string | undefined;
         }
 

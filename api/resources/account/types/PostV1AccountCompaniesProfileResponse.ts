@@ -18,6 +18,7 @@ export interface PostV1AccountCompaniesProfileResponse {
     iban: string | null;
     bankName: string | null;
     peppolId: string | null;
+    sepaCreditorId: string | null;
     logoFileId: string | null;
 }
 

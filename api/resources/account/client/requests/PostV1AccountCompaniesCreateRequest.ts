@@ -18,6 +18,7 @@ export interface PostV1AccountCompaniesCreateRequest {
     iban?: string;
     bankName?: string;
     peppolId?: string;
+    sepaCreditorId?: string;
     defaultInvoiceCurrency?: string;
     /** Jurisdiction the company is registered in (immutable after creation) */
     countryCode?: PostV1AccountCompaniesCreateRequest.CountryCode;

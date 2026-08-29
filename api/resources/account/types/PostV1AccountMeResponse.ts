@@ -5,6 +5,7 @@ export interface PostV1AccountMeResponse {
     locale: string;
     activeCompanyId: string | null;
     role: string | null;
+    billing: PostV1AccountMeResponse.Billing;
     companies: PostV1AccountMeResponse.Companies.Item[];
 }
 
@@ -16,6 +17,22 @@ export namespace PostV1AccountMeResponse {
         locale: string;
         plan: string;
         isSuperAdmin: boolean;
+    }
+
+    export interface Billing {
+        status: Billing.Status;
+        plan: string;
+        balanceCents: number;
+        trialEndsAt: string | null;
+    }
+
+    export namespace Billing {
+        export const Status = {
+            Trial: "trial",
+            Active: "active",
+            Suspended: "suspended",
+        } as const;
+        export type Status = (typeof Status)[keyof typeof Status];
     }
 
     export type Companies = Companies.Item[];

@@ -5,13 +5,20 @@ export interface PostV1ProductionOrdersCreateResponse {
     type: PostV1ProductionOrdersCreateResponse.Type;
     bomId: string;
     warehouseId: string;
+    routingId: string | null;
     quantity: string;
     date: string;
     status: PostV1ProductionOrdersCreateResponse.Status;
+    scrappedQuantity: string | null;
+    materialCost: string | null;
+    laborCost: string | null;
+    scrapCost: string | null;
     totalCost: string | null;
     journalTransactionId: string | null;
     notes: string | null;
     createdAt: string;
+    operations: PostV1ProductionOrdersCreateResponse.Operations.Item[];
+    qualityChecks: PostV1ProductionOrdersCreateResponse.QualityChecks.Item[];
 }
 
 export namespace PostV1ProductionOrdersCreateResponse {
@@ -25,4 +32,44 @@ export namespace PostV1ProductionOrdersCreateResponse {
         Completed: "completed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type Operations = Operations.Item[];
+
+    export namespace Operations {
+        export interface Item {
+            id: string;
+            routingOperationId: string | null;
+            workCenterId: string;
+            sequence: number;
+            name: string;
+            plannedMinutes: string;
+            actualMinutes: string | null;
+            costPerHour: string;
+            cost: string | null;
+        }
+    }
+
+    export type QualityChecks = QualityChecks.Item[];
+
+    export namespace QualityChecks {
+        export interface Item {
+            id: string;
+            orderId: string;
+            routingOperationId: string | null;
+            name: string;
+            result: Item.Result;
+            notes: string | null;
+            checkedAt: string | null;
+            checkedBy: string | null;
+            createdAt: string;
+        }
+
+        export namespace Item {
+            export const Result = {
+                Pending: "pending",
+                Passed: "passed",
+                Failed: "failed",
+            } as const;
+            export type Result = (typeof Result)[keyof typeof Result];
+        }
+    }
 }

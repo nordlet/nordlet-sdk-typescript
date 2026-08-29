@@ -5,12 +5,15 @@ import { AgreementsClient } from "./api/resources/agreements/client/Client.js";
 import { AssetsClient } from "./api/resources/assets/client/Client.js";
 import { AuditClient } from "./api/resources/audit/client/Client.js";
 import { BankClient } from "./api/resources/bank/client/Client.js";
+import { BillingClient } from "./api/resources/billing/client/Client.js";
+import { CaptureClient } from "./api/resources/capture/client/Client.js";
 import { CashClient } from "./api/resources/cash/client/Client.js";
 import { CatalogClient } from "./api/resources/catalog/client/Client.js";
 import { ConsolidationClient } from "./api/resources/consolidation/client/Client.js";
 import { DeclarationsClient } from "./api/resources/declarations/client/Client.js";
 import { EcommerceClient } from "./api/resources/ecommerce/client/Client.js";
 import { FilesClient } from "./api/resources/files/client/Client.js";
+import { FleetClient } from "./api/resources/fleet/client/Client.js";
 import { HrClient } from "./api/resources/hr/client/Client.js";
 import { InventoryClient } from "./api/resources/inventory/client/Client.js";
 import { LedgerClient } from "./api/resources/ledger/client/Client.js";
@@ -18,6 +21,7 @@ import { PartnersClient } from "./api/resources/partners/client/Client.js";
 import { PayrollClient } from "./api/resources/payroll/client/Client.js";
 import { PosClient } from "./api/resources/pos/client/Client.js";
 import { ProductionClient } from "./api/resources/production/client/Client.js";
+import { ProjectsClient } from "./api/resources/projects/client/Client.js";
 import { PublicClient } from "./api/resources/public/client/Client.js";
 import { PurchasesClient } from "./api/resources/purchases/client/Client.js";
 import { ReferenceClient } from "./api/resources/reference/client/Client.js";
@@ -42,16 +46,19 @@ export class NordletApiClient {
     protected _catalog: CatalogClient | undefined;
     protected _sales: SalesClient | undefined;
     protected _purchases: PurchasesClient | undefined;
+    protected _capture: CaptureClient | undefined;
     protected _declarations: DeclarationsClient | undefined;
     protected _ledger: LedgerClient | undefined;
     protected _assets: AssetsClient | undefined;
     protected _hr: HrClient | undefined;
+    protected _fleet: FleetClient | undefined;
     protected _payroll: PayrollClient | undefined;
     protected _agreements: AgreementsClient | undefined;
     protected _inventory: InventoryClient | undefined;
     protected _production: ProductionClient | undefined;
     protected _ecommerce: EcommerceClient | undefined;
     protected _cash: CashClient | undefined;
+    protected _projects: ProjectsClient | undefined;
     protected _transport: TransportClient | undefined;
     protected _pos: PosClient | undefined;
     protected _audit: AuditClient | undefined;
@@ -61,6 +68,7 @@ export class NordletApiClient {
     protected _reports: ReportsClient | undefined;
     protected _consolidation: ConsolidationClient | undefined;
     protected _public: PublicClient | undefined;
+    protected _billing: BillingClient | undefined;
     protected _account: AccountClient | undefined;
 
     constructor(options: NordletApiClient.Options) {
@@ -87,6 +95,10 @@ export class NordletApiClient {
         return (this._purchases ??= new PurchasesClient(this._options));
     }
 
+    public get capture(): CaptureClient {
+        return (this._capture ??= new CaptureClient(this._options));
+    }
+
     public get declarations(): DeclarationsClient {
         return (this._declarations ??= new DeclarationsClient(this._options));
     }
@@ -101,6 +113,10 @@ export class NordletApiClient {
 
     public get hr(): HrClient {
         return (this._hr ??= new HrClient(this._options));
+    }
+
+    public get fleet(): FleetClient {
+        return (this._fleet ??= new FleetClient(this._options));
     }
 
     public get payroll(): PayrollClient {
@@ -125,6 +141,10 @@ export class NordletApiClient {
 
     public get cash(): CashClient {
         return (this._cash ??= new CashClient(this._options));
+    }
+
+    public get projects(): ProjectsClient {
+        return (this._projects ??= new ProjectsClient(this._options));
     }
 
     public get transport(): TransportClient {
@@ -161,6 +181,10 @@ export class NordletApiClient {
 
     public get public(): PublicClient {
         return (this._public ??= new PublicClient(this._options));
+    }
+
+    public get billing(): BillingClient {
+        return (this._billing ??= new BillingClient(this._options));
     }
 
     public get account(): AccountClient {

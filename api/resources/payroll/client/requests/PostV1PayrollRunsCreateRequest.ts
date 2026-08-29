@@ -10,6 +10,7 @@
 export interface PostV1PayrollRunsCreateRequest {
     year: number;
     month: number;
+    includeNatura?: boolean;
     lines?: PostV1PayrollRunsCreateRequest.Lines.Item[];
     notes?: string;
 }

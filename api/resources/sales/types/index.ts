@@ -8,6 +8,8 @@ export * from "./PostV1SalesActsUpdateResponse.js";
 export * from "./PostV1SalesInvoicesApplyAdvanceResponse.js";
 export * from "./PostV1SalesInvoicesCreateResponse.js";
 export * from "./PostV1SalesInvoicesDeleteResponse.js";
+export * from "./PostV1SalesInvoicesEinvoiceSendResponse.js";
+export * from "./PostV1SalesInvoicesEinvoiceXmlResponse.js";
 export * from "./PostV1SalesInvoicesGetResponse.js";
 export * from "./PostV1SalesInvoicesIssueResponse.js";
 export * from "./PostV1SalesInvoicesListResponse.js";

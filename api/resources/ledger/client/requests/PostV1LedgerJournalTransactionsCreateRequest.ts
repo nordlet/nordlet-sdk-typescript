@@ -22,6 +22,7 @@ export namespace PostV1LedgerJournalTransactionsCreateRequest {
         export interface Item {
             accountCode: string;
             costCenterId?: string | undefined;
+            projectId?: string | undefined;
             debit?: string | undefined;
             credit?: string | undefined;
             description?: string | undefined;

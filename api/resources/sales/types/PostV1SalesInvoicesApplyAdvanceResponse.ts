@@ -27,6 +27,7 @@ export interface PostV1SalesInvoicesApplyAdvanceResponse {
     createdAt: string;
     updatedAt: string;
     lines: PostV1SalesInvoicesApplyAdvanceResponse.Lines.Item[];
+    vatEvidence: PostV1SalesInvoicesApplyAdvanceResponse.VatEvidence | null;
 }
 
 export namespace PostV1SalesInvoicesApplyAdvanceResponse {
@@ -74,6 +75,7 @@ export namespace PostV1SalesInvoicesApplyAdvanceResponse {
             vatRatePercent: string;
             vatClassifierCode: string | null;
             costCenterId: string | null;
+            projectId: string | null;
             lineNet: string;
             lineVat: string;
             lineGross: string;
@@ -103,6 +105,64 @@ export namespace PostV1SalesInvoicesApplyAdvanceResponse {
                     expectedDate: string | null;
                     percent: string;
                 }
+            }
+        }
+    }
+
+    export interface VatEvidence {
+        capturedAt: string;
+        issueDate: string;
+        scheme: VatEvidence.Scheme;
+        partner: VatEvidence.Partner;
+        vies: VatEvidence.Vies | null;
+        location: VatEvidence.Location;
+        rateTable: VatEvidence.RateTable | null;
+        rates: VatEvidence.Rates.Item[];
+    }
+
+    export namespace VatEvidence {
+        export interface Scheme {
+            vatScheme: string | null;
+            vatCountryCode: string | null;
+            deemedSupplier: boolean;
+        }
+
+        export interface Partner {
+            id: string;
+            vatCode: string | null;
+            vatValid: boolean | null;
+            vatValidatedAt: string | null;
+        }
+
+        export interface Vies {
+            valid: boolean;
+            countryCode: string;
+            vatNumber: string;
+            name: string | null;
+            address: string | null;
+            requestIdentifier: string | null;
+            checkedAt: string;
+        }
+
+        export interface Location {
+            billingCountryCode: string | null;
+            source: string | null;
+        }
+
+        export interface RateTable {
+            importId: string;
+            situationOn: string;
+            trigger: string;
+            startedAt: string;
+        }
+
+        export type Rates = Rates.Item[];
+
+        export namespace Rates {
+            export interface Item {
+                ratePercent: string;
+                country: string;
+                category: string | null;
             }
         }
     }

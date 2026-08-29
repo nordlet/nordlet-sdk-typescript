@@ -30,3 +30,5 @@ export * from "./PostV1PartnersStatusesListResponse.js";
 export * from "./PostV1PartnersStatusesUpdateResponse.js";
 export * from "./PostV1PartnersUpdateResponse.js";
 export * from "./PostV1PartnersValidateVatResponse.js";
+export * from "./PostV1PartnersVatReviewsListResponse.js";
+export * from "./PostV1PartnersVatReviewsResolveResponse.js";

@@ -16,5 +16,7 @@ export interface PostV1InventoryStockReceiveRequest {
     date: string;
     quantity: string;
     unitCost: string;
+    lotNumber?: string;
+    expiryDate?: string;
     notes?: string;
 }

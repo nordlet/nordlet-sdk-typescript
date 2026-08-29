@@ -16,5 +16,6 @@ export interface PostV1InventoryStockTransferRequest {
     itemId: string;
     date: string;
     quantity: string;
+    lotNumber?: string;
     notes?: string;
 }

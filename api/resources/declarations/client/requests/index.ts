@@ -18,6 +18,7 @@ export type { PostV1DeclarationsLtIvazGenerateRequest } from "./PostV1Declaratio
 export { PostV1DeclarationsLtSaftGenerateRequest } from "./PostV1DeclarationsLtSaftGenerateRequest.js";
 export type { PostV1DeclarationsLtSamComputeRequest } from "./PostV1DeclarationsLtSamComputeRequest.js";
 export { PostV1DeclarationsLtSdGenerateRequest } from "./PostV1DeclarationsLtSdGenerateRequest.js";
+export type { PostV1DeclarationsPlJpkV7MGenerateRequest } from "./PostV1DeclarationsPlJpkV7MGenerateRequest.js";
 export { PostV1DeclarationsSubmissionsCreateRequest } from "./PostV1DeclarationsSubmissionsCreateRequest.js";
 export { PostV1DeclarationsSubmissionsListRequest } from "./PostV1DeclarationsSubmissionsListRequest.js";
 export { PostV1DeclarationsSubmissionsMarkRequest } from "./PostV1DeclarationsSubmissionsMarkRequest.js";

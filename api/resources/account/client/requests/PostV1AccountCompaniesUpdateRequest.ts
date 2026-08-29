@@ -16,6 +16,7 @@ export interface PostV1AccountCompaniesUpdateRequest {
     iban?: string;
     bankName?: string;
     peppolId?: string;
+    sepaCreditorId?: string;
     defaultInvoiceCurrency?: string;
     logo?: PostV1AccountCompaniesUpdateRequest.Logo;
 }

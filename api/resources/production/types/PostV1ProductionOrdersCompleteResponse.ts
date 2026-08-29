@@ -5,9 +5,14 @@ export interface PostV1ProductionOrdersCompleteResponse {
     type: PostV1ProductionOrdersCompleteResponse.Type;
     bomId: string;
     warehouseId: string;
+    routingId: string | null;
     quantity: string;
     date: string;
     status: PostV1ProductionOrdersCompleteResponse.Status;
+    scrappedQuantity: string | null;
+    materialCost: string | null;
+    laborCost: string | null;
+    scrapCost: string | null;
     totalCost: string | null;
     journalTransactionId: string | null;
     notes: string | null;

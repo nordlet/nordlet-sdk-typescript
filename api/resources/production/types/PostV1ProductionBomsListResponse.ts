@@ -17,6 +17,7 @@ export namespace PostV1ProductionBomsListResponse {
             name: string;
             finishedItemId: string;
             outputQuantity: string;
+            routingId: string | null;
             isActive: boolean;
         }
     }

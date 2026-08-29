@@ -11,6 +11,7 @@ export interface PostV1ConsolidationReportResponse {
     equityMethod: PostV1ConsolidationReportResponse.EquityMethod;
     members: PostV1ConsolidationReportResponse.Members.Item[];
     eliminations: PostV1ConsolidationReportResponse.Eliminations;
+    cashFlow: PostV1ConsolidationReportResponse.CashFlow;
     intercompanyCandidates: PostV1ConsolidationReportResponse.IntercompanyCandidates.Item[];
 }
 
@@ -180,6 +181,78 @@ export namespace PostV1ConsolidationReportResponse {
                 code: string;
                 amount: string;
                 note?: string | undefined;
+            }
+        }
+    }
+
+    export interface CashFlow {
+        openingCash: string;
+        closingCash: string;
+        netChange: string;
+        operating: CashFlow.Operating;
+        investing: CashFlow.Investing;
+        financing: CashFlow.Financing;
+        balanced: boolean;
+    }
+
+    export namespace CashFlow {
+        export interface Operating {
+            inflow: string;
+            outflow: string;
+            net: string;
+            rows: Operating.Rows.Item[];
+        }
+
+        export namespace Operating {
+            export type Rows = Rows.Item[];
+
+            export namespace Rows {
+                export interface Item {
+                    code: string;
+                    name: string;
+                    inflow: string;
+                    outflow: string;
+                }
+            }
+        }
+
+        export interface Investing {
+            inflow: string;
+            outflow: string;
+            net: string;
+            rows: Investing.Rows.Item[];
+        }
+
+        export namespace Investing {
+            export type Rows = Rows.Item[];
+
+            export namespace Rows {
+                export interface Item {
+                    code: string;
+                    name: string;
+                    inflow: string;
+                    outflow: string;
+                }
+            }
+        }
+
+        export interface Financing {
+            inflow: string;
+            outflow: string;
+            net: string;
+            rows: Financing.Rows.Item[];
+        }
+
+        export namespace Financing {
+            export type Rows = Rows.Item[];
+
+            export namespace Rows {
+                export interface Item {
+                    code: string;
+                    name: string;
+                    inflow: string;
+                    outflow: string;
+                }
             }
         }
     }

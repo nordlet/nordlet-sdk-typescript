@@ -16,9 +16,14 @@ export namespace PostV1ProductionOrdersListResponse {
             type: Item.Type;
             bomId: string;
             warehouseId: string;
+            routingId: string | null;
             quantity: string;
             date: string;
             status: Item.Status;
+            scrappedQuantity: string | null;
+            materialCost: string | null;
+            laborCost: string | null;
+            scrapCost: string | null;
             totalCost: string | null;
             journalTransactionId: string | null;
             notes: string | null;

@@ -3,6 +3,7 @@
 export interface PostV1CatalogItemsGetResponse {
     id: string;
     type: PostV1CatalogItemsGetResponse.Type;
+    tracking: PostV1CatalogItemsGetResponse.Tracking;
     name: string;
     code: string | null;
     barcode: string | null;
@@ -32,6 +33,12 @@ export namespace PostV1CatalogItemsGetResponse {
         Set: "set",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
+    export const Tracking = {
+        None: "none",
+        Lot: "lot",
+        Serial: "serial",
+    } as const;
+    export type Tracking = (typeof Tracking)[keyof typeof Tracking];
 
     export namespace Translations {
         export interface Value {

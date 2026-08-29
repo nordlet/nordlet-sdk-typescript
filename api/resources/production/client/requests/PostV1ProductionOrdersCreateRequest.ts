@@ -13,6 +13,7 @@ export interface PostV1ProductionOrdersCreateRequest {
     type?: PostV1ProductionOrdersCreateRequest.Type;
     bomId: string;
     warehouseId: string;
+    routingId?: string;
     quantity: string;
     date: string;
     notes?: string;

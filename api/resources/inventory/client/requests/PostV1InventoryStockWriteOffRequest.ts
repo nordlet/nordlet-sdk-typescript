@@ -14,6 +14,7 @@ export interface PostV1InventoryStockWriteOffRequest {
     itemId: string;
     date: string;
     quantity: string;
+    lotNumber?: string;
     expenseAccountCode?: string;
     inventoryAccountCode?: string;
     notes?: string;

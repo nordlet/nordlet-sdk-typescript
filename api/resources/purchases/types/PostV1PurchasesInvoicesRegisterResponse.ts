@@ -17,6 +17,7 @@ export interface PostV1PurchasesInvoicesRegisterResponse {
     paidAmount: string;
     journalTransactionId: string | null;
     creditedInvoiceId: string | null;
+    purchaseOrderId: string | null;
     notes: string | null;
     createdAt: string;
     updatedAt: string;
@@ -54,6 +55,7 @@ export namespace PostV1PurchasesInvoicesRegisterResponse {
             vatRatePercent: string;
             vatClassifierCode: string | null;
             costCenterId: string | null;
+            projectId: string | null;
             accountCode: string | null;
             lineNet: string;
             lineVat: string;

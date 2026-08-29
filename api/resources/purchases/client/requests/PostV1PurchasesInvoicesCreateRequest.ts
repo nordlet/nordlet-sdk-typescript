@@ -17,6 +17,7 @@ export interface PostV1PurchasesInvoicesCreateRequest {
     dueDate?: string;
     currency?: string;
     creditedInvoiceId?: string;
+    purchaseOrderId?: string;
     notes?: string;
     lines: PostV1PurchasesInvoicesCreateRequest.Lines.Item[];
 }
@@ -40,6 +41,7 @@ export namespace PostV1PurchasesInvoicesCreateRequest {
             vatRatePercent?: string | undefined;
             vatClassifierCode?: string | undefined;
             costCenterId?: string | undefined;
+            projectId?: string | undefined;
             accountCode?: string | undefined;
         }
 
