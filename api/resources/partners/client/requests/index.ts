@@ -2,6 +2,7 @@ export { PostV1PartnersAddressesCreateRequest } from "./PostV1PartnersAddressesC
 export type { PostV1PartnersAddressesDeleteRequest } from "./PostV1PartnersAddressesDeleteRequest.js";
 export { PostV1PartnersAddressesListRequest } from "./PostV1PartnersAddressesListRequest.js";
 export { PostV1PartnersAddressesUpdateRequest } from "./PostV1PartnersAddressesUpdateRequest.js";
+export type { PostV1PartnersAnonymizeRequest } from "./PostV1PartnersAnonymizeRequest.js";
 export type { PostV1PartnersBankAccountsCreateRequest } from "./PostV1PartnersBankAccountsCreateRequest.js";
 export type { PostV1PartnersBankAccountsDeleteRequest } from "./PostV1PartnersBankAccountsDeleteRequest.js";
 export { PostV1PartnersBankAccountsListRequest } from "./PostV1PartnersBankAccountsListRequest.js";

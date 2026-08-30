@@ -8,6 +8,10 @@ export type { PostV1AccountCompaniesDeleteRequest } from "./PostV1AccountCompani
 export type { PostV1AccountCompaniesProfileRequest } from "./PostV1AccountCompaniesProfileRequest.js";
 export type { PostV1AccountCompaniesSelectRequest } from "./PostV1AccountCompaniesSelectRequest.js";
 export type { PostV1AccountCompaniesUpdateRequest } from "./PostV1AccountCompaniesUpdateRequest.js";
+export type { PostV1AccountConsentAcceptRequest } from "./PostV1AccountConsentAcceptRequest.js";
+export type { PostV1AccountDeleteRequest } from "./PostV1AccountDeleteRequest.js";
+export { PostV1AccountEmailChangeRequestRequest } from "./PostV1AccountEmailChangeRequestRequest.js";
+export type { PostV1AccountExportRequest } from "./PostV1AccountExportRequest.js";
 export { PostV1AccountInvitesAcceptRequest } from "./PostV1AccountInvitesAcceptRequest.js";
 export { PostV1AccountInvitesCreateRequest } from "./PostV1AccountInvitesCreateRequest.js";
 export type { PostV1AccountInvitesGetRequest } from "./PostV1AccountInvitesGetRequest.js";
@@ -21,3 +25,7 @@ export type { PostV1AccountMembersListRequest } from "./PostV1AccountMembersList
 export type { PostV1AccountMembersRemoveRequest } from "./PostV1AccountMembersRemoveRequest.js";
 export { PostV1AccountMembersSetRoleRequest } from "./PostV1AccountMembersSetRoleRequest.js";
 export type { PostV1AccountMeRequest } from "./PostV1AccountMeRequest.js";
+export type { PostV1AccountProfileUpdateRequest } from "./PostV1AccountProfileUpdateRequest.js";
+export type { PostV1AccountSessionsListRequest } from "./PostV1AccountSessionsListRequest.js";
+export type { PostV1AccountSessionsRevokeOthersRequest } from "./PostV1AccountSessionsRevokeOthersRequest.js";
+export type { PostV1AccountSessionsRevokeRequest } from "./PostV1AccountSessionsRevokeRequest.js";

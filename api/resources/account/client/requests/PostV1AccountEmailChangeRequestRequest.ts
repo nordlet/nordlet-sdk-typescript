@@ -3,17 +3,15 @@
 /**
  * @example
  *     {
- *         email: "email"
+ *         newEmail: "newEmail"
  *     }
  */
-export interface PostV1AccountLoginLinkRequestRequest {
-    email: string;
-    locale?: PostV1AccountLoginLinkRequestRequest.Locale;
-    acceptTerms?: boolean;
-    acceptDpa?: boolean;
+export interface PostV1AccountEmailChangeRequestRequest {
+    newEmail: string;
+    locale?: PostV1AccountEmailChangeRequestRequest.Locale;
 }
 
-export namespace PostV1AccountLoginLinkRequestRequest {
+export namespace PostV1AccountEmailChangeRequestRequest {
     export const Locale = {
         Lt: "lt",
         En: "en",

@@ -6,6 +6,7 @@ export interface PostV1AccountMeResponse {
     activeCompanyId: string | null;
     role: string | null;
     billing: PostV1AccountMeResponse.Billing;
+    consent: PostV1AccountMeResponse.Consent;
     companies: PostV1AccountMeResponse.Companies.Item[];
 }
 
@@ -33,6 +34,16 @@ export namespace PostV1AccountMeResponse {
             Suspended: "suspended",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
+    }
+
+    export interface Consent {
+        termsVersion: string | null;
+        termsAcceptedAt: string | null;
+        dpaVersion: string | null;
+        dpaAcceptedAt: string | null;
+        currentTermsVersion: string;
+        currentDpaVersion: string;
+        required: boolean;
     }
 
     export type Companies = Companies.Item[];

@@ -10,6 +10,8 @@ export interface PostV1AccountInvitesAcceptRequest {
     token: string;
     name?: string;
     locale?: PostV1AccountInvitesAcceptRequest.Locale;
+    acceptTerms?: boolean;
+    acceptDpa?: boolean;
 }
 
 export namespace PostV1AccountInvitesAcceptRequest {

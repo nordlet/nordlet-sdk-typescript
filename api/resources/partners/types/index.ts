@@ -2,6 +2,7 @@ export * from "./PostV1PartnersAddressesCreateResponse.js";
 export * from "./PostV1PartnersAddressesDeleteResponse.js";
 export * from "./PostV1PartnersAddressesListResponse.js";
 export * from "./PostV1PartnersAddressesUpdateResponse.js";
+export * from "./PostV1PartnersAnonymizeResponse.js";
 export * from "./PostV1PartnersBankAccountsCreateResponse.js";
 export * from "./PostV1PartnersBankAccountsDeleteResponse.js";
 export * from "./PostV1PartnersBankAccountsListResponse.js";

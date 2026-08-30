@@ -1,8 +1,10 @@
 export { PostV1HrContractsCreateRequest } from "./PostV1HrContractsCreateRequest.js";
 export type { PostV1HrContractsEndRequest } from "./PostV1HrContractsEndRequest.js";
 export { PostV1HrContractsListRequest } from "./PostV1HrContractsListRequest.js";
+export type { PostV1HrEmployeesAnonymizeRequest } from "./PostV1HrEmployeesAnonymizeRequest.js";
 export type { PostV1HrEmployeesAttachmentsListRequest } from "./PostV1HrEmployeesAttachmentsListRequest.js";
 export type { PostV1HrEmployeesCreateRequest } from "./PostV1HrEmployeesCreateRequest.js";
+export type { PostV1HrEmployeesDeleteRequest } from "./PostV1HrEmployeesDeleteRequest.js";
 export type { PostV1HrEmployeesGetRequest } from "./PostV1HrEmployeesGetRequest.js";
 export { PostV1HrEmployeesListRequest } from "./PostV1HrEmployeesListRequest.js";
 export { PostV1HrEmployeesRecordsCreateRequest } from "./PostV1HrEmployeesRecordsCreateRequest.js";
