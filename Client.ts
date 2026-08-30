@@ -17,6 +17,7 @@ import { FleetClient } from "./api/resources/fleet/client/Client.js";
 import { HrClient } from "./api/resources/hr/client/Client.js";
 import { InventoryClient } from "./api/resources/inventory/client/Client.js";
 import { LedgerClient } from "./api/resources/ledger/client/Client.js";
+import { MigrationClient } from "./api/resources/migration/client/Client.js";
 import { PartnersClient } from "./api/resources/partners/client/Client.js";
 import { PayrollClient } from "./api/resources/payroll/client/Client.js";
 import { PosClient } from "./api/resources/pos/client/Client.js";
@@ -49,6 +50,7 @@ export class NordletApiClient {
     protected _capture: CaptureClient | undefined;
     protected _declarations: DeclarationsClient | undefined;
     protected _ledger: LedgerClient | undefined;
+    protected _migration: MigrationClient | undefined;
     protected _assets: AssetsClient | undefined;
     protected _hr: HrClient | undefined;
     protected _fleet: FleetClient | undefined;
@@ -105,6 +107,10 @@ export class NordletApiClient {
 
     public get ledger(): LedgerClient {
         return (this._ledger ??= new LedgerClient(this._options));
+    }
+
+    public get migration(): MigrationClient {
+        return (this._migration ??= new MigrationClient(this._options));
     }
 
     public get assets(): AssetsClient {
