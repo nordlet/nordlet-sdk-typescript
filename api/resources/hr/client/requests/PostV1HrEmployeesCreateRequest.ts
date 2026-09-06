@@ -24,6 +24,7 @@ export interface PostV1HrEmployeesCreateRequest {
     npdOverride?: string | null;
     pensionAccumulation?: boolean;
     notes?: string;
+    attributes?: PostV1HrEmployeesCreateRequest.Attributes.Item[];
 }
 
 export namespace PostV1HrEmployeesCreateRequest {
@@ -32,5 +33,14 @@ export namespace PostV1HrEmployeesCreateRequest {
         city?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+    }
+
+    export type Attributes = Attributes.Item[];
+
+    export namespace Attributes {
+        export interface Item {
+            name: string;
+            value: string;
+        }
     }
 }

@@ -25,6 +25,7 @@ export interface PostV1CatalogItemsCreateRequest {
     description?: string;
     groupId?: string;
     attributes?: Record<string, string>;
+    documentRef?: string;
     translations?: Record<string, PostV1CatalogItemsCreateRequest.Translations.Value>;
     components?: PostV1CatalogItemsCreateRequest.Components.Item[];
 }

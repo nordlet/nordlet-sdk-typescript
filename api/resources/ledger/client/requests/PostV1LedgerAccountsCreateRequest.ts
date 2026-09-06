@@ -11,12 +11,33 @@
 export interface PostV1LedgerAccountsCreateRequest {
     code: string;
     name: string;
+    translations?: PostV1LedgerAccountsCreateRequest.Translations;
     type: PostV1LedgerAccountsCreateRequest.Type;
     parentId?: string;
     isPostable?: boolean;
 }
 
 export namespace PostV1LedgerAccountsCreateRequest {
+    export interface Translations {
+        lt?: Translations.Lt | undefined;
+        en?: Translations.En | undefined;
+        ru?: Translations.Ru | undefined;
+    }
+
+    export namespace Translations {
+        export interface Lt {
+            name: string;
+        }
+
+        export interface En {
+            name: string;
+        }
+
+        export interface Ru {
+            name: string;
+        }
+    }
+
     export const Type = {
         Asset: "asset",
         Liability: "liability",

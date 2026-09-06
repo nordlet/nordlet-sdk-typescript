@@ -31,6 +31,7 @@ export namespace PostV1CatalogItemsListResponse {
             description: string | null;
             groupId: string | null;
             attributes: Record<string, string | null> | null;
+            documentRef: string | null;
             translations: Record<string, Item.Translations.Value | null> | null;
             components: Item.Components.Item[];
             createdAt: string;

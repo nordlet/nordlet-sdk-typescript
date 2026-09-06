@@ -35,6 +35,7 @@ export namespace PostV1SalesInvoicesListResponse {
             vatCountryCode: string | null;
             deemedSupplier: boolean;
             notes: string | null;
+            documentRef: string | null;
             createdAt: string;
             updatedAt: string;
         }

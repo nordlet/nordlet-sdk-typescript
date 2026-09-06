@@ -37,6 +37,8 @@ export namespace PostV1BankFeedsConnectionsCompleteResponse {
             id: string;
             connectionId: string;
             bankAccountId: string | null;
+            importTemplateId: string | null;
+            syncSchedule: Item.SyncSchedule;
             externalId: string;
             iban: string | null;
             currency: string;
@@ -44,6 +46,16 @@ export namespace PostV1BankFeedsConnectionsCompleteResponse {
             product: string | null;
             syncFrom: string | null;
             lastSyncedAt: string | null;
+        }
+
+        export namespace Item {
+            export const SyncSchedule = {
+                Manual: "manual",
+                Daily: "daily",
+                Weekly: "weekly",
+                Monthly: "monthly",
+            } as const;
+            export type SyncSchedule = (typeof SyncSchedule)[keyof typeof SyncSchedule];
         }
     }
 }

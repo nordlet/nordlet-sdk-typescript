@@ -24,6 +24,7 @@ export interface PostV1SalesInvoicesUpdateResponse {
     vatCountryCode: string | null;
     deemedSupplier: boolean;
     notes: string | null;
+    documentRef: string | null;
     createdAt: string;
     updatedAt: string;
     lines: PostV1SalesInvoicesUpdateResponse.Lines.Item[];

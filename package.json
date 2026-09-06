@@ -1,6 +1,6 @@
 {
   "name": "nordlet",
-  "version": "0.2.3",
+  "version": "0.2.6",
   "description": "Official TypeScript/JavaScript SDK for the Nordlet Accounting API",
   "license": "MIT",
   "repository": "github:nordlet/nordlet-sdk-typescript",

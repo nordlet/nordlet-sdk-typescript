@@ -30,6 +30,7 @@ export namespace PostV1PurchasesInvoicesListResponse {
             creditedInvoiceId: string | null;
             purchaseOrderId: string | null;
             notes: string | null;
+            documentRef: string | null;
             createdAt: string;
             updatedAt: string;
         }

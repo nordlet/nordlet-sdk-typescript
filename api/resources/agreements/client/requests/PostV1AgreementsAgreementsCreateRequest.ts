@@ -3,14 +3,16 @@
 /**
  * @example
  *     {
- *         partnerId: "partnerId",
  *         number: "number",
  *         startDate: "startDate"
  *     }
  */
 export interface PostV1AgreementsAgreementsCreateRequest {
     typeId?: string;
-    partnerId: string;
+    kind?: PostV1AgreementsAgreementsCreateRequest.Kind;
+    partnerId?: string;
+    employeeId?: string;
+    bankAccountId?: string;
     number: string;
     name?: string;
     startDate: string;
@@ -21,10 +23,21 @@ export interface PostV1AgreementsAgreementsCreateRequest {
     currency?: string;
     status?: PostV1AgreementsAgreementsCreateRequest.Status;
     notes?: string;
+    documentRef?: string;
     items?: PostV1AgreementsAgreementsCreateRequest.Items.Item[];
 }
 
 export namespace PostV1AgreementsAgreementsCreateRequest {
+    export const Kind = {
+        Customer: "customer",
+        Supplier: "supplier",
+        Employment: "employment",
+        Bank: "bank",
+        Lease: "lease",
+        Insurance: "insurance",
+        Other: "other",
+    } as const;
+    export type Kind = (typeof Kind)[keyof typeof Kind];
     export const BillingPeriod = {
         Monthly: "monthly",
         Quarterly: "quarterly",

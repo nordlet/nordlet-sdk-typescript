@@ -267,7 +267,6 @@ export class AgreementsClient {
      *
      * @example
      *     await client.agreements.postV1AgreementsAgreementsCreate({
-     *         partnerId: "partnerId",
      *         number: "number",
      *         startDate: "startDate"
      *     })

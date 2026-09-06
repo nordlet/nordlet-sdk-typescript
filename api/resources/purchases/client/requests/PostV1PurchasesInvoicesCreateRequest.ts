@@ -19,6 +19,7 @@ export interface PostV1PurchasesInvoicesCreateRequest {
     creditedInvoiceId?: string;
     purchaseOrderId?: string;
     notes?: string;
+    documentRef?: string;
     lines: PostV1PurchasesInvoicesCreateRequest.Lines.Item[];
 }
 

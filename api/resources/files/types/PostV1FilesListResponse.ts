@@ -14,11 +14,12 @@ export namespace PostV1FilesListResponse {
         export interface Item {
             id: string;
             entity: string;
-            entityId: string;
+            entityId: string | null;
             fileName: string;
             mimeType: string;
             sizeBytes: number;
             sha256: string;
+            storageKey: string;
             createdAt: string;
         }
     }

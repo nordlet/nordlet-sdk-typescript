@@ -9,6 +9,7 @@
  */
 export interface PostV1BankStatementsImportRequest {
     bankAccountId: string;
+    templateId?: string;
     format?: PostV1BankStatementsImportRequest.Format;
     content: string;
 }

@@ -31,6 +31,7 @@ export namespace PostV1HrEmployeesListResponse {
             pensionAccumulation: boolean;
             status: Item.Status;
             notes: string | null;
+            attributes: Item.Attributes.Item[] | null;
             createdAt: string;
         }
 
@@ -47,6 +48,14 @@ export namespace PostV1HrEmployeesListResponse {
                 Terminated: "terminated",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
+            export type Attributes = Attributes.Item[];
+
+            export namespace Attributes {
+                export interface Item {
+                    name: string;
+                    value: string;
+                }
+            }
         }
     }
 }

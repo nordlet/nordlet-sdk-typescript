@@ -20,4 +20,16 @@ export interface PostV1AssetsAssetsCreateRequest {
     salvageValue?: string;
     usefulLifeMonths?: number;
     notes?: string;
+    documents?: PostV1AssetsAssetsCreateRequest.Documents.Item[];
+}
+
+export namespace PostV1AssetsAssetsCreateRequest {
+    export type Documents = Documents.Item[];
+
+    export namespace Documents {
+        export interface Item {
+            name: string;
+            ref: string;
+        }
+    }
 }

@@ -4,7 +4,6 @@
  * @example
  *     {
  *         employeeId: "employeeId",
- *         contractNo: "contractNo",
  *         startDate: "startDate",
  *         baseSalary: "baseSalary"
  *     }
@@ -14,13 +13,14 @@ export interface PostV1HrContractsCreateRequest {
     positionId?: string;
     departmentId?: string;
     scheduleId?: string;
-    contractNo: string;
+    agreementId?: string;
+    contractNo?: string;
     type?: PostV1HrContractsCreateRequest.Type;
     startDate: string;
     endDate?: string;
     baseSalary: string;
     salaryType?: PostV1HrContractsCreateRequest.SalaryType;
-    workHoursPerWeek?: string;
+    workHours?: string;
     notes?: string;
 }
 
@@ -33,6 +33,9 @@ export namespace PostV1HrContractsCreateRequest {
     export const SalaryType = {
         Monthly: "monthly",
         Hourly: "hourly",
+        Weekly: "weekly",
+        Daily: "daily",
+        Yearly: "yearly",
     } as const;
     export type SalaryType = (typeof SalaryType)[keyof typeof SalaryType];
 }

@@ -16,6 +16,7 @@ export interface PostV1PurchasesOrdersCreateRequest {
     warehouseId?: string;
     currency?: string;
     notes?: string;
+    documentRef?: string;
     lines: PostV1PurchasesOrdersCreateRequest.Lines.Item[];
 }
 

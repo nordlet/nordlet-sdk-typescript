@@ -9,6 +9,7 @@
 export interface PostV1AgreementsAgreementsUpdateRequest {
     id: string;
     typeId?: string | null;
+    kind?: PostV1AgreementsAgreementsUpdateRequest.Kind;
     name?: string | null;
     endDate?: string | null;
     autoRenew?: boolean;
@@ -16,9 +17,20 @@ export interface PostV1AgreementsAgreementsUpdateRequest {
     billingPeriod?: PostV1AgreementsAgreementsUpdateRequest.BillingPeriod | null;
     status?: PostV1AgreementsAgreementsUpdateRequest.Status;
     notes?: string | null;
+    documentRef?: string | null;
 }
 
 export namespace PostV1AgreementsAgreementsUpdateRequest {
+    export const Kind = {
+        Customer: "customer",
+        Supplier: "supplier",
+        Employment: "employment",
+        Bank: "bank",
+        Lease: "lease",
+        Insurance: "insurance",
+        Other: "other",
+    } as const;
+    export type Kind = (typeof Kind)[keyof typeof Kind];
     export const BillingPeriod = {
         Monthly: "monthly",
         Quarterly: "quarterly",

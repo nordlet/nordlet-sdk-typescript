@@ -19,6 +19,7 @@ export interface PostV1PurchasesInvoicesRegisterResponse {
     creditedInvoiceId: string | null;
     purchaseOrderId: string | null;
     notes: string | null;
+    documentRef: string | null;
     createdAt: string;
     updatedAt: string;
     lines: PostV1PurchasesInvoicesRegisterResponse.Lines.Item[];

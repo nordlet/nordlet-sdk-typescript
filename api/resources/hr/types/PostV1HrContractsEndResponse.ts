@@ -6,6 +6,7 @@ export interface PostV1HrContractsEndResponse {
     positionId: string | null;
     departmentId: string | null;
     scheduleId: string | null;
+    agreementId: string | null;
     contractNo: string;
     type: PostV1HrContractsEndResponse.Type;
     startDate: string;
@@ -13,7 +14,8 @@ export interface PostV1HrContractsEndResponse {
     endReason: string | null;
     baseSalary: string;
     salaryType: PostV1HrContractsEndResponse.SalaryType;
-    workHoursPerWeek: string;
+    workHours: string;
+    workHoursUnit: PostV1HrContractsEndResponse.WorkHoursUnit;
     status: PostV1HrContractsEndResponse.Status;
     notes: string | null;
     createdAt: string;
@@ -28,8 +30,16 @@ export namespace PostV1HrContractsEndResponse {
     export const SalaryType = {
         Monthly: "monthly",
         Hourly: "hourly",
+        Weekly: "weekly",
+        Daily: "daily",
+        Yearly: "yearly",
     } as const;
     export type SalaryType = (typeof SalaryType)[keyof typeof SalaryType];
+    export const WorkHoursUnit = {
+        Day: "day",
+        Week: "week",
+    } as const;
+    export type WorkHoursUnit = (typeof WorkHoursUnit)[keyof typeof WorkHoursUnit];
     export const Status = {
         Active: "active",
         Ended: "ended",

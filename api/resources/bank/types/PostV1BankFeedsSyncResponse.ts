@@ -4,6 +4,12 @@ export interface PostV1BankFeedsSyncResponse {
     connectionId: string;
     imported: number;
     skipped: number;
+    posted: number;
+    partnersCreated: number;
+    invoicesCreated: number;
+    invoicesLinked: number;
+    paymentsMatched: number;
+    warnings: string[];
     accounts: PostV1BankFeedsSyncResponse.Accounts.Item[];
 }
 

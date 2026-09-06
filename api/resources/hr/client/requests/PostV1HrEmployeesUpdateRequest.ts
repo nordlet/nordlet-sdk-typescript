@@ -23,6 +23,7 @@ export interface PostV1HrEmployeesUpdateRequest {
     npdOverride?: string | null;
     pensionAccumulation?: boolean;
     notes?: string;
+    attributes?: PostV1HrEmployeesUpdateRequest.Attributes.Item[];
     id: string;
     terminationDate?: string;
     status?: PostV1HrEmployeesUpdateRequest.Status;
@@ -34,6 +35,15 @@ export namespace PostV1HrEmployeesUpdateRequest {
         city?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+    }
+
+    export type Attributes = Attributes.Item[];
+
+    export namespace Attributes {
+        export interface Item {
+            name: string;
+            value: string;
+        }
     }
 
     export const Status = {

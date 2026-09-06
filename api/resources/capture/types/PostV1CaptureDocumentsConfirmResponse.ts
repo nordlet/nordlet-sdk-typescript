@@ -91,6 +91,7 @@ export namespace PostV1CaptureDocumentsConfirmResponse {
         creditedInvoiceId: string | null;
         purchaseOrderId: string | null;
         notes: string | null;
+        documentRef: string | null;
         createdAt: string;
         updatedAt: string;
         lines: Invoice.Lines.Item[];

@@ -15,6 +15,7 @@ export interface PostV1PurchasesOrdersGetResponse {
     approvedBy: string | null;
     approvedAt: string | null;
     notes: string | null;
+    documentRef: string | null;
     createdAt: string;
     updatedAt: string;
     lines: PostV1PurchasesOrdersGetResponse.Lines.Item[];

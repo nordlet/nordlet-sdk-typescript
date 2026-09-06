@@ -17,6 +17,7 @@ export interface PostV1AssetsAssetsModernizeResponse {
     totalLifeMonths: number;
     status: PostV1AssetsAssetsModernizeResponse.Status;
     notes: string | null;
+    documents: PostV1AssetsAssetsModernizeResponse.Documents.Item[] | null;
     createdAt: string;
 }
 
@@ -27,4 +28,12 @@ export namespace PostV1AssetsAssetsModernizeResponse {
         Disposed: "disposed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type Documents = Documents.Item[];
+
+    export namespace Documents {
+        export interface Item {
+            name: string;
+            ref: string;
+        }
+    }
 }

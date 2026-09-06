@@ -3,11 +3,12 @@
 export interface PostV1FilesGetResponse {
     id: string;
     entity: string;
-    entityId: string;
+    entityId: string | null;
     fileName: string;
     mimeType: string;
     sizeBytes: number;
     sha256: string;
+    storageKey: string;
     createdAt: string;
     content: string;
 }

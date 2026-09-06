@@ -1075,7 +1075,6 @@ export class HrClient {
      * @example
      *     await client.hr.postV1HrContractsCreate({
      *         employeeId: "employeeId",
-     *         contractNo: "contractNo",
      *         startDate: "startDate",
      *         baseSalary: "baseSalary"
      *     })

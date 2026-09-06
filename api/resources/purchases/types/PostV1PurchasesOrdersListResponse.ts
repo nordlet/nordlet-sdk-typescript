@@ -26,6 +26,7 @@ export namespace PostV1PurchasesOrdersListResponse {
             approvedBy: string | null;
             approvedAt: string | null;
             notes: string | null;
+            documentRef: string | null;
             createdAt: string;
             updatedAt: string;
         }

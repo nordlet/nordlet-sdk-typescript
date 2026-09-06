@@ -33,6 +33,7 @@ export namespace PostV1PartnersListResponse {
             vatValidatedAt: string | null;
             address: Item.Address | null;
             notes: string | null;
+            documentRef: string | null;
             createdAt: string;
             updatedAt: string;
         }

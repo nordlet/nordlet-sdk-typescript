@@ -11,4 +11,5 @@ export interface PostV1BankAccountsCreateRequest {
     iban?: string;
     currency?: string;
     accountCode?: string;
+    documentRef?: string;
 }

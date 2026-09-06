@@ -4,6 +4,7 @@ export interface PostV1LedgerAccountsCreateResponse {
     id: string;
     code: string;
     name: string;
+    translations: PostV1LedgerAccountsCreateResponse.Translations | null;
     type: PostV1LedgerAccountsCreateResponse.Type;
     parentId: string | null;
     isPostable: boolean;
@@ -11,6 +12,26 @@ export interface PostV1LedgerAccountsCreateResponse {
 }
 
 export namespace PostV1LedgerAccountsCreateResponse {
+    export interface Translations {
+        lt?: Translations.Lt | undefined;
+        en?: Translations.En | undefined;
+        ru?: Translations.Ru | undefined;
+    }
+
+    export namespace Translations {
+        export interface Lt {
+            name: string;
+        }
+
+        export interface En {
+            name: string;
+        }
+
+        export interface Ru {
+            name: string;
+        }
+    }
+
     export const Type = {
         Asset: "asset",
         Liability: "liability",

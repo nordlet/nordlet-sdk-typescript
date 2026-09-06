@@ -21,6 +21,7 @@ export interface PostV1FleetVehiclesCreateRequest {
     technicalInspectionDue?: string;
     insuranceDue?: string;
     notes?: string;
+    documents?: PostV1FleetVehiclesCreateRequest.Documents.Item[];
 }
 
 export namespace PostV1FleetVehiclesCreateRequest {
@@ -33,4 +34,12 @@ export namespace PostV1FleetVehiclesCreateRequest {
         Other: "other",
     } as const;
     export type FuelType = (typeof FuelType)[keyof typeof FuelType];
+    export type Documents = Documents.Item[];
+
+    export namespace Documents {
+        export interface Item {
+            name: string;
+            ref: string;
+        }
+    }
 }

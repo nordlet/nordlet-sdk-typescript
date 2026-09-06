@@ -14,7 +14,10 @@ export namespace PostV1AgreementsAgreementsListResponse {
         export interface Item {
             id: string;
             typeId: string | null;
-            partnerId: string;
+            kind: Item.Kind;
+            partnerId: string | null;
+            employeeId: string | null;
+            bankAccountId: string | null;
             number: string;
             name: string | null;
             startDate: string;
@@ -25,10 +28,21 @@ export namespace PostV1AgreementsAgreementsListResponse {
             currency: string;
             status: Item.Status;
             notes: string | null;
+            documentRef: string | null;
             createdAt: string;
         }
 
         export namespace Item {
+            export const Kind = {
+                Customer: "customer",
+                Supplier: "supplier",
+                Employment: "employment",
+                Bank: "bank",
+                Lease: "lease",
+                Insurance: "insurance",
+                Other: "other",
+            } as const;
+            export type Kind = (typeof Kind)[keyof typeof Kind];
             export const BillingPeriod = {
                 Monthly: "monthly",
                 Quarterly: "quarterly",

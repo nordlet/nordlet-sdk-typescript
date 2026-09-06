@@ -832,6 +832,125 @@ export class BankClient {
     }
 
     /**
+     * @param {NordletApi.PostV1BankTransactionsRecordRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.postV1BankTransactionsRecord({
+     *         bankAccountId: "bankAccountId",
+     *         date: "date",
+     *         amount: "amount",
+     *         documentType: "sale_invoice",
+     *         documentId: "documentId"
+     *     })
+     */
+    public postV1BankTransactionsRecord(
+        request: NordletApi.PostV1BankTransactionsRecordRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankTransactionsRecordResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postV1BankTransactionsRecord(request, requestOptions));
+    }
+
+    private async __postV1BankTransactionsRecord(
+        request: NordletApi.PostV1BankTransactionsRecordRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankTransactionsRecordResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/transactions/record",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankTransactionsRecordResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/bank/transactions/record");
+    }
+
+    /**
      * @param {NordletApi.PostV1BankPaymentsExportRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -945,6 +1064,607 @@ export class BankClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/bank/payments/export");
+    }
+
+    /**
+     * @param {NordletApi.PostV1BankImportTemplatesCreateRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.createABankImportTemplateFieldsDefaultToTheTypesStandardFieldList({
+     *         name: "name",
+     *         type: "stripe"
+     *     })
+     */
+    public createABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+        request: NordletApi.PostV1BankImportTemplatesCreateRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankImportTemplatesCreateResponse> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__createABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(request, requestOptions),
+        );
+    }
+
+    private async __createABankImportTemplateFieldsDefaultToTheTypesStandardFieldList(
+        request: NordletApi.PostV1BankImportTemplatesCreateRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankImportTemplatesCreateResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/import-templates/create",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankImportTemplatesCreateResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/import-templates/create",
+        );
+    }
+
+    /**
+     * @param {NordletApi.PostV1BankImportTemplatesUpdateRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.postV1BankImportTemplatesUpdate({
+     *         id: "id"
+     *     })
+     */
+    public postV1BankImportTemplatesUpdate(
+        request: NordletApi.PostV1BankImportTemplatesUpdateRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankImportTemplatesUpdateResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postV1BankImportTemplatesUpdate(request, requestOptions));
+    }
+
+    private async __postV1BankImportTemplatesUpdate(
+        request: NordletApi.PostV1BankImportTemplatesUpdateRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankImportTemplatesUpdateResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/import-templates/update",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankImportTemplatesUpdateResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/import-templates/update",
+        );
+    }
+
+    /**
+     * @param {NordletApi.PostV1BankImportTemplatesDeleteRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.postV1BankImportTemplatesDelete({
+     *         id: "id"
+     *     })
+     */
+    public postV1BankImportTemplatesDelete(
+        request: NordletApi.PostV1BankImportTemplatesDeleteRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankImportTemplatesDeleteResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postV1BankImportTemplatesDelete(request, requestOptions));
+    }
+
+    private async __postV1BankImportTemplatesDelete(
+        request: NordletApi.PostV1BankImportTemplatesDeleteRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankImportTemplatesDeleteResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/import-templates/delete",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankImportTemplatesDeleteResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/import-templates/delete",
+        );
+    }
+
+    /**
+     * @param {NordletApi.PostV1BankImportTemplatesGetRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.postV1BankImportTemplatesGet({
+     *         id: "id"
+     *     })
+     */
+    public postV1BankImportTemplatesGet(
+        request: NordletApi.PostV1BankImportTemplatesGetRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankImportTemplatesGetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postV1BankImportTemplatesGet(request, requestOptions));
+    }
+
+    private async __postV1BankImportTemplatesGet(
+        request: NordletApi.PostV1BankImportTemplatesGetRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankImportTemplatesGetResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/import-templates/get",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankImportTemplatesGetResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/import-templates/get",
+        );
+    }
+
+    /**
+     * @param {NordletApi.PostV1BankImportTemplatesListRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.postV1BankImportTemplatesList()
+     */
+    public postV1BankImportTemplatesList(
+        request: NordletApi.PostV1BankImportTemplatesListRequest = {},
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankImportTemplatesListResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postV1BankImportTemplatesList(request, requestOptions));
+    }
+
+    private async __postV1BankImportTemplatesList(
+        request: NordletApi.PostV1BankImportTemplatesListRequest = {},
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankImportTemplatesListResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/import-templates/list",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankImportTemplatesListResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/import-templates/list",
+        );
     }
 
     /**
@@ -3175,6 +3895,131 @@ export class BankClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/bank/feeds/accounts/link");
+    }
+
+    /**
+     * @param {NordletApi.PostV1BankFeedsAccountsConfigureRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.chooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically({
+     *         id: "id"
+     *     })
+     */
+    public chooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+        request: NordletApi.PostV1BankFeedsAccountsConfigureRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.PostV1BankFeedsAccountsConfigureResponse> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__chooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+                request,
+                requestOptions,
+            ),
+        );
+    }
+
+    private async __chooseTheImportTemplateAppliedOnSyncAndHowOftenTheAccountIsSyncedAutomatically(
+        request: NordletApi.PostV1BankFeedsAccountsConfigureRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.PostV1BankFeedsAccountsConfigureResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/feeds/accounts/configure",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.PostV1BankFeedsAccountsConfigureResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/feeds/accounts/configure",
+        );
     }
 
     /**

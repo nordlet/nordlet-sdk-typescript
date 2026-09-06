@@ -26,6 +26,7 @@ export namespace PostV1FleetVehiclesListResponse {
             insuranceDue: string | null;
             status: Item.Status;
             notes: string | null;
+            documents: Item.Documents.Item[] | null;
             currentAssignment: Item.CurrentAssignment | null;
             createdAt: string;
         }
@@ -37,6 +38,14 @@ export namespace PostV1FleetVehiclesListResponse {
                 Scrapped: "scrapped",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
+            export type Documents = Documents.Item[];
+
+            export namespace Documents {
+                export interface Item {
+                    name: string;
+                    ref: string;
+                }
+            }
 
             export interface CurrentAssignment {
                 id: string;

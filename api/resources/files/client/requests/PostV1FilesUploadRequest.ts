@@ -4,7 +4,6 @@
  * @example
  *     {
  *         entity: "entity",
- *         entityId: "entityId",
  *         fileName: "fileName",
  *         mimeType: "mimeType",
  *         content: "content"
@@ -12,7 +11,7 @@
  */
 export interface PostV1FilesUploadRequest {
     entity: string;
-    entityId: string;
+    entityId?: string;
     fileName: string;
     mimeType: string;
     /** Base64-encoded file content */

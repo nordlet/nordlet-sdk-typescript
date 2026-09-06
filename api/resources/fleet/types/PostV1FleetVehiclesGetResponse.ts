@@ -15,6 +15,7 @@ export interface PostV1FleetVehiclesGetResponse {
     insuranceDue: string | null;
     status: PostV1FleetVehiclesGetResponse.Status;
     notes: string | null;
+    documents: PostV1FleetVehiclesGetResponse.Documents.Item[] | null;
     currentAssignment: PostV1FleetVehiclesGetResponse.CurrentAssignment | null;
     createdAt: string;
 }
@@ -26,6 +27,14 @@ export namespace PostV1FleetVehiclesGetResponse {
         Scrapped: "scrapped",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type Documents = Documents.Item[];
+
+    export namespace Documents {
+        export interface Item {
+            name: string;
+            ref: string;
+        }
+    }
 
     export interface CurrentAssignment {
         id: string;

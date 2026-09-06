@@ -39,7 +39,6 @@ export class FilesClient {
      * @example
      *     await client.files.postV1FilesUpload({
      *         entity: "entity",
-     *         entityId: "entityId",
      *         fileName: "fileName",
      *         mimeType: "mimeType",
      *         content: "content"

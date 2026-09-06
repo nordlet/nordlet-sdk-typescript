@@ -28,6 +28,7 @@ export namespace PostV1AssetsAssetsListResponse {
             totalLifeMonths: number;
             status: Item.Status;
             notes: string | null;
+            documents: Item.Documents.Item[] | null;
             createdAt: string;
         }
 
@@ -38,6 +39,14 @@ export namespace PostV1AssetsAssetsListResponse {
                 Disposed: "disposed",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
+            export type Documents = Documents.Item[];
+
+            export namespace Documents {
+                export interface Item {
+                    name: string;
+                    ref: string;
+                }
+            }
         }
     }
 }

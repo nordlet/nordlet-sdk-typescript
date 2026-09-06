@@ -3,6 +3,13 @@
 export interface PostV1BankStatementsImportResponse {
     imported: number;
     skipped: number;
+    posted: number;
+    customersCreated: number;
+    invoicesCreated: number;
+    invoicesLinked: number;
+    creditNotesCreated: number;
+    paymentsMatched: number;
+    warnings: string[];
     statements: PostV1BankStatementsImportResponse.Statements.Item[];
 }
 

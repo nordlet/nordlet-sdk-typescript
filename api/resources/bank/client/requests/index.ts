@@ -2,6 +2,7 @@ export type { PostV1BankAccountsCreateRequest } from "./PostV1BankAccountsCreate
 export { PostV1BankAccountsListRequest } from "./PostV1BankAccountsListRequest.js";
 export type { PostV1BankAccountsUpdateRequest } from "./PostV1BankAccountsUpdateRequest.js";
 export type { PostV1BankDirectDebitsExportRequest } from "./PostV1BankDirectDebitsExportRequest.js";
+export { PostV1BankFeedsAccountsConfigureRequest } from "./PostV1BankFeedsAccountsConfigureRequest.js";
 export type { PostV1BankFeedsAccountsLinkRequest } from "./PostV1BankFeedsAccountsLinkRequest.js";
 export type { PostV1BankFeedsBanksListRequest } from "./PostV1BankFeedsBanksListRequest.js";
 export type { PostV1BankFeedsConnectionsCompleteRequest } from "./PostV1BankFeedsConnectionsCompleteRequest.js";
@@ -10,6 +11,11 @@ export type { PostV1BankFeedsConnectionsGetRequest } from "./PostV1BankFeedsConn
 export { PostV1BankFeedsConnectionsListRequest } from "./PostV1BankFeedsConnectionsListRequest.js";
 export { PostV1BankFeedsConnectionsStartRequest } from "./PostV1BankFeedsConnectionsStartRequest.js";
 export type { PostV1BankFeedsSyncRequest } from "./PostV1BankFeedsSyncRequest.js";
+export { PostV1BankImportTemplatesCreateRequest } from "./PostV1BankImportTemplatesCreateRequest.js";
+export type { PostV1BankImportTemplatesDeleteRequest } from "./PostV1BankImportTemplatesDeleteRequest.js";
+export type { PostV1BankImportTemplatesGetRequest } from "./PostV1BankImportTemplatesGetRequest.js";
+export { PostV1BankImportTemplatesListRequest } from "./PostV1BankImportTemplatesListRequest.js";
+export { PostV1BankImportTemplatesUpdateRequest } from "./PostV1BankImportTemplatesUpdateRequest.js";
 export type { PostV1BankMandatesCancelRequest } from "./PostV1BankMandatesCancelRequest.js";
 export { PostV1BankMandatesCreateRequest } from "./PostV1BankMandatesCreateRequest.js";
 export type { PostV1BankMandatesGetRequest } from "./PostV1BankMandatesGetRequest.js";
@@ -25,4 +31,5 @@ export { PostV1BankStatementsImportRequest } from "./PostV1BankStatementsImportR
 export type { PostV1BankTransactionsImportRequest } from "./PostV1BankTransactionsImportRequest.js";
 export { PostV1BankTransactionsListRequest } from "./PostV1BankTransactionsListRequest.js";
 export { PostV1BankTransactionsMatchRequest } from "./PostV1BankTransactionsMatchRequest.js";
+export { PostV1BankTransactionsRecordRequest } from "./PostV1BankTransactionsRecordRequest.js";
 export type { PostV1BankTransactionsSuggestMatchesRequest } from "./PostV1BankTransactionsSuggestMatchesRequest.js";

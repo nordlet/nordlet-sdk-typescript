@@ -17,6 +17,7 @@ export namespace PostV1LedgerJournalTransactionsListResponse {
             description: string | null;
             documentType: string | null;
             documentId: string | null;
+            partnerId: string | null;
             status: Item.Status;
             createdAt: string;
             postedAt: string | null;

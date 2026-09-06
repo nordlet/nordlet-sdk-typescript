@@ -22,6 +22,7 @@ export interface PostV1PartnersCreateResponse {
     vatValidatedAt: string | null;
     address: PostV1PartnersCreateResponse.Address | null;
     notes: string | null;
+    documentRef: string | null;
     createdAt: string;
     updatedAt: string;
 }

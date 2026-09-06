@@ -20,6 +20,7 @@ export interface PostV1CatalogItemsCreateResponse {
     description: string | null;
     groupId: string | null;
     attributes: Record<string, string | null> | null;
+    documentRef: string | null;
     translations: Record<string, PostV1CatalogItemsCreateResponse.Translations.Value | null> | null;
     components: PostV1CatalogItemsCreateResponse.Components.Item[];
     createdAt: string;

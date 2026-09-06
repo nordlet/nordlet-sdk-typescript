@@ -20,6 +20,7 @@ export interface PostV1HrEmployeesAnonymizeResponse {
     pensionAccumulation: boolean;
     status: PostV1HrEmployeesAnonymizeResponse.Status;
     notes: string | null;
+    attributes: PostV1HrEmployeesAnonymizeResponse.Attributes.Item[] | null;
     createdAt: string;
 }
 
@@ -36,4 +37,12 @@ export namespace PostV1HrEmployeesAnonymizeResponse {
         Terminated: "terminated",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type Attributes = Attributes.Item[];
+
+    export namespace Attributes {
+        export interface Item {
+            name: string;
+            value: string;
+        }
+    }
 }

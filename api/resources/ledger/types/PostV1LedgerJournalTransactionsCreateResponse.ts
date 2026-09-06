@@ -6,6 +6,7 @@ export interface PostV1LedgerJournalTransactionsCreateResponse {
     description: string | null;
     documentType: string | null;
     documentId: string | null;
+    partnerId: string | null;
     status: PostV1LedgerJournalTransactionsCreateResponse.Status;
     createdAt: string;
     postedAt: string | null;

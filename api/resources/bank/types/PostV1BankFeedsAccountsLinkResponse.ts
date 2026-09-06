@@ -4,6 +4,8 @@ export interface PostV1BankFeedsAccountsLinkResponse {
     id: string;
     connectionId: string;
     bankAccountId: string | null;
+    importTemplateId: string | null;
+    syncSchedule: PostV1BankFeedsAccountsLinkResponse.SyncSchedule;
     externalId: string;
     iban: string | null;
     currency: string;
@@ -11,4 +13,14 @@ export interface PostV1BankFeedsAccountsLinkResponse {
     product: string | null;
     syncFrom: string | null;
     lastSyncedAt: string | null;
+}
+
+export namespace PostV1BankFeedsAccountsLinkResponse {
+    export const SyncSchedule = {
+        Manual: "manual",
+        Daily: "daily",
+        Weekly: "weekly",
+        Monthly: "monthly",
+    } as const;
+    export type SyncSchedule = (typeof SyncSchedule)[keyof typeof SyncSchedule];
 }

@@ -3,7 +3,10 @@
 export interface PostV1AgreementsAgreementsCreateResponse {
     id: string;
     typeId: string | null;
-    partnerId: string;
+    kind: PostV1AgreementsAgreementsCreateResponse.Kind;
+    partnerId: string | null;
+    employeeId: string | null;
+    bankAccountId: string | null;
     number: string;
     name: string | null;
     startDate: string;
@@ -14,11 +17,22 @@ export interface PostV1AgreementsAgreementsCreateResponse {
     currency: string;
     status: PostV1AgreementsAgreementsCreateResponse.Status;
     notes: string | null;
+    documentRef: string | null;
     createdAt: string;
     items: PostV1AgreementsAgreementsCreateResponse.Items.Item[];
 }
 
 export namespace PostV1AgreementsAgreementsCreateResponse {
+    export const Kind = {
+        Customer: "customer",
+        Supplier: "supplier",
+        Employment: "employment",
+        Bank: "bank",
+        Lease: "lease",
+        Insurance: "insurance",
+        Other: "other",
+    } as const;
+    export type Kind = (typeof Kind)[keyof typeof Kind];
     export const BillingPeriod = {
         Monthly: "monthly",
         Quarterly: "quarterly",

@@ -26,6 +26,7 @@ export interface PostV1CatalogItemsUpdateRequest {
     description?: string;
     groupId?: string;
     attributes?: Record<string, string>;
+    documentRef?: string;
     translations?: Record<string, PostV1CatalogItemsUpdateRequest.Translations.Value>;
     components?: PostV1CatalogItemsUpdateRequest.Components.Item[];
 }

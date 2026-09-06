@@ -28,6 +28,7 @@ export namespace PostV1PartnersFindOrCreateResponse {
         vatValidatedAt: string | null;
         address: Partner.Address | null;
         notes: string | null;
+        documentRef: string | null;
         createdAt: string;
         updatedAt: string;
     }

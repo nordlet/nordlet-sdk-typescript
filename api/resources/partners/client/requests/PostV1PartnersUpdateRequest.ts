@@ -26,6 +26,7 @@ export interface PostV1PartnersUpdateRequest {
     statusId?: string;
     address?: PostV1PartnersUpdateRequest.Address;
     notes?: string;
+    documentRef?: string;
 }
 
 export namespace PostV1PartnersUpdateRequest {

@@ -18,6 +18,7 @@ export interface PostV1SalesInvoicesCreateRequest {
     vatCountryCode?: string;
     deemedSupplier?: boolean;
     notes?: string;
+    documentRef?: string;
     lines: PostV1SalesInvoicesCreateRequest.Lines.Item[];
 }
 
