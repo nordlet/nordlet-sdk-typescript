@@ -9,6 +9,8 @@ export interface PostV1BankImportTemplatesListRequest {
     pageSize?: number;
     sort?: PostV1BankImportTemplatesListRequest.Sort.Item[];
     filter?: PostV1BankImportTemplatesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1BankImportTemplatesListRequest {

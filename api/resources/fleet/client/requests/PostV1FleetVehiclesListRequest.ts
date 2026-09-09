@@ -9,6 +9,8 @@ export interface PostV1FleetVehiclesListRequest {
     pageSize?: number;
     sort?: PostV1FleetVehiclesListRequest.Sort.Item[];
     filter?: PostV1FleetVehiclesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1FleetVehiclesListRequest {

@@ -9,6 +9,8 @@ export interface PostV1PartnersContactsListRequest {
     pageSize?: number;
     sort?: PostV1PartnersContactsListRequest.Sort.Item[];
     filter?: PostV1PartnersContactsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1PartnersContactsListRequest {

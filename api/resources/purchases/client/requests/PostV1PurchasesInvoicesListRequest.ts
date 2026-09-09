@@ -9,6 +9,8 @@ export interface PostV1PurchasesInvoicesListRequest {
     pageSize?: number;
     sort?: PostV1PurchasesInvoicesListRequest.Sort.Item[];
     filter?: PostV1PurchasesInvoicesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1PurchasesInvoicesListRequest {

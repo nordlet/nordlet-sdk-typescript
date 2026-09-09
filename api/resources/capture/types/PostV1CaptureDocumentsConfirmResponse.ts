@@ -90,6 +90,7 @@ export namespace PostV1CaptureDocumentsConfirmResponse {
         journalTransactionId: string | null;
         creditedInvoiceId: string | null;
         purchaseOrderId: string | null;
+        operationTypeId: string | null;
         notes: string | null;
         documentRef: string | null;
         createdAt: string;

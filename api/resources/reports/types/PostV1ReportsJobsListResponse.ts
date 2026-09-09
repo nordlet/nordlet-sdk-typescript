@@ -5,6 +5,7 @@ export interface PostV1ReportsJobsListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1ReportsJobsListResponse {

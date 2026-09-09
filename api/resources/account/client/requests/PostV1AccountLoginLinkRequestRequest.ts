@@ -11,6 +11,7 @@ export interface PostV1AccountLoginLinkRequestRequest {
     locale?: PostV1AccountLoginLinkRequestRequest.Locale;
     acceptTerms?: boolean;
     acceptDpa?: boolean;
+    referralCode?: string;
 }
 
 export namespace PostV1AccountLoginLinkRequestRequest {

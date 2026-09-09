@@ -32,6 +32,7 @@ export namespace PostV1BankSettlementsImportResponse {
             netTotal: string;
             status: Item.Status;
             journalTransactionId: string | null;
+            bankTransactionId: string | null;
             lineCount: number;
             matchedCount: number;
             unmatchedCount: number;

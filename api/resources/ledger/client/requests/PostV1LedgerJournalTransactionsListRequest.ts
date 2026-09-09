@@ -9,6 +9,8 @@ export interface PostV1LedgerJournalTransactionsListRequest {
     pageSize?: number;
     sort?: PostV1LedgerJournalTransactionsListRequest.Sort.Item[];
     filter?: PostV1LedgerJournalTransactionsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1LedgerJournalTransactionsListRequest {

@@ -6,6 +6,7 @@ export interface PostV1AccountMeResponse {
     activeCompanyId: string | null;
     role: string | null;
     billing: PostV1AccountMeResponse.Billing;
+    referralPoints: number;
     consent: PostV1AccountMeResponse.Consent;
     companies: PostV1AccountMeResponse.Companies.Item[];
 }

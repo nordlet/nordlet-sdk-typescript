@@ -5,6 +5,7 @@ export interface PostV1PurchasesInvoicesListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1PurchasesInvoicesListResponse {
@@ -29,6 +30,7 @@ export namespace PostV1PurchasesInvoicesListResponse {
             journalTransactionId: string | null;
             creditedInvoiceId: string | null;
             purchaseOrderId: string | null;
+            operationTypeId: string | null;
             notes: string | null;
             documentRef: string | null;
             createdAt: string;

@@ -27,8 +27,25 @@ export namespace PostV1PartnersFindOrCreateResponse {
         vatValid: boolean | null;
         vatValidatedAt: string | null;
         address: Partner.Address | null;
+        correspondenceAddress: Partner.CorrespondenceAddress | null;
         notes: string | null;
         documentRef: string | null;
+        shortName: string | null;
+        website: string | null;
+        fax: string | null;
+        eoriCode: string | null;
+        otherCode: string | null;
+        foreignTaxNumber: string | null;
+        autoDebtReminder: boolean;
+        lateInterestPercent: string | null;
+        firstCallDate: string | null;
+        lastCallDate: string | null;
+        nextCallDate: string | null;
+        rating: number | null;
+        isEmployee: boolean;
+        isGroupMember: boolean;
+        isActive: boolean;
+        legalCountryClass: Partner.LegalCountryClass | null;
         createdAt: string;
         updatedAt: string;
     }
@@ -43,8 +60,26 @@ export namespace PostV1PartnersFindOrCreateResponse {
         export interface Address {
             street?: string | undefined;
             city?: string | undefined;
+            municipality?: string | undefined;
+            county?: string | undefined;
             postalCode?: string | undefined;
             countryCode?: string | undefined;
         }
+
+        export interface CorrespondenceAddress {
+            street?: string | undefined;
+            city?: string | undefined;
+            municipality?: string | undefined;
+            county?: string | undefined;
+            postalCode?: string | undefined;
+            countryCode?: string | undefined;
+        }
+
+        export const LegalCountryClass = {
+            Lt: "lt",
+            Eu: "eu",
+            NonEu: "non_eu",
+        } as const;
+        export type LegalCountryClass = (typeof LegalCountryClass)[keyof typeof LegalCountryClass];
     }
 }

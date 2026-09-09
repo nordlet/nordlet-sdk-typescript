@@ -9,6 +9,8 @@ export interface PostV1PosDevicesListRequest {
     pageSize?: number;
     sort?: PostV1PosDevicesListRequest.Sort.Item[];
     filter?: PostV1PosDevicesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1PosDevicesListRequest {

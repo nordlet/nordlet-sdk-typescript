@@ -5,6 +5,7 @@ export interface PostV1PartnersListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1PartnersListResponse {
@@ -32,8 +33,25 @@ export namespace PostV1PartnersListResponse {
             vatValid: boolean | null;
             vatValidatedAt: string | null;
             address: Item.Address | null;
+            correspondenceAddress: Item.CorrespondenceAddress | null;
             notes: string | null;
             documentRef: string | null;
+            shortName: string | null;
+            website: string | null;
+            fax: string | null;
+            eoriCode: string | null;
+            otherCode: string | null;
+            foreignTaxNumber: string | null;
+            autoDebtReminder: boolean;
+            lateInterestPercent: string | null;
+            firstCallDate: string | null;
+            lastCallDate: string | null;
+            nextCallDate: string | null;
+            rating: number | null;
+            isEmployee: boolean;
+            isGroupMember: boolean;
+            isActive: boolean;
+            legalCountryClass: Item.LegalCountryClass | null;
             createdAt: string;
             updatedAt: string;
         }
@@ -48,9 +66,27 @@ export namespace PostV1PartnersListResponse {
             export interface Address {
                 street?: string | undefined;
                 city?: string | undefined;
+                municipality?: string | undefined;
+                county?: string | undefined;
                 postalCode?: string | undefined;
                 countryCode?: string | undefined;
             }
+
+            export interface CorrespondenceAddress {
+                street?: string | undefined;
+                city?: string | undefined;
+                municipality?: string | undefined;
+                county?: string | undefined;
+                postalCode?: string | undefined;
+                countryCode?: string | undefined;
+            }
+
+            export const LegalCountryClass = {
+                Lt: "lt",
+                Eu: "eu",
+                NonEu: "non_eu",
+            } as const;
+            export type LegalCountryClass = (typeof LegalCountryClass)[keyof typeof LegalCountryClass];
         }
     }
 }

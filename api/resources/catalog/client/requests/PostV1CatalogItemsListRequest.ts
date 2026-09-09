@@ -9,6 +9,8 @@ export interface PostV1CatalogItemsListRequest {
     pageSize?: number;
     sort?: PostV1CatalogItemsListRequest.Sort.Item[];
     filter?: PostV1CatalogItemsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1CatalogItemsListRequest {

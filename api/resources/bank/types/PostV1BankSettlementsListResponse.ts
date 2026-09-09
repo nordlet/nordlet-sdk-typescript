@@ -5,6 +5,7 @@ export interface PostV1BankSettlementsListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1BankSettlementsListResponse {
@@ -23,6 +24,7 @@ export namespace PostV1BankSettlementsListResponse {
             netTotal: string;
             status: Item.Status;
             journalTransactionId: string | null;
+            bankTransactionId: string | null;
             lineCount: number;
             matchedCount: number;
             unmatchedCount: number;

@@ -8,6 +8,8 @@ export interface PostV1BillingAccountSetPlanResponse {
     firstTopUpAt: string | null;
     lastChargedDate: string | null;
     paymentsConfigured: boolean;
+    hasPaymentAccount: boolean;
+    hasSubscription: boolean;
     monthToDate: PostV1BillingAccountSetPlanResponse.MonthToDate;
     plans: Record<string, PostV1BillingAccountSetPlanResponse.Plans.Value>;
     topUp: PostV1BillingAccountSetPlanResponse.TopUp;

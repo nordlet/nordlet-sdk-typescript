@@ -9,6 +9,8 @@ export interface PostV1AssetsGroupsListRequest {
     pageSize?: number;
     sort?: PostV1AssetsGroupsListRequest.Sort.Item[];
     filter?: PostV1AssetsGroupsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1AssetsGroupsListRequest {

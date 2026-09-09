@@ -19,6 +19,15 @@ export interface PostV1SalesInvoicesCreateRequest {
     deemedSupplier?: boolean;
     notes?: string;
     documentRef?: string;
+    operationTypeId?: string;
+    documentSeriesId?: string;
+    seriesLabel?: string;
+    orderNumber?: string;
+    issuedByName?: string;
+    issuedByTitle?: string;
+    receivedByName?: string;
+    receivedByTitle?: string;
+    discountPercent?: string;
     lines: PostV1SalesInvoicesCreateRequest.Lines.Item[];
 }
 

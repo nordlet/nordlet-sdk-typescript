@@ -4,3 +4,7 @@ export type { PostV1CaptureDocumentsExtractRequest } from "./PostV1CaptureDocume
 export type { PostV1CaptureDocumentsGetRequest } from "./PostV1CaptureDocumentsGetRequest.js";
 export { PostV1CaptureDocumentsListRequest } from "./PostV1CaptureDocumentsListRequest.js";
 export type { PostV1CaptureDocumentsUploadRequest } from "./PostV1CaptureDocumentsUploadRequest.js";
+export type { PostV1CaptureInboundEmailRequest } from "./PostV1CaptureInboundEmailRequest.js";
+export type { PostV1CaptureSettingsGetRequest } from "./PostV1CaptureSettingsGetRequest.js";
+export type { PostV1CaptureSettingsRegenerateIntakeRequest } from "./PostV1CaptureSettingsRegenerateIntakeRequest.js";
+export type { PostV1CaptureSettingsUpdateRequest } from "./PostV1CaptureSettingsUpdateRequest.js";

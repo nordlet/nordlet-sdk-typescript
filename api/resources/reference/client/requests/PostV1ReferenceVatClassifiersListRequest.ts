@@ -9,6 +9,8 @@ export interface PostV1ReferenceVatClassifiersListRequest {
     pageSize?: number;
     sort?: PostV1ReferenceVatClassifiersListRequest.Sort.Item[];
     filter?: PostV1ReferenceVatClassifiersListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ReferenceVatClassifiersListRequest {

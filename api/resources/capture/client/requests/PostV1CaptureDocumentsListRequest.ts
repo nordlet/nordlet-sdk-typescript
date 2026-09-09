@@ -9,6 +9,8 @@ export interface PostV1CaptureDocumentsListRequest {
     pageSize?: number;
     sort?: PostV1CaptureDocumentsListRequest.Sort.Item[];
     filter?: PostV1CaptureDocumentsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1CaptureDocumentsListRequest {

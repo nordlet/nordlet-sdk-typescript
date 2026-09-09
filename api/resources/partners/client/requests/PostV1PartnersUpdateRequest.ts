@@ -10,23 +10,40 @@ export interface PostV1PartnersUpdateRequest {
     id: string;
     type?: PostV1PartnersUpdateRequest.Type;
     name?: string;
-    code?: string;
-    vatCode?: string;
-    peppolId?: string;
-    email?: string;
-    phone?: string;
-    selfEmploymentCertNo?: string;
-    birthDate?: string;
+    code?: string | null;
+    vatCode?: string | null;
+    peppolId?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    selfEmploymentCertNo?: string | null;
+    birthDate?: string | null;
     isCustomer?: boolean;
     isSupplier?: boolean;
-    paymentTermDays?: number;
-    creditLimit?: string;
-    priceListId?: string;
-    groupId?: string;
-    statusId?: string;
-    address?: PostV1PartnersUpdateRequest.Address;
-    notes?: string;
+    paymentTermDays?: number | null;
+    creditLimit?: string | null;
+    priceListId?: string | null;
+    groupId?: string | null;
+    statusId?: string | null;
+    address?: PostV1PartnersUpdateRequest.Address | null;
+    correspondenceAddress?: PostV1PartnersUpdateRequest.CorrespondenceAddress | null;
+    notes?: string | null;
     documentRef?: string;
+    shortName?: string | null;
+    website?: string | null;
+    fax?: string | null;
+    eoriCode?: string | null;
+    otherCode?: string | null;
+    foreignTaxNumber?: string | null;
+    autoDebtReminder?: boolean;
+    lateInterestPercent?: string | null;
+    firstCallDate?: string | null;
+    lastCallDate?: string | null;
+    nextCallDate?: string | null;
+    rating?: number | null;
+    isEmployee?: boolean;
+    isGroupMember?: boolean;
+    isActive?: boolean;
+    legalCountryClass?: PostV1PartnersUpdateRequest.LegalCountryClass | null;
 }
 
 export namespace PostV1PartnersUpdateRequest {
@@ -39,7 +56,25 @@ export namespace PostV1PartnersUpdateRequest {
     export interface Address {
         street?: string | undefined;
         city?: string | undefined;
+        municipality?: string | undefined;
+        county?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
     }
+
+    export interface CorrespondenceAddress {
+        street?: string | undefined;
+        city?: string | undefined;
+        municipality?: string | undefined;
+        county?: string | undefined;
+        postalCode?: string | undefined;
+        countryCode?: string | undefined;
+    }
+
+    export const LegalCountryClass = {
+        Lt: "lt",
+        Eu: "eu",
+        NonEu: "non_eu",
+    } as const;
+    export type LegalCountryClass = (typeof LegalCountryClass)[keyof typeof LegalCountryClass];
 }

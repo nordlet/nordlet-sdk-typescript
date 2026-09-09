@@ -21,8 +21,25 @@ export interface PostV1PartnersCreateResponse {
     vatValid: boolean | null;
     vatValidatedAt: string | null;
     address: PostV1PartnersCreateResponse.Address | null;
+    correspondenceAddress: PostV1PartnersCreateResponse.CorrespondenceAddress | null;
     notes: string | null;
     documentRef: string | null;
+    shortName: string | null;
+    website: string | null;
+    fax: string | null;
+    eoriCode: string | null;
+    otherCode: string | null;
+    foreignTaxNumber: string | null;
+    autoDebtReminder: boolean;
+    lateInterestPercent: string | null;
+    firstCallDate: string | null;
+    lastCallDate: string | null;
+    nextCallDate: string | null;
+    rating: number | null;
+    isEmployee: boolean;
+    isGroupMember: boolean;
+    isActive: boolean;
+    legalCountryClass: PostV1PartnersCreateResponse.LegalCountryClass | null;
     createdAt: string;
     updatedAt: string;
 }
@@ -37,7 +54,25 @@ export namespace PostV1PartnersCreateResponse {
     export interface Address {
         street?: string | undefined;
         city?: string | undefined;
+        municipality?: string | undefined;
+        county?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
     }
+
+    export interface CorrespondenceAddress {
+        street?: string | undefined;
+        city?: string | undefined;
+        municipality?: string | undefined;
+        county?: string | undefined;
+        postalCode?: string | undefined;
+        countryCode?: string | undefined;
+    }
+
+    export const LegalCountryClass = {
+        Lt: "lt",
+        Eu: "eu",
+        NonEu: "non_eu",
+    } as const;
+    export type LegalCountryClass = (typeof LegalCountryClass)[keyof typeof LegalCountryClass];
 }

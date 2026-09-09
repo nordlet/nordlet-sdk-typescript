@@ -17,6 +17,12 @@ export interface PostV1BankImportTemplatesCreateRequest {
     companyMetaField?: string | null;
     invoiceItemId?: string | null;
     advanceInvoices?: boolean;
+    authorizationOperationTypeId?: string | null;
+    payoutOperationTypeId?: string | null;
+    commissionOperationTypeId?: string | null;
+    lenderMetaField?: string | null;
+    partialRefundLabel?: string | null;
+    fullRefundLabel?: string | null;
 }
 
 export namespace PostV1BankImportTemplatesCreateRequest {

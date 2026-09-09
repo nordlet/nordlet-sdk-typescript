@@ -6,6 +6,7 @@ import { AssetsClient } from "./api/resources/assets/client/Client.js";
 import { AuditClient } from "./api/resources/audit/client/Client.js";
 import { BankClient } from "./api/resources/bank/client/Client.js";
 import { BillingClient } from "./api/resources/billing/client/Client.js";
+import { CalendarClient } from "./api/resources/calendar/client/Client.js";
 import { CaptureClient } from "./api/resources/capture/client/Client.js";
 import { CashClient } from "./api/resources/cash/client/Client.js";
 import { CatalogClient } from "./api/resources/catalog/client/Client.js";
@@ -63,6 +64,7 @@ export class NordletApiClient {
     protected _projects: ProjectsClient | undefined;
     protected _transport: TransportClient | undefined;
     protected _pos: PosClient | undefined;
+    protected _calendar: CalendarClient | undefined;
     protected _audit: AuditClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
     protected _bank: BankClient | undefined;
@@ -159,6 +161,10 @@ export class NordletApiClient {
 
     public get pos(): PosClient {
         return (this._pos ??= new PosClient(this._options));
+    }
+
+    public get calendar(): CalendarClient {
+        return (this._calendar ??= new CalendarClient(this._options));
     }
 
     public get audit(): AuditClient {

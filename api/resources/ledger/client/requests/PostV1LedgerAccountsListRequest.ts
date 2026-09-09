@@ -9,6 +9,8 @@ export interface PostV1LedgerAccountsListRequest {
     pageSize?: number;
     sort?: PostV1LedgerAccountsListRequest.Sort.Item[];
     filter?: PostV1LedgerAccountsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1LedgerAccountsListRequest {

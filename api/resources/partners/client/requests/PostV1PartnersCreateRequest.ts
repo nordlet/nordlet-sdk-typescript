@@ -24,8 +24,25 @@ export interface PostV1PartnersCreateRequest {
     groupId?: string;
     statusId?: string;
     address?: PostV1PartnersCreateRequest.Address;
+    correspondenceAddress?: PostV1PartnersCreateRequest.CorrespondenceAddress;
     notes?: string;
     documentRef?: string;
+    shortName?: string;
+    website?: string;
+    fax?: string;
+    eoriCode?: string;
+    otherCode?: string;
+    foreignTaxNumber?: string;
+    autoDebtReminder?: boolean;
+    lateInterestPercent?: string;
+    firstCallDate?: string;
+    lastCallDate?: string;
+    nextCallDate?: string;
+    rating?: number;
+    isEmployee?: boolean;
+    isGroupMember?: boolean;
+    isActive?: boolean;
+    legalCountryClass?: PostV1PartnersCreateRequest.LegalCountryClass;
 }
 
 export namespace PostV1PartnersCreateRequest {
@@ -38,7 +55,25 @@ export namespace PostV1PartnersCreateRequest {
     export interface Address {
         street?: string | undefined;
         city?: string | undefined;
+        municipality?: string | undefined;
+        county?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
     }
+
+    export interface CorrespondenceAddress {
+        street?: string | undefined;
+        city?: string | undefined;
+        municipality?: string | undefined;
+        county?: string | undefined;
+        postalCode?: string | undefined;
+        countryCode?: string | undefined;
+    }
+
+    export const LegalCountryClass = {
+        Lt: "lt",
+        Eu: "eu",
+        NonEu: "non_eu",
+    } as const;
+    export type LegalCountryClass = (typeof LegalCountryClass)[keyof typeof LegalCountryClass];
 }

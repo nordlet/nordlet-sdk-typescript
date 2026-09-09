@@ -9,6 +9,8 @@ export interface PostV1ReferenceCurrenciesListRequest {
     pageSize?: number;
     sort?: PostV1ReferenceCurrenciesListRequest.Sort.Item[];
     filter?: PostV1ReferenceCurrenciesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ReferenceCurrenciesListRequest {

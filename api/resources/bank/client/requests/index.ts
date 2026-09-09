@@ -21,12 +21,18 @@ export { PostV1BankMandatesCreateRequest } from "./PostV1BankMandatesCreateReque
 export type { PostV1BankMandatesGetRequest } from "./PostV1BankMandatesGetRequest.js";
 export { PostV1BankMandatesListRequest } from "./PostV1BankMandatesListRequest.js";
 export type { PostV1BankMandatesUpdateRequest } from "./PostV1BankMandatesUpdateRequest.js";
+export type { PostV1BankMatchRulesCreateRequest } from "./PostV1BankMatchRulesCreateRequest.js";
+export type { PostV1BankMatchRulesDeleteRequest } from "./PostV1BankMatchRulesDeleteRequest.js";
+export type { PostV1BankMatchRulesListRequest } from "./PostV1BankMatchRulesListRequest.js";
+export type { PostV1BankMatchRulesUpdateRequest } from "./PostV1BankMatchRulesUpdateRequest.js";
 export type { PostV1BankPaymentsExportRequest } from "./PostV1BankPaymentsExportRequest.js";
 export type { PostV1BankSettlementsGetRequest } from "./PostV1BankSettlementsGetRequest.js";
 export { PostV1BankSettlementsImportRequest } from "./PostV1BankSettlementsImportRequest.js";
+export type { PostV1BankSettlementsLinkRequest } from "./PostV1BankSettlementsLinkRequest.js";
 export { PostV1BankSettlementsListRequest } from "./PostV1BankSettlementsListRequest.js";
 export type { PostV1BankSettlementsMatchRequest } from "./PostV1BankSettlementsMatchRequest.js";
 export type { PostV1BankSettlementsPostRequest } from "./PostV1BankSettlementsPostRequest.js";
+export type { PostV1BankSettlementsUnlinkRequest } from "./PostV1BankSettlementsUnlinkRequest.js";
 export { PostV1BankStatementsImportRequest } from "./PostV1BankStatementsImportRequest.js";
 export type { PostV1BankTransactionsImportRequest } from "./PostV1BankTransactionsImportRequest.js";
 export { PostV1BankTransactionsListRequest } from "./PostV1BankTransactionsListRequest.js";

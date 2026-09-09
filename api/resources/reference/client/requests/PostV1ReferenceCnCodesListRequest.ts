@@ -9,6 +9,8 @@ export interface PostV1ReferenceCnCodesListRequest {
     pageSize?: number;
     sort?: PostV1ReferenceCnCodesListRequest.Sort.Item[];
     filter?: PostV1ReferenceCnCodesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ReferenceCnCodesListRequest {

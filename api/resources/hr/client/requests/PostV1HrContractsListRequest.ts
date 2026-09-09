@@ -9,6 +9,8 @@ export interface PostV1HrContractsListRequest {
     pageSize?: number;
     sort?: PostV1HrContractsListRequest.Sort.Item[];
     filter?: PostV1HrContractsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1HrContractsListRequest {

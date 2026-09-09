@@ -9,6 +9,8 @@ export interface PostV1ProjectsTimeEntriesListRequest {
     pageSize?: number;
     sort?: PostV1ProjectsTimeEntriesListRequest.Sort.Item[];
     filter?: PostV1ProjectsTimeEntriesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ProjectsTimeEntriesListRequest {

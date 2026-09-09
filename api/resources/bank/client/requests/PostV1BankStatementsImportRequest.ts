@@ -12,6 +12,8 @@ export interface PostV1BankStatementsImportRequest {
     templateId?: string;
     format?: PostV1BankStatementsImportRequest.Format;
     content: string;
+    /** Stripe transfers export (plain CSV or base64) used to post lender payouts and commissions */
+    transfersCsv?: string;
 }
 
 export namespace PostV1BankStatementsImportRequest {

@@ -8,6 +8,9 @@ export interface PostV1BankStatementsImportResponse {
     invoicesCreated: number;
     invoicesLinked: number;
     creditNotesCreated: number;
+    authorizationsRecorded: number;
+    payoutsPosted: number;
+    commissionsPosted: number;
     paymentsMatched: number;
     warnings: string[];
     statements: PostV1BankStatementsImportResponse.Statements.Item[];

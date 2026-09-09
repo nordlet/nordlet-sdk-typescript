@@ -14,6 +14,7 @@ export interface PostV1PurchasesInvoicesUpdateRequest {
     dueDate?: string;
     currency?: string;
     purchaseOrderId?: string | null;
+    operationTypeId?: string | null;
     notes?: string;
     lines?: PostV1PurchasesInvoicesUpdateRequest.Lines.Item[];
 }

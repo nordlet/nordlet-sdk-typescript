@@ -9,6 +9,8 @@ export interface PostV1AgreementsAgreementsListRequest {
     pageSize?: number;
     sort?: PostV1AgreementsAgreementsListRequest.Sort.Item[];
     filter?: PostV1AgreementsAgreementsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1AgreementsAgreementsListRequest {

@@ -9,6 +9,8 @@ export interface PostV1InventoryReorderRulesListRequest {
     pageSize?: number;
     sort?: PostV1InventoryReorderRulesListRequest.Sort.Item[];
     filter?: PostV1InventoryReorderRulesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1InventoryReorderRulesListRequest {

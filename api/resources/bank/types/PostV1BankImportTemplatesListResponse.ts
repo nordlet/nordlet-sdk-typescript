@@ -5,6 +5,7 @@ export interface PostV1BankImportTemplatesListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1BankImportTemplatesListResponse {
@@ -22,6 +23,12 @@ export namespace PostV1BankImportTemplatesListResponse {
             companyMetaField: string | null;
             invoiceItemId: string | null;
             advanceInvoices: boolean;
+            authorizationOperationTypeId: string | null;
+            payoutOperationTypeId: string | null;
+            commissionOperationTypeId: string | null;
+            lenderMetaField: string | null;
+            partialRefundLabel: string | null;
+            fullRefundLabel: string | null;
             createdAt: string;
             updatedAt: string;
         }

@@ -4,7 +4,12 @@ export type { PostV1CatalogItemGroupsListRequest } from "./PostV1CatalogItemGrou
 export type { PostV1CatalogItemGroupsUpdateRequest } from "./PostV1CatalogItemGroupsUpdateRequest.js";
 export { PostV1CatalogItemsCreateRequest } from "./PostV1CatalogItemsCreateRequest.js";
 export type { PostV1CatalogItemsDeleteRequest } from "./PostV1CatalogItemsDeleteRequest.js";
+export type { PostV1CatalogItemsFilesListRequest } from "./PostV1CatalogItemsFilesListRequest.js";
 export type { PostV1CatalogItemsGetRequest } from "./PostV1CatalogItemsGetRequest.js";
+export { PostV1CatalogItemsKindsCreateRequest } from "./PostV1CatalogItemsKindsCreateRequest.js";
+export type { PostV1CatalogItemsKindsDeleteRequest } from "./PostV1CatalogItemsKindsDeleteRequest.js";
+export type { PostV1CatalogItemsKindsListRequest } from "./PostV1CatalogItemsKindsListRequest.js";
+export { PostV1CatalogItemsKindsUpdateRequest } from "./PostV1CatalogItemsKindsUpdateRequest.js";
 export { PostV1CatalogItemsListRequest } from "./PostV1CatalogItemsListRequest.js";
 export type { PostV1CatalogItemsSuppliersDeleteRequest } from "./PostV1CatalogItemsSuppliersDeleteRequest.js";
 export type { PostV1CatalogItemsSuppliersListRequest } from "./PostV1CatalogItemsSuppliersListRequest.js";
@@ -16,3 +21,8 @@ export type { PostV1CatalogPriceListsItemsListRequest } from "./PostV1CatalogPri
 export type { PostV1CatalogPriceListsItemsSetRequest } from "./PostV1CatalogPriceListsItemsSetRequest.js";
 export type { PostV1CatalogPriceListsListRequest } from "./PostV1CatalogPriceListsListRequest.js";
 export type { PostV1CatalogPriceListsUpdateRequest } from "./PostV1CatalogPriceListsUpdateRequest.js";
+export type { PostV1CatalogUnitsCreateRequest } from "./PostV1CatalogUnitsCreateRequest.js";
+export type { PostV1CatalogUnitsDeleteRequest } from "./PostV1CatalogUnitsDeleteRequest.js";
+export type { PostV1CatalogUnitsListRequest } from "./PostV1CatalogUnitsListRequest.js";
+export { PostV1CatalogUnitsOptionsRequest } from "./PostV1CatalogUnitsOptionsRequest.js";
+export type { PostV1CatalogUnitsUpdateRequest } from "./PostV1CatalogUnitsUpdateRequest.js";

@@ -16,6 +16,15 @@ export interface PostV1SalesInvoicesUpdateRequest {
     vatCountryCode?: string | null;
     deemedSupplier?: boolean;
     notes?: string;
+    operationTypeId?: string | null;
+    documentSeriesId?: string | null;
+    seriesLabel?: string | null;
+    discountPercent?: string;
+    orderNumber?: string | null;
+    issuedByName?: string | null;
+    issuedByTitle?: string | null;
+    receivedByName?: string | null;
+    receivedByTitle?: string | null;
     lines?: PostV1SalesInvoicesUpdateRequest.Lines.Item[];
 }
 

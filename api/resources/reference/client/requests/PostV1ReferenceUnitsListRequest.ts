@@ -9,6 +9,8 @@ export interface PostV1ReferenceUnitsListRequest {
     pageSize?: number;
     sort?: PostV1ReferenceUnitsListRequest.Sort.Item[];
     filter?: PostV1ReferenceUnitsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ReferenceUnitsListRequest {

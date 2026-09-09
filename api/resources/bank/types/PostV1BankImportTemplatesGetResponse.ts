@@ -11,6 +11,12 @@ export interface PostV1BankImportTemplatesGetResponse {
     companyMetaField: string | null;
     invoiceItemId: string | null;
     advanceInvoices: boolean;
+    authorizationOperationTypeId: string | null;
+    payoutOperationTypeId: string | null;
+    commissionOperationTypeId: string | null;
+    lenderMetaField: string | null;
+    partialRefundLabel: string | null;
+    fullRefundLabel: string | null;
     createdAt: string;
     updatedAt: string;
 }

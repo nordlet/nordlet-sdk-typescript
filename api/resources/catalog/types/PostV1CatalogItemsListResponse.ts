@@ -5,6 +5,7 @@ export interface PostV1CatalogItemsListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1CatalogItemsListResponse {
@@ -34,6 +35,33 @@ export namespace PostV1CatalogItemsListResponse {
             documentRef: string | null;
             translations: Record<string, Item.Translations.Value | null> | null;
             components: Item.Components.Item[];
+            kindId: string | null;
+            saleAccountCode: string | null;
+            purchaseAccountCode: string | null;
+            expenseAccountCode: string | null;
+            manufacturer: string | null;
+            grossMassKg: string | null;
+            minQuantity: string | null;
+            costPrice: string | null;
+            isFreePrice: boolean;
+            externalId: string | null;
+            isReturnable: boolean;
+            commentRequired: boolean;
+            priceFrom: string | null;
+            priceTo: string | null;
+            minPrice: string | null;
+            discountPercent: string | null;
+            maxDiscountPercent: string | null;
+            loyaltyPoints: number | null;
+            department: string | null;
+            ageRestriction: number | null;
+            packageQuantity: string | null;
+            taraCode: string | null;
+            certificateNumber: string | null;
+            certificateDate: string | null;
+            validFrom: string | null;
+            validTo: string | null;
+            posFlags: Record<string, boolean | null> | null;
             createdAt: string;
             updatedAt: string;
         }

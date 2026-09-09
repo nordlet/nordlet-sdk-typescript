@@ -12,6 +12,7 @@ export interface PostV1BankSettlementsGetResponse {
     netTotal: string;
     status: PostV1BankSettlementsGetResponse.Status;
     journalTransactionId: string | null;
+    bankTransactionId: string | null;
     lineCount: number;
     matchedCount: number;
     unmatchedCount: number;

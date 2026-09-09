@@ -9,6 +9,8 @@ export interface PostV1TransportWaybillsListRequest {
     pageSize?: number;
     sort?: PostV1TransportWaybillsListRequest.Sort.Item[];
     filter?: PostV1TransportWaybillsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1TransportWaybillsListRequest {

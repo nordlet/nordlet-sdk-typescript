@@ -5,6 +5,7 @@ export interface PostV1ReferenceBanksListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1ReferenceBanksListResponse {

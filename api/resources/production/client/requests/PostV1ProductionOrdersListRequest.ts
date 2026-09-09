@@ -9,6 +9,8 @@ export interface PostV1ProductionOrdersListRequest {
     pageSize?: number;
     sort?: PostV1ProductionOrdersListRequest.Sort.Item[];
     filter?: PostV1ProductionOrdersListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ProductionOrdersListRequest {

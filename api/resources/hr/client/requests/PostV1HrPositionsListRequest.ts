@@ -9,6 +9,8 @@ export interface PostV1HrPositionsListRequest {
     pageSize?: number;
     sort?: PostV1HrPositionsListRequest.Sort.Item[];
     filter?: PostV1HrPositionsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1HrPositionsListRequest {

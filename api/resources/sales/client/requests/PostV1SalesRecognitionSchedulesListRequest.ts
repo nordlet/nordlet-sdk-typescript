@@ -9,6 +9,8 @@ export interface PostV1SalesRecognitionSchedulesListRequest {
     pageSize?: number;
     sort?: PostV1SalesRecognitionSchedulesListRequest.Sort.Item[];
     filter?: PostV1SalesRecognitionSchedulesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1SalesRecognitionSchedulesListRequest {

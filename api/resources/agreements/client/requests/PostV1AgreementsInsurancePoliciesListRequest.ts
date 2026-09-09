@@ -9,6 +9,8 @@ export interface PostV1AgreementsInsurancePoliciesListRequest {
     pageSize?: number;
     sort?: PostV1AgreementsInsurancePoliciesListRequest.Sort.Item[];
     filter?: PostV1AgreementsInsurancePoliciesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1AgreementsInsurancePoliciesListRequest {

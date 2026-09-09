@@ -28,6 +28,33 @@ export interface PostV1CatalogItemsCreateRequest {
     documentRef?: string;
     translations?: Record<string, PostV1CatalogItemsCreateRequest.Translations.Value>;
     components?: PostV1CatalogItemsCreateRequest.Components.Item[];
+    kindId?: string;
+    saleAccountCode?: string;
+    purchaseAccountCode?: string;
+    expenseAccountCode?: string;
+    manufacturer?: string;
+    grossMassKg?: string;
+    minQuantity?: string;
+    costPrice?: string;
+    isFreePrice?: boolean;
+    externalId?: string;
+    isReturnable?: boolean;
+    commentRequired?: boolean;
+    priceFrom?: string;
+    priceTo?: string;
+    minPrice?: string;
+    discountPercent?: string;
+    maxDiscountPercent?: string;
+    loyaltyPoints?: number;
+    department?: string;
+    ageRestriction?: number;
+    packageQuantity?: string;
+    taraCode?: string;
+    certificateNumber?: string;
+    certificateDate?: string;
+    validFrom?: string;
+    validTo?: string;
+    posFlags?: Record<string, boolean>;
 }
 
 export namespace PostV1CatalogItemsCreateRequest {

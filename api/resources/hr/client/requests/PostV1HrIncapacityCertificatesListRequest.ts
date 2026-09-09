@@ -9,6 +9,8 @@ export interface PostV1HrIncapacityCertificatesListRequest {
     pageSize?: number;
     sort?: PostV1HrIncapacityCertificatesListRequest.Sort.Item[];
     filter?: PostV1HrIncapacityCertificatesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1HrIncapacityCertificatesListRequest {

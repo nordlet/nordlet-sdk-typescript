@@ -9,6 +9,8 @@ export interface PostV1LedgerPeriodsListRequest {
     pageSize?: number;
     sort?: PostV1LedgerPeriodsListRequest.Sort.Item[];
     filter?: PostV1LedgerPeriodsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1LedgerPeriodsListRequest {

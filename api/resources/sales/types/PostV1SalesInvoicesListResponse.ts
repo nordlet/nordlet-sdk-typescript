@@ -5,6 +5,7 @@ export interface PostV1SalesInvoicesListResponse {
     page: number;
     pageSize: number;
     total: number;
+    totals?: Record<string, string> | undefined;
 }
 
 export namespace PostV1SalesInvoicesListResponse {
@@ -36,6 +37,18 @@ export namespace PostV1SalesInvoicesListResponse {
             deemedSupplier: boolean;
             notes: string | null;
             documentRef: string | null;
+            operationTypeId: string | null;
+            documentSeriesId: string | null;
+            seriesLabel: string | null;
+            discountPercent: string;
+            orderNumber: string | null;
+            issuedByName: string | null;
+            issuedByTitle: string | null;
+            receivedByName: string | null;
+            receivedByTitle: string | null;
+            lockedAt: string | null;
+            lockedBy: string | null;
+            payToken: string | null;
             createdAt: string;
             updatedAt: string;
         }

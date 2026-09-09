@@ -9,6 +9,8 @@ export interface PostV1InventoryStockMovementsListRequest {
     pageSize?: number;
     sort?: PostV1InventoryStockMovementsListRequest.Sort.Item[];
     filter?: PostV1InventoryStockMovementsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1InventoryStockMovementsListRequest {

@@ -9,6 +9,8 @@ export interface PostV1PartnersVatReviewsListRequest {
     pageSize?: number;
     sort?: PostV1PartnersVatReviewsListRequest.Sort.Item[];
     filter?: PostV1PartnersVatReviewsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1PartnersVatReviewsListRequest {

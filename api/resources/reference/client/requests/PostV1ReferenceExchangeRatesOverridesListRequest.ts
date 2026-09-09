@@ -9,6 +9,8 @@ export interface PostV1ReferenceExchangeRatesOverridesListRequest {
     pageSize?: number;
     sort?: PostV1ReferenceExchangeRatesOverridesListRequest.Sort.Item[];
     filter?: PostV1ReferenceExchangeRatesOverridesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1ReferenceExchangeRatesOverridesListRequest {

@@ -9,6 +9,8 @@ export interface PostV1LedgerOwnersListRequest {
     pageSize?: number;
     sort?: PostV1LedgerOwnersListRequest.Sort.Item[];
     filter?: PostV1LedgerOwnersListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1LedgerOwnersListRequest {

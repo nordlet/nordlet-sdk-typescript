@@ -9,6 +9,8 @@ export interface PostV1WebhooksDeliveriesListRequest {
     pageSize?: number;
     sort?: PostV1WebhooksDeliveriesListRequest.Sort.Item[];
     filter?: PostV1WebhooksDeliveriesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1WebhooksDeliveriesListRequest {

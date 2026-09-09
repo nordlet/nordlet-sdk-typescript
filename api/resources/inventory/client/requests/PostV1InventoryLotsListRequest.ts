@@ -9,6 +9,8 @@ export interface PostV1InventoryLotsListRequest {
     pageSize?: number;
     sort?: PostV1InventoryLotsListRequest.Sort.Item[];
     filter?: PostV1InventoryLotsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1InventoryLotsListRequest {

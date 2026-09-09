@@ -9,6 +9,8 @@ export interface PostV1LedgerCostCenterGroupsListRequest {
     pageSize?: number;
     sort?: PostV1LedgerCostCenterGroupsListRequest.Sort.Item[];
     filter?: PostV1LedgerCostCenterGroupsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1LedgerCostCenterGroupsListRequest {

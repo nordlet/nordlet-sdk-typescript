@@ -9,6 +9,8 @@ export interface PostV1HrEmployeesListRequest {
     pageSize?: number;
     sort?: PostV1HrEmployeesListRequest.Sort.Item[];
     filter?: PostV1HrEmployeesListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1HrEmployeesListRequest {

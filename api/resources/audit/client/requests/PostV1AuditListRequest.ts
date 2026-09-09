@@ -9,6 +9,8 @@ export interface PostV1AuditListRequest {
     pageSize?: number;
     sort?: PostV1AuditListRequest.Sort.Item[];
     filter?: PostV1AuditListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1AuditListRequest {

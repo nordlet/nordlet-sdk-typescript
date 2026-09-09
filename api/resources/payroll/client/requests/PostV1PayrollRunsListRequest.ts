@@ -9,6 +9,8 @@ export interface PostV1PayrollRunsListRequest {
     pageSize?: number;
     sort?: PostV1PayrollRunsListRequest.Sort.Item[];
     filter?: PostV1PayrollRunsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1PayrollRunsListRequest {

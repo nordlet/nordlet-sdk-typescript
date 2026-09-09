@@ -9,6 +9,8 @@ export interface PostV1WebhooksSubscriptionsListRequest {
     pageSize?: number;
     sort?: PostV1WebhooksSubscriptionsListRequest.Sort.Item[];
     filter?: PostV1WebhooksSubscriptionsListRequest.Filter.Item[];
+    /** Numeric fields to sum over every row matching the filter (not only the current page) */
+    totals?: string[];
 }
 
 export namespace PostV1WebhooksSubscriptionsListRequest {
