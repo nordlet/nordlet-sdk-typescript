@@ -9,6 +9,10 @@ export interface PostV1AccountCompaniesUpdateResponse {
     isVatPayer: boolean;
     isSandbox: boolean;
     countryCode: string;
+    /** Chart of accounts template the company was seeded with */
+    chartTemplate: string;
+    /** Chart of accounts template of the company country */
+    countryChartTemplate: string;
     baseCurrency: string;
     defaultInvoiceCurrency: string;
     status: PostV1AccountCompaniesUpdateResponse.Status;
@@ -20,6 +24,19 @@ export interface PostV1AccountCompaniesUpdateResponse {
     peppolId: string | null;
     sepaCreditorId: string | null;
     logoFileId: string | null;
+    legalForm: string | null;
+    registryName: string | null;
+    incorporatedOn: string | null;
+    shareCapital: string | null;
+    accountsKeptBy: PostV1AccountCompaniesUpdateResponse.AccountsKeptBy | null;
+    vatPeriod: PostV1AccountCompaniesUpdateResponse.VatPeriod | null;
+    fiscalYearEndMonth: number | null;
+    timeZone: string;
+    filingOptions: Record<string, string | null> | null;
+    bookkeeperName: string | null;
+    auditorName: string | null;
+    auditorRegistrationNumber: string | null;
+    auditRequired: boolean;
 }
 
 export namespace PostV1AccountCompaniesUpdateResponse {
@@ -36,4 +53,18 @@ export namespace PostV1AccountCompaniesUpdateResponse {
         postalCode?: string | undefined;
         countryCode?: string | undefined;
     }
+
+    export const AccountsKeptBy = {
+        Company: "company",
+        External: "external",
+    } as const;
+    export type AccountsKeptBy = (typeof AccountsKeptBy)[keyof typeof AccountsKeptBy];
+    export const VatPeriod = {
+        Monthly: "monthly",
+        Bimonthly: "bimonthly",
+        Quarterly: "quarterly",
+        Semiannual: "semiannual",
+        Annual: "annual",
+    } as const;
+    export type VatPeriod = (typeof VatPeriod)[keyof typeof VatPeriod];
 }

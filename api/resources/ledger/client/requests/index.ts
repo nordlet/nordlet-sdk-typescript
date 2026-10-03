@@ -1,6 +1,7 @@
 export type { PostV1LedgerAccountsApplyTemplateRequest } from "./PostV1LedgerAccountsApplyTemplateRequest.js";
 export { PostV1LedgerAccountsCreateRequest } from "./PostV1LedgerAccountsCreateRequest.js";
 export { PostV1LedgerAccountsListRequest } from "./PostV1LedgerAccountsListRequest.js";
+export type { PostV1LedgerAccountsSwitchChartRequest } from "./PostV1LedgerAccountsSwitchChartRequest.js";
 export type { PostV1LedgerAccountsUpdateRequest } from "./PostV1LedgerAccountsUpdateRequest.js";
 export type { PostV1LedgerCostCenterGroupsCreateRequest } from "./PostV1LedgerCostCenterGroupsCreateRequest.js";
 export type { PostV1LedgerCostCenterGroupsDeleteRequest } from "./PostV1LedgerCostCenterGroupsDeleteRequest.js";
@@ -21,3 +22,10 @@ export type { PostV1LedgerPeriodsLockRequest } from "./PostV1LedgerPeriodsLockRe
 export type { PostV1LedgerPeriodsUnlockRequest } from "./PostV1LedgerPeriodsUnlockRequest.js";
 export type { PostV1LedgerPostingRulesListRequest } from "./PostV1LedgerPostingRulesListRequest.js";
 export { PostV1LedgerPostingRulesUpdateRequest } from "./PostV1LedgerPostingRulesUpdateRequest.js";
+export type { PostV1LedgerStatementRowsListRequest } from "./PostV1LedgerStatementRowsListRequest.js";
+export type { PostV1LedgerStatementRowsSchemesRequest } from "./PostV1LedgerStatementRowsSchemesRequest.js";
+export type { PostV1LedgerStatementRowsSetRequest } from "./PostV1LedgerStatementRowsSetRequest.js";
+export { PostV1OfficersCreateRequest } from "./PostV1OfficersCreateRequest.js";
+export type { PostV1OfficersDeleteRequest } from "./PostV1OfficersDeleteRequest.js";
+export type { PostV1OfficersListRequest } from "./PostV1OfficersListRequest.js";
+export { PostV1OfficersUpdateRequest } from "./PostV1OfficersUpdateRequest.js";

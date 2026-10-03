@@ -31,6 +31,7 @@ export namespace PostV1DeclarationsLtIntrastatComputeResponse {
             transactionNature: string;
             deliveryTerms: string | null;
             transportMode: string | null;
+            regionCode: string | null;
             country: string;
             originCountry: string | null;
             partnerVat: string | null;

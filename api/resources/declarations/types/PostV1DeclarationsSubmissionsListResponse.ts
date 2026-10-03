@@ -23,6 +23,22 @@ export namespace PostV1DeclarationsSubmissionsListResponse {
             fileId: string | null;
             externalRef: string | null;
             message: string | null;
+            ruleKey: string | null;
+            period: string | null;
+            documentKey: string | null;
+            origin: string;
+            transportSystem: string | null;
+            submittedAt: string | null;
+            acceptedAt: string | null;
+            rejectedAt: string | null;
+            checkedAt: string | null;
+            nextCheckAt: string | null;
+            attempts: number;
+            deliveryError: string | null;
+            sentSha256: string | null;
+            certificateFingerprint: string | null;
+            submittedByActorType: string | null;
+            submittedByActorId: string | null;
             createdAt: string;
             updatedAt: string;
         }

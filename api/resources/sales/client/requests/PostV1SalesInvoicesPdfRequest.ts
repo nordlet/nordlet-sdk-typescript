@@ -13,9 +13,9 @@ export interface PostV1SalesInvoicesPdfRequest {
 
 export namespace PostV1SalesInvoicesPdfRequest {
     export const Locale = {
-        Lt: "lt",
         En: "en",
-        Ru: "ru",
+        Lt: "lt",
+        De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
 }

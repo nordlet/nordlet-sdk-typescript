@@ -4,12 +4,14 @@ export interface PostV1PayrollRunsCreateResponse {
     id: string;
     year: number;
     month: number;
+    countryCode: string;
     status: PostV1PayrollRunsCreateResponse.Status;
     grossTotal: string;
-    npdTotal: string;
-    gpmTotal: string;
-    sodraEmployeeTotal: string;
-    sodraEmployerTotal: string;
+    taxAllowanceTotal: string;
+    incomeTaxTotal: string;
+    employeeContributionsTotal: string;
+    employerContributionsTotal: string;
+    componentTotals: PostV1PayrollRunsCreateResponse.ComponentTotals.Item[];
     netTotal: string;
     journalTransactionId: string | null;
     notes: string | null;
@@ -24,6 +26,29 @@ export namespace PostV1PayrollRunsCreateResponse {
         Approved: "approved",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type ComponentTotals = ComponentTotals.Item[];
+
+    export namespace ComponentTotals {
+        export interface Item {
+            code: string;
+            kind: Item.Kind;
+            amount: string;
+            rate?: string | undefined;
+            base?: string | undefined;
+        }
+
+        export namespace Item {
+            export const Kind = {
+                Allowance: "allowance",
+                EmployeeTax: "employee_tax",
+                EmployeeContribution: "employee_contribution",
+                EmployerContribution: "employer_contribution",
+                EmployerPayment: "employer_payment",
+            } as const;
+            export type Kind = (typeof Kind)[keyof typeof Kind];
+        }
+    }
+
     export type Lines = Lines.Item[];
 
     export namespace Lines {
@@ -37,11 +62,16 @@ export namespace PostV1PayrollRunsCreateResponse {
             additions: Item.Additions.Item[];
             deductions: Item.Deductions.Item[];
             taxableBase: string;
-            npd: string;
-            gpm: string;
-            sodraEmployee: string;
-            sodraEmployer: string;
+            taxAllowance: string;
+            incomeTax: string;
+            employeeContributions: string;
+            employerContributions: string;
+            components: Item.Components.Item[];
             net: string;
+            daysWorked: string | null;
+            hoursWorked: string | null;
+            registeredDays: string | null;
+            averageHourlyEarnings: string | null;
         }
 
         export namespace Item {
@@ -61,6 +91,29 @@ export namespace PostV1PayrollRunsCreateResponse {
                 export interface Item {
                     name: string;
                     amount: string;
+                }
+            }
+
+            export type Components = Components.Item[];
+
+            export namespace Components {
+                export interface Item {
+                    code: string;
+                    kind: Item.Kind;
+                    amount: string;
+                    rate?: string | undefined;
+                    base?: string | undefined;
+                }
+
+                export namespace Item {
+                    export const Kind = {
+                        Allowance: "allowance",
+                        EmployeeTax: "employee_tax",
+                        EmployeeContribution: "employee_contribution",
+                        EmployerContribution: "employer_contribution",
+                        EmployerPayment: "employer_payment",
+                    } as const;
+                    export type Kind = (typeof Kind)[keyof typeof Kind];
                 }
             }
         }

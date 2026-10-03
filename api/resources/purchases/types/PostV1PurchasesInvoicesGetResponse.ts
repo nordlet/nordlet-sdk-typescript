@@ -20,6 +20,11 @@ export interface PostV1PurchasesInvoicesGetResponse {
     purchaseOrderId: string | null;
     operationTypeId: string | null;
     notes: string | null;
+    intrastatTransportMode: string | null;
+    intrastatDeliveryTerms: string | null;
+    intrastatRegion: string | null;
+    intrastatNatureOfTransaction: string | null;
+    einvoiceNumber: string | null;
     documentRef: string | null;
     createdAt: string;
     updatedAt: string;

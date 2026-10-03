@@ -21,9 +21,9 @@ export namespace PostV1PartnersDebtRemindersPreviewResponse {
 
         export namespace Item {
             export const Locale = {
-                Lt: "lt",
                 En: "en",
-                Ru: "ru",
+                Lt: "lt",
+                De: "de",
             } as const;
             export type Locale = (typeof Locale)[keyof typeof Locale];
             export type Invoices = Invoices.Item[];

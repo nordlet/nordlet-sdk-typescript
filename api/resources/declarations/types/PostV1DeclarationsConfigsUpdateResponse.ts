@@ -7,6 +7,7 @@ export interface PostV1DeclarationsConfigsUpdateResponse {
     fields: PostV1DeclarationsConfigsUpdateResponse.Fields.Item[];
     endpoints?: PostV1DeclarationsConfigsUpdateResponse.Endpoints.Item[] | undefined;
     values: Record<string, string>;
+    acceptsCertificate: boolean;
 }
 
 export namespace PostV1DeclarationsConfigsUpdateResponse {
@@ -25,6 +26,8 @@ export namespace PostV1DeclarationsConfigsUpdateResponse {
                 Text: "text",
                 Secret: "secret",
                 Select: "select",
+                Url: "url",
+                Certificate: "certificate",
             } as const;
             export type Kind = (typeof Kind)[keyof typeof Kind];
         }

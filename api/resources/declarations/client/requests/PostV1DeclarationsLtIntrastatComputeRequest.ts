@@ -15,6 +15,10 @@ export interface PostV1DeclarationsLtIntrastatComputeRequest {
     transactionNature?: string;
     deliveryTerms?: string;
     transportMode?: PostV1DeclarationsLtIntrastatComputeRequest.TransportMode;
+    regionCode?: string;
+    statisticalValueRequired?: boolean;
+    preparationTimeHours?: number;
+    preparationTimeMinutes?: number;
     persist?: boolean;
 }
 

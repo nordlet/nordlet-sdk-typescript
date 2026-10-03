@@ -20,9 +20,10 @@ export interface PostV1HrEmployeesCreateRequest {
     socialInsuranceNo?: string;
     socialInsuranceStart?: string;
     hireDate?: string;
-    applyNpd?: boolean;
-    npdOverride?: string | null;
+    applyAllowance?: boolean;
+    allowanceOverride?: string | null;
     pensionAccumulation?: boolean;
+    payrollOptions?: Record<string, string>;
     notes?: string;
     attributes?: PostV1HrEmployeesCreateRequest.Attributes.Item[];
 }

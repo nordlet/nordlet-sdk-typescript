@@ -11,6 +11,8 @@ export interface PostV1BankSettlementsMatchResponse {
     description: string | null;
     sourceId: string | null;
     chargeId: string | null;
+    commissionPercent: string | null;
+    commissionAmount: string | null;
     reference: string | null;
     matchedInvoiceId: string | null;
     matchStatus: PostV1BankSettlementsMatchResponse.MatchStatus;

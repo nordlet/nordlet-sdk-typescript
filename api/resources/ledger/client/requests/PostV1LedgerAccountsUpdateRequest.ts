@@ -9,28 +9,14 @@
 export interface PostV1LedgerAccountsUpdateRequest {
     id: string;
     name?: string;
-    translations?: PostV1LedgerAccountsUpdateRequest.Translations | null;
+    translations?: Record<string, PostV1LedgerAccountsUpdateRequest.Translations.Value | null> | null;
     parentId?: string | null;
     isPostable?: boolean;
 }
 
 export namespace PostV1LedgerAccountsUpdateRequest {
-    export interface Translations {
-        lt?: Translations.Lt | undefined;
-        en?: Translations.En | undefined;
-        ru?: Translations.Ru | undefined;
-    }
-
     export namespace Translations {
-        export interface Lt {
-            name: string;
-        }
-
-        export interface En {
-            name: string;
-        }
-
-        export interface Ru {
+        export interface Value {
             name: string;
         }
     }

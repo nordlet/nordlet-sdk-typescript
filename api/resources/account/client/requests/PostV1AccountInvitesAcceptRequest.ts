@@ -16,9 +16,9 @@ export interface PostV1AccountInvitesAcceptRequest {
 
 export namespace PostV1AccountInvitesAcceptRequest {
     export const Locale = {
-        Lt: "lt",
         En: "en",
-        Ru: "ru",
+        Lt: "lt",
+        De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
 }

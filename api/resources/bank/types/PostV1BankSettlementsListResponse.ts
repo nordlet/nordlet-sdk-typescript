@@ -22,6 +22,7 @@ export namespace PostV1BankSettlementsListResponse {
             grossTotal: string;
             feeTotal: string;
             netTotal: string;
+            fxRate: string | null;
             status: Item.Status;
             journalTransactionId: string | null;
             bankTransactionId: string | null;

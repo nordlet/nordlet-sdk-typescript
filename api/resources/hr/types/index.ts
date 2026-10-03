@@ -5,6 +5,7 @@ export * from "./PostV1HrEmployeesAnonymizeResponse.js";
 export * from "./PostV1HrEmployeesAttachmentsListResponse.js";
 export * from "./PostV1HrEmployeesCreateResponse.js";
 export * from "./PostV1HrEmployeesDeleteResponse.js";
+export * from "./PostV1HrEmployeesFieldsResponse.js";
 export * from "./PostV1HrEmployeesGetResponse.js";
 export * from "./PostV1HrEmployeesListResponse.js";
 export * from "./PostV1HrEmployeesRecordsCreateResponse.js";

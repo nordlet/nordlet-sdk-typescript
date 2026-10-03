@@ -5,10 +5,16 @@ export interface PostV1AccountReferralGetResponse {
     link: string;
     points: number;
     referredCount: number;
+    rates: PostV1AccountReferralGetResponse.Rates;
     history: PostV1AccountReferralGetResponse.History.Item[];
 }
 
 export namespace PostV1AccountReferralGetResponse {
+    export interface Rates {
+        perEur: number;
+        pointCents: number;
+    }
+
     export type History = History.Item[];
 
     export namespace History {

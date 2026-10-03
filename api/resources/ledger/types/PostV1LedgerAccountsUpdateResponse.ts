@@ -4,7 +4,7 @@ export interface PostV1LedgerAccountsUpdateResponse {
     id: string;
     code: string;
     name: string;
-    translations: PostV1LedgerAccountsUpdateResponse.Translations | null;
+    translations: Record<string, PostV1LedgerAccountsUpdateResponse.Translations.Value | null> | null;
     type: PostV1LedgerAccountsUpdateResponse.Type;
     parentId: string | null;
     isPostable: boolean;
@@ -12,22 +12,8 @@ export interface PostV1LedgerAccountsUpdateResponse {
 }
 
 export namespace PostV1LedgerAccountsUpdateResponse {
-    export interface Translations {
-        lt?: Translations.Lt | undefined;
-        en?: Translations.En | undefined;
-        ru?: Translations.Ru | undefined;
-    }
-
     export namespace Translations {
-        export interface Lt {
-            name: string;
-        }
-
-        export interface En {
-            name: string;
-        }
-
-        export interface Ru {
+        export interface Value {
             name: string;
         }
     }

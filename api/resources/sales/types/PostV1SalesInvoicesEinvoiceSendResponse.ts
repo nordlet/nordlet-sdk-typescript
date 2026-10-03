@@ -4,7 +4,25 @@ export interface PostV1SalesInvoicesEinvoiceSendResponse {
     sent: boolean;
     system: string;
     format: string;
+    transport: PostV1SalesInvoicesEinvoiceSendResponse.Transport;
     messageId: string;
+    nationalNumber: string | null;
+    status: PostV1SalesInvoicesEinvoiceSendResponse.Status;
+    detail: string | null;
     fileId: string;
     warnings: string[];
+}
+
+export namespace PostV1SalesInvoicesEinvoiceSendResponse {
+    export const Transport = {
+        Bridge: "bridge",
+        Direct: "direct",
+    } as const;
+    export type Transport = (typeof Transport)[keyof typeof Transport];
+    export const Status = {
+        Sent: "sent",
+        Accepted: "accepted",
+        Rejected: "rejected",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }

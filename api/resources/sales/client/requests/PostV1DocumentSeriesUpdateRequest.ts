@@ -15,6 +15,8 @@ export interface PostV1DocumentSeriesUpdateRequest {
     operationTypeId?: string | null;
     numberLength?: number;
     nextNumber?: number;
+    allocatedFrom?: number | null;
+    allocatedTo?: number | null;
     warehouseId?: string | null;
     printSeries?: boolean;
     isDefault?: boolean;

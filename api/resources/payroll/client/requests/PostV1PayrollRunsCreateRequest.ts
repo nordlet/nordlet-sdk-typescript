@@ -11,11 +11,21 @@ export interface PostV1PayrollRunsCreateRequest {
     year: number;
     month: number;
     includeNatura?: boolean;
+    grossOverrides?: PostV1PayrollRunsCreateRequest.GrossOverrides.Item[];
     lines?: PostV1PayrollRunsCreateRequest.Lines.Item[];
     notes?: string;
 }
 
 export namespace PostV1PayrollRunsCreateRequest {
+    export type GrossOverrides = GrossOverrides.Item[];
+
+    export namespace GrossOverrides {
+        export interface Item {
+            employeeId: string;
+            gross: string;
+        }
+    }
+
     export type Lines = Lines.Item[];
 
     export namespace Lines {

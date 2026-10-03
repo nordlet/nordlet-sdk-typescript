@@ -13,5 +13,6 @@ export interface PostV1PayrollRunsApproveRequest {
     payableAccountCode?: string;
     gpmAccountCode?: string;
     sodraAccountCode?: string;
+    employerSocialAccountCode?: string;
     deductionAccountCode?: string;
 }

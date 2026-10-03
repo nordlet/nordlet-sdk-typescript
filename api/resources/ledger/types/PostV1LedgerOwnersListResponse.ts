@@ -21,11 +21,21 @@ export namespace PostV1LedgerOwnersListResponse {
             sharesAmount: string | null;
             sharesType: string | null;
             sharesAcquisitionDate: string | null;
+            withholdingTaxPercent: string | null;
+            partnerLiability: Item.PartnerLiability | null;
+            specialBalanceRequired: boolean | null;
+            supplementaryBalanceRequired: boolean | null;
             address: Item.Address | null;
             createdAt: string;
         }
 
         export namespace Item {
+            export const PartnerLiability = {
+                General: "general",
+                Limited: "limited",
+            } as const;
+            export type PartnerLiability = (typeof PartnerLiability)[keyof typeof PartnerLiability];
+
             export interface Address {
                 street?: string | undefined;
                 city?: string | undefined;

@@ -7,25 +7,26 @@
  *     }
  */
 export interface PostV1HrEmployeesUpdateRequest {
-    code?: string;
+    code?: string | null;
     firstName?: string;
     lastName?: string;
-    personalCode?: string;
-    birthDate?: string;
-    email?: string;
-    phone?: string;
-    address?: PostV1HrEmployeesUpdateRequest.Address;
-    iban?: string;
-    socialInsuranceNo?: string;
-    socialInsuranceStart?: string;
-    hireDate?: string;
-    applyNpd?: boolean;
-    npdOverride?: string | null;
+    personalCode?: string | null;
+    birthDate?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    address?: PostV1HrEmployeesUpdateRequest.Address | null;
+    iban?: string | null;
+    socialInsuranceNo?: string | null;
+    socialInsuranceStart?: string | null;
+    hireDate?: string | null;
+    applyAllowance?: boolean;
+    allowanceOverride?: string | null;
     pensionAccumulation?: boolean;
-    notes?: string;
+    payrollOptions?: Record<string, string>;
+    notes?: string | null;
     attributes?: PostV1HrEmployeesUpdateRequest.Attributes.Item[];
     id: string;
-    terminationDate?: string;
+    terminationDate?: string | null;
     status?: PostV1HrEmployeesUpdateRequest.Status;
 }
 

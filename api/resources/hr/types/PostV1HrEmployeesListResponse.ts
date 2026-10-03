@@ -27,9 +27,10 @@ export namespace PostV1HrEmployeesListResponse {
             socialInsuranceStart: string | null;
             hireDate: string | null;
             terminationDate: string | null;
-            applyNpd: boolean;
-            npdOverride: string | null;
+            applyAllowance: boolean;
+            allowanceOverride: string | null;
             pensionAccumulation: boolean;
+            payrollOptions: Record<string, string>;
             status: Item.Status;
             notes: string | null;
             attributes: Item.Attributes.Item[] | null;

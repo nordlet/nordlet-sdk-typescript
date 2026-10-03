@@ -9,10 +9,15 @@
 export interface PostV1SalesInvoicesUpdateRequest {
     id: string;
     partnerId?: string;
+    agreementId?: string | null;
     currency?: string;
-    issueDate?: string;
-    dueDate?: string;
+    issueDate?: string | null;
+    dueDate?: string | null;
     vatScheme?: PostV1SalesInvoicesUpdateRequest.VatScheme | null;
+    intrastatTransportMode?: string | null;
+    intrastatDeliveryTerms?: string | null;
+    intrastatRegion?: string | null;
+    intrastatNatureOfTransaction?: string | null;
     vatCountryCode?: string | null;
     deemedSupplier?: boolean;
     notes?: string;
@@ -56,6 +61,7 @@ export namespace PostV1SalesInvoicesUpdateRequest {
             costCenterId?: string | undefined;
             projectId?: string | undefined;
             recognition?: Item.Recognition | undefined;
+            vatExemptionBasis?: string | undefined;
             standaloneSellingPrice?: string | undefined;
             refundEstimatePercent?: string | undefined;
         }

@@ -10,6 +10,7 @@ export interface PostV1BankSettlementsPostResponse {
     grossTotal: string;
     feeTotal: string;
     netTotal: string;
+    fxRate: string | null;
     status: PostV1BankSettlementsPostResponse.Status;
     journalTransactionId: string | null;
     bankTransactionId: string | null;
@@ -35,5 +36,7 @@ export namespace PostV1BankSettlementsPostResponse {
         sellerAmount: string;
         feeAmount: string;
         suspenseAmount: string;
+        fxRate: string;
+        exchangeDifference: string;
     }
 }

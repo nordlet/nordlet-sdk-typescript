@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         locale: "lt"
+ *         locale: "en"
  *     }
  */
 export interface PostV1AccountLocaleSetRequest {
@@ -12,9 +12,9 @@ export interface PostV1AccountLocaleSetRequest {
 
 export namespace PostV1AccountLocaleSetRequest {
     export const Locale = {
-        Lt: "lt",
         En: "en",
-        Ru: "ru",
+        Lt: "lt",
+        De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
 }

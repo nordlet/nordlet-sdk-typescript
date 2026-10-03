@@ -5,4 +5,5 @@ export interface PostV1AccountApiKeysCreateResponse {
     name: string;
     scopes: string[];
     key: string;
+    expiresAt: string | null;
 }

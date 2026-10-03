@@ -24,6 +24,7 @@ export namespace PostV1SalesInvoicesListResponse {
             issueDate: string | null;
             dueDate: string | null;
             currency: string;
+            fxRate: string | null;
             netTotal: string;
             vatTotal: string;
             grossTotal: string;
@@ -33,6 +34,10 @@ export namespace PostV1SalesInvoicesListResponse {
             creditedInvoiceId: string | null;
             agreementId: string | null;
             vatScheme: Item.VatScheme | null;
+            intrastatTransportMode: string | null;
+            intrastatDeliveryTerms: string | null;
+            intrastatRegion: string | null;
+            intrastatNatureOfTransaction: string | null;
             vatCountryCode: string | null;
             deemedSupplier: boolean;
             notes: string | null;
@@ -49,6 +54,14 @@ export namespace PostV1SalesInvoicesListResponse {
             lockedAt: string | null;
             lockedBy: string | null;
             payToken: string | null;
+            einvoiceSystem: string | null;
+            einvoiceTransport: string | null;
+            einvoiceMessageId: string | null;
+            einvoiceNumber: string | null;
+            einvoiceStatus: string | null;
+            einvoiceDetail: string | null;
+            einvoiceSentAt: string | null;
+            einvoiceCheckedAt: string | null;
             createdAt: string;
             updatedAt: string;
         }

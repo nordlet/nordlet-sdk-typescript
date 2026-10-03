@@ -15,9 +15,10 @@ export interface PostV1HrEmployeesAnonymizeResponse {
     socialInsuranceStart: string | null;
     hireDate: string | null;
     terminationDate: string | null;
-    applyNpd: boolean;
-    npdOverride: string | null;
+    applyAllowance: boolean;
+    allowanceOverride: string | null;
     pensionAccumulation: boolean;
+    payrollOptions: Record<string, string>;
     status: PostV1HrEmployeesAnonymizeResponse.Status;
     notes: string | null;
     attributes: PostV1HrEmployeesAnonymizeResponse.Attributes.Item[] | null;

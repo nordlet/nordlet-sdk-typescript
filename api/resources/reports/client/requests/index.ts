@@ -3,8 +3,10 @@ export type { PostV1ReportsCashFlowRequest } from "./PostV1ReportsCashFlowReques
 export type { PostV1ReportsCostCenterActivityRequest } from "./PostV1ReportsCostCenterActivityRequest.js";
 export type { PostV1ReportsCostCenterItemsRequest } from "./PostV1ReportsCostCenterItemsRequest.js";
 export type { PostV1ReportsCostCentersRequest } from "./PostV1ReportsCostCentersRequest.js";
+export type { PostV1ReportsDatevRequest } from "./PostV1ReportsDatevRequest.js";
 export { PostV1ReportsDebtAgingRequest } from "./PostV1ReportsDebtAgingRequest.js";
 export type { PostV1ReportsEuPurchasesRequest } from "./PostV1ReportsEuPurchasesRequest.js";
+export type { PostV1ReportsFecRequest } from "./PostV1ReportsFecRequest.js";
 export { PostV1ReportsFinancialStatementsRequest } from "./PostV1ReportsFinancialStatementsRequest.js";
 export type { PostV1ReportsGeneralJournalRequest } from "./PostV1ReportsGeneralJournalRequest.js";
 export type { PostV1ReportsGlDetailRequest } from "./PostV1ReportsGlDetailRequest.js";
@@ -16,6 +18,7 @@ export type { PostV1ReportsOnlineSalesRequest } from "./PostV1ReportsOnlineSales
 export type { PostV1ReportsOssRequest } from "./PostV1ReportsOssRequest.js";
 export type { PostV1ReportsPartnerBalancesRequest } from "./PostV1ReportsPartnerBalancesRequest.js";
 export type { PostV1ReportsPosSalesRequest } from "./PostV1ReportsPosSalesRequest.js";
+export type { PostV1ReportsSieRequest } from "./PostV1ReportsSieRequest.js";
 export type { PostV1ReportsSizeCategoryRequest } from "./PostV1ReportsSizeCategoryRequest.js";
 export type { PostV1ReportsStockAgingRequest } from "./PostV1ReportsStockAgingRequest.js";
 export type { PostV1ReportsStockBalanceRequest } from "./PostV1ReportsStockBalanceRequest.js";

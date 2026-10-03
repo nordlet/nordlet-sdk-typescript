@@ -5,6 +5,7 @@ export type { PostV1HrEmployeesAnonymizeRequest } from "./PostV1HrEmployeesAnony
 export type { PostV1HrEmployeesAttachmentsListRequest } from "./PostV1HrEmployeesAttachmentsListRequest.js";
 export type { PostV1HrEmployeesCreateRequest } from "./PostV1HrEmployeesCreateRequest.js";
 export type { PostV1HrEmployeesDeleteRequest } from "./PostV1HrEmployeesDeleteRequest.js";
+export type { PostV1HrEmployeesFieldsRequest } from "./PostV1HrEmployeesFieldsRequest.js";
 export type { PostV1HrEmployeesGetRequest } from "./PostV1HrEmployeesGetRequest.js";
 export { PostV1HrEmployeesListRequest } from "./PostV1HrEmployeesListRequest.js";
 export { PostV1HrEmployeesRecordsCreateRequest } from "./PostV1HrEmployeesRecordsCreateRequest.js";

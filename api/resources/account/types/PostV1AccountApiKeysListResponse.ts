@@ -13,6 +13,8 @@ export namespace PostV1AccountApiKeysListResponse {
             name: string;
             scopes: string[];
             lastUsedAt: string | null;
+            expiresAt: string | null;
+            replacedByKeyId: string | null;
             revokedAt: string | null;
             createdAt: string;
         }

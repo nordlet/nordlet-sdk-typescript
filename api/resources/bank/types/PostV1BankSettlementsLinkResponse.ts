@@ -10,6 +10,7 @@ export interface PostV1BankSettlementsLinkResponse {
     grossTotal: string;
     feeTotal: string;
     netTotal: string;
+    fxRate: string | null;
     status: PostV1BankSettlementsLinkResponse.Status;
     journalTransactionId: string | null;
     bankTransactionId: string | null;

@@ -23,9 +23,9 @@ export namespace PostV1AccountInvitesCreateRequest {
     } as const;
     export type Role = (typeof Role)[keyof typeof Role];
     export const Locale = {
-        Lt: "lt",
         En: "en",
-        Ru: "ru",
+        Lt: "lt",
+        De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
 }

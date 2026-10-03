@@ -14,6 +14,10 @@ export interface PostV1LedgerOwnersCreateRequest {
     sharesAmount?: string;
     sharesType?: PostV1LedgerOwnersCreateRequest.SharesType;
     sharesAcquisitionDate?: string;
+    withholdingTaxPercent?: string;
+    partnerLiability?: PostV1LedgerOwnersCreateRequest.PartnerLiability | null;
+    specialBalanceRequired?: boolean | null;
+    supplementaryBalanceRequired?: boolean | null;
     address?: PostV1LedgerOwnersCreateRequest.Address;
 }
 
@@ -25,6 +29,11 @@ export namespace PostV1LedgerOwnersCreateRequest {
         Prv: "PRV",
     } as const;
     export type SharesType = (typeof SharesType)[keyof typeof SharesType];
+    export const PartnerLiability = {
+        General: "general",
+        Limited: "limited",
+    } as const;
+    export type PartnerLiability = (typeof PartnerLiability)[keyof typeof PartnerLiability];
 
     export interface Address {
         street?: string | undefined;

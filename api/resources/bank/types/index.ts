@@ -26,6 +26,7 @@ export * from "./PostV1BankMatchRulesDeleteResponse.js";
 export * from "./PostV1BankMatchRulesListResponse.js";
 export * from "./PostV1BankMatchRulesUpdateResponse.js";
 export * from "./PostV1BankPaymentsExportResponse.js";
+export * from "./PostV1BankSettlementsCommissionResponse.js";
 export * from "./PostV1BankSettlementsGetResponse.js";
 export * from "./PostV1BankSettlementsImportResponse.js";
 export * from "./PostV1BankSettlementsLinkResponse.js";

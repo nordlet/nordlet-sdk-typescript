@@ -9,4 +9,5 @@
 export interface PostV1AccountApiKeysCreateRequest {
     name: string;
     scopes?: string[];
+    expiresInDays?: number;
 }

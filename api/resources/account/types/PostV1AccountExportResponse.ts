@@ -48,6 +48,9 @@ export namespace PostV1AccountExportResponse {
         export interface Item {
             id: string;
             companyId: string | null;
+            ipAddress: string | null;
+            userAgent: string | null;
+            lastSeenAt: string | null;
             createdAt: string;
             expiresAt: string;
             current: boolean;

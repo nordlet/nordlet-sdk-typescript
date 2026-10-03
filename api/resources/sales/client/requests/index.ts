@@ -19,6 +19,7 @@ export type { PostV1SalesInvoicesApplyAdvanceRequest } from "./PostV1SalesInvoic
 export { PostV1SalesInvoicesCreateRequest } from "./PostV1SalesInvoicesCreateRequest.js";
 export type { PostV1SalesInvoicesDeleteRequest } from "./PostV1SalesInvoicesDeleteRequest.js";
 export type { PostV1SalesInvoicesEinvoiceSendRequest } from "./PostV1SalesInvoicesEinvoiceSendRequest.js";
+export type { PostV1SalesInvoicesEinvoiceStatusRequest } from "./PostV1SalesInvoicesEinvoiceStatusRequest.js";
 export type { PostV1SalesInvoicesEinvoiceXmlRequest } from "./PostV1SalesInvoicesEinvoiceXmlRequest.js";
 export type { PostV1SalesInvoicesGetRequest } from "./PostV1SalesInvoicesGetRequest.js";
 export type { PostV1SalesInvoicesIssueRequest } from "./PostV1SalesInvoicesIssueRequest.js";

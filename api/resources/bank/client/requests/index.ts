@@ -26,6 +26,7 @@ export type { PostV1BankMatchRulesDeleteRequest } from "./PostV1BankMatchRulesDe
 export type { PostV1BankMatchRulesListRequest } from "./PostV1BankMatchRulesListRequest.js";
 export type { PostV1BankMatchRulesUpdateRequest } from "./PostV1BankMatchRulesUpdateRequest.js";
 export type { PostV1BankPaymentsExportRequest } from "./PostV1BankPaymentsExportRequest.js";
+export type { PostV1BankSettlementsCommissionRequest } from "./PostV1BankSettlementsCommissionRequest.js";
 export type { PostV1BankSettlementsGetRequest } from "./PostV1BankSettlementsGetRequest.js";
 export { PostV1BankSettlementsImportRequest } from "./PostV1BankSettlementsImportRequest.js";
 export type { PostV1BankSettlementsLinkRequest } from "./PostV1BankSettlementsLinkRequest.js";

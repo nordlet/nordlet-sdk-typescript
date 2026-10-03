@@ -8,20 +8,20 @@
  */
 export interface PostV1TransportWaybillsUpdateRequest {
     consigneePartnerId?: string;
-    transporterPartnerId?: string;
+    transporterPartnerId?: string | null;
     documentDate?: string;
     dispatchAt?: string;
-    estimatedArrivalAt?: string;
-    vehiclePlate?: string;
-    trailerPlate?: string;
-    driverName?: string;
-    driverSurname?: string;
-    loadWarehouseId?: string;
+    estimatedArrivalAt?: string | null;
+    vehiclePlate?: string | null;
+    trailerPlate?: string | null;
+    driverName?: string | null;
+    driverSurname?: string | null;
+    loadWarehouseId?: string | null;
     loadAddress?: string;
     unloadAddress?: string;
-    valueEur?: string;
-    saleInvoiceId?: string;
-    notes?: string;
+    valueEur?: string | null;
+    saleInvoiceId?: string | null;
+    notes?: string | null;
     series?: string;
     lines?: PostV1TransportWaybillsUpdateRequest.Lines.Item[];
     id: string;

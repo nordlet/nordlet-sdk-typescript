@@ -14,7 +14,12 @@ export interface PostV1SalesInvoicesCreateRequest {
     issueDate?: string;
     dueDate?: string;
     creditedInvoiceId?: string;
+    agreementId?: string;
     vatScheme?: PostV1SalesInvoicesCreateRequest.VatScheme;
+    intrastatTransportMode?: string;
+    intrastatDeliveryTerms?: string;
+    intrastatRegion?: string;
+    intrastatNatureOfTransaction?: string;
     vatCountryCode?: string;
     deemedSupplier?: boolean;
     notes?: string;
@@ -66,6 +71,7 @@ export namespace PostV1SalesInvoicesCreateRequest {
             costCenterId?: string | undefined;
             projectId?: string | undefined;
             recognition?: Item.Recognition | undefined;
+            vatExemptionBasis?: string | undefined;
             standaloneSellingPrice?: string | undefined;
             refundEstimatePercent?: string | undefined;
         }

@@ -5,6 +5,5 @@ export interface PostV1AccountInvitesCreateResponse {
     email: string;
     role: string;
     expiresAt: string;
-    inviteUrl: string;
     emailSent: boolean;
 }

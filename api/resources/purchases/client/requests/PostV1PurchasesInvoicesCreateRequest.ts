@@ -20,6 +20,11 @@ export interface PostV1PurchasesInvoicesCreateRequest {
     purchaseOrderId?: string;
     operationTypeId?: string;
     notes?: string;
+    intrastatTransportMode?: string;
+    intrastatDeliveryTerms?: string;
+    intrastatRegion?: string;
+    intrastatNatureOfTransaction?: string;
+    einvoiceNumber?: string;
     documentRef?: string;
     lines: PostV1PurchasesInvoicesCreateRequest.Lines.Item[];
 }

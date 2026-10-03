@@ -12,6 +12,10 @@ export interface PostV1AccountCompaniesCreateRequest {
     vatCode?: string;
     smeExemptionNumber?: string;
     isVatPayer?: boolean;
+    vatPeriod?: PostV1AccountCompaniesCreateRequest.VatPeriod;
+    fiscalYearEndMonth?: number;
+    timeZone?: string;
+    filingOptions?: Record<string, string>;
     address?: PostV1AccountCompaniesCreateRequest.Address;
     email?: string;
     phone?: string;
@@ -20,6 +24,15 @@ export interface PostV1AccountCompaniesCreateRequest {
     peppolId?: string;
     sepaCreditorId?: string;
     defaultInvoiceCurrency?: string;
+    legalForm?: string;
+    registryName?: string;
+    incorporatedOn?: string;
+    shareCapital?: string;
+    accountsKeptBy?: PostV1AccountCompaniesCreateRequest.AccountsKeptBy;
+    bookkeeperName?: string;
+    auditorName?: string;
+    auditorRegistrationNumber?: string;
+    auditRequired?: boolean;
     /** Jurisdiction the company is registered in (immutable after creation) */
     countryCode?: PostV1AccountCompaniesCreateRequest.CountryCode;
     /** Sandbox companies hold test data and are purged immediately on delete (immutable after creation) */
@@ -27,6 +40,15 @@ export interface PostV1AccountCompaniesCreateRequest {
 }
 
 export namespace PostV1AccountCompaniesCreateRequest {
+    export const VatPeriod = {
+        Monthly: "monthly",
+        Bimonthly: "bimonthly",
+        Quarterly: "quarterly",
+        Semiannual: "semiannual",
+        Annual: "annual",
+    } as const;
+    export type VatPeriod = (typeof VatPeriod)[keyof typeof VatPeriod];
+
     export interface Address {
         street?: string | undefined;
         city?: string | undefined;
@@ -34,6 +56,11 @@ export namespace PostV1AccountCompaniesCreateRequest {
         countryCode?: string | undefined;
     }
 
+    export const AccountsKeptBy = {
+        Company: "company",
+        External: "external",
+    } as const;
+    export type AccountsKeptBy = (typeof AccountsKeptBy)[keyof typeof AccountsKeptBy];
     /** Jurisdiction the company is registered in (immutable after creation) */
     export const CountryCode = {
         At: "AT",

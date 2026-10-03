@@ -10,8 +10,9 @@ export interface PostV1CatalogUnitsOptionsRequest {
 
 export namespace PostV1CatalogUnitsOptionsRequest {
     export const Locale = {
-        Lt: "lt",
         En: "en",
+        Lt: "lt",
+        De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
 }

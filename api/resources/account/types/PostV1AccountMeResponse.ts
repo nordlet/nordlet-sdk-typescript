@@ -4,6 +4,7 @@ export interface PostV1AccountMeResponse {
     user: PostV1AccountMeResponse.User;
     locale: string;
     activeCompanyId: string | null;
+    timeZone: string;
     role: string | null;
     billing: PostV1AccountMeResponse.Billing;
     referralPoints: number;
@@ -26,6 +27,9 @@ export namespace PostV1AccountMeResponse {
         plan: string;
         balanceCents: number;
         trialEndsAt: string | null;
+        payerUserId: string;
+        payerEmail: string;
+        isPayer: boolean;
     }
 
     export namespace Billing {

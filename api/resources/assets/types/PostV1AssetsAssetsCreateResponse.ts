@@ -18,6 +18,11 @@ export interface PostV1AssetsAssetsCreateResponse {
     status: PostV1AssetsAssetsCreateResponse.Status;
     notes: string | null;
     documents: PostV1AssetsAssetsCreateResponse.Documents.Item[] | null;
+    inputVatAmount: string | null;
+    inputVatFirstUseDate: string | null;
+    inputVatDeductiblePercent: string | null;
+    inputVatRealEstate: boolean;
+    inputVatUseChanges: PostV1AssetsAssetsCreateResponse.InputVatUseChanges.Item[];
     createdAt: string;
 }
 
@@ -34,6 +39,25 @@ export namespace PostV1AssetsAssetsCreateResponse {
         export interface Item {
             name: string;
             ref: string;
+        }
+    }
+
+    export type InputVatUseChanges = InputVatUseChanges.Item[];
+
+    export namespace InputVatUseChanges {
+        export interface Item {
+            year: number;
+            percent: string;
+            reason: Item.Reason;
+        }
+
+        export namespace Item {
+            export const Reason = {
+                UseChange: "use_change",
+                Sale: "sale",
+                Withdrawal: "withdrawal",
+            } as const;
+            export type Reason = (typeof Reason)[keyof typeof Reason];
         }
     }
 }

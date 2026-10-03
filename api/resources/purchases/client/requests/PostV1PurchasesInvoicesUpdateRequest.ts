@@ -11,11 +11,16 @@ export interface PostV1PurchasesInvoicesUpdateRequest {
     partnerId?: string;
     documentNumber?: string;
     documentDate?: string;
-    dueDate?: string;
+    dueDate?: string | null;
     currency?: string;
     purchaseOrderId?: string | null;
     operationTypeId?: string | null;
     notes?: string;
+    intrastatTransportMode?: string | null;
+    intrastatDeliveryTerms?: string | null;
+    intrastatRegion?: string | null;
+    intrastatNatureOfTransaction?: string | null;
+    einvoiceNumber?: string | null;
     lines?: PostV1PurchasesInvoicesUpdateRequest.Lines.Item[];
 }
 

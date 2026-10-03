@@ -1,6 +1,7 @@
 export * from "./PostV1PayrollCalcResponse.js";
 export * from "./PostV1PayrollDepartmentsCreateResponse.js";
 export * from "./PostV1PayrollDepartmentsListResponse.js";
+export * from "./PostV1PayrollLinesAttendanceResponse.js";
 export * from "./PostV1PayrollPaymentsExportResponse.js";
 export * from "./PostV1PayrollRunsApproveResponse.js";
 export * from "./PostV1PayrollRunsCancelResponse.js";

@@ -9,11 +9,21 @@ export interface PostV1LedgerOwnersCreateResponse {
     sharesAmount: string | null;
     sharesType: string | null;
     sharesAcquisitionDate: string | null;
+    withholdingTaxPercent: string | null;
+    partnerLiability: PostV1LedgerOwnersCreateResponse.PartnerLiability | null;
+    specialBalanceRequired: boolean | null;
+    supplementaryBalanceRequired: boolean | null;
     address: PostV1LedgerOwnersCreateResponse.Address | null;
     createdAt: string;
 }
 
 export namespace PostV1LedgerOwnersCreateResponse {
+    export const PartnerLiability = {
+        General: "general",
+        Limited: "limited",
+    } as const;
+    export type PartnerLiability = (typeof PartnerLiability)[keyof typeof PartnerLiability];
+
     export interface Address {
         street?: string | undefined;
         city?: string | undefined;

@@ -12,15 +12,7 @@ export namespace PostV1ReferenceCountriesListResponse {
             code: string;
             isEu: boolean;
             isEea: boolean;
-            names: Item.Names;
-        }
-
-        export namespace Item {
-            export interface Names {
-                lt: string;
-                en: string;
-                ru: string;
-            }
+            names: Record<string, string>;
         }
     }
 }

@@ -12,6 +12,7 @@ export interface PostV1SalesInvoicesCreateResponse {
     issueDate: string | null;
     dueDate: string | null;
     currency: string;
+    fxRate: string | null;
     netTotal: string;
     vatTotal: string;
     grossTotal: string;
@@ -21,6 +22,10 @@ export interface PostV1SalesInvoicesCreateResponse {
     creditedInvoiceId: string | null;
     agreementId: string | null;
     vatScheme: PostV1SalesInvoicesCreateResponse.VatScheme | null;
+    intrastatTransportMode: string | null;
+    intrastatDeliveryTerms: string | null;
+    intrastatRegion: string | null;
+    intrastatNatureOfTransaction: string | null;
     vatCountryCode: string | null;
     deemedSupplier: boolean;
     notes: string | null;
@@ -37,6 +42,14 @@ export interface PostV1SalesInvoicesCreateResponse {
     lockedAt: string | null;
     lockedBy: string | null;
     payToken: string | null;
+    einvoiceSystem: string | null;
+    einvoiceTransport: string | null;
+    einvoiceMessageId: string | null;
+    einvoiceNumber: string | null;
+    einvoiceStatus: string | null;
+    einvoiceDetail: string | null;
+    einvoiceSentAt: string | null;
+    einvoiceCheckedAt: string | null;
     createdAt: string;
     updatedAt: string;
     lines: PostV1SalesInvoicesCreateResponse.Lines.Item[];
@@ -87,6 +100,7 @@ export namespace PostV1SalesInvoicesCreateResponse {
             unitPriceInclVat: string | null;
             vatRatePercent: string;
             vatClassifierCode: string | null;
+            vatExemptionBasis: string | null;
             costCenterId: string | null;
             projectId: string | null;
             lineNet: string;

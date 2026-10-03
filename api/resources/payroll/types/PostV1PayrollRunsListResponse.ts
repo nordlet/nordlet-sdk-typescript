@@ -16,12 +16,14 @@ export namespace PostV1PayrollRunsListResponse {
             id: string;
             year: number;
             month: number;
+            countryCode: string;
             status: Item.Status;
             grossTotal: string;
-            npdTotal: string;
-            gpmTotal: string;
-            sodraEmployeeTotal: string;
-            sodraEmployerTotal: string;
+            taxAllowanceTotal: string;
+            incomeTaxTotal: string;
+            employeeContributionsTotal: string;
+            employerContributionsTotal: string;
+            componentTotals: Item.ComponentTotals.Item[];
             netTotal: string;
             journalTransactionId: string | null;
             notes: string | null;
@@ -35,6 +37,28 @@ export namespace PostV1PayrollRunsListResponse {
                 Approved: "approved",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
+            export type ComponentTotals = ComponentTotals.Item[];
+
+            export namespace ComponentTotals {
+                export interface Item {
+                    code: string;
+                    kind: Item.Kind;
+                    amount: string;
+                    rate?: string | undefined;
+                    base?: string | undefined;
+                }
+
+                export namespace Item {
+                    export const Kind = {
+                        Allowance: "allowance",
+                        EmployeeTax: "employee_tax",
+                        EmployeeContribution: "employee_contribution",
+                        EmployerContribution: "employer_contribution",
+                        EmployerPayment: "employer_payment",
+                    } as const;
+                    export type Kind = (typeof Kind)[keyof typeof Kind];
+                }
+            }
         }
     }
 }

@@ -1,13 +1,14 @@
 export type { PostV1AccountApiKeysCreateRequest } from "./PostV1AccountApiKeysCreateRequest.js";
 export type { PostV1AccountApiKeysListRequest } from "./PostV1AccountApiKeysListRequest.js";
 export type { PostV1AccountApiKeysRevokeRequest } from "./PostV1AccountApiKeysRevokeRequest.js";
+export type { PostV1AccountApiKeysRotateRequest } from "./PostV1AccountApiKeysRotateRequest.js";
 export type { PostV1AccountCompaniesActivateRequest } from "./PostV1AccountCompaniesActivateRequest.js";
 export type { PostV1AccountCompaniesArchiveRequest } from "./PostV1AccountCompaniesArchiveRequest.js";
 export { PostV1AccountCompaniesCreateRequest } from "./PostV1AccountCompaniesCreateRequest.js";
 export type { PostV1AccountCompaniesDeleteRequest } from "./PostV1AccountCompaniesDeleteRequest.js";
 export type { PostV1AccountCompaniesProfileRequest } from "./PostV1AccountCompaniesProfileRequest.js";
 export type { PostV1AccountCompaniesSelectRequest } from "./PostV1AccountCompaniesSelectRequest.js";
-export type { PostV1AccountCompaniesUpdateRequest } from "./PostV1AccountCompaniesUpdateRequest.js";
+export { PostV1AccountCompaniesUpdateRequest } from "./PostV1AccountCompaniesUpdateRequest.js";
 export type { PostV1AccountConsentAcceptRequest } from "./PostV1AccountConsentAcceptRequest.js";
 export type { PostV1AccountDeleteRequest } from "./PostV1AccountDeleteRequest.js";
 export { PostV1AccountEmailChangeRequestRequest } from "./PostV1AccountEmailChangeRequestRequest.js";
@@ -24,8 +25,10 @@ export type { PostV1AccountLogoutRequest } from "./PostV1AccountLogoutRequest.js
 export type { PostV1AccountMembersListRequest } from "./PostV1AccountMembersListRequest.js";
 export type { PostV1AccountMembersRemoveRequest } from "./PostV1AccountMembersRemoveRequest.js";
 export { PostV1AccountMembersSetRoleRequest } from "./PostV1AccountMembersSetRoleRequest.js";
+export type { PostV1AccountMembersTransferOwnershipRequest } from "./PostV1AccountMembersTransferOwnershipRequest.js";
 export type { PostV1AccountMeRequest } from "./PostV1AccountMeRequest.js";
 export type { PostV1AccountProfileUpdateRequest } from "./PostV1AccountProfileUpdateRequest.js";
+export type { PostV1AccountReferralConvertRequest } from "./PostV1AccountReferralConvertRequest.js";
 export type { PostV1AccountReferralGetRequest } from "./PostV1AccountReferralGetRequest.js";
 export type { PostV1AccountSessionsListRequest } from "./PostV1AccountSessionsListRequest.js";
 export type { PostV1AccountSessionsRevokeOthersRequest } from "./PostV1AccountSessionsRevokeOthersRequest.js";

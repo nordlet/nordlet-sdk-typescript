@@ -16,7 +16,7 @@ export namespace PostV1LedgerAccountsListResponse {
             id: string;
             code: string;
             name: string;
-            translations: Item.Translations | null;
+            translations: Record<string, Item.Translations.Value | null> | null;
             type: Item.Type;
             parentId: string | null;
             isPostable: boolean;
@@ -24,22 +24,8 @@ export namespace PostV1LedgerAccountsListResponse {
         }
 
         export namespace Item {
-            export interface Translations {
-                lt?: Translations.Lt | undefined;
-                en?: Translations.En | undefined;
-                ru?: Translations.Ru | undefined;
-            }
-
             export namespace Translations {
-                export interface Lt {
-                    name: string;
-                }
-
-                export interface En {
-                    name: string;
-                }
-
-                export interface Ru {
+                export interface Value {
                     name: string;
                 }
             }

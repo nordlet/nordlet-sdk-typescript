@@ -10,6 +10,8 @@ export interface PostV1BillingAccountSetPlanResponse {
     paymentsConfigured: boolean;
     hasPaymentAccount: boolean;
     hasSubscription: boolean;
+    paymentFailedAt: string | null;
+    paymentFailedInvoiceUrl: string | null;
     monthToDate: PostV1BillingAccountSetPlanResponse.MonthToDate;
     plans: Record<string, PostV1BillingAccountSetPlanResponse.Plans.Value>;
     topUp: PostV1BillingAccountSetPlanResponse.TopUp;

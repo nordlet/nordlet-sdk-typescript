@@ -10,8 +10,10 @@
 export interface PostV1PayrollCalcRequest {
     taxableBase: string;
     date: string;
-    applyNpd?: boolean;
-    npdOverride?: string;
+    applyAllowance?: boolean;
+    allowanceOverride?: string;
     pensionAccumulation?: boolean;
     fixedTerm?: boolean;
+    benefitInKind?: string;
+    options?: Record<string, string>;
 }

@@ -16,6 +16,7 @@ export namespace PostV1DeclarationsConfigsListResponse {
             fields: Item.Fields.Item[];
             endpoints?: Item.Endpoints.Item[] | undefined;
             values: Record<string, string>;
+            acceptsCertificate: boolean;
         }
 
         export namespace Item {
@@ -34,6 +35,8 @@ export namespace PostV1DeclarationsConfigsListResponse {
                         Text: "text",
                         Secret: "secret",
                         Select: "select",
+                        Url: "url",
+                        Certificate: "certificate",
                     } as const;
                     export type Kind = (typeof Kind)[keyof typeof Kind];
                 }
