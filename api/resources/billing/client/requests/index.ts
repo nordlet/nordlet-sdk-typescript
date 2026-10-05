@@ -1,6 +1,6 @@
-export type { PostV1BillingAccountGetRequest } from "./PostV1BillingAccountGetRequest.js";
-export { PostV1BillingAccountSetPlanRequest } from "./PostV1BillingAccountSetPlanRequest.js";
-export { PostV1BillingPortalCreateRequest } from "./PostV1BillingPortalCreateRequest.js";
-export { PostV1BillingTopupCreateRequest } from "./PostV1BillingTopupCreateRequest.js";
-export type { PostV1BillingTransactionsListRequest } from "./PostV1BillingTransactionsListRequest.js";
-export type { PostV1BillingUsageListRequest } from "./PostV1BillingUsageListRequest.js";
+export type { AccountGetBillingRequest } from "./AccountGetBillingRequest.js";
+export { AccountSetPlanBillingRequest } from "./AccountSetPlanBillingRequest.js";
+export { PortalCreateBillingRequest } from "./PortalCreateBillingRequest.js";
+export { TopupCreateBillingRequest } from "./TopupCreateBillingRequest.js";
+export type { TransactionsListBillingRequest } from "./TransactionsListBillingRequest.js";
+export type { UsageListBillingRequest } from "./UsageListBillingRequest.js";

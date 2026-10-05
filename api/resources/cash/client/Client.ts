@@ -24,38 +24,40 @@ export class CashClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CashOrdersCreateRequest} request
+     * @param {NordletApi.OrdersCreateCashRequest} request
      * @param {CashClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.cash.postV1CashOrdersCreate({
+     *     await client.cash.ordersCreate({
      *         type: "receipt",
-     *         date: "date",
-     *         amount: "amount",
+     *         date: "2026-07-01",
+     *         amount: "121.0000",
      *         purpose: "purpose",
      *         counterAccountCode: "counterAccountCode"
      *     })
      */
-    public postV1CashOrdersCreate(
-        request: NordletApi.PostV1CashOrdersCreateRequest,
+    public ordersCreate(
+        request: NordletApi.OrdersCreateCashRequest,
         requestOptions?: CashClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CashOrdersCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CashOrdersCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersCreateCashResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersCreate(request, requestOptions));
     }
 
-    private async __postV1CashOrdersCreate(
-        request: NordletApi.PostV1CashOrdersCreateRequest,
+    private async __ordersCreate(
+        request: NordletApi.OrdersCreateCashRequest,
         requestOptions?: CashClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CashOrdersCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersCreateCashResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -82,10 +84,7 @@ export class CashClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CashOrdersCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.OrdersCreateCashResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -97,6 +96,11 @@ export class CashClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -112,6 +116,11 @@ export class CashClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -143,34 +152,36 @@ export class CashClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CashOrdersGetRequest} request
+     * @param {NordletApi.OrdersGetCashRequest} request
      * @param {CashClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.cash.postV1CashOrdersGet({
+     *     await client.cash.ordersGet({
      *         id: "id"
      *     })
      */
-    public postV1CashOrdersGet(
-        request: NordletApi.PostV1CashOrdersGetRequest,
+    public ordersGet(
+        request: NordletApi.OrdersGetCashRequest,
         requestOptions?: CashClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CashOrdersGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CashOrdersGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersGetCashResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersGet(request, requestOptions));
     }
 
-    private async __postV1CashOrdersGet(
-        request: NordletApi.PostV1CashOrdersGetRequest,
+    private async __ordersGet(
+        request: NordletApi.OrdersGetCashRequest,
         requestOptions?: CashClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CashOrdersGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersGetCashResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -197,10 +208,7 @@ export class CashClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CashOrdersGetResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.OrdersGetCashResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -212,6 +220,11 @@ export class CashClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -227,6 +240,11 @@ export class CashClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -258,32 +276,34 @@ export class CashClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CashOrdersListRequest} request
+     * @param {NordletApi.OrdersListCashRequest} request
      * @param {CashClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.cash.postV1CashOrdersList()
+     *     await client.cash.ordersList()
      */
-    public postV1CashOrdersList(
-        request: NordletApi.PostV1CashOrdersListRequest = {},
+    public ordersList(
+        request: NordletApi.OrdersListCashRequest = {},
         requestOptions?: CashClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CashOrdersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CashOrdersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersListCashResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersList(request, requestOptions));
     }
 
-    private async __postV1CashOrdersList(
-        request: NordletApi.PostV1CashOrdersListRequest = {},
+    private async __ordersList(
+        request: NordletApi.OrdersListCashRequest = {},
         requestOptions?: CashClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CashOrdersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersListCashResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -310,10 +330,7 @@ export class CashClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CashOrdersListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.OrdersListCashResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -325,6 +342,11 @@ export class CashClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -340,6 +362,11 @@ export class CashClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -371,32 +398,34 @@ export class CashClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CashBalanceRequest} request
+     * @param {NordletApi.BalanceCashRequest} request
      * @param {CashClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.cash.postV1CashBalance()
+     *     await client.cash.balance()
      */
-    public postV1CashBalance(
-        request: NordletApi.PostV1CashBalanceRequest = {},
+    public balance(
+        request: NordletApi.BalanceCashRequest = {},
         requestOptions?: CashClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CashBalanceResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CashBalance(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BalanceCashResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__balance(request, requestOptions));
     }
 
-    private async __postV1CashBalance(
-        request: NordletApi.PostV1CashBalanceRequest = {},
+    private async __balance(
+        request: NordletApi.BalanceCashRequest = {},
         requestOptions?: CashClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CashBalanceResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BalanceCashResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -423,7 +452,7 @@ export class CashClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1CashBalanceResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.BalanceCashResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -435,6 +464,11 @@ export class CashClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -450,6 +484,11 @@ export class CashClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -481,32 +520,34 @@ export class CashClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CashAdvanceHoldersBalancesRequest} request
+     * @param {NordletApi.AdvanceHoldersBalancesCashRequest} request
      * @param {CashClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.cash.postV1CashAdvanceHoldersBalances()
+     *     await client.cash.advanceHoldersBalances()
      */
-    public postV1CashAdvanceHoldersBalances(
-        request: NordletApi.PostV1CashAdvanceHoldersBalancesRequest = {},
+    public advanceHoldersBalances(
+        request: NordletApi.AdvanceHoldersBalancesCashRequest = {},
         requestOptions?: CashClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CashAdvanceHoldersBalancesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CashAdvanceHoldersBalances(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AdvanceHoldersBalancesCashResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__advanceHoldersBalances(request, requestOptions));
     }
 
-    private async __postV1CashAdvanceHoldersBalances(
-        request: NordletApi.PostV1CashAdvanceHoldersBalancesRequest = {},
+    private async __advanceHoldersBalances(
+        request: NordletApi.AdvanceHoldersBalancesCashRequest = {},
         requestOptions?: CashClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CashAdvanceHoldersBalancesResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AdvanceHoldersBalancesCashResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -534,7 +575,7 @@ export class CashClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CashAdvanceHoldersBalancesResponse,
+                data: _response.body as NordletApi.AdvanceHoldersBalancesCashResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -551,6 +592,11 @@ export class CashClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -563,6 +609,11 @@ export class CashClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

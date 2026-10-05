@@ -24,36 +24,38 @@ export class PublicClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PublicIntegrationRequestsRequest} request
+     * @param {NordletApi.IntegrationRequestsPublicRequest} request
      * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.public.postV1PublicIntegrationRequests({
+     *     await client.public.integrationRequests({
      *         integration: "integration",
      *         name: "name",
      *         email: "email"
      *     })
      */
-    public postV1PublicIntegrationRequests(
-        request: NordletApi.PostV1PublicIntegrationRequestsRequest,
+    public integrationRequests(
+        request: NordletApi.IntegrationRequestsPublicRequest,
         requestOptions?: PublicClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PublicIntegrationRequestsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PublicIntegrationRequests(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.IntegrationRequestsPublicResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__integrationRequests(request, requestOptions));
     }
 
-    private async __postV1PublicIntegrationRequests(
-        request: NordletApi.PostV1PublicIntegrationRequestsRequest,
+    private async __integrationRequests(
+        request: NordletApi.IntegrationRequestsPublicRequest,
         requestOptions?: PublicClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PublicIntegrationRequestsResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntegrationRequestsPublicResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -81,7 +83,7 @@ export class PublicClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PublicIntegrationRequestsResponse,
+                data: _response.body as NordletApi.IntegrationRequestsPublicResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -98,6 +100,11 @@ export class PublicClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -110,6 +117,11 @@ export class PublicClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -146,32 +158,34 @@ export class PublicClient {
     }
 
     /**
-     * @param {NordletApi.GetV1PublicPayTokenRequest} request
+     * @param {NordletApi.PayPublicRequest} request
      * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.public.getV1PublicPayToken({
+     *     await client.public.pay({
      *         token: "token"
      *     })
      */
-    public getV1PublicPayToken(
-        request: NordletApi.GetV1PublicPayTokenRequest,
+    public pay(
+        request: NordletApi.PayPublicRequest,
         requestOptions?: PublicClient.RequestOptions,
     ): core.HttpResponsePromise<void> {
-        return core.HttpResponsePromise.fromPromise(this.__getV1PublicPayToken(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__pay(request, requestOptions));
     }
 
-    private async __getV1PublicPayToken(
-        request: NordletApi.GetV1PublicPayTokenRequest,
+    private async __pay(
+        request: NordletApi.PayPublicRequest,
         requestOptions?: PublicClient.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
         const { token } = request;
@@ -213,6 +227,11 @@ export class PublicClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -225,6 +244,11 @@ export class PublicClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

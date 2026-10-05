@@ -24,32 +24,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerAccountsListRequest} request
+     * @param {NordletApi.AccountsListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerAccountsList()
+     *     await client.ledger.accountsList()
      */
-    public postV1LedgerAccountsList(
-        request: NordletApi.PostV1LedgerAccountsListRequest = {},
+    public accountsList(
+        request: NordletApi.AccountsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerAccountsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerAccountsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AccountsListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__accountsList(request, requestOptions));
     }
 
-    private async __postV1LedgerAccountsList(
-        request: NordletApi.PostV1LedgerAccountsListRequest = {},
+    private async __accountsList(
+        request: NordletApi.AccountsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerAccountsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AccountsListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -77,7 +79,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerAccountsListResponse,
+                data: _response.body as NordletApi.AccountsListLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -94,6 +96,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -106,6 +113,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -137,36 +149,38 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerAccountsCreateRequest} request
+     * @param {NordletApi.AccountsCreateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerAccountsCreate({
+     *     await client.ledger.accountsCreate({
      *         code: "code",
      *         name: "name",
      *         type: "asset"
      *     })
      */
-    public postV1LedgerAccountsCreate(
-        request: NordletApi.PostV1LedgerAccountsCreateRequest,
+    public accountsCreate(
+        request: NordletApi.AccountsCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerAccountsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerAccountsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AccountsCreateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__accountsCreate(request, requestOptions));
     }
 
-    private async __postV1LedgerAccountsCreate(
-        request: NordletApi.PostV1LedgerAccountsCreateRequest,
+    private async __accountsCreate(
+        request: NordletApi.AccountsCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerAccountsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AccountsCreateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -194,7 +208,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerAccountsCreateResponse,
+                data: _response.body as NordletApi.AccountsCreateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -211,6 +225,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -223,6 +242,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -254,34 +278,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerAccountsUpdateRequest} request
+     * @param {NordletApi.AccountsUpdateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerAccountsUpdate({
+     *     await client.ledger.accountsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1LedgerAccountsUpdate(
-        request: NordletApi.PostV1LedgerAccountsUpdateRequest,
+    public accountsUpdate(
+        request: NordletApi.AccountsUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerAccountsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerAccountsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AccountsUpdateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__accountsUpdate(request, requestOptions));
     }
 
-    private async __postV1LedgerAccountsUpdate(
-        request: NordletApi.PostV1LedgerAccountsUpdateRequest,
+    private async __accountsUpdate(
+        request: NordletApi.AccountsUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerAccountsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AccountsUpdateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -309,7 +335,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerAccountsUpdateResponse,
+                data: _response.body as NordletApi.AccountsUpdateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -326,6 +352,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -338,6 +369,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -369,32 +405,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerAccountsApplyTemplateRequest} request
+     * @param {NordletApi.AccountsApplyTemplateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerAccountsApplyTemplate()
+     *     await client.ledger.accountsApplyTemplate()
      */
-    public postV1LedgerAccountsApplyTemplate(
-        request: NordletApi.PostV1LedgerAccountsApplyTemplateRequest = {},
+    public accountsApplyTemplate(
+        request: NordletApi.AccountsApplyTemplateLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerAccountsApplyTemplateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerAccountsApplyTemplate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AccountsApplyTemplateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__accountsApplyTemplate(request, requestOptions));
     }
 
-    private async __postV1LedgerAccountsApplyTemplate(
-        request: NordletApi.PostV1LedgerAccountsApplyTemplateRequest = {},
+    private async __accountsApplyTemplate(
+        request: NordletApi.AccountsApplyTemplateLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerAccountsApplyTemplateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AccountsApplyTemplateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -422,7 +460,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerAccountsApplyTemplateResponse,
+                data: _response.body as NordletApi.AccountsApplyTemplateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -439,6 +477,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -451,6 +494,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -489,34 +537,34 @@ export class LedgerClient {
     /**
      * Replaces the seeded chart with the chart template of the company country (the Romanian general chart for a company registered in Romania, the Lithuanian standard chart otherwise) and switches the posting defaults with it. Answers 409 when the company already uses that chart, has journal entries, holds accounts created by hand, or has settings that name an account the new chart does not have.
      *
-     * @param {NordletApi.PostV1LedgerAccountsSwitchChartRequest} request
+     * @param {NordletApi.AccountsSwitchChartLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.moveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry()
+     *     await client.ledger.accountsSwitchChart()
      */
-    public moveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
-        request: NordletApi.PostV1LedgerAccountsSwitchChartRequest = {},
+    public accountsSwitchChart(
+        request: NordletApi.AccountsSwitchChartLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerAccountsSwitchChartResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__moveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.AccountsSwitchChartLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__accountsSwitchChart(request, requestOptions));
     }
 
-    private async __moveACompanyThatHasPostedNothingYetToTheChartOfAccountsOfItsCountry(
-        request: NordletApi.PostV1LedgerAccountsSwitchChartRequest = {},
+    private async __accountsSwitchChart(
+        request: NordletApi.AccountsSwitchChartLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerAccountsSwitchChartResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AccountsSwitchChartLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -544,7 +592,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerAccountsSwitchChartResponse,
+                data: _response.body as NordletApi.AccountsSwitchChartLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -561,6 +609,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -573,6 +626,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -609,32 +667,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerPeriodsListRequest} request
+     * @param {NordletApi.PeriodsListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerPeriodsList()
+     *     await client.ledger.periodsList()
      */
-    public postV1LedgerPeriodsList(
-        request: NordletApi.PostV1LedgerPeriodsListRequest = {},
+    public periodsList(
+        request: NordletApi.PeriodsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerPeriodsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerPeriodsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PeriodsListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__periodsList(request, requestOptions));
     }
 
-    private async __postV1LedgerPeriodsList(
-        request: NordletApi.PostV1LedgerPeriodsListRequest = {},
+    private async __periodsList(
+        request: NordletApi.PeriodsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerPeriodsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PeriodsListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -661,10 +721,7 @@ export class LedgerClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LedgerPeriodsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.PeriodsListLedgerResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -676,6 +733,11 @@ export class LedgerClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -691,6 +753,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -722,35 +789,37 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerPeriodsLockRequest} request
+     * @param {NordletApi.PeriodsLockLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerPeriodsLock({
+     *     await client.ledger.periodsLock({
      *         year: 1000000,
      *         month: 1000000
      *     })
      */
-    public postV1LedgerPeriodsLock(
-        request: NordletApi.PostV1LedgerPeriodsLockRequest,
+    public periodsLock(
+        request: NordletApi.PeriodsLockLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerPeriodsLockResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerPeriodsLock(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PeriodsLockLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__periodsLock(request, requestOptions));
     }
 
-    private async __postV1LedgerPeriodsLock(
-        request: NordletApi.PostV1LedgerPeriodsLockRequest,
+    private async __periodsLock(
+        request: NordletApi.PeriodsLockLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerPeriodsLockResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PeriodsLockLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -777,10 +846,7 @@ export class LedgerClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LedgerPeriodsLockResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.PeriodsLockLedgerResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -792,6 +858,11 @@ export class LedgerClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -807,6 +878,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -838,35 +914,37 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerPeriodsUnlockRequest} request
+     * @param {NordletApi.PeriodsUnlockLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerPeriodsUnlock({
+     *     await client.ledger.periodsUnlock({
      *         year: 1000000,
      *         month: 1000000
      *     })
      */
-    public postV1LedgerPeriodsUnlock(
-        request: NordletApi.PostV1LedgerPeriodsUnlockRequest,
+    public periodsUnlock(
+        request: NordletApi.PeriodsUnlockLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerPeriodsUnlockResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerPeriodsUnlock(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PeriodsUnlockLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__periodsUnlock(request, requestOptions));
     }
 
-    private async __postV1LedgerPeriodsUnlock(
-        request: NordletApi.PostV1LedgerPeriodsUnlockRequest,
+    private async __periodsUnlock(
+        request: NordletApi.PeriodsUnlockLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerPeriodsUnlockResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PeriodsUnlockLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -894,7 +972,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerPeriodsUnlockResponse,
+                data: _response.body as NordletApi.PeriodsUnlockLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -911,6 +989,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -923,6 +1006,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -954,34 +1042,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerJournalTransactionsListRequest} request
+     * @param {NordletApi.JournalTransactionsListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerJournalTransactionsList()
+     *     await client.ledger.journalTransactionsList()
      */
-    public postV1LedgerJournalTransactionsList(
-        request: NordletApi.PostV1LedgerJournalTransactionsListRequest = {},
+    public journalTransactionsList(
+        request: NordletApi.JournalTransactionsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerJournalTransactionsListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1LedgerJournalTransactionsList(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.JournalTransactionsListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__journalTransactionsList(request, requestOptions));
     }
 
-    private async __postV1LedgerJournalTransactionsList(
-        request: NordletApi.PostV1LedgerJournalTransactionsListRequest = {},
+    private async __journalTransactionsList(
+        request: NordletApi.JournalTransactionsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerJournalTransactionsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.JournalTransactionsListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1009,7 +1097,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerJournalTransactionsListResponse,
+                data: _response.body as NordletApi.JournalTransactionsListLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1026,6 +1114,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1038,6 +1131,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1074,35 +1172,37 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCentersCreateRequest} request
+     * @param {NordletApi.CostCentersCreateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCentersCreate({
+     *     await client.ledger.costCentersCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1LedgerCostCentersCreate(
-        request: NordletApi.PostV1LedgerCostCentersCreateRequest,
+    public costCentersCreate(
+        request: NordletApi.CostCentersCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCentersCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCentersCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCentersCreateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCentersCreate(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCentersCreate(
-        request: NordletApi.PostV1LedgerCostCentersCreateRequest,
+    private async __costCentersCreate(
+        request: NordletApi.CostCentersCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCentersCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCentersCreateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1130,7 +1230,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCentersCreateResponse,
+                data: _response.body as NordletApi.CostCentersCreateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1147,6 +1247,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1159,6 +1264,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1195,34 +1305,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCentersUpdateRequest} request
+     * @param {NordletApi.CostCentersUpdateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCentersUpdate({
+     *     await client.ledger.costCentersUpdate({
      *         id: "id"
      *     })
      */
-    public postV1LedgerCostCentersUpdate(
-        request: NordletApi.PostV1LedgerCostCentersUpdateRequest,
+    public costCentersUpdate(
+        request: NordletApi.CostCentersUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCentersUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCentersUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCentersUpdateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCentersUpdate(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCentersUpdate(
-        request: NordletApi.PostV1LedgerCostCentersUpdateRequest,
+    private async __costCentersUpdate(
+        request: NordletApi.CostCentersUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCentersUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCentersUpdateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1250,7 +1362,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCentersUpdateResponse,
+                data: _response.body as NordletApi.CostCentersUpdateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1267,6 +1379,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1279,6 +1396,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1315,32 +1437,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCentersListRequest} request
+     * @param {NordletApi.CostCentersListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCentersList()
+     *     await client.ledger.costCentersList()
      */
-    public postV1LedgerCostCentersList(
-        request: NordletApi.PostV1LedgerCostCentersListRequest = {},
+    public costCentersList(
+        request: NordletApi.CostCentersListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCentersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCentersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCentersListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCentersList(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCentersList(
-        request: NordletApi.PostV1LedgerCostCentersListRequest = {},
+    private async __costCentersList(
+        request: NordletApi.CostCentersListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCentersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCentersListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1368,7 +1492,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCentersListResponse,
+                data: _response.body as NordletApi.CostCentersListLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1385,6 +1509,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1397,6 +1526,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1428,35 +1562,37 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCenterGroupsCreateRequest} request
+     * @param {NordletApi.CostCenterGroupsCreateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCenterGroupsCreate({
+     *     await client.ledger.costCenterGroupsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1LedgerCostCenterGroupsCreate(
-        request: NordletApi.PostV1LedgerCostCenterGroupsCreateRequest,
+    public costCenterGroupsCreate(
+        request: NordletApi.CostCenterGroupsCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCenterGroupsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCenterGroupsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCenterGroupsCreateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCenterGroupsCreate(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCenterGroupsCreate(
-        request: NordletApi.PostV1LedgerCostCenterGroupsCreateRequest,
+    private async __costCenterGroupsCreate(
+        request: NordletApi.CostCenterGroupsCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCenterGroupsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCenterGroupsCreateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1484,7 +1620,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCenterGroupsCreateResponse,
+                data: _response.body as NordletApi.CostCenterGroupsCreateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1501,6 +1637,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1513,6 +1654,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1549,34 +1695,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCenterGroupsUpdateRequest} request
+     * @param {NordletApi.CostCenterGroupsUpdateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCenterGroupsUpdate({
+     *     await client.ledger.costCenterGroupsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1LedgerCostCenterGroupsUpdate(
-        request: NordletApi.PostV1LedgerCostCenterGroupsUpdateRequest,
+    public costCenterGroupsUpdate(
+        request: NordletApi.CostCenterGroupsUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCenterGroupsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCenterGroupsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCenterGroupsUpdateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCenterGroupsUpdate(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCenterGroupsUpdate(
-        request: NordletApi.PostV1LedgerCostCenterGroupsUpdateRequest,
+    private async __costCenterGroupsUpdate(
+        request: NordletApi.CostCenterGroupsUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCenterGroupsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCenterGroupsUpdateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1604,7 +1752,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCenterGroupsUpdateResponse,
+                data: _response.body as NordletApi.CostCenterGroupsUpdateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1621,6 +1769,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1633,6 +1786,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1669,34 +1827,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCenterGroupsDeleteRequest} request
+     * @param {NordletApi.CostCenterGroupsDeleteLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCenterGroupsDelete({
+     *     await client.ledger.costCenterGroupsDelete({
      *         id: "id"
      *     })
      */
-    public postV1LedgerCostCenterGroupsDelete(
-        request: NordletApi.PostV1LedgerCostCenterGroupsDeleteRequest,
+    public costCenterGroupsDelete(
+        request: NordletApi.CostCenterGroupsDeleteLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCenterGroupsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCenterGroupsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCenterGroupsDeleteLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCenterGroupsDelete(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCenterGroupsDelete(
-        request: NordletApi.PostV1LedgerCostCenterGroupsDeleteRequest,
+    private async __costCenterGroupsDelete(
+        request: NordletApi.CostCenterGroupsDeleteLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCenterGroupsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCenterGroupsDeleteLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1724,7 +1884,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCenterGroupsDeleteResponse,
+                data: _response.body as NordletApi.CostCenterGroupsDeleteLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1741,6 +1901,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1753,6 +1918,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1789,32 +1959,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerCostCenterGroupsListRequest} request
+     * @param {NordletApi.CostCenterGroupsListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerCostCenterGroupsList()
+     *     await client.ledger.costCenterGroupsList()
      */
-    public postV1LedgerCostCenterGroupsList(
-        request: NordletApi.PostV1LedgerCostCenterGroupsListRequest = {},
+    public costCenterGroupsList(
+        request: NordletApi.CostCenterGroupsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerCostCenterGroupsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerCostCenterGroupsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CostCenterGroupsListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__costCenterGroupsList(request, requestOptions));
     }
 
-    private async __postV1LedgerCostCenterGroupsList(
-        request: NordletApi.PostV1LedgerCostCenterGroupsListRequest = {},
+    private async __costCenterGroupsList(
+        request: NordletApi.CostCenterGroupsListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerCostCenterGroupsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CostCenterGroupsListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1842,7 +2014,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerCostCenterGroupsListResponse,
+                data: _response.body as NordletApi.CostCenterGroupsListLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1859,6 +2031,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1871,6 +2048,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1907,32 +2089,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerPostingRulesListRequest} request
+     * @param {NordletApi.PostingRulesListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerPostingRulesList()
+     *     await client.ledger.postingRulesList()
      */
-    public postV1LedgerPostingRulesList(
-        request: NordletApi.PostV1LedgerPostingRulesListRequest = {},
+    public postingRulesList(
+        request: NordletApi.PostingRulesListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerPostingRulesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerPostingRulesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PostingRulesListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postingRulesList(request, requestOptions));
     }
 
-    private async __postV1LedgerPostingRulesList(
-        request: NordletApi.PostV1LedgerPostingRulesListRequest = {},
+    private async __postingRulesList(
+        request: NordletApi.PostingRulesListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerPostingRulesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PostingRulesListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1960,7 +2144,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerPostingRulesListResponse,
+                data: _response.body as NordletApi.PostingRulesListLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1977,6 +2161,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1989,6 +2178,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2025,36 +2219,38 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerPostingRulesUpdateRequest} request
+     * @param {NordletApi.PostingRulesUpdateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerPostingRulesUpdate({
+     *     await client.ledger.postingRulesUpdate({
      *         rules: [{
      *                 key: "sales.receivable"
      *             }]
      *     })
      */
-    public postV1LedgerPostingRulesUpdate(
-        request: NordletApi.PostV1LedgerPostingRulesUpdateRequest,
+    public postingRulesUpdate(
+        request: NordletApi.PostingRulesUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerPostingRulesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerPostingRulesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PostingRulesUpdateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__postingRulesUpdate(request, requestOptions));
     }
 
-    private async __postV1LedgerPostingRulesUpdate(
-        request: NordletApi.PostV1LedgerPostingRulesUpdateRequest,
+    private async __postingRulesUpdate(
+        request: NordletApi.PostingRulesUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerPostingRulesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PostingRulesUpdateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2082,7 +2278,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerPostingRulesUpdateResponse,
+                data: _response.body as NordletApi.PostingRulesUpdateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2099,6 +2295,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2111,6 +2312,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2147,34 +2353,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerOwnersCreateRequest} request
+     * @param {NordletApi.OwnersCreateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerOwnersCreate({
+     *     await client.ledger.ownersCreate({
      *         name: "name"
      *     })
      */
-    public postV1LedgerOwnersCreate(
-        request: NordletApi.PostV1LedgerOwnersCreateRequest,
+    public ownersCreate(
+        request: NordletApi.OwnersCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerOwnersCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerOwnersCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OwnersCreateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ownersCreate(request, requestOptions));
     }
 
-    private async __postV1LedgerOwnersCreate(
-        request: NordletApi.PostV1LedgerOwnersCreateRequest,
+    private async __ownersCreate(
+        request: NordletApi.OwnersCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerOwnersCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OwnersCreateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2202,7 +2410,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerOwnersCreateResponse,
+                data: _response.body as NordletApi.OwnersCreateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2219,6 +2427,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2231,6 +2444,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2262,34 +2480,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerOwnersUpdateRequest} request
+     * @param {NordletApi.OwnersUpdateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerOwnersUpdate({
+     *     await client.ledger.ownersUpdate({
      *         id: "id"
      *     })
      */
-    public postV1LedgerOwnersUpdate(
-        request: NordletApi.PostV1LedgerOwnersUpdateRequest,
+    public ownersUpdate(
+        request: NordletApi.OwnersUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerOwnersUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerOwnersUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OwnersUpdateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ownersUpdate(request, requestOptions));
     }
 
-    private async __postV1LedgerOwnersUpdate(
-        request: NordletApi.PostV1LedgerOwnersUpdateRequest,
+    private async __ownersUpdate(
+        request: NordletApi.OwnersUpdateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerOwnersUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OwnersUpdateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2317,7 +2537,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerOwnersUpdateResponse,
+                data: _response.body as NordletApi.OwnersUpdateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2334,6 +2554,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2346,6 +2571,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2377,34 +2607,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerOwnersDeleteRequest} request
+     * @param {NordletApi.OwnersDeleteLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerOwnersDelete({
+     *     await client.ledger.ownersDelete({
      *         id: "id"
      *     })
      */
-    public postV1LedgerOwnersDelete(
-        request: NordletApi.PostV1LedgerOwnersDeleteRequest,
+    public ownersDelete(
+        request: NordletApi.OwnersDeleteLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerOwnersDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerOwnersDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OwnersDeleteLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ownersDelete(request, requestOptions));
     }
 
-    private async __postV1LedgerOwnersDelete(
-        request: NordletApi.PostV1LedgerOwnersDeleteRequest,
+    private async __ownersDelete(
+        request: NordletApi.OwnersDeleteLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerOwnersDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OwnersDeleteLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2432,7 +2664,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerOwnersDeleteResponse,
+                data: _response.body as NordletApi.OwnersDeleteLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2449,6 +2681,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2461,6 +2698,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2492,32 +2734,34 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerOwnersListRequest} request
+     * @param {NordletApi.OwnersListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerOwnersList()
+     *     await client.ledger.ownersList()
      */
-    public postV1LedgerOwnersList(
-        request: NordletApi.PostV1LedgerOwnersListRequest = {},
+    public ownersList(
+        request: NordletApi.OwnersListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerOwnersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerOwnersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OwnersListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ownersList(request, requestOptions));
     }
 
-    private async __postV1LedgerOwnersList(
-        request: NordletApi.PostV1LedgerOwnersListRequest = {},
+    private async __ownersList(
+        request: NordletApi.OwnersListLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerOwnersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OwnersListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2544,10 +2788,7 @@ export class LedgerClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LedgerOwnersListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.OwnersListLedgerResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2559,6 +2800,11 @@ export class LedgerClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2574,6 +2820,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2605,34 +2856,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerJournalTransactionsGetRequest} request
+     * @param {NordletApi.JournalTransactionsGetLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerJournalTransactionsGet({
+     *     await client.ledger.journalTransactionsGet({
      *         id: "id"
      *     })
      */
-    public postV1LedgerJournalTransactionsGet(
-        request: NordletApi.PostV1LedgerJournalTransactionsGetRequest,
+    public journalTransactionsGet(
+        request: NordletApi.JournalTransactionsGetLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerJournalTransactionsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LedgerJournalTransactionsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.JournalTransactionsGetLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__journalTransactionsGet(request, requestOptions));
     }
 
-    private async __postV1LedgerJournalTransactionsGet(
-        request: NordletApi.PostV1LedgerJournalTransactionsGetRequest,
+    private async __journalTransactionsGet(
+        request: NordletApi.JournalTransactionsGetLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerJournalTransactionsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.JournalTransactionsGetLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2660,7 +2913,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerJournalTransactionsGetResponse,
+                data: _response.body as NordletApi.JournalTransactionsGetLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2677,6 +2930,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2689,6 +2947,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2725,39 +2988,39 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerJournalTransactionsCreateRequest} request
+     * @param {NordletApi.JournalTransactionsCreateLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.postV1LedgerJournalTransactionsCreate({
-     *         date: "date",
+     *     await client.ledger.journalTransactionsCreate({
+     *         date: "2026-07-01",
      *         entries: [{
      *                 accountCode: "accountCode"
      *             }]
      *     })
      */
-    public postV1LedgerJournalTransactionsCreate(
-        request: NordletApi.PostV1LedgerJournalTransactionsCreateRequest,
+    public journalTransactionsCreate(
+        request: NordletApi.JournalTransactionsCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerJournalTransactionsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1LedgerJournalTransactionsCreate(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.JournalTransactionsCreateLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__journalTransactionsCreate(request, requestOptions));
     }
 
-    private async __postV1LedgerJournalTransactionsCreate(
-        request: NordletApi.PostV1LedgerJournalTransactionsCreateRequest,
+    private async __journalTransactionsCreate(
+        request: NordletApi.JournalTransactionsCreateLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerJournalTransactionsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.JournalTransactionsCreateLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2785,7 +3048,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerJournalTransactionsCreateResponse,
+                data: _response.body as NordletApi.JournalTransactionsCreateLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2802,6 +3065,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2814,6 +3082,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2852,34 +3125,34 @@ export class LedgerClient {
     /**
      * The rows or codes of each return or registry deposit of the company country that are filled from account balances. Accounts fall into a row by the layout defaults for the standard chart of accounts unless mapped under Settings → Statement rows.
      *
-     * @param {NordletApi.PostV1LedgerStatementRowsSchemesRequest} request
+     * @param {NordletApi.StatementRowsSchemesLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.nationalStatementLayoutsAvailableToTheCompany()
+     *     await client.ledger.statementRowsSchemes()
      */
-    public nationalStatementLayoutsAvailableToTheCompany(
-        request: NordletApi.PostV1LedgerStatementRowsSchemesRequest = {},
+    public statementRowsSchemes(
+        request: NordletApi.StatementRowsSchemesLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerStatementRowsSchemesResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__nationalStatementLayoutsAvailableToTheCompany(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.StatementRowsSchemesLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statementRowsSchemes(request, requestOptions));
     }
 
-    private async __nationalStatementLayoutsAvailableToTheCompany(
-        request: NordletApi.PostV1LedgerStatementRowsSchemesRequest = {},
+    private async __statementRowsSchemes(
+        request: NordletApi.StatementRowsSchemesLedgerRequest = {},
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerStatementRowsSchemesResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatementRowsSchemesLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2907,7 +3180,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerStatementRowsSchemesResponse,
+                data: _response.body as NordletApi.StatementRowsSchemesLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2924,6 +3197,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2936,6 +3214,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2972,36 +3255,36 @@ export class LedgerClient {
     }
 
     /**
-     * @param {NordletApi.PostV1LedgerStatementRowsListRequest} request
+     * @param {NordletApi.StatementRowsListLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.accountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod({
+     *     await client.ledger.statementRowsList({
      *         scheme: "scheme"
      *     })
      */
-    public accountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
-        request: NordletApi.PostV1LedgerStatementRowsListRequest,
+    public statementRowsList(
+        request: NordletApi.StatementRowsListLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerStatementRowsListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__accountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.StatementRowsListLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statementRowsList(request, requestOptions));
     }
 
-    private async __accountsPlacedOnTheRowsOfAStatementLayoutWithTheRowTotalsOfAPeriod(
-        request: NordletApi.PostV1LedgerStatementRowsListRequest,
+    private async __statementRowsList(
+        request: NordletApi.StatementRowsListLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerStatementRowsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatementRowsListLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3029,7 +3312,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerStatementRowsListResponse,
+                data: _response.body as NordletApi.StatementRowsListLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3046,6 +3329,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3058,6 +3346,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3096,37 +3389,37 @@ export class LedgerClient {
     /**
      * A mapping on a code prefix covers every account whose code starts with it; the longest matching prefix wins. An empty rowCode removes the mapping so the layout default applies again.
      *
-     * @param {NordletApi.PostV1LedgerStatementRowsSetRequest} request
+     * @param {NordletApi.StatementRowsSetLedgerRequest} request
      * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ledger.mapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout({
+     *     await client.ledger.statementRowsSet({
      *         scheme: "scheme",
      *         accountCode: "accountCode"
      *     })
      */
-    public mapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
-        request: NordletApi.PostV1LedgerStatementRowsSetRequest,
+    public statementRowsSet(
+        request: NordletApi.StatementRowsSetLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LedgerStatementRowsSetResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__mapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.StatementRowsSetLedgerResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statementRowsSet(request, requestOptions));
     }
 
-    private async __mapAnAccountOrAnAccountCodePrefixToARowOfAStatementLayout(
-        request: NordletApi.PostV1LedgerStatementRowsSetRequest,
+    private async __statementRowsSet(
+        request: NordletApi.StatementRowsSetLedgerRequest,
         requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LedgerStatementRowsSetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatementRowsSetLedgerResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3154,7 +3447,7 @@ export class LedgerClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1LedgerStatementRowsSetResponse,
+                data: _response.body as NordletApi.StatementRowsSetLedgerResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3171,6 +3464,11 @@ export class LedgerClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3183,6 +3481,11 @@ export class LedgerClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3216,468 +3519,5 @@ export class LedgerClient {
             "POST",
             "/v1/ledger/statement-rows/set",
         );
-    }
-
-    /**
-     * Directors, board members, the company secretary, representatives and liquidators, with their personal identifier, appointment and resignation dates and whether they sign the annual accounts. Annual returns and registry deposits are built from this register.
-     *
-     * @param {NordletApi.PostV1OfficersListRequest} request
-     * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.ledger.officersOfTheCompany()
-     */
-    public officersOfTheCompany(
-        request: NordletApi.PostV1OfficersListRequest = {},
-        requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1OfficersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__officersOfTheCompany(request, requestOptions));
-    }
-
-    private async __officersOfTheCompany(
-        request: NordletApi.PostV1OfficersListRequest = {},
-        requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1OfficersListResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/officers/list",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1OfficersListResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/officers/list");
-    }
-
-    /**
-     * @param {NordletApi.PostV1OfficersCreateRequest} request
-     * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.ledger.recordAnOfficerOfTheCompany({
-     *         name: "name",
-     *         role: "director"
-     *     })
-     */
-    public recordAnOfficerOfTheCompany(
-        request: NordletApi.PostV1OfficersCreateRequest,
-        requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1OfficersCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__recordAnOfficerOfTheCompany(request, requestOptions));
-    }
-
-    private async __recordAnOfficerOfTheCompany(
-        request: NordletApi.PostV1OfficersCreateRequest,
-        requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1OfficersCreateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/officers/create",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1OfficersCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/officers/create");
-    }
-
-    /**
-     * @param {NordletApi.PostV1OfficersUpdateRequest} request
-     * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.ledger.changeARecordedOfficer({
-     *         id: "id",
-     *         name: "name",
-     *         role: "director"
-     *     })
-     */
-    public changeARecordedOfficer(
-        request: NordletApi.PostV1OfficersUpdateRequest,
-        requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1OfficersUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__changeARecordedOfficer(request, requestOptions));
-    }
-
-    private async __changeARecordedOfficer(
-        request: NordletApi.PostV1OfficersUpdateRequest,
-        requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1OfficersUpdateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/officers/update",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1OfficersUpdateResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/officers/update");
-    }
-
-    /**
-     * @param {NordletApi.PostV1OfficersDeleteRequest} request
-     * @param {LedgerClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.ledger.removeARecordedOfficer({
-     *         id: "id"
-     *     })
-     */
-    public removeARecordedOfficer(
-        request: NordletApi.PostV1OfficersDeleteRequest,
-        requestOptions?: LedgerClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1OfficersDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__removeARecordedOfficer(request, requestOptions));
-    }
-
-    private async __removeARecordedOfficer(
-        request: NordletApi.PostV1OfficersDeleteRequest,
-        requestOptions?: LedgerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1OfficersDeleteResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/officers/delete",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1OfficersDeleteResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/officers/delete");
     }
 }

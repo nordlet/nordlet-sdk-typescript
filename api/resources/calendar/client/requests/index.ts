@@ -1,7 +1,7 @@
-export type { PostV1CalendarCreateRequest } from "./PostV1CalendarCreateRequest.js";
-export type { PostV1CalendarDeleteRequest } from "./PostV1CalendarDeleteRequest.js";
-export type { PostV1CalendarDownloadRequest } from "./PostV1CalendarDownloadRequest.js";
-export type { PostV1CalendarGetRequest } from "./PostV1CalendarGetRequest.js";
-export type { PostV1CalendarListRequest } from "./PostV1CalendarListRequest.js";
-export type { PostV1CalendarSubmitRequest } from "./PostV1CalendarSubmitRequest.js";
-export type { PostV1CalendarUpdateRequest } from "./PostV1CalendarUpdateRequest.js";
+export type { CreateCalendarRequest } from "./CreateCalendarRequest.js";
+export type { DeleteCalendarRequest } from "./DeleteCalendarRequest.js";
+export type { DownloadCalendarRequest } from "./DownloadCalendarRequest.js";
+export type { GetCalendarRequest } from "./GetCalendarRequest.js";
+export type { ListCalendarRequest } from "./ListCalendarRequest.js";
+export type { SubmitCalendarRequest } from "./SubmitCalendarRequest.js";
+export type { UpdateCalendarRequest } from "./UpdateCalendarRequest.js";

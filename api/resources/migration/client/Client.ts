@@ -26,36 +26,36 @@ export class MigrationClient {
     /**
      * Runs every check the import runs (accounts, partners, balances, open invoices, assets, stock) and returns the same summary and warnings, then rolls everything back. Nothing is stored.
      *
-     * @param {NordletApi.PostV1MigrationBooksValidateRequest} request
+     * @param {NordletApi.BooksValidateMigrationRequest} request
      * @param {MigrationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.migration.checkAHistoricalBooksPackageWithoutWritingAnything({
-     *         cutoverDate: "cutoverDate"
+     *     await client.migration.booksValidate({
+     *         cutoverDate: "2026-07-01"
      *     })
      */
-    public checkAHistoricalBooksPackageWithoutWritingAnything(
-        request: NordletApi.PostV1MigrationBooksValidateRequest,
+    public booksValidate(
+        request: NordletApi.BooksValidateMigrationRequest,
         requestOptions?: MigrationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1MigrationBooksValidateResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__checkAHistoricalBooksPackageWithoutWritingAnything(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.BooksValidateMigrationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__booksValidate(request, requestOptions));
     }
 
-    private async __checkAHistoricalBooksPackageWithoutWritingAnything(
-        request: NordletApi.PostV1MigrationBooksValidateRequest,
+    private async __booksValidate(
+        request: NordletApi.BooksValidateMigrationRequest,
         requestOptions?: MigrationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1MigrationBooksValidateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BooksValidateMigrationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -83,7 +83,7 @@ export class MigrationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1MigrationBooksValidateResponse,
+                data: _response.body as NordletApi.BooksValidateMigrationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -100,6 +100,11 @@ export class MigrationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -112,6 +117,11 @@ export class MigrationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -145,36 +155,36 @@ export class MigrationClient {
     /**
      * Brings a company over from another system in one call: chart of accounts, partners, items, opening balances (or the full journal history), open customer and supplier invoices, fixed assets with their accumulated depreciation, and stock on hand. The whole package is written in one database transaction — if any row fails, nothing is stored.
      *
-     * @param {NordletApi.PostV1MigrationBooksImportRequest} request
+     * @param {NordletApi.BooksImportMigrationRequest} request
      * @param {MigrationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.migration.importHistoricalBooksFromAPreviousAccountingSystem({
-     *         cutoverDate: "cutoverDate"
+     *     await client.migration.booksImport({
+     *         cutoverDate: "2026-07-01"
      *     })
      */
-    public importHistoricalBooksFromAPreviousAccountingSystem(
-        request: NordletApi.PostV1MigrationBooksImportRequest,
+    public booksImport(
+        request: NordletApi.BooksImportMigrationRequest,
         requestOptions?: MigrationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1MigrationBooksImportResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__importHistoricalBooksFromAPreviousAccountingSystem(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.BooksImportMigrationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__booksImport(request, requestOptions));
     }
 
-    private async __importHistoricalBooksFromAPreviousAccountingSystem(
-        request: NordletApi.PostV1MigrationBooksImportRequest,
+    private async __booksImport(
+        request: NordletApi.BooksImportMigrationRequest,
         requestOptions?: MigrationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1MigrationBooksImportResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BooksImportMigrationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -202,7 +212,7 @@ export class MigrationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1MigrationBooksImportResponse,
+                data: _response.body as NordletApi.BooksImportMigrationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -219,6 +229,11 @@ export class MigrationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -231,6 +246,11 @@ export class MigrationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

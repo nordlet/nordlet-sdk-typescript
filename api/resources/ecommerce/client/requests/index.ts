@@ -1,8 +1,8 @@
-export type { PostV1EcommerceOrdersCancelRequest } from "./PostV1EcommerceOrdersCancelRequest.js";
-export type { PostV1EcommerceOrdersCreateRequest } from "./PostV1EcommerceOrdersCreateRequest.js";
-export type { PostV1EcommerceOrdersFulfillRequest } from "./PostV1EcommerceOrdersFulfillRequest.js";
-export type { PostV1EcommerceOrdersGetRequest } from "./PostV1EcommerceOrdersGetRequest.js";
-export { PostV1EcommerceOrdersListRequest } from "./PostV1EcommerceOrdersListRequest.js";
-export type { PostV1EcommerceOrdersReserveRequest } from "./PostV1EcommerceOrdersReserveRequest.js";
-export type { PostV1EcommerceProductsListRequest } from "./PostV1EcommerceProductsListRequest.js";
-export type { PostV1EcommerceStockListRequest } from "./PostV1EcommerceStockListRequest.js";
+export type { OrdersCancelEcommerceRequest } from "./OrdersCancelEcommerceRequest.js";
+export type { OrdersCreateEcommerceRequest } from "./OrdersCreateEcommerceRequest.js";
+export type { OrdersFulfillEcommerceRequest } from "./OrdersFulfillEcommerceRequest.js";
+export type { OrdersGetEcommerceRequest } from "./OrdersGetEcommerceRequest.js";
+export { OrdersListEcommerceRequest } from "./OrdersListEcommerceRequest.js";
+export type { OrdersReserveEcommerceRequest } from "./OrdersReserveEcommerceRequest.js";
+export type { ProductsListEcommerceRequest } from "./ProductsListEcommerceRequest.js";
+export type { StockListEcommerceRequest } from "./StockListEcommerceRequest.js";

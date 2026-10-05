@@ -12,13 +12,17 @@ import { CashClient } from "./api/resources/cash/client/Client.js";
 import { CatalogClient } from "./api/resources/catalog/client/Client.js";
 import { ConsolidationClient } from "./api/resources/consolidation/client/Client.js";
 import { DeclarationsClient } from "./api/resources/declarations/client/Client.js";
+import { DocumentSeriesClient } from "./api/resources/documentSeries/client/Client.js";
 import { EcommerceClient } from "./api/resources/ecommerce/client/Client.js";
 import { FilesClient } from "./api/resources/files/client/Client.js";
 import { FleetClient } from "./api/resources/fleet/client/Client.js";
 import { HrClient } from "./api/resources/hr/client/Client.js";
 import { InventoryClient } from "./api/resources/inventory/client/Client.js";
+import { LeadsClient } from "./api/resources/leads/client/Client.js";
 import { LedgerClient } from "./api/resources/ledger/client/Client.js";
 import { MigrationClient } from "./api/resources/migration/client/Client.js";
+import { OfficersClient } from "./api/resources/officers/client/Client.js";
+import { OperationTypesClient } from "./api/resources/operationTypes/client/Client.js";
 import { PartnersClient } from "./api/resources/partners/client/Client.js";
 import { PayrollClient } from "./api/resources/payroll/client/Client.js";
 import { PosClient } from "./api/resources/pos/client/Client.js";
@@ -45,12 +49,16 @@ export class NordletApiClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<NordletApiClient.Options>;
     protected _reference: ReferenceClient | undefined;
     protected _partners: PartnersClient | undefined;
+    protected _leads: LeadsClient | undefined;
     protected _catalog: CatalogClient | undefined;
     protected _sales: SalesClient | undefined;
+    protected _operationTypes: OperationTypesClient | undefined;
+    protected _documentSeries: DocumentSeriesClient | undefined;
     protected _purchases: PurchasesClient | undefined;
     protected _capture: CaptureClient | undefined;
     protected _declarations: DeclarationsClient | undefined;
     protected _ledger: LedgerClient | undefined;
+    protected _officers: OfficersClient | undefined;
     protected _migration: MigrationClient | undefined;
     protected _assets: AssetsClient | undefined;
     protected _hr: HrClient | undefined;
@@ -87,12 +95,24 @@ export class NordletApiClient {
         return (this._partners ??= new PartnersClient(this._options));
     }
 
+    public get leads(): LeadsClient {
+        return (this._leads ??= new LeadsClient(this._options));
+    }
+
     public get catalog(): CatalogClient {
         return (this._catalog ??= new CatalogClient(this._options));
     }
 
     public get sales(): SalesClient {
         return (this._sales ??= new SalesClient(this._options));
+    }
+
+    public get operationTypes(): OperationTypesClient {
+        return (this._operationTypes ??= new OperationTypesClient(this._options));
+    }
+
+    public get documentSeries(): DocumentSeriesClient {
+        return (this._documentSeries ??= new DocumentSeriesClient(this._options));
     }
 
     public get purchases(): PurchasesClient {
@@ -109,6 +129,10 @@ export class NordletApiClient {
 
     public get ledger(): LedgerClient {
         return (this._ledger ??= new LedgerClient(this._options));
+    }
+
+    public get officers(): OfficersClient {
+        return (this._officers ??= new OfficersClient(this._options));
     }
 
     public get migration(): MigrationClient {

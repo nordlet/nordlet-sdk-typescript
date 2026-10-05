@@ -24,35 +24,37 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {NordletApi.PostV1WebhooksSubscriptionsCreateRequest} request
+     * @param {NordletApi.SubscriptionsCreateWebhooksRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postV1WebhooksSubscriptionsCreate({
+     *     await client.webhooks.subscriptionsCreate({
      *         url: "url",
-     *         events: ["events"]
+     *         events: ["agreement.invoice_generated"]
      *     })
      */
-    public postV1WebhooksSubscriptionsCreate(
-        request: NordletApi.PostV1WebhooksSubscriptionsCreateRequest,
+    public subscriptionsCreate(
+        request: NordletApi.SubscriptionsCreateWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1WebhooksSubscriptionsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1WebhooksSubscriptionsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SubscriptionsCreateWebhooksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__subscriptionsCreate(request, requestOptions));
     }
 
-    private async __postV1WebhooksSubscriptionsCreate(
-        request: NordletApi.PostV1WebhooksSubscriptionsCreateRequest,
+    private async __subscriptionsCreate(
+        request: NordletApi.SubscriptionsCreateWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1WebhooksSubscriptionsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SubscriptionsCreateWebhooksResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -80,7 +82,7 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1WebhooksSubscriptionsCreateResponse,
+                data: _response.body as NordletApi.SubscriptionsCreateWebhooksResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -97,6 +99,11 @@ export class WebhooksClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -109,6 +116,11 @@ export class WebhooksClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -145,32 +157,34 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {NordletApi.PostV1WebhooksSubscriptionsListRequest} request
+     * @param {NordletApi.SubscriptionsListWebhooksRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postV1WebhooksSubscriptionsList()
+     *     await client.webhooks.subscriptionsList()
      */
-    public postV1WebhooksSubscriptionsList(
-        request: NordletApi.PostV1WebhooksSubscriptionsListRequest = {},
+    public subscriptionsList(
+        request: NordletApi.SubscriptionsListWebhooksRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1WebhooksSubscriptionsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1WebhooksSubscriptionsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SubscriptionsListWebhooksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__subscriptionsList(request, requestOptions));
     }
 
-    private async __postV1WebhooksSubscriptionsList(
-        request: NordletApi.PostV1WebhooksSubscriptionsListRequest = {},
+    private async __subscriptionsList(
+        request: NordletApi.SubscriptionsListWebhooksRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1WebhooksSubscriptionsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SubscriptionsListWebhooksResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -198,7 +212,7 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1WebhooksSubscriptionsListResponse,
+                data: _response.body as NordletApi.SubscriptionsListWebhooksResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -215,6 +229,11 @@ export class WebhooksClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -227,6 +246,11 @@ export class WebhooksClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -263,34 +287,36 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {NordletApi.PostV1WebhooksSubscriptionsUpdateRequest} request
+     * @param {NordletApi.SubscriptionsUpdateWebhooksRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postV1WebhooksSubscriptionsUpdate({
+     *     await client.webhooks.subscriptionsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1WebhooksSubscriptionsUpdate(
-        request: NordletApi.PostV1WebhooksSubscriptionsUpdateRequest,
+    public subscriptionsUpdate(
+        request: NordletApi.SubscriptionsUpdateWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1WebhooksSubscriptionsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1WebhooksSubscriptionsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SubscriptionsUpdateWebhooksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__subscriptionsUpdate(request, requestOptions));
     }
 
-    private async __postV1WebhooksSubscriptionsUpdate(
-        request: NordletApi.PostV1WebhooksSubscriptionsUpdateRequest,
+    private async __subscriptionsUpdate(
+        request: NordletApi.SubscriptionsUpdateWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1WebhooksSubscriptionsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SubscriptionsUpdateWebhooksResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -318,7 +344,7 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1WebhooksSubscriptionsUpdateResponse,
+                data: _response.body as NordletApi.SubscriptionsUpdateWebhooksResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -335,6 +361,11 @@ export class WebhooksClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -347,6 +378,11 @@ export class WebhooksClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -383,34 +419,36 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {NordletApi.PostV1WebhooksSubscriptionsDeleteRequest} request
+     * @param {NordletApi.SubscriptionsDeleteWebhooksRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postV1WebhooksSubscriptionsDelete({
+     *     await client.webhooks.subscriptionsDelete({
      *         id: "id"
      *     })
      */
-    public postV1WebhooksSubscriptionsDelete(
-        request: NordletApi.PostV1WebhooksSubscriptionsDeleteRequest,
+    public subscriptionsDelete(
+        request: NordletApi.SubscriptionsDeleteWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1WebhooksSubscriptionsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1WebhooksSubscriptionsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SubscriptionsDeleteWebhooksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__subscriptionsDelete(request, requestOptions));
     }
 
-    private async __postV1WebhooksSubscriptionsDelete(
-        request: NordletApi.PostV1WebhooksSubscriptionsDeleteRequest,
+    private async __subscriptionsDelete(
+        request: NordletApi.SubscriptionsDeleteWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1WebhooksSubscriptionsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SubscriptionsDeleteWebhooksResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -438,7 +476,7 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1WebhooksSubscriptionsDeleteResponse,
+                data: _response.body as NordletApi.SubscriptionsDeleteWebhooksResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -455,6 +493,11 @@ export class WebhooksClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -467,6 +510,11 @@ export class WebhooksClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -503,32 +551,34 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {NordletApi.PostV1WebhooksDeliveriesListRequest} request
+     * @param {NordletApi.DeliveriesListWebhooksRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postV1WebhooksDeliveriesList()
+     *     await client.webhooks.deliveriesList()
      */
-    public postV1WebhooksDeliveriesList(
-        request: NordletApi.PostV1WebhooksDeliveriesListRequest = {},
+    public deliveriesList(
+        request: NordletApi.DeliveriesListWebhooksRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1WebhooksDeliveriesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1WebhooksDeliveriesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DeliveriesListWebhooksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deliveriesList(request, requestOptions));
     }
 
-    private async __postV1WebhooksDeliveriesList(
-        request: NordletApi.PostV1WebhooksDeliveriesListRequest = {},
+    private async __deliveriesList(
+        request: NordletApi.DeliveriesListWebhooksRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1WebhooksDeliveriesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DeliveriesListWebhooksResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -556,7 +606,7 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1WebhooksDeliveriesListResponse,
+                data: _response.body as NordletApi.DeliveriesListWebhooksResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -573,6 +623,11 @@ export class WebhooksClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -585,6 +640,11 @@ export class WebhooksClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -616,34 +676,36 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {NordletApi.PostV1WebhooksDeliveriesRedeliverRequest} request
+     * @param {NordletApi.DeliveriesRedeliverWebhooksRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.webhooks.postV1WebhooksDeliveriesRedeliver({
+     *     await client.webhooks.deliveriesRedeliver({
      *         id: "id"
      *     })
      */
-    public postV1WebhooksDeliveriesRedeliver(
-        request: NordletApi.PostV1WebhooksDeliveriesRedeliverRequest,
+    public deliveriesRedeliver(
+        request: NordletApi.DeliveriesRedeliverWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1WebhooksDeliveriesRedeliverResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1WebhooksDeliveriesRedeliver(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DeliveriesRedeliverWebhooksResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deliveriesRedeliver(request, requestOptions));
     }
 
-    private async __postV1WebhooksDeliveriesRedeliver(
-        request: NordletApi.PostV1WebhooksDeliveriesRedeliverRequest,
+    private async __deliveriesRedeliver(
+        request: NordletApi.DeliveriesRedeliverWebhooksRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1WebhooksDeliveriesRedeliverResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DeliveriesRedeliverWebhooksResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -671,7 +733,7 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1WebhooksDeliveriesRedeliverResponse,
+                data: _response.body as NordletApi.DeliveriesRedeliverWebhooksResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -688,6 +750,11 @@ export class WebhooksClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -700,6 +767,11 @@ export class WebhooksClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

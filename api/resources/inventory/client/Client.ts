@@ -24,32 +24,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventorySettingsGetRequest} request
+     * @param {NordletApi.SettingsGetInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventorySettingsGet()
+     *     await client.inventory.settingsGet()
      */
-    public postV1InventorySettingsGet(
-        request: NordletApi.PostV1InventorySettingsGetRequest = {},
+    public settingsGet(
+        request: NordletApi.SettingsGetInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventorySettingsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventorySettingsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SettingsGetInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__settingsGet(request, requestOptions));
     }
 
-    private async __postV1InventorySettingsGet(
-        request: NordletApi.PostV1InventorySettingsGetRequest = {},
+    private async __settingsGet(
+        request: NordletApi.SettingsGetInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventorySettingsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SettingsGetInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -77,7 +79,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventorySettingsGetResponse,
+                data: _response.body as NordletApi.SettingsGetInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -94,6 +96,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -106,6 +113,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -137,34 +149,36 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventorySettingsUpdateRequest} request
+     * @param {NordletApi.SettingsUpdateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventorySettingsUpdate({
+     *     await client.inventory.settingsUpdate({
      *         negativeStockPolicy: "reject"
      *     })
      */
-    public postV1InventorySettingsUpdate(
-        request: NordletApi.PostV1InventorySettingsUpdateRequest,
+    public settingsUpdate(
+        request: NordletApi.SettingsUpdateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventorySettingsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventorySettingsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SettingsUpdateInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__settingsUpdate(request, requestOptions));
     }
 
-    private async __postV1InventorySettingsUpdate(
-        request: NordletApi.PostV1InventorySettingsUpdateRequest,
+    private async __settingsUpdate(
+        request: NordletApi.SettingsUpdateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventorySettingsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SettingsUpdateInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -192,7 +206,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventorySettingsUpdateResponse,
+                data: _response.body as NordletApi.SettingsUpdateInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -209,6 +223,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -221,6 +240,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -257,35 +281,37 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryWarehousesCreateRequest} request
+     * @param {NordletApi.WarehousesCreateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryWarehousesCreate({
+     *     await client.inventory.warehousesCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1InventoryWarehousesCreate(
-        request: NordletApi.PostV1InventoryWarehousesCreateRequest,
+    public warehousesCreate(
+        request: NordletApi.WarehousesCreateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryWarehousesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryWarehousesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WarehousesCreateInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__warehousesCreate(request, requestOptions));
     }
 
-    private async __postV1InventoryWarehousesCreate(
-        request: NordletApi.PostV1InventoryWarehousesCreateRequest,
+    private async __warehousesCreate(
+        request: NordletApi.WarehousesCreateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryWarehousesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WarehousesCreateInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -313,7 +339,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryWarehousesCreateResponse,
+                data: _response.body as NordletApi.WarehousesCreateInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -330,6 +356,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -342,6 +373,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -378,32 +414,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryWarehousesListRequest} request
+     * @param {NordletApi.WarehousesListInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryWarehousesList()
+     *     await client.inventory.warehousesList()
      */
-    public postV1InventoryWarehousesList(
-        request: NordletApi.PostV1InventoryWarehousesListRequest = {},
+    public warehousesList(
+        request: NordletApi.WarehousesListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryWarehousesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryWarehousesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WarehousesListInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__warehousesList(request, requestOptions));
     }
 
-    private async __postV1InventoryWarehousesList(
-        request: NordletApi.PostV1InventoryWarehousesListRequest = {},
+    private async __warehousesList(
+        request: NordletApi.WarehousesListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryWarehousesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WarehousesListInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -431,7 +469,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryWarehousesListResponse,
+                data: _response.body as NordletApi.WarehousesListInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -448,6 +486,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -460,6 +503,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -496,38 +544,40 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryStockReceiveRequest} request
+     * @param {NordletApi.StockReceiveInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryStockReceive({
+     *     await client.inventory.stockReceive({
      *         warehouseId: "warehouseId",
      *         itemId: "itemId",
-     *         date: "date",
-     *         quantity: "quantity",
-     *         unitCost: "unitCost"
+     *         date: "2026-07-01",
+     *         quantity: "121.0000",
+     *         unitCost: "121.000000"
      *     })
      */
-    public postV1InventoryStockReceive(
-        request: NordletApi.PostV1InventoryStockReceiveRequest,
+    public stockReceive(
+        request: NordletApi.StockReceiveInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryStockReceiveResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryStockReceive(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockReceiveInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockReceive(request, requestOptions));
     }
 
-    private async __postV1InventoryStockReceive(
-        request: NordletApi.PostV1InventoryStockReceiveRequest,
+    private async __stockReceive(
+        request: NordletApi.StockReceiveInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryStockReceiveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockReceiveInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -555,7 +605,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryStockReceiveResponse,
+                data: _response.body as NordletApi.StockReceiveInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -572,6 +622,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -584,6 +639,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -615,37 +675,39 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryStockWriteOffRequest} request
+     * @param {NordletApi.StockWriteOffInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryStockWriteOff({
+     *     await client.inventory.stockWriteOff({
      *         warehouseId: "warehouseId",
      *         itemId: "itemId",
-     *         date: "date",
-     *         quantity: "quantity"
+     *         date: "2026-07-01",
+     *         quantity: "121.0000"
      *     })
      */
-    public postV1InventoryStockWriteOff(
-        request: NordletApi.PostV1InventoryStockWriteOffRequest,
+    public stockWriteOff(
+        request: NordletApi.StockWriteOffInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryStockWriteOffResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryStockWriteOff(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockWriteOffInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockWriteOff(request, requestOptions));
     }
 
-    private async __postV1InventoryStockWriteOff(
-        request: NordletApi.PostV1InventoryStockWriteOffRequest,
+    private async __stockWriteOff(
+        request: NordletApi.StockWriteOffInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryStockWriteOffResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockWriteOffInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -673,7 +735,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryStockWriteOffResponse,
+                data: _response.body as NordletApi.StockWriteOffInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -690,6 +752,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -702,6 +769,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -738,38 +810,40 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryStockTransferRequest} request
+     * @param {NordletApi.StockTransferInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryStockTransfer({
+     *     await client.inventory.stockTransfer({
      *         fromWarehouseId: "fromWarehouseId",
      *         toWarehouseId: "toWarehouseId",
      *         itemId: "itemId",
-     *         date: "date",
-     *         quantity: "quantity"
+     *         date: "2026-07-01",
+     *         quantity: "121.0000"
      *     })
      */
-    public postV1InventoryStockTransfer(
-        request: NordletApi.PostV1InventoryStockTransferRequest,
+    public stockTransfer(
+        request: NordletApi.StockTransferInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryStockTransferResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryStockTransfer(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockTransferInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockTransfer(request, requestOptions));
     }
 
-    private async __postV1InventoryStockTransfer(
-        request: NordletApi.PostV1InventoryStockTransferRequest,
+    private async __stockTransfer(
+        request: NordletApi.StockTransferInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryStockTransferResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockTransferInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -797,7 +871,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryStockTransferResponse,
+                data: _response.body as NordletApi.StockTransferInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -814,6 +888,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -826,6 +905,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -857,38 +941,40 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryStockTakeRequest} request
+     * @param {NordletApi.StockTakeInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryStockTake({
+     *     await client.inventory.stockTake({
      *         warehouseId: "warehouseId",
-     *         date: "date",
+     *         date: "2026-07-01",
      *         lines: [{
-     *                 countedQty: "countedQty"
+     *                 countedQty: "121.0000"
      *             }]
      *     })
      */
-    public postV1InventoryStockTake(
-        request: NordletApi.PostV1InventoryStockTakeRequest,
+    public stockTake(
+        request: NordletApi.StockTakeInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryStockTakeResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryStockTake(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockTakeInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockTake(request, requestOptions));
     }
 
-    private async __postV1InventoryStockTake(
-        request: NordletApi.PostV1InventoryStockTakeRequest,
+    private async __stockTake(
+        request: NordletApi.StockTakeInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryStockTakeResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockTakeInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -916,7 +1002,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryStockTakeResponse,
+                data: _response.body as NordletApi.StockTakeInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -933,6 +1019,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -945,6 +1036,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -976,32 +1072,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryStockLevelsRequest} request
+     * @param {NordletApi.StockLevelsInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryStockLevels()
+     *     await client.inventory.stockLevels()
      */
-    public postV1InventoryStockLevels(
-        request: NordletApi.PostV1InventoryStockLevelsRequest = {},
+    public stockLevels(
+        request: NordletApi.StockLevelsInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryStockLevelsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryStockLevels(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockLevelsInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockLevels(request, requestOptions));
     }
 
-    private async __postV1InventoryStockLevels(
-        request: NordletApi.PostV1InventoryStockLevelsRequest = {},
+    private async __stockLevels(
+        request: NordletApi.StockLevelsInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryStockLevelsResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockLevelsInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1029,7 +1127,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryStockLevelsResponse,
+                data: _response.body as NordletApi.StockLevelsInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1046,6 +1144,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1058,6 +1161,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1089,32 +1197,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryStockMovementsListRequest} request
+     * @param {NordletApi.StockMovementsListInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryStockMovementsList()
+     *     await client.inventory.stockMovementsList()
      */
-    public postV1InventoryStockMovementsList(
-        request: NordletApi.PostV1InventoryStockMovementsListRequest = {},
+    public stockMovementsList(
+        request: NordletApi.StockMovementsListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryStockMovementsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryStockMovementsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockMovementsListInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockMovementsList(request, requestOptions));
     }
 
-    private async __postV1InventoryStockMovementsList(
-        request: NordletApi.PostV1InventoryStockMovementsListRequest = {},
+    private async __stockMovementsList(
+        request: NordletApi.StockMovementsListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryStockMovementsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockMovementsListInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1142,7 +1252,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryStockMovementsListResponse,
+                data: _response.body as NordletApi.StockMovementsListInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1159,6 +1269,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1171,6 +1286,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1207,32 +1327,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryLotsListRequest} request
+     * @param {NordletApi.LotsListInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryLotsList()
+     *     await client.inventory.lotsList()
      */
-    public postV1InventoryLotsList(
-        request: NordletApi.PostV1InventoryLotsListRequest = {},
+    public lotsList(
+        request: NordletApi.LotsListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryLotsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryLotsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LotsListInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__lotsList(request, requestOptions));
     }
 
-    private async __postV1InventoryLotsList(
-        request: NordletApi.PostV1InventoryLotsListRequest = {},
+    private async __lotsList(
+        request: NordletApi.LotsListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryLotsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LotsListInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1259,10 +1381,7 @@ export class InventoryClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1InventoryLotsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.LotsListInventoryResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1274,6 +1393,11 @@ export class InventoryClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1289,6 +1413,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1320,34 +1449,36 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryLotsGetRequest} request
+     * @param {NordletApi.LotsGetInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryLotsGet({
+     *     await client.inventory.lotsGet({
      *         id: "id"
      *     })
      */
-    public postV1InventoryLotsGet(
-        request: NordletApi.PostV1InventoryLotsGetRequest,
+    public lotsGet(
+        request: NordletApi.LotsGetInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryLotsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryLotsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LotsGetInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__lotsGet(request, requestOptions));
     }
 
-    private async __postV1InventoryLotsGet(
-        request: NordletApi.PostV1InventoryLotsGetRequest,
+    private async __lotsGet(
+        request: NordletApi.LotsGetInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryLotsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LotsGetInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1374,10 +1505,7 @@ export class InventoryClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1InventoryLotsGetResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.LotsGetInventoryResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1389,6 +1517,11 @@ export class InventoryClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1404,6 +1537,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1435,34 +1573,36 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryLotsUpdateRequest} request
+     * @param {NordletApi.LotsUpdateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryLotsUpdate({
+     *     await client.inventory.lotsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1InventoryLotsUpdate(
-        request: NordletApi.PostV1InventoryLotsUpdateRequest,
+    public lotsUpdate(
+        request: NordletApi.LotsUpdateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryLotsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryLotsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LotsUpdateInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__lotsUpdate(request, requestOptions));
     }
 
-    private async __postV1InventoryLotsUpdate(
-        request: NordletApi.PostV1InventoryLotsUpdateRequest,
+    private async __lotsUpdate(
+        request: NordletApi.LotsUpdateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryLotsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LotsUpdateInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1490,7 +1630,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryLotsUpdateResponse,
+                data: _response.body as NordletApi.LotsUpdateInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1507,6 +1647,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1519,6 +1664,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1550,35 +1700,37 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryLandedCostsCreateRequest} request
+     * @param {NordletApi.LandedCostsCreateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryLandedCostsCreate({
-     *         date: "date",
-     *         amount: "amount"
+     *     await client.inventory.landedCostsCreate({
+     *         date: "2026-07-01",
+     *         amount: "121.000000"
      *     })
      */
-    public postV1InventoryLandedCostsCreate(
-        request: NordletApi.PostV1InventoryLandedCostsCreateRequest,
+    public landedCostsCreate(
+        request: NordletApi.LandedCostsCreateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryLandedCostsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryLandedCostsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LandedCostsCreateInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__landedCostsCreate(request, requestOptions));
     }
 
-    private async __postV1InventoryLandedCostsCreate(
-        request: NordletApi.PostV1InventoryLandedCostsCreateRequest,
+    private async __landedCostsCreate(
+        request: NordletApi.LandedCostsCreateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryLandedCostsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LandedCostsCreateInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1606,7 +1758,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryLandedCostsCreateResponse,
+                data: _response.body as NordletApi.LandedCostsCreateInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1623,6 +1775,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1635,6 +1792,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1671,34 +1833,36 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryLandedCostsGetRequest} request
+     * @param {NordletApi.LandedCostsGetInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryLandedCostsGet({
+     *     await client.inventory.landedCostsGet({
      *         id: "id"
      *     })
      */
-    public postV1InventoryLandedCostsGet(
-        request: NordletApi.PostV1InventoryLandedCostsGetRequest,
+    public landedCostsGet(
+        request: NordletApi.LandedCostsGetInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryLandedCostsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryLandedCostsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LandedCostsGetInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__landedCostsGet(request, requestOptions));
     }
 
-    private async __postV1InventoryLandedCostsGet(
-        request: NordletApi.PostV1InventoryLandedCostsGetRequest,
+    private async __landedCostsGet(
+        request: NordletApi.LandedCostsGetInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryLandedCostsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LandedCostsGetInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1726,7 +1890,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryLandedCostsGetResponse,
+                data: _response.body as NordletApi.LandedCostsGetInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1743,6 +1907,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1755,6 +1924,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1791,32 +1965,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryLandedCostsListRequest} request
+     * @param {NordletApi.LandedCostsListInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryLandedCostsList()
+     *     await client.inventory.landedCostsList()
      */
-    public postV1InventoryLandedCostsList(
-        request: NordletApi.PostV1InventoryLandedCostsListRequest = {},
+    public landedCostsList(
+        request: NordletApi.LandedCostsListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryLandedCostsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryLandedCostsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LandedCostsListInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__landedCostsList(request, requestOptions));
     }
 
-    private async __postV1InventoryLandedCostsList(
-        request: NordletApi.PostV1InventoryLandedCostsListRequest = {},
+    private async __landedCostsList(
+        request: NordletApi.LandedCostsListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryLandedCostsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LandedCostsListInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1844,7 +2020,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryLandedCostsListResponse,
+                data: _response.body as NordletApi.LandedCostsListInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1861,6 +2037,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1873,6 +2054,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1909,35 +2095,37 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryReorderRulesCreateRequest} request
+     * @param {NordletApi.ReorderRulesCreateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryReorderRulesCreate({
+     *     await client.inventory.reorderRulesCreate({
      *         itemId: "itemId",
-     *         minQty: "minQty"
+     *         minQty: "121.0000"
      *     })
      */
-    public postV1InventoryReorderRulesCreate(
-        request: NordletApi.PostV1InventoryReorderRulesCreateRequest,
+    public reorderRulesCreate(
+        request: NordletApi.ReorderRulesCreateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryReorderRulesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryReorderRulesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReorderRulesCreateInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__reorderRulesCreate(request, requestOptions));
     }
 
-    private async __postV1InventoryReorderRulesCreate(
-        request: NordletApi.PostV1InventoryReorderRulesCreateRequest,
+    private async __reorderRulesCreate(
+        request: NordletApi.ReorderRulesCreateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryReorderRulesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReorderRulesCreateInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1965,7 +2153,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryReorderRulesCreateResponse,
+                data: _response.body as NordletApi.ReorderRulesCreateInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1982,6 +2170,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1994,6 +2187,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2030,34 +2228,36 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryReorderRulesUpdateRequest} request
+     * @param {NordletApi.ReorderRulesUpdateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryReorderRulesUpdate({
+     *     await client.inventory.reorderRulesUpdate({
      *         id: "id"
      *     })
      */
-    public postV1InventoryReorderRulesUpdate(
-        request: NordletApi.PostV1InventoryReorderRulesUpdateRequest,
+    public reorderRulesUpdate(
+        request: NordletApi.ReorderRulesUpdateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryReorderRulesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryReorderRulesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReorderRulesUpdateInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__reorderRulesUpdate(request, requestOptions));
     }
 
-    private async __postV1InventoryReorderRulesUpdate(
-        request: NordletApi.PostV1InventoryReorderRulesUpdateRequest,
+    private async __reorderRulesUpdate(
+        request: NordletApi.ReorderRulesUpdateInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryReorderRulesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReorderRulesUpdateInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2085,7 +2285,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryReorderRulesUpdateResponse,
+                data: _response.body as NordletApi.ReorderRulesUpdateInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2102,6 +2302,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2114,6 +2319,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2150,34 +2360,36 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryReorderRulesDeleteRequest} request
+     * @param {NordletApi.ReorderRulesDeleteInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryReorderRulesDelete({
+     *     await client.inventory.reorderRulesDelete({
      *         id: "id"
      *     })
      */
-    public postV1InventoryReorderRulesDelete(
-        request: NordletApi.PostV1InventoryReorderRulesDeleteRequest,
+    public reorderRulesDelete(
+        request: NordletApi.ReorderRulesDeleteInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryReorderRulesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryReorderRulesDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReorderRulesDeleteInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__reorderRulesDelete(request, requestOptions));
     }
 
-    private async __postV1InventoryReorderRulesDelete(
-        request: NordletApi.PostV1InventoryReorderRulesDeleteRequest,
+    private async __reorderRulesDelete(
+        request: NordletApi.ReorderRulesDeleteInventoryRequest,
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryReorderRulesDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReorderRulesDeleteInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2205,7 +2417,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryReorderRulesDeleteResponse,
+                data: _response.body as NordletApi.ReorderRulesDeleteInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2222,6 +2434,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2234,6 +2451,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2270,32 +2492,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryReorderRulesListRequest} request
+     * @param {NordletApi.ReorderRulesListInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryReorderRulesList()
+     *     await client.inventory.reorderRulesList()
      */
-    public postV1InventoryReorderRulesList(
-        request: NordletApi.PostV1InventoryReorderRulesListRequest = {},
+    public reorderRulesList(
+        request: NordletApi.ReorderRulesListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryReorderRulesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryReorderRulesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReorderRulesListInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__reorderRulesList(request, requestOptions));
     }
 
-    private async __postV1InventoryReorderRulesList(
-        request: NordletApi.PostV1InventoryReorderRulesListRequest = {},
+    private async __reorderRulesList(
+        request: NordletApi.ReorderRulesListInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryReorderRulesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReorderRulesListInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2323,7 +2547,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryReorderRulesListResponse,
+                data: _response.body as NordletApi.ReorderRulesListInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2340,6 +2564,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2352,6 +2581,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2388,32 +2622,34 @@ export class InventoryClient {
     }
 
     /**
-     * @param {NordletApi.PostV1InventoryReorderRulesCheckRequest} request
+     * @param {NordletApi.ReorderRulesCheckInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.inventory.postV1InventoryReorderRulesCheck()
+     *     await client.inventory.reorderRulesCheck()
      */
-    public postV1InventoryReorderRulesCheck(
-        request: NordletApi.PostV1InventoryReorderRulesCheckRequest = {},
+    public reorderRulesCheck(
+        request: NordletApi.ReorderRulesCheckInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1InventoryReorderRulesCheckResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1InventoryReorderRulesCheck(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReorderRulesCheckInventoryResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__reorderRulesCheck(request, requestOptions));
     }
 
-    private async __postV1InventoryReorderRulesCheck(
-        request: NordletApi.PostV1InventoryReorderRulesCheckRequest = {},
+    private async __reorderRulesCheck(
+        request: NordletApi.ReorderRulesCheckInventoryRequest = {},
         requestOptions?: InventoryClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1InventoryReorderRulesCheckResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReorderRulesCheckInventoryResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2441,7 +2677,7 @@ export class InventoryClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1InventoryReorderRulesCheckResponse,
+                data: _response.body as NordletApi.ReorderRulesCheckInventoryResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2458,6 +2694,11 @@ export class InventoryClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2470,6 +2711,11 @@ export class InventoryClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

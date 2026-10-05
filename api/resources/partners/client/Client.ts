@@ -24,34 +24,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersAddressesCreateRequest} request
+     * @param {NordletApi.AddressesCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersAddressesCreate({
+     *     await client.partners.addressesCreate({
      *         partnerId: "partnerId"
      *     })
      */
-    public postV1PartnersAddressesCreate(
-        request: NordletApi.PostV1PartnersAddressesCreateRequest,
+    public addressesCreate(
+        request: NordletApi.AddressesCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersAddressesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersAddressesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AddressesCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__addressesCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersAddressesCreate(
-        request: NordletApi.PostV1PartnersAddressesCreateRequest,
+    private async __addressesCreate(
+        request: NordletApi.AddressesCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersAddressesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AddressesCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -79,7 +81,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersAddressesCreateResponse,
+                data: _response.body as NordletApi.AddressesCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -96,6 +98,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -108,6 +115,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -144,34 +156,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersAddressesUpdateRequest} request
+     * @param {NordletApi.AddressesUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersAddressesUpdate({
+     *     await client.partners.addressesUpdate({
      *         id: "id"
      *     })
      */
-    public postV1PartnersAddressesUpdate(
-        request: NordletApi.PostV1PartnersAddressesUpdateRequest,
+    public addressesUpdate(
+        request: NordletApi.AddressesUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersAddressesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersAddressesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AddressesUpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__addressesUpdate(request, requestOptions));
     }
 
-    private async __postV1PartnersAddressesUpdate(
-        request: NordletApi.PostV1PartnersAddressesUpdateRequest,
+    private async __addressesUpdate(
+        request: NordletApi.AddressesUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersAddressesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AddressesUpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -199,7 +213,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersAddressesUpdateResponse,
+                data: _response.body as NordletApi.AddressesUpdatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -216,6 +230,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -228,6 +247,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -264,34 +288,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersAddressesDeleteRequest} request
+     * @param {NordletApi.AddressesDeletePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersAddressesDelete({
+     *     await client.partners.addressesDelete({
      *         id: "id"
      *     })
      */
-    public postV1PartnersAddressesDelete(
-        request: NordletApi.PostV1PartnersAddressesDeleteRequest,
+    public addressesDelete(
+        request: NordletApi.AddressesDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersAddressesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersAddressesDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AddressesDeletePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__addressesDelete(request, requestOptions));
     }
 
-    private async __postV1PartnersAddressesDelete(
-        request: NordletApi.PostV1PartnersAddressesDeleteRequest,
+    private async __addressesDelete(
+        request: NordletApi.AddressesDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersAddressesDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AddressesDeletePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -319,7 +345,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersAddressesDeleteResponse,
+                data: _response.body as NordletApi.AddressesDeletePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -336,6 +362,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -348,6 +379,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -384,32 +420,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersAddressesListRequest} request
+     * @param {NordletApi.AddressesListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersAddressesList()
+     *     await client.partners.addressesList()
      */
-    public postV1PartnersAddressesList(
-        request: NordletApi.PostV1PartnersAddressesListRequest = {},
+    public addressesList(
+        request: NordletApi.AddressesListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersAddressesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersAddressesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AddressesListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__addressesList(request, requestOptions));
     }
 
-    private async __postV1PartnersAddressesList(
-        request: NordletApi.PostV1PartnersAddressesListRequest = {},
+    private async __addressesList(
+        request: NordletApi.AddressesListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersAddressesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AddressesListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -437,7 +475,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersAddressesListResponse,
+                data: _response.body as NordletApi.AddressesListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -454,6 +492,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -466,6 +509,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -497,35 +545,37 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersContactsCreateRequest} request
+     * @param {NordletApi.ContactsCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersContactsCreate({
+     *     await client.partners.contactsCreate({
      *         name: "name",
      *         partnerId: "partnerId"
      *     })
      */
-    public postV1PartnersContactsCreate(
-        request: NordletApi.PostV1PartnersContactsCreateRequest,
+    public contactsCreate(
+        request: NordletApi.ContactsCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersContactsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersContactsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ContactsCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__contactsCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersContactsCreate(
-        request: NordletApi.PostV1PartnersContactsCreateRequest,
+    private async __contactsCreate(
+        request: NordletApi.ContactsCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersContactsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ContactsCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -553,7 +603,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersContactsCreateResponse,
+                data: _response.body as NordletApi.ContactsCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -570,6 +620,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -582,6 +637,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -613,34 +673,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersContactsUpdateRequest} request
+     * @param {NordletApi.ContactsUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersContactsUpdate({
+     *     await client.partners.contactsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1PartnersContactsUpdate(
-        request: NordletApi.PostV1PartnersContactsUpdateRequest,
+    public contactsUpdate(
+        request: NordletApi.ContactsUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersContactsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersContactsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ContactsUpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__contactsUpdate(request, requestOptions));
     }
 
-    private async __postV1PartnersContactsUpdate(
-        request: NordletApi.PostV1PartnersContactsUpdateRequest,
+    private async __contactsUpdate(
+        request: NordletApi.ContactsUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersContactsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ContactsUpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -668,7 +730,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersContactsUpdateResponse,
+                data: _response.body as NordletApi.ContactsUpdatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -685,6 +747,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -697,6 +764,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -728,34 +800,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersContactsDeleteRequest} request
+     * @param {NordletApi.ContactsDeletePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersContactsDelete({
+     *     await client.partners.contactsDelete({
      *         id: "id"
      *     })
      */
-    public postV1PartnersContactsDelete(
-        request: NordletApi.PostV1PartnersContactsDeleteRequest,
+    public contactsDelete(
+        request: NordletApi.ContactsDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersContactsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersContactsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ContactsDeletePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__contactsDelete(request, requestOptions));
     }
 
-    private async __postV1PartnersContactsDelete(
-        request: NordletApi.PostV1PartnersContactsDeleteRequest,
+    private async __contactsDelete(
+        request: NordletApi.ContactsDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersContactsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ContactsDeletePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -783,7 +857,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersContactsDeleteResponse,
+                data: _response.body as NordletApi.ContactsDeletePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -800,6 +874,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -812,6 +891,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -843,32 +927,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersContactsListRequest} request
+     * @param {NordletApi.ContactsListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersContactsList()
+     *     await client.partners.contactsList()
      */
-    public postV1PartnersContactsList(
-        request: NordletApi.PostV1PartnersContactsListRequest = {},
+    public contactsList(
+        request: NordletApi.ContactsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersContactsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersContactsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ContactsListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__contactsList(request, requestOptions));
     }
 
-    private async __postV1PartnersContactsList(
-        request: NordletApi.PostV1PartnersContactsListRequest = {},
+    private async __contactsList(
+        request: NordletApi.ContactsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersContactsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ContactsListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -896,7 +982,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersContactsListResponse,
+                data: _response.body as NordletApi.ContactsListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -913,6 +999,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -925,6 +1016,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -956,35 +1052,37 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersBankAccountsCreateRequest} request
+     * @param {NordletApi.BankAccountsCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersBankAccountsCreate({
+     *     await client.partners.bankAccountsCreate({
      *         iban: "iban",
      *         partnerId: "partnerId"
      *     })
      */
-    public postV1PartnersBankAccountsCreate(
-        request: NordletApi.PostV1PartnersBankAccountsCreateRequest,
+    public bankAccountsCreate(
+        request: NordletApi.BankAccountsCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersBankAccountsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersBankAccountsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BankAccountsCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__bankAccountsCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersBankAccountsCreate(
-        request: NordletApi.PostV1PartnersBankAccountsCreateRequest,
+    private async __bankAccountsCreate(
+        request: NordletApi.BankAccountsCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersBankAccountsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BankAccountsCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1012,7 +1110,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersBankAccountsCreateResponse,
+                data: _response.body as NordletApi.BankAccountsCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1029,6 +1127,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1041,6 +1144,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1077,34 +1185,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersBankAccountsUpdateRequest} request
+     * @param {NordletApi.BankAccountsUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersBankAccountsUpdate({
+     *     await client.partners.bankAccountsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1PartnersBankAccountsUpdate(
-        request: NordletApi.PostV1PartnersBankAccountsUpdateRequest,
+    public bankAccountsUpdate(
+        request: NordletApi.BankAccountsUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersBankAccountsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersBankAccountsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BankAccountsUpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__bankAccountsUpdate(request, requestOptions));
     }
 
-    private async __postV1PartnersBankAccountsUpdate(
-        request: NordletApi.PostV1PartnersBankAccountsUpdateRequest,
+    private async __bankAccountsUpdate(
+        request: NordletApi.BankAccountsUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersBankAccountsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BankAccountsUpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1132,7 +1242,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersBankAccountsUpdateResponse,
+                data: _response.body as NordletApi.BankAccountsUpdatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1149,6 +1259,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1161,6 +1276,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1197,34 +1317,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersBankAccountsDeleteRequest} request
+     * @param {NordletApi.BankAccountsDeletePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersBankAccountsDelete({
+     *     await client.partners.bankAccountsDelete({
      *         id: "id"
      *     })
      */
-    public postV1PartnersBankAccountsDelete(
-        request: NordletApi.PostV1PartnersBankAccountsDeleteRequest,
+    public bankAccountsDelete(
+        request: NordletApi.BankAccountsDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersBankAccountsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersBankAccountsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BankAccountsDeletePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__bankAccountsDelete(request, requestOptions));
     }
 
-    private async __postV1PartnersBankAccountsDelete(
-        request: NordletApi.PostV1PartnersBankAccountsDeleteRequest,
+    private async __bankAccountsDelete(
+        request: NordletApi.BankAccountsDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersBankAccountsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BankAccountsDeletePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1252,7 +1374,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersBankAccountsDeleteResponse,
+                data: _response.body as NordletApi.BankAccountsDeletePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1269,6 +1391,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1281,6 +1408,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1317,32 +1449,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersBankAccountsListRequest} request
+     * @param {NordletApi.BankAccountsListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersBankAccountsList()
+     *     await client.partners.bankAccountsList()
      */
-    public postV1PartnersBankAccountsList(
-        request: NordletApi.PostV1PartnersBankAccountsListRequest = {},
+    public bankAccountsList(
+        request: NordletApi.BankAccountsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersBankAccountsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersBankAccountsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BankAccountsListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__bankAccountsList(request, requestOptions));
     }
 
-    private async __postV1PartnersBankAccountsList(
-        request: NordletApi.PostV1PartnersBankAccountsListRequest = {},
+    private async __bankAccountsList(
+        request: NordletApi.BankAccountsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersBankAccountsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BankAccountsListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1370,7 +1504,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersBankAccountsListResponse,
+                data: _response.body as NordletApi.BankAccountsListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1387,6 +1521,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1399,6 +1538,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1435,34 +1579,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersFilesListRequest} request
+     * @param {NordletApi.FilesListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersFilesList({
+     *     await client.partners.filesList({
      *         partnerId: "partnerId"
      *     })
      */
-    public postV1PartnersFilesList(
-        request: NordletApi.PostV1PartnersFilesListRequest,
+    public filesList(
+        request: NordletApi.FilesListPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersFilesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersFilesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.FilesListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__filesList(request, requestOptions));
     }
 
-    private async __postV1PartnersFilesList(
-        request: NordletApi.PostV1PartnersFilesListRequest,
+    private async __filesList(
+        request: NordletApi.FilesListPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersFilesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.FilesListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1489,10 +1635,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PartnersFilesListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.FilesListPartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1504,6 +1647,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1519,6 +1667,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1550,34 +1703,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersDebtRemindersPreviewRequest} request
+     * @param {NordletApi.DebtRemindersPreviewPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.remindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany()
+     *     await client.partners.debtRemindersPreview()
      */
-    public remindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
-        request: NordletApi.PostV1PartnersDebtRemindersPreviewRequest = {},
+    public debtRemindersPreview(
+        request: NordletApi.DebtRemindersPreviewPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersDebtRemindersPreviewResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__remindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.DebtRemindersPreviewPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__debtRemindersPreview(request, requestOptions));
     }
 
-    private async __remindersTheOvernightDebtReminderJobWouldSendTodayForThisCompany(
-        request: NordletApi.PostV1PartnersDebtRemindersPreviewRequest = {},
+    private async __debtRemindersPreview(
+        request: NordletApi.DebtRemindersPreviewPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersDebtRemindersPreviewResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DebtRemindersPreviewPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1605,7 +1758,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersDebtRemindersPreviewResponse,
+                data: _response.body as NordletApi.DebtRemindersPreviewPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1622,6 +1775,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1634,6 +1792,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1670,32 +1833,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersDebtRemindersListRequest} request
+     * @param {NordletApi.DebtRemindersListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersDebtRemindersList()
+     *     await client.partners.debtRemindersList()
      */
-    public postV1PartnersDebtRemindersList(
-        request: NordletApi.PostV1PartnersDebtRemindersListRequest = {},
+    public debtRemindersList(
+        request: NordletApi.DebtRemindersListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersDebtRemindersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersDebtRemindersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DebtRemindersListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__debtRemindersList(request, requestOptions));
     }
 
-    private async __postV1PartnersDebtRemindersList(
-        request: NordletApi.PostV1PartnersDebtRemindersListRequest = {},
+    private async __debtRemindersList(
+        request: NordletApi.DebtRemindersListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersDebtRemindersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DebtRemindersListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1723,7 +1888,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersDebtRemindersListResponse,
+                data: _response.body as NordletApi.DebtRemindersListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1740,6 +1905,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1752,6 +1922,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1788,32 +1963,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersValidateVatRequest} request
+     * @param {NordletApi.ValidateVatPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersValidateVat()
+     *     await client.partners.validateVat()
      */
-    public postV1PartnersValidateVat(
-        request: NordletApi.PostV1PartnersValidateVatRequest = {},
+    public validateVat(
+        request: NordletApi.ValidateVatPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersValidateVatResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersValidateVat(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ValidateVatPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__validateVat(request, requestOptions));
     }
 
-    private async __postV1PartnersValidateVat(
-        request: NordletApi.PostV1PartnersValidateVatRequest = {},
+    private async __validateVat(
+        request: NordletApi.ValidateVatPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersValidateVatResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ValidateVatPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1841,7 +2018,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersValidateVatResponse,
+                data: _response.body as NordletApi.ValidateVatPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1858,6 +2035,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1870,6 +2052,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1901,32 +2088,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersVatReviewsListRequest} request
+     * @param {NordletApi.VatReviewsListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersVatReviewsList()
+     *     await client.partners.vatReviewsList()
      */
-    public postV1PartnersVatReviewsList(
-        request: NordletApi.PostV1PartnersVatReviewsListRequest = {},
+    public vatReviewsList(
+        request: NordletApi.VatReviewsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersVatReviewsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersVatReviewsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VatReviewsListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vatReviewsList(request, requestOptions));
     }
 
-    private async __postV1PartnersVatReviewsList(
-        request: NordletApi.PostV1PartnersVatReviewsListRequest = {},
+    private async __vatReviewsList(
+        request: NordletApi.VatReviewsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersVatReviewsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VatReviewsListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1954,7 +2143,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersVatReviewsListResponse,
+                data: _response.body as NordletApi.VatReviewsListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1971,6 +2160,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1983,6 +2177,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2019,35 +2218,37 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersVatReviewsResolveRequest} request
+     * @param {NordletApi.VatReviewsResolvePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersVatReviewsResolve({
+     *     await client.partners.vatReviewsResolve({
      *         id: "id",
      *         resolution: "confirmed_valid"
      *     })
      */
-    public postV1PartnersVatReviewsResolve(
-        request: NordletApi.PostV1PartnersVatReviewsResolveRequest,
+    public vatReviewsResolve(
+        request: NordletApi.VatReviewsResolvePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersVatReviewsResolveResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersVatReviewsResolve(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VatReviewsResolvePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vatReviewsResolve(request, requestOptions));
     }
 
-    private async __postV1PartnersVatReviewsResolve(
-        request: NordletApi.PostV1PartnersVatReviewsResolveRequest,
+    private async __vatReviewsResolve(
+        request: NordletApi.VatReviewsResolvePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersVatReviewsResolveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VatReviewsResolvePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2075,7 +2276,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersVatReviewsResolveResponse,
+                data: _response.body as NordletApi.VatReviewsResolvePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2092,6 +2293,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2104,6 +2310,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2140,34 +2351,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersCreateRequest} request
+     * @param {NordletApi.CreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersCreate({
+     *     await client.partners.create({
      *         name: "name"
      *     })
      */
-    public postV1PartnersCreate(
-        request: NordletApi.PostV1PartnersCreateRequest,
+    public create(
+        request: NordletApi.CreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
-    private async __postV1PartnersCreate(
-        request: NordletApi.PostV1PartnersCreateRequest,
+    private async __create(
+        request: NordletApi.CreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2194,10 +2407,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PartnersCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.CreatePartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2209,6 +2419,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2224,6 +2439,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2255,34 +2475,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersFindOrCreateRequest} request
+     * @param {NordletApi.FindOrCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersFindOrCreate({
+     *     await client.partners.findOrCreate({
      *         name: "name"
      *     })
      */
-    public postV1PartnersFindOrCreate(
-        request: NordletApi.PostV1PartnersFindOrCreateRequest,
+    public findOrCreate(
+        request: NordletApi.FindOrCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersFindOrCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersFindOrCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.FindOrCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__findOrCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersFindOrCreate(
-        request: NordletApi.PostV1PartnersFindOrCreateRequest,
+    private async __findOrCreate(
+        request: NordletApi.FindOrCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersFindOrCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.FindOrCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2310,7 +2532,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersFindOrCreateResponse,
+                data: _response.body as NordletApi.FindOrCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2327,6 +2549,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2339,6 +2566,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2370,34 +2602,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersGetRequest} request
+     * @param {NordletApi.GetPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersGet({
+     *     await client.partners.get({
      *         id: "id"
      *     })
      */
-    public postV1PartnersGet(
-        request: NordletApi.PostV1PartnersGetRequest,
+    public get(
+        request: NordletApi.GetPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GetPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
-    private async __postV1PartnersGet(
-        request: NordletApi.PostV1PartnersGetRequest,
+    private async __get(
+        request: NordletApi.GetPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GetPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2424,7 +2658,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1PartnersGetResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.GetPartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2436,6 +2670,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2451,6 +2690,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2482,34 +2726,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersUpdateRequest} request
+     * @param {NordletApi.UpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersUpdate({
+     *     await client.partners.update({
      *         id: "id"
      *     })
      */
-    public postV1PartnersUpdate(
-        request: NordletApi.PostV1PartnersUpdateRequest,
+    public update(
+        request: NordletApi.UpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
-    private async __postV1PartnersUpdate(
-        request: NordletApi.PostV1PartnersUpdateRequest,
+    private async __update(
+        request: NordletApi.UpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2536,10 +2782,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PartnersUpdateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.UpdatePartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2551,6 +2794,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2566,6 +2814,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2597,34 +2850,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersDeleteRequest} request
+     * @param {NordletApi.DeletePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersDelete({
+     *     await client.partners.delete({
      *         id: "id"
      *     })
      */
-    public postV1PartnersDelete(
-        request: NordletApi.PostV1PartnersDeleteRequest,
+    public delete(
+        request: NordletApi.DeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DeletePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
     }
 
-    private async __postV1PartnersDelete(
-        request: NordletApi.PostV1PartnersDeleteRequest,
+    private async __delete(
+        request: NordletApi.DeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DeletePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2651,10 +2906,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PartnersDeleteResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.DeletePartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2666,6 +2918,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2681,6 +2938,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2714,36 +2976,36 @@ export class PartnersClient {
     /**
      * Removes birth date, self-employment certificate number, email, phone, address, notes, contacts, addresses and bank accounts, then hides the partner. The name, code and VAT number stay because issued invoices must keep identifying the counterparty for the statutory retention period.
      *
-     * @param {NordletApi.PostV1PartnersAnonymizeRequest} request
+     * @param {NordletApi.AnonymizePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.blankAPartnersPersonalDataAndHideTheRecord({
+     *     await client.partners.anonymize({
      *         id: "id"
      *     })
      */
-    public blankAPartnersPersonalDataAndHideTheRecord(
-        request: NordletApi.PostV1PartnersAnonymizeRequest,
+    public anonymize(
+        request: NordletApi.AnonymizePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersAnonymizeResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__blankAPartnersPersonalDataAndHideTheRecord(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.AnonymizePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__anonymize(request, requestOptions));
     }
 
-    private async __blankAPartnersPersonalDataAndHideTheRecord(
-        request: NordletApi.PostV1PartnersAnonymizeRequest,
+    private async __anonymize(
+        request: NordletApi.AnonymizePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersAnonymizeResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AnonymizePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2770,10 +3032,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PartnersAnonymizeResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.AnonymizePartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2785,6 +3044,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2800,6 +3064,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2831,32 +3100,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersListRequest} request
+     * @param {NordletApi.ListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersList()
+     *     await client.partners.list()
      */
-    public postV1PartnersList(
-        request: NordletApi.PostV1PartnersListRequest = {},
+    public list(
+        request: NordletApi.ListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
-    private async __postV1PartnersList(
-        request: NordletApi.PostV1PartnersListRequest = {},
+    private async __list(
+        request: NordletApi.ListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2883,10 +3154,7 @@ export class PartnersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PartnersListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.ListPartnersResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -2898,6 +3166,11 @@ export class PartnersClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2913,6 +3186,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2944,35 +3222,37 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersGroupsCreateRequest} request
+     * @param {NordletApi.GroupsCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersGroupsCreate({
+     *     await client.partners.groupsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1PartnersGroupsCreate(
-        request: NordletApi.PostV1PartnersGroupsCreateRequest,
+    public groupsCreate(
+        request: NordletApi.GroupsCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersGroupsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersGroupsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersGroupsCreate(
-        request: NordletApi.PostV1PartnersGroupsCreateRequest,
+    private async __groupsCreate(
+        request: NordletApi.GroupsCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersGroupsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3000,7 +3280,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersGroupsCreateResponse,
+                data: _response.body as NordletApi.GroupsCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3017,6 +3297,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3029,6 +3314,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3060,34 +3350,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersGroupsUpdateRequest} request
+     * @param {NordletApi.GroupsUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersGroupsUpdate({
+     *     await client.partners.groupsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1PartnersGroupsUpdate(
-        request: NordletApi.PostV1PartnersGroupsUpdateRequest,
+    public groupsUpdate(
+        request: NordletApi.GroupsUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersGroupsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersGroupsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsUpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsUpdate(request, requestOptions));
     }
 
-    private async __postV1PartnersGroupsUpdate(
-        request: NordletApi.PostV1PartnersGroupsUpdateRequest,
+    private async __groupsUpdate(
+        request: NordletApi.GroupsUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersGroupsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsUpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3115,7 +3407,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersGroupsUpdateResponse,
+                data: _response.body as NordletApi.GroupsUpdatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3132,6 +3424,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3144,6 +3441,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3175,34 +3477,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersGroupsDeleteRequest} request
+     * @param {NordletApi.GroupsDeletePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersGroupsDelete({
+     *     await client.partners.groupsDelete({
      *         id: "id"
      *     })
      */
-    public postV1PartnersGroupsDelete(
-        request: NordletApi.PostV1PartnersGroupsDeleteRequest,
+    public groupsDelete(
+        request: NordletApi.GroupsDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersGroupsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersGroupsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsDeletePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsDelete(request, requestOptions));
     }
 
-    private async __postV1PartnersGroupsDelete(
-        request: NordletApi.PostV1PartnersGroupsDeleteRequest,
+    private async __groupsDelete(
+        request: NordletApi.GroupsDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersGroupsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsDeletePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3230,7 +3534,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersGroupsDeleteResponse,
+                data: _response.body as NordletApi.GroupsDeletePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3247,6 +3551,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3259,6 +3568,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3290,32 +3604,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersGroupsListRequest} request
+     * @param {NordletApi.GroupsListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersGroupsList()
+     *     await client.partners.groupsList()
      */
-    public postV1PartnersGroupsList(
-        request: NordletApi.PostV1PartnersGroupsListRequest = {},
+    public groupsList(
+        request: NordletApi.GroupsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersGroupsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersGroupsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsList(request, requestOptions));
     }
 
-    private async __postV1PartnersGroupsList(
-        request: NordletApi.PostV1PartnersGroupsListRequest = {},
+    private async __groupsList(
+        request: NordletApi.GroupsListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersGroupsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3343,7 +3659,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersGroupsListResponse,
+                data: _response.body as NordletApi.GroupsListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3360,6 +3676,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3372,6 +3693,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3403,35 +3729,37 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersStatusesCreateRequest} request
+     * @param {NordletApi.StatusesCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersStatusesCreate({
+     *     await client.partners.statusesCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1PartnersStatusesCreate(
-        request: NordletApi.PostV1PartnersStatusesCreateRequest,
+    public statusesCreate(
+        request: NordletApi.StatusesCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersStatusesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersStatusesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StatusesCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statusesCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersStatusesCreate(
-        request: NordletApi.PostV1PartnersStatusesCreateRequest,
+    private async __statusesCreate(
+        request: NordletApi.StatusesCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersStatusesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatusesCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3459,7 +3787,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersStatusesCreateResponse,
+                data: _response.body as NordletApi.StatusesCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3476,6 +3804,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3488,6 +3821,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3519,34 +3857,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersStatusesUpdateRequest} request
+     * @param {NordletApi.StatusesUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersStatusesUpdate({
+     *     await client.partners.statusesUpdate({
      *         id: "id"
      *     })
      */
-    public postV1PartnersStatusesUpdate(
-        request: NordletApi.PostV1PartnersStatusesUpdateRequest,
+    public statusesUpdate(
+        request: NordletApi.StatusesUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersStatusesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersStatusesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StatusesUpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statusesUpdate(request, requestOptions));
     }
 
-    private async __postV1PartnersStatusesUpdate(
-        request: NordletApi.PostV1PartnersStatusesUpdateRequest,
+    private async __statusesUpdate(
+        request: NordletApi.StatusesUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersStatusesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatusesUpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3574,7 +3914,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersStatusesUpdateResponse,
+                data: _response.body as NordletApi.StatusesUpdatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3591,6 +3931,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3603,6 +3948,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3634,34 +3984,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersStatusesDeleteRequest} request
+     * @param {NordletApi.StatusesDeletePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersStatusesDelete({
+     *     await client.partners.statusesDelete({
      *         id: "id"
      *     })
      */
-    public postV1PartnersStatusesDelete(
-        request: NordletApi.PostV1PartnersStatusesDeleteRequest,
+    public statusesDelete(
+        request: NordletApi.StatusesDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersStatusesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersStatusesDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StatusesDeletePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statusesDelete(request, requestOptions));
     }
 
-    private async __postV1PartnersStatusesDelete(
-        request: NordletApi.PostV1PartnersStatusesDeleteRequest,
+    private async __statusesDelete(
+        request: NordletApi.StatusesDeletePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersStatusesDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatusesDeletePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3689,7 +4041,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersStatusesDeleteResponse,
+                data: _response.body as NordletApi.StatusesDeletePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3706,6 +4058,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3718,6 +4075,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3749,32 +4111,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersStatusesListRequest} request
+     * @param {NordletApi.StatusesListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersStatusesList()
+     *     await client.partners.statusesList()
      */
-    public postV1PartnersStatusesList(
-        request: NordletApi.PostV1PartnersStatusesListRequest = {},
+    public statusesList(
+        request: NordletApi.StatusesListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersStatusesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersStatusesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StatusesListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__statusesList(request, requestOptions));
     }
 
-    private async __postV1PartnersStatusesList(
-        request: NordletApi.PostV1PartnersStatusesListRequest = {},
+    private async __statusesList(
+        request: NordletApi.StatusesListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersStatusesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StatusesListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3802,7 +4166,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersStatusesListResponse,
+                data: _response.body as NordletApi.StatusesListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3819,6 +4183,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3831,6 +4200,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3862,34 +4236,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersInquiriesCreateRequest} request
+     * @param {NordletApi.InquiriesCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersInquiriesCreate({
+     *     await client.partners.inquiriesCreate({
      *         subject: "subject"
      *     })
      */
-    public postV1PartnersInquiriesCreate(
-        request: NordletApi.PostV1PartnersInquiriesCreateRequest,
+    public inquiriesCreate(
+        request: NordletApi.InquiriesCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersInquiriesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersInquiriesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.InquiriesCreatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__inquiriesCreate(request, requestOptions));
     }
 
-    private async __postV1PartnersInquiriesCreate(
-        request: NordletApi.PostV1PartnersInquiriesCreateRequest,
+    private async __inquiriesCreate(
+        request: NordletApi.InquiriesCreatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersInquiriesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.InquiriesCreatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3917,7 +4293,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersInquiriesCreateResponse,
+                data: _response.body as NordletApi.InquiriesCreatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3934,6 +4310,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3946,6 +4327,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3982,34 +4368,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersInquiriesUpdateRequest} request
+     * @param {NordletApi.InquiriesUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersInquiriesUpdate({
+     *     await client.partners.inquiriesUpdate({
      *         id: "id"
      *     })
      */
-    public postV1PartnersInquiriesUpdate(
-        request: NordletApi.PostV1PartnersInquiriesUpdateRequest,
+    public inquiriesUpdate(
+        request: NordletApi.InquiriesUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersInquiriesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersInquiriesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.InquiriesUpdatePartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__inquiriesUpdate(request, requestOptions));
     }
 
-    private async __postV1PartnersInquiriesUpdate(
-        request: NordletApi.PostV1PartnersInquiriesUpdateRequest,
+    private async __inquiriesUpdate(
+        request: NordletApi.InquiriesUpdatePartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersInquiriesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.InquiriesUpdatePartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -4037,7 +4425,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersInquiriesUpdateResponse,
+                data: _response.body as NordletApi.InquiriesUpdatePartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -4054,6 +4442,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -4066,6 +4459,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -4102,34 +4500,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersInquiriesGetRequest} request
+     * @param {NordletApi.InquiriesGetPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersInquiriesGet({
+     *     await client.partners.inquiriesGet({
      *         id: "id"
      *     })
      */
-    public postV1PartnersInquiriesGet(
-        request: NordletApi.PostV1PartnersInquiriesGetRequest,
+    public inquiriesGet(
+        request: NordletApi.InquiriesGetPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersInquiriesGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersInquiriesGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.InquiriesGetPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__inquiriesGet(request, requestOptions));
     }
 
-    private async __postV1PartnersInquiriesGet(
-        request: NordletApi.PostV1PartnersInquiriesGetRequest,
+    private async __inquiriesGet(
+        request: NordletApi.InquiriesGetPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersInquiriesGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.InquiriesGetPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -4157,7 +4557,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersInquiriesGetResponse,
+                data: _response.body as NordletApi.InquiriesGetPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -4174,6 +4574,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -4186,6 +4591,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -4217,32 +4627,34 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersInquiriesListRequest} request
+     * @param {NordletApi.InquiriesListPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersInquiriesList()
+     *     await client.partners.inquiriesList()
      */
-    public postV1PartnersInquiriesList(
-        request: NordletApi.PostV1PartnersInquiriesListRequest = {},
+    public inquiriesList(
+        request: NordletApi.InquiriesListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersInquiriesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersInquiriesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.InquiriesListPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__inquiriesList(request, requestOptions));
     }
 
-    private async __postV1PartnersInquiriesList(
-        request: NordletApi.PostV1PartnersInquiriesListRequest = {},
+    private async __inquiriesList(
+        request: NordletApi.InquiriesListPartnersRequest = {},
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersInquiriesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.InquiriesListPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -4270,7 +4682,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersInquiriesListResponse,
+                data: _response.body as NordletApi.InquiriesListPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -4287,6 +4699,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -4299,6 +4716,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -4330,34 +4752,36 @@ export class PartnersClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PartnersCreditCheckRequest} request
+     * @param {NordletApi.CreditCheckPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.partners.postV1PartnersCreditCheck({
+     *     await client.partners.creditCheck({
      *         partnerId: "partnerId"
      *     })
      */
-    public postV1PartnersCreditCheck(
-        request: NordletApi.PostV1PartnersCreditCheckRequest,
+    public creditCheck(
+        request: NordletApi.CreditCheckPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PartnersCreditCheckResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PartnersCreditCheck(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CreditCheckPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__creditCheck(request, requestOptions));
     }
 
-    private async __postV1PartnersCreditCheck(
-        request: NordletApi.PostV1PartnersCreditCheckRequest,
+    private async __creditCheck(
+        request: NordletApi.CreditCheckPartnersRequest,
         requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PartnersCreditCheckResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CreditCheckPartnersResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -4385,7 +4809,7 @@ export class PartnersClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PartnersCreditCheckResponse,
+                data: _response.body as NordletApi.CreditCheckPartnersResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -4402,6 +4826,11 @@ export class PartnersClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -4414,6 +4843,11 @@ export class PartnersClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -4442,1712 +4876,5 @@ export class PartnersClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/partners/credit-check");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsCreateRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsCreate({
-     *         name: "name"
-     *     })
-     */
-    public postV1LeadsCreate(
-        request: NordletApi.PostV1LeadsCreateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsCreate(request, requestOptions));
-    }
-
-    private async __postV1LeadsCreate(
-        request: NordletApi.PostV1LeadsCreateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsCreateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/create",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1LeadsCreateResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/create");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsGetRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsGet({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsGet(
-        request: NordletApi.PostV1LeadsGetRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsGet(request, requestOptions));
-    }
-
-    private async __postV1LeadsGet(
-        request: NordletApi.PostV1LeadsGetRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsGetResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/get",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1LeadsGetResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/get");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsUpdateRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsUpdate({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsUpdate(
-        request: NordletApi.PostV1LeadsUpdateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsUpdate(request, requestOptions));
-    }
-
-    private async __postV1LeadsUpdate(
-        request: NordletApi.PostV1LeadsUpdateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsUpdateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/update",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1LeadsUpdateResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/update");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsDeleteRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsDelete({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsDelete(
-        request: NordletApi.PostV1LeadsDeleteRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsDelete(request, requestOptions));
-    }
-
-    private async __postV1LeadsDelete(
-        request: NordletApi.PostV1LeadsDeleteRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsDeleteResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/delete",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1LeadsDeleteResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/delete");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsListRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsList()
-     */
-    public postV1LeadsList(
-        request: NordletApi.PostV1LeadsListRequest = {},
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsList(request, requestOptions));
-    }
-
-    private async __postV1LeadsList(
-        request: NordletApi.PostV1LeadsListRequest = {},
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsListResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/list",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1LeadsListResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/list");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsNotesCreateRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsNotesCreate({
-     *         leadId: "leadId",
-     *         body: "body"
-     *     })
-     */
-    public postV1LeadsNotesCreate(
-        request: NordletApi.PostV1LeadsNotesCreateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsNotesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsNotesCreate(request, requestOptions));
-    }
-
-    private async __postV1LeadsNotesCreate(
-        request: NordletApi.PostV1LeadsNotesCreateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsNotesCreateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/notes/create",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsNotesCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/notes/create");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsNotesDeleteRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsNotesDelete({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsNotesDelete(
-        request: NordletApi.PostV1LeadsNotesDeleteRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsNotesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsNotesDelete(request, requestOptions));
-    }
-
-    private async __postV1LeadsNotesDelete(
-        request: NordletApi.PostV1LeadsNotesDeleteRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsNotesDeleteResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/notes/delete",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsNotesDeleteResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/notes/delete");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsNotesListRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsNotesList({
-     *         leadId: "leadId"
-     *     })
-     */
-    public postV1LeadsNotesList(
-        request: NordletApi.PostV1LeadsNotesListRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsNotesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsNotesList(request, requestOptions));
-    }
-
-    private async __postV1LeadsNotesList(
-        request: NordletApi.PostV1LeadsNotesListRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsNotesListResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/notes/list",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsNotesListResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/notes/list");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsFilesListRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsFilesList({
-     *         leadId: "leadId"
-     *     })
-     */
-    public postV1LeadsFilesList(
-        request: NordletApi.PostV1LeadsFilesListRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsFilesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsFilesList(request, requestOptions));
-    }
-
-    private async __postV1LeadsFilesList(
-        request: NordletApi.PostV1LeadsFilesListRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsFilesListResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/files/list",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsFilesListResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/files/list");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsSourcesCreateRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsSourcesCreate({
-     *         name: "name"
-     *     })
-     */
-    public postV1LeadsSourcesCreate(
-        request: NordletApi.PostV1LeadsSourcesCreateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsSourcesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsSourcesCreate(request, requestOptions));
-    }
-
-    private async __postV1LeadsSourcesCreate(
-        request: NordletApi.PostV1LeadsSourcesCreateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsSourcesCreateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/sources/create",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsSourcesCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/sources/create");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsSourcesUpdateRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsSourcesUpdate({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsSourcesUpdate(
-        request: NordletApi.PostV1LeadsSourcesUpdateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsSourcesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsSourcesUpdate(request, requestOptions));
-    }
-
-    private async __postV1LeadsSourcesUpdate(
-        request: NordletApi.PostV1LeadsSourcesUpdateRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsSourcesUpdateResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/sources/update",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsSourcesUpdateResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/sources/update");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsSourcesDeleteRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsSourcesDelete({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsSourcesDelete(
-        request: NordletApi.PostV1LeadsSourcesDeleteRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsSourcesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsSourcesDelete(request, requestOptions));
-    }
-
-    private async __postV1LeadsSourcesDelete(
-        request: NordletApi.PostV1LeadsSourcesDeleteRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsSourcesDeleteResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/sources/delete",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsSourcesDeleteResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/sources/delete");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsSourcesListRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsSourcesList()
-     */
-    public postV1LeadsSourcesList(
-        request: NordletApi.PostV1LeadsSourcesListRequest = {},
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsSourcesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsSourcesList(request, requestOptions));
-    }
-
-    private async __postV1LeadsSourcesList(
-        request: NordletApi.PostV1LeadsSourcesListRequest = {},
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsSourcesListResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/sources/list",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsSourcesListResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/sources/list");
-    }
-
-    /**
-     * @param {NordletApi.PostV1LeadsSourcesOptionsRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsSourcesOptions()
-     */
-    public postV1LeadsSourcesOptions(
-        request: NordletApi.PostV1LeadsSourcesOptionsRequest = {},
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsSourcesOptionsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsSourcesOptions(request, requestOptions));
-    }
-
-    private async __postV1LeadsSourcesOptions(
-        request: NordletApi.PostV1LeadsSourcesOptionsRequest = {},
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsSourcesOptionsResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/sources/options",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsSourcesOptionsResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/sources/options");
-    }
-
-    /**
-     * Create a customer partner from the lead, move the lead files to the partner, copy the lead notes into the partner notes and mark the lead as converted.
-     *
-     * @param {NordletApi.PostV1LeadsConvertRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link NordletApi.BadRequestError}
-     * @throws {@link NordletApi.UnauthorizedError}
-     * @throws {@link NordletApi.ForbiddenError}
-     * @throws {@link NordletApi.NotFoundError}
-     * @throws {@link NordletApi.ConflictError}
-     * @throws {@link NordletApi.UnprocessableEntityError}
-     * @throws {@link NordletApi.TooManyRequestsError}
-     * @throws {@link NordletApi.InternalServerError}
-     *
-     * @example
-     *     await client.partners.postV1LeadsConvert({
-     *         id: "id"
-     *     })
-     */
-    public postV1LeadsConvert(
-        request: NordletApi.PostV1LeadsConvertRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1LeadsConvertResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1LeadsConvert(request, requestOptions));
-    }
-
-    private async __postV1LeadsConvert(
-        request: NordletApi.PostV1LeadsConvertRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1LeadsConvertResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.NordletApiEnvironment.Production,
-                "v1/leads/convert",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1LeadsConvertResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new NordletApi.BadRequestError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 401:
-                    throw new NordletApi.UnauthorizedError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 403:
-                    throw new NordletApi.ForbiddenError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new NordletApi.NotFoundError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 409:
-                    throw new NordletApi.ConflictError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 422:
-                    throw new NordletApi.UnprocessableEntityError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new NordletApi.TooManyRequestsError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new NordletApi.InternalServerError(
-                        _response.error.body as NordletApi.ErrorResponse,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.NordletApiError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/leads/convert");
     }
 }

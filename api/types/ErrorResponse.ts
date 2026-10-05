@@ -22,6 +22,7 @@ export namespace ErrorResponse {
             IdempotencyKeyReuse: "idempotency_key_reuse",
             IdempotencyInProgress: "idempotency_in_progress",
             RateLimited: "rate_limited",
+            PaymentRequired: "payment_required",
             Internal: "internal",
         } as const;
         export type Code = (typeof Code)[keyof typeof Code];

@@ -24,35 +24,37 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollDepartmentsCreateRequest} request
+     * @param {NordletApi.DepartmentsCreatePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollDepartmentsCreate({
+     *     await client.payroll.departmentsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1PayrollDepartmentsCreate(
-        request: NordletApi.PostV1PayrollDepartmentsCreateRequest,
+    public departmentsCreate(
+        request: NordletApi.DepartmentsCreatePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollDepartmentsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollDepartmentsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DepartmentsCreatePayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__departmentsCreate(request, requestOptions));
     }
 
-    private async __postV1PayrollDepartmentsCreate(
-        request: NordletApi.PostV1PayrollDepartmentsCreateRequest,
+    private async __departmentsCreate(
+        request: NordletApi.DepartmentsCreatePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollDepartmentsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DepartmentsCreatePayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -80,7 +82,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollDepartmentsCreateResponse,
+                data: _response.body as NordletApi.DepartmentsCreatePayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -97,6 +99,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -109,6 +116,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -145,32 +157,34 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollDepartmentsListRequest} request
+     * @param {NordletApi.DepartmentsListPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollDepartmentsList()
+     *     await client.payroll.departmentsList()
      */
-    public postV1PayrollDepartmentsList(
-        request: NordletApi.PostV1PayrollDepartmentsListRequest = {},
+    public departmentsList(
+        request: NordletApi.DepartmentsListPayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollDepartmentsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollDepartmentsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DepartmentsListPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__departmentsList(request, requestOptions));
     }
 
-    private async __postV1PayrollDepartmentsList(
-        request: NordletApi.PostV1PayrollDepartmentsListRequest = {},
+    private async __departmentsList(
+        request: NordletApi.DepartmentsListPayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollDepartmentsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DepartmentsListPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -198,7 +212,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollDepartmentsListResponse,
+                data: _response.body as NordletApi.DepartmentsListPayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -215,6 +229,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -227,6 +246,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -258,35 +282,37 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollSchedulesCreateRequest} request
+     * @param {NordletApi.SchedulesCreatePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollSchedulesCreate({
+     *     await client.payroll.schedulesCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1PayrollSchedulesCreate(
-        request: NordletApi.PostV1PayrollSchedulesCreateRequest,
+    public schedulesCreate(
+        request: NordletApi.SchedulesCreatePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollSchedulesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollSchedulesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SchedulesCreatePayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__schedulesCreate(request, requestOptions));
     }
 
-    private async __postV1PayrollSchedulesCreate(
-        request: NordletApi.PostV1PayrollSchedulesCreateRequest,
+    private async __schedulesCreate(
+        request: NordletApi.SchedulesCreatePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollSchedulesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SchedulesCreatePayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -314,7 +340,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollSchedulesCreateResponse,
+                data: _response.body as NordletApi.SchedulesCreatePayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -331,6 +357,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -343,6 +374,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -374,32 +410,34 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollSchedulesListRequest} request
+     * @param {NordletApi.SchedulesListPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollSchedulesList()
+     *     await client.payroll.schedulesList()
      */
-    public postV1PayrollSchedulesList(
-        request: NordletApi.PostV1PayrollSchedulesListRequest = {},
+    public schedulesList(
+        request: NordletApi.SchedulesListPayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollSchedulesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollSchedulesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SchedulesListPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__schedulesList(request, requestOptions));
     }
 
-    private async __postV1PayrollSchedulesList(
-        request: NordletApi.PostV1PayrollSchedulesListRequest = {},
+    private async __schedulesList(
+        request: NordletApi.SchedulesListPayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollSchedulesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SchedulesListPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -427,7 +465,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollSchedulesListResponse,
+                data: _response.body as NordletApi.SchedulesListPayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -444,6 +482,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -456,6 +499,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -487,37 +535,37 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollCalcRequest} request
+     * @param {NordletApi.CalcPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.calculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry({
-     *         taxableBase: "taxableBase",
-     *         date: "date"
+     *     await client.payroll.calc({
+     *         taxableBase: "121.00",
+     *         date: "2026-07-01"
      *     })
      */
-    public calculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
-        request: NordletApi.PostV1PayrollCalcRequest,
+    public calc(
+        request: NordletApi.CalcPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollCalcResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__calculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.CalcPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__calc(request, requestOptions));
     }
 
-    private async __calculateOneEmployeePaymentUnderTheRulesOfTheCompanyCountry(
-        request: NordletApi.PostV1PayrollCalcRequest,
+    private async __calc(
+        request: NordletApi.CalcPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollCalcResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CalcPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -544,7 +592,7 @@ export class PayrollClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1PayrollCalcResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.CalcPayrollResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -556,6 +604,11 @@ export class PayrollClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -571,6 +624,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -602,35 +660,37 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollRunsCreateRequest} request
+     * @param {NordletApi.RunsCreatePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollRunsCreate({
+     *     await client.payroll.runsCreate({
      *         year: 1000000,
      *         month: 1000000
      *     })
      */
-    public postV1PayrollRunsCreate(
-        request: NordletApi.PostV1PayrollRunsCreateRequest,
+    public runsCreate(
+        request: NordletApi.RunsCreatePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollRunsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollRunsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.RunsCreatePayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__runsCreate(request, requestOptions));
     }
 
-    private async __postV1PayrollRunsCreate(
-        request: NordletApi.PostV1PayrollRunsCreateRequest,
+    private async __runsCreate(
+        request: NordletApi.RunsCreatePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollRunsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.RunsCreatePayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -657,10 +717,7 @@ export class PayrollClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PayrollRunsCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.RunsCreatePayrollResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -672,6 +729,11 @@ export class PayrollClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -687,6 +749,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -718,34 +785,36 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollRunsGetRequest} request
+     * @param {NordletApi.RunsGetPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollRunsGet({
+     *     await client.payroll.runsGet({
      *         id: "id"
      *     })
      */
-    public postV1PayrollRunsGet(
-        request: NordletApi.PostV1PayrollRunsGetRequest,
+    public runsGet(
+        request: NordletApi.RunsGetPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollRunsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollRunsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.RunsGetPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__runsGet(request, requestOptions));
     }
 
-    private async __postV1PayrollRunsGet(
-        request: NordletApi.PostV1PayrollRunsGetRequest,
+    private async __runsGet(
+        request: NordletApi.RunsGetPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollRunsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.RunsGetPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -772,10 +841,7 @@ export class PayrollClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PayrollRunsGetResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.RunsGetPayrollResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -787,6 +853,11 @@ export class PayrollClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -802,6 +873,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -833,32 +909,34 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollRunsListRequest} request
+     * @param {NordletApi.RunsListPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollRunsList()
+     *     await client.payroll.runsList()
      */
-    public postV1PayrollRunsList(
-        request: NordletApi.PostV1PayrollRunsListRequest = {},
+    public runsList(
+        request: NordletApi.RunsListPayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollRunsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollRunsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.RunsListPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__runsList(request, requestOptions));
     }
 
-    private async __postV1PayrollRunsList(
-        request: NordletApi.PostV1PayrollRunsListRequest = {},
+    private async __runsList(
+        request: NordletApi.RunsListPayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollRunsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.RunsListPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -885,10 +963,7 @@ export class PayrollClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PayrollRunsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.RunsListPayrollResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -900,6 +975,11 @@ export class PayrollClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -915,6 +995,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -948,36 +1033,36 @@ export class PayrollClient {
     /**
      * The days and hours worked, the days on the register and the average hourly earnings that some countries report per employment. The Czech monthly employer report asks for all four. They can be set while the run is a draft.
      *
-     * @param {NordletApi.PostV1PayrollLinesAttendanceRequest} request
+     * @param {NordletApi.LinesAttendancePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.recordTheTimeAPersonWorkedInAPayrollLine({
+     *     await client.payroll.linesAttendance({
      *         id: "id"
      *     })
      */
-    public recordTheTimeAPersonWorkedInAPayrollLine(
-        request: NordletApi.PostV1PayrollLinesAttendanceRequest,
+    public linesAttendance(
+        request: NordletApi.LinesAttendancePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollLinesAttendanceResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__recordTheTimeAPersonWorkedInAPayrollLine(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.LinesAttendancePayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__linesAttendance(request, requestOptions));
     }
 
-    private async __recordTheTimeAPersonWorkedInAPayrollLine(
-        request: NordletApi.PostV1PayrollLinesAttendanceRequest,
+    private async __linesAttendance(
+        request: NordletApi.LinesAttendancePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollLinesAttendanceResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LinesAttendancePayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1005,7 +1090,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollLinesAttendanceResponse,
+                data: _response.body as NordletApi.LinesAttendancePayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1022,6 +1107,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1034,6 +1124,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1065,34 +1160,36 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollRunsApproveRequest} request
+     * @param {NordletApi.RunsApprovePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollRunsApprove({
+     *     await client.payroll.runsApprove({
      *         id: "id"
      *     })
      */
-    public postV1PayrollRunsApprove(
-        request: NordletApi.PostV1PayrollRunsApproveRequest,
+    public runsApprove(
+        request: NordletApi.RunsApprovePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollRunsApproveResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollRunsApprove(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.RunsApprovePayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__runsApprove(request, requestOptions));
     }
 
-    private async __postV1PayrollRunsApprove(
-        request: NordletApi.PostV1PayrollRunsApproveRequest,
+    private async __runsApprove(
+        request: NordletApi.RunsApprovePayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollRunsApproveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.RunsApprovePayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1120,7 +1217,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollRunsApproveResponse,
+                data: _response.body as NordletApi.RunsApprovePayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1137,6 +1234,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1149,6 +1251,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1180,34 +1287,36 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollRunsCancelRequest} request
+     * @param {NordletApi.RunsCancelPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollRunsCancel({
+     *     await client.payroll.runsCancel({
      *         id: "id"
      *     })
      */
-    public postV1PayrollRunsCancel(
-        request: NordletApi.PostV1PayrollRunsCancelRequest,
+    public runsCancel(
+        request: NordletApi.RunsCancelPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollRunsCancelResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollRunsCancel(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.RunsCancelPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__runsCancel(request, requestOptions));
     }
 
-    private async __postV1PayrollRunsCancel(
-        request: NordletApi.PostV1PayrollRunsCancelRequest,
+    private async __runsCancel(
+        request: NordletApi.RunsCancelPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollRunsCancelResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.RunsCancelPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1234,10 +1343,7 @@ export class PayrollClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1PayrollRunsCancelResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.RunsCancelPayrollResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1249,6 +1355,11 @@ export class PayrollClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1264,6 +1375,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1295,35 +1411,37 @@ export class PayrollClient {
     }
 
     /**
-     * @param {NordletApi.PostV1PayrollPaymentsExportRequest} request
+     * @param {NordletApi.PaymentsExportPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.postV1PayrollPaymentsExport({
+     *     await client.payroll.paymentsExport({
      *         runId: "runId",
      *         bankAccountId: "bankAccountId"
      *     })
      */
-    public postV1PayrollPaymentsExport(
-        request: NordletApi.PostV1PayrollPaymentsExportRequest,
+    public paymentsExport(
+        request: NordletApi.PaymentsExportPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1PayrollPaymentsExportResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1PayrollPaymentsExport(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PaymentsExportPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__paymentsExport(request, requestOptions));
     }
 
-    private async __postV1PayrollPaymentsExport(
-        request: NordletApi.PostV1PayrollPaymentsExportRequest,
+    private async __paymentsExport(
+        request: NordletApi.PaymentsExportPayrollRequest,
         requestOptions?: PayrollClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1PayrollPaymentsExportResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PaymentsExportPayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1351,7 +1469,7 @@ export class PayrollClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1PayrollPaymentsExportResponse,
+                data: _response.body as NordletApi.PaymentsExportPayrollResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1368,6 +1486,11 @@ export class PayrollClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1380,6 +1503,11 @@ export class PayrollClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

@@ -24,34 +24,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsCreateRequest} request
+     * @param {NordletApi.ItemsCreateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsCreate({
+     *     await client.catalog.itemsCreate({
      *         name: "name"
      *     })
      */
-    public postV1CatalogItemsCreate(
-        request: NordletApi.PostV1CatalogItemsCreateRequest,
+    public itemsCreate(
+        request: NordletApi.ItemsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsCreateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsCreate(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsCreate(
-        request: NordletApi.PostV1CatalogItemsCreateRequest,
+    private async __itemsCreate(
+        request: NordletApi.ItemsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsCreateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -79,7 +81,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsCreateResponse,
+                data: _response.body as NordletApi.ItemsCreateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -96,6 +98,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -108,6 +115,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -139,34 +151,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsGetRequest} request
+     * @param {NordletApi.ItemsGetCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsGet({
+     *     await client.catalog.itemsGet({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemsGet(
-        request: NordletApi.PostV1CatalogItemsGetRequest,
+    public itemsGet(
+        request: NordletApi.ItemsGetCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsGetCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsGet(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsGet(
-        request: NordletApi.PostV1CatalogItemsGetRequest,
+    private async __itemsGet(
+        request: NordletApi.ItemsGetCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsGetCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -193,10 +207,7 @@ export class CatalogClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CatalogItemsGetResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.ItemsGetCatalogResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -208,6 +219,11 @@ export class CatalogClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -223,6 +239,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -254,34 +275,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsUpdateRequest} request
+     * @param {NordletApi.ItemsUpdateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsUpdate({
+     *     await client.catalog.itemsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemsUpdate(
-        request: NordletApi.PostV1CatalogItemsUpdateRequest,
+    public itemsUpdate(
+        request: NordletApi.ItemsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsUpdateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsUpdate(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsUpdate(
-        request: NordletApi.PostV1CatalogItemsUpdateRequest,
+    private async __itemsUpdate(
+        request: NordletApi.ItemsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsUpdateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -309,7 +332,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsUpdateResponse,
+                data: _response.body as NordletApi.ItemsUpdateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -326,6 +349,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -338,6 +366,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -369,34 +402,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsDeleteRequest} request
+     * @param {NordletApi.ItemsDeleteCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsDelete({
+     *     await client.catalog.itemsDelete({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemsDelete(
-        request: NordletApi.PostV1CatalogItemsDeleteRequest,
+    public itemsDelete(
+        request: NordletApi.ItemsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsDeleteCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsDelete(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsDelete(
-        request: NordletApi.PostV1CatalogItemsDeleteRequest,
+    private async __itemsDelete(
+        request: NordletApi.ItemsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsDeleteCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -424,7 +459,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsDeleteResponse,
+                data: _response.body as NordletApi.ItemsDeleteCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -441,6 +476,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -453,6 +493,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -484,32 +529,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsListRequest} request
+     * @param {NordletApi.ItemsListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsList()
+     *     await client.catalog.itemsList()
      */
-    public postV1CatalogItemsList(
-        request: NordletApi.PostV1CatalogItemsListRequest = {},
+    public itemsList(
+        request: NordletApi.ItemsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsList(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsList(
-        request: NordletApi.PostV1CatalogItemsListRequest = {},
+    private async __itemsList(
+        request: NordletApi.ItemsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -536,10 +583,7 @@ export class CatalogClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CatalogItemsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.ItemsListCatalogResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -551,6 +595,11 @@ export class CatalogClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -566,6 +615,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -597,34 +651,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsFilesListRequest} request
+     * @param {NordletApi.ItemsFilesListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsFilesList({
+     *     await client.catalog.itemsFilesList({
      *         itemId: "itemId"
      *     })
      */
-    public postV1CatalogItemsFilesList(
-        request: NordletApi.PostV1CatalogItemsFilesListRequest,
+    public itemsFilesList(
+        request: NordletApi.ItemsFilesListCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsFilesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsFilesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsFilesListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsFilesList(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsFilesList(
-        request: NordletApi.PostV1CatalogItemsFilesListRequest,
+    private async __itemsFilesList(
+        request: NordletApi.ItemsFilesListCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsFilesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsFilesListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -652,7 +708,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsFilesListResponse,
+                data: _response.body as NordletApi.ItemsFilesListCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -669,6 +725,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -681,6 +742,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -712,35 +778,37 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsKindsCreateRequest} request
+     * @param {NordletApi.ItemsKindsCreateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsKindsCreate({
+     *     await client.catalog.itemsKindsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1CatalogItemsKindsCreate(
-        request: NordletApi.PostV1CatalogItemsKindsCreateRequest,
+    public itemsKindsCreate(
+        request: NordletApi.ItemsKindsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsKindsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsKindsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsKindsCreateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsKindsCreate(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsKindsCreate(
-        request: NordletApi.PostV1CatalogItemsKindsCreateRequest,
+    private async __itemsKindsCreate(
+        request: NordletApi.ItemsKindsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsKindsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsKindsCreateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -768,7 +836,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsKindsCreateResponse,
+                data: _response.body as NordletApi.ItemsKindsCreateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -785,6 +853,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -797,6 +870,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -833,34 +911,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsKindsUpdateRequest} request
+     * @param {NordletApi.ItemsKindsUpdateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsKindsUpdate({
+     *     await client.catalog.itemsKindsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemsKindsUpdate(
-        request: NordletApi.PostV1CatalogItemsKindsUpdateRequest,
+    public itemsKindsUpdate(
+        request: NordletApi.ItemsKindsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsKindsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsKindsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsKindsUpdateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsKindsUpdate(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsKindsUpdate(
-        request: NordletApi.PostV1CatalogItemsKindsUpdateRequest,
+    private async __itemsKindsUpdate(
+        request: NordletApi.ItemsKindsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsKindsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsKindsUpdateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -888,7 +968,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsKindsUpdateResponse,
+                data: _response.body as NordletApi.ItemsKindsUpdateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -905,6 +985,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -917,6 +1002,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -953,34 +1043,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsKindsDeleteRequest} request
+     * @param {NordletApi.ItemsKindsDeleteCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsKindsDelete({
+     *     await client.catalog.itemsKindsDelete({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemsKindsDelete(
-        request: NordletApi.PostV1CatalogItemsKindsDeleteRequest,
+    public itemsKindsDelete(
+        request: NordletApi.ItemsKindsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsKindsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsKindsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsKindsDeleteCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsKindsDelete(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsKindsDelete(
-        request: NordletApi.PostV1CatalogItemsKindsDeleteRequest,
+    private async __itemsKindsDelete(
+        request: NordletApi.ItemsKindsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsKindsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsKindsDeleteCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1008,7 +1100,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsKindsDeleteResponse,
+                data: _response.body as NordletApi.ItemsKindsDeleteCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1025,6 +1117,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1037,6 +1134,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1073,32 +1175,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsKindsListRequest} request
+     * @param {NordletApi.ItemsKindsListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsKindsList()
+     *     await client.catalog.itemsKindsList()
      */
-    public postV1CatalogItemsKindsList(
-        request: NordletApi.PostV1CatalogItemsKindsListRequest = {},
+    public itemsKindsList(
+        request: NordletApi.ItemsKindsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsKindsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsKindsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsKindsListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsKindsList(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsKindsList(
-        request: NordletApi.PostV1CatalogItemsKindsListRequest = {},
+    private async __itemsKindsList(
+        request: NordletApi.ItemsKindsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsKindsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsKindsListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1126,7 +1230,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsKindsListResponse,
+                data: _response.body as NordletApi.ItemsKindsListCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1143,6 +1247,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1155,6 +1264,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1186,35 +1300,37 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogUnitsCreateRequest} request
+     * @param {NordletApi.UnitsCreateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogUnitsCreate({
+     *     await client.catalog.unitsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1CatalogUnitsCreate(
-        request: NordletApi.PostV1CatalogUnitsCreateRequest,
+    public unitsCreate(
+        request: NordletApi.UnitsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogUnitsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogUnitsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UnitsCreateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__unitsCreate(request, requestOptions));
     }
 
-    private async __postV1CatalogUnitsCreate(
-        request: NordletApi.PostV1CatalogUnitsCreateRequest,
+    private async __unitsCreate(
+        request: NordletApi.UnitsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogUnitsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UnitsCreateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1242,7 +1358,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogUnitsCreateResponse,
+                data: _response.body as NordletApi.UnitsCreateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1259,6 +1375,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1271,6 +1392,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1302,34 +1428,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogUnitsUpdateRequest} request
+     * @param {NordletApi.UnitsUpdateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogUnitsUpdate({
+     *     await client.catalog.unitsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1CatalogUnitsUpdate(
-        request: NordletApi.PostV1CatalogUnitsUpdateRequest,
+    public unitsUpdate(
+        request: NordletApi.UnitsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogUnitsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogUnitsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UnitsUpdateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__unitsUpdate(request, requestOptions));
     }
 
-    private async __postV1CatalogUnitsUpdate(
-        request: NordletApi.PostV1CatalogUnitsUpdateRequest,
+    private async __unitsUpdate(
+        request: NordletApi.UnitsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogUnitsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UnitsUpdateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1357,7 +1485,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogUnitsUpdateResponse,
+                data: _response.body as NordletApi.UnitsUpdateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1374,6 +1502,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1386,6 +1519,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1417,34 +1555,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogUnitsDeleteRequest} request
+     * @param {NordletApi.UnitsDeleteCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogUnitsDelete({
+     *     await client.catalog.unitsDelete({
      *         id: "id"
      *     })
      */
-    public postV1CatalogUnitsDelete(
-        request: NordletApi.PostV1CatalogUnitsDeleteRequest,
+    public unitsDelete(
+        request: NordletApi.UnitsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogUnitsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogUnitsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UnitsDeleteCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__unitsDelete(request, requestOptions));
     }
 
-    private async __postV1CatalogUnitsDelete(
-        request: NordletApi.PostV1CatalogUnitsDeleteRequest,
+    private async __unitsDelete(
+        request: NordletApi.UnitsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogUnitsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UnitsDeleteCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1472,7 +1612,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogUnitsDeleteResponse,
+                data: _response.body as NordletApi.UnitsDeleteCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1489,6 +1629,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1501,6 +1646,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1532,32 +1682,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogUnitsListRequest} request
+     * @param {NordletApi.UnitsListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogUnitsList()
+     *     await client.catalog.unitsList()
      */
-    public postV1CatalogUnitsList(
-        request: NordletApi.PostV1CatalogUnitsListRequest = {},
+    public unitsList(
+        request: NordletApi.UnitsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogUnitsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogUnitsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UnitsListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__unitsList(request, requestOptions));
     }
 
-    private async __postV1CatalogUnitsList(
-        request: NordletApi.PostV1CatalogUnitsListRequest = {},
+    private async __unitsList(
+        request: NordletApi.UnitsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogUnitsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UnitsListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1584,10 +1736,7 @@ export class CatalogClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CatalogUnitsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.UnitsListCatalogResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1599,6 +1748,11 @@ export class CatalogClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1614,6 +1768,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1645,32 +1804,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogUnitsOptionsRequest} request
+     * @param {NordletApi.UnitsOptionsCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogUnitsOptions()
+     *     await client.catalog.unitsOptions()
      */
-    public postV1CatalogUnitsOptions(
-        request: NordletApi.PostV1CatalogUnitsOptionsRequest = {},
+    public unitsOptions(
+        request: NordletApi.UnitsOptionsCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogUnitsOptionsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogUnitsOptions(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UnitsOptionsCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__unitsOptions(request, requestOptions));
     }
 
-    private async __postV1CatalogUnitsOptions(
-        request: NordletApi.PostV1CatalogUnitsOptionsRequest = {},
+    private async __unitsOptions(
+        request: NordletApi.UnitsOptionsCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogUnitsOptionsResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UnitsOptionsCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1698,7 +1859,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogUnitsOptionsResponse,
+                data: _response.body as NordletApi.UnitsOptionsCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1715,6 +1876,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1727,6 +1893,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1758,35 +1929,37 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemGroupsCreateRequest} request
+     * @param {NordletApi.ItemGroupsCreateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemGroupsCreate({
+     *     await client.catalog.itemGroupsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1CatalogItemGroupsCreate(
-        request: NordletApi.PostV1CatalogItemGroupsCreateRequest,
+    public itemGroupsCreate(
+        request: NordletApi.ItemGroupsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemGroupsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemGroupsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemGroupsCreateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemGroupsCreate(request, requestOptions));
     }
 
-    private async __postV1CatalogItemGroupsCreate(
-        request: NordletApi.PostV1CatalogItemGroupsCreateRequest,
+    private async __itemGroupsCreate(
+        request: NordletApi.ItemGroupsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemGroupsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemGroupsCreateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1814,7 +1987,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemGroupsCreateResponse,
+                data: _response.body as NordletApi.ItemGroupsCreateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1831,6 +2004,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1843,6 +2021,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1879,34 +2062,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemGroupsUpdateRequest} request
+     * @param {NordletApi.ItemGroupsUpdateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemGroupsUpdate({
+     *     await client.catalog.itemGroupsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemGroupsUpdate(
-        request: NordletApi.PostV1CatalogItemGroupsUpdateRequest,
+    public itemGroupsUpdate(
+        request: NordletApi.ItemGroupsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemGroupsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemGroupsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemGroupsUpdateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemGroupsUpdate(request, requestOptions));
     }
 
-    private async __postV1CatalogItemGroupsUpdate(
-        request: NordletApi.PostV1CatalogItemGroupsUpdateRequest,
+    private async __itemGroupsUpdate(
+        request: NordletApi.ItemGroupsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemGroupsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemGroupsUpdateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1934,7 +2119,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemGroupsUpdateResponse,
+                data: _response.body as NordletApi.ItemGroupsUpdateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1951,6 +2136,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1963,6 +2153,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1999,34 +2194,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemGroupsDeleteRequest} request
+     * @param {NordletApi.ItemGroupsDeleteCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemGroupsDelete({
+     *     await client.catalog.itemGroupsDelete({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemGroupsDelete(
-        request: NordletApi.PostV1CatalogItemGroupsDeleteRequest,
+    public itemGroupsDelete(
+        request: NordletApi.ItemGroupsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemGroupsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemGroupsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemGroupsDeleteCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemGroupsDelete(request, requestOptions));
     }
 
-    private async __postV1CatalogItemGroupsDelete(
-        request: NordletApi.PostV1CatalogItemGroupsDeleteRequest,
+    private async __itemGroupsDelete(
+        request: NordletApi.ItemGroupsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemGroupsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemGroupsDeleteCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2054,7 +2251,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemGroupsDeleteResponse,
+                data: _response.body as NordletApi.ItemGroupsDeleteCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2071,6 +2268,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2083,6 +2285,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2119,32 +2326,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemGroupsListRequest} request
+     * @param {NordletApi.ItemGroupsListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemGroupsList()
+     *     await client.catalog.itemGroupsList()
      */
-    public postV1CatalogItemGroupsList(
-        request: NordletApi.PostV1CatalogItemGroupsListRequest = {},
+    public itemGroupsList(
+        request: NordletApi.ItemGroupsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemGroupsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemGroupsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemGroupsListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemGroupsList(request, requestOptions));
     }
 
-    private async __postV1CatalogItemGroupsList(
-        request: NordletApi.PostV1CatalogItemGroupsListRequest = {},
+    private async __itemGroupsList(
+        request: NordletApi.ItemGroupsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemGroupsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemGroupsListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2172,7 +2381,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemGroupsListResponse,
+                data: _response.body as NordletApi.ItemGroupsListCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2189,6 +2398,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2201,6 +2415,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2232,35 +2451,37 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsSuppliersUpsertRequest} request
+     * @param {NordletApi.ItemsSuppliersUpsertCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsSuppliersUpsert({
+     *     await client.catalog.itemsSuppliersUpsert({
      *         itemId: "itemId",
      *         partnerId: "partnerId"
      *     })
      */
-    public postV1CatalogItemsSuppliersUpsert(
-        request: NordletApi.PostV1CatalogItemsSuppliersUpsertRequest,
+    public itemsSuppliersUpsert(
+        request: NordletApi.ItemsSuppliersUpsertCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsSuppliersUpsertResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsSuppliersUpsert(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsSuppliersUpsertCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsSuppliersUpsert(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsSuppliersUpsert(
-        request: NordletApi.PostV1CatalogItemsSuppliersUpsertRequest,
+    private async __itemsSuppliersUpsert(
+        request: NordletApi.ItemsSuppliersUpsertCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsSuppliersUpsertResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsSuppliersUpsertCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2288,7 +2509,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsSuppliersUpsertResponse,
+                data: _response.body as NordletApi.ItemsSuppliersUpsertCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2305,6 +2526,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2317,6 +2543,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2353,32 +2584,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsSuppliersListRequest} request
+     * @param {NordletApi.ItemsSuppliersListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsSuppliersList()
+     *     await client.catalog.itemsSuppliersList()
      */
-    public postV1CatalogItemsSuppliersList(
-        request: NordletApi.PostV1CatalogItemsSuppliersListRequest = {},
+    public itemsSuppliersList(
+        request: NordletApi.ItemsSuppliersListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsSuppliersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsSuppliersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsSuppliersListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsSuppliersList(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsSuppliersList(
-        request: NordletApi.PostV1CatalogItemsSuppliersListRequest = {},
+    private async __itemsSuppliersList(
+        request: NordletApi.ItemsSuppliersListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsSuppliersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsSuppliersListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2406,7 +2639,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsSuppliersListResponse,
+                data: _response.body as NordletApi.ItemsSuppliersListCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2423,6 +2656,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2435,6 +2673,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2471,34 +2714,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogItemsSuppliersDeleteRequest} request
+     * @param {NordletApi.ItemsSuppliersDeleteCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogItemsSuppliersDelete({
+     *     await client.catalog.itemsSuppliersDelete({
      *         id: "id"
      *     })
      */
-    public postV1CatalogItemsSuppliersDelete(
-        request: NordletApi.PostV1CatalogItemsSuppliersDeleteRequest,
+    public itemsSuppliersDelete(
+        request: NordletApi.ItemsSuppliersDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogItemsSuppliersDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogItemsSuppliersDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ItemsSuppliersDeleteCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__itemsSuppliersDelete(request, requestOptions));
     }
 
-    private async __postV1CatalogItemsSuppliersDelete(
-        request: NordletApi.PostV1CatalogItemsSuppliersDeleteRequest,
+    private async __itemsSuppliersDelete(
+        request: NordletApi.ItemsSuppliersDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogItemsSuppliersDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ItemsSuppliersDeleteCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2526,7 +2771,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogItemsSuppliersDeleteResponse,
+                data: _response.body as NordletApi.ItemsSuppliersDeleteCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2543,6 +2788,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2555,6 +2805,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2591,35 +2846,37 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogPriceListsCreateRequest} request
+     * @param {NordletApi.PriceListsCreateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogPriceListsCreate({
+     *     await client.catalog.priceListsCreate({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1CatalogPriceListsCreate(
-        request: NordletApi.PostV1CatalogPriceListsCreateRequest,
+    public priceListsCreate(
+        request: NordletApi.PriceListsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogPriceListsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogPriceListsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PriceListsCreateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__priceListsCreate(request, requestOptions));
     }
 
-    private async __postV1CatalogPriceListsCreate(
-        request: NordletApi.PostV1CatalogPriceListsCreateRequest,
+    private async __priceListsCreate(
+        request: NordletApi.PriceListsCreateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogPriceListsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PriceListsCreateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2647,7 +2904,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogPriceListsCreateResponse,
+                data: _response.body as NordletApi.PriceListsCreateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2664,6 +2921,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2676,6 +2938,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2712,34 +2979,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogPriceListsUpdateRequest} request
+     * @param {NordletApi.PriceListsUpdateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogPriceListsUpdate({
+     *     await client.catalog.priceListsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1CatalogPriceListsUpdate(
-        request: NordletApi.PostV1CatalogPriceListsUpdateRequest,
+    public priceListsUpdate(
+        request: NordletApi.PriceListsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogPriceListsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogPriceListsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PriceListsUpdateCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__priceListsUpdate(request, requestOptions));
     }
 
-    private async __postV1CatalogPriceListsUpdate(
-        request: NordletApi.PostV1CatalogPriceListsUpdateRequest,
+    private async __priceListsUpdate(
+        request: NordletApi.PriceListsUpdateCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogPriceListsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PriceListsUpdateCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2767,7 +3036,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogPriceListsUpdateResponse,
+                data: _response.body as NordletApi.PriceListsUpdateCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2784,6 +3053,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2796,6 +3070,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2832,32 +3111,34 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogPriceListsListRequest} request
+     * @param {NordletApi.PriceListsListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogPriceListsList()
+     *     await client.catalog.priceListsList()
      */
-    public postV1CatalogPriceListsList(
-        request: NordletApi.PostV1CatalogPriceListsListRequest = {},
+    public priceListsList(
+        request: NordletApi.PriceListsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogPriceListsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogPriceListsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PriceListsListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__priceListsList(request, requestOptions));
     }
 
-    private async __postV1CatalogPriceListsList(
-        request: NordletApi.PostV1CatalogPriceListsListRequest = {},
+    private async __priceListsList(
+        request: NordletApi.PriceListsListCatalogRequest = {},
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogPriceListsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PriceListsListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2885,7 +3166,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogPriceListsListResponse,
+                data: _response.body as NordletApi.PriceListsListCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2902,6 +3183,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2914,6 +3200,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2945,38 +3236,40 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogPriceListsItemsSetRequest} request
+     * @param {NordletApi.PriceListsItemsSetCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogPriceListsItemsSet({
+     *     await client.catalog.priceListsItemsSet({
      *         priceListId: "priceListId",
      *         items: [{
      *                 itemId: "itemId",
-     *                 unitPriceExclVat: "unitPriceExclVat"
+     *                 unitPriceExclVat: "121.0000"
      *             }]
      *     })
      */
-    public postV1CatalogPriceListsItemsSet(
-        request: NordletApi.PostV1CatalogPriceListsItemsSetRequest,
+    public priceListsItemsSet(
+        request: NordletApi.PriceListsItemsSetCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogPriceListsItemsSetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogPriceListsItemsSet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PriceListsItemsSetCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__priceListsItemsSet(request, requestOptions));
     }
 
-    private async __postV1CatalogPriceListsItemsSet(
-        request: NordletApi.PostV1CatalogPriceListsItemsSetRequest,
+    private async __priceListsItemsSet(
+        request: NordletApi.PriceListsItemsSetCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogPriceListsItemsSetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PriceListsItemsSetCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3004,7 +3297,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogPriceListsItemsSetResponse,
+                data: _response.body as NordletApi.PriceListsItemsSetCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3021,6 +3314,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3033,6 +3331,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3069,34 +3372,36 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogPriceListsItemsListRequest} request
+     * @param {NordletApi.PriceListsItemsListCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogPriceListsItemsList({
+     *     await client.catalog.priceListsItemsList({
      *         priceListId: "priceListId"
      *     })
      */
-    public postV1CatalogPriceListsItemsList(
-        request: NordletApi.PostV1CatalogPriceListsItemsListRequest,
+    public priceListsItemsList(
+        request: NordletApi.PriceListsItemsListCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogPriceListsItemsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogPriceListsItemsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PriceListsItemsListCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__priceListsItemsList(request, requestOptions));
     }
 
-    private async __postV1CatalogPriceListsItemsList(
-        request: NordletApi.PostV1CatalogPriceListsItemsListRequest,
+    private async __priceListsItemsList(
+        request: NordletApi.PriceListsItemsListCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogPriceListsItemsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PriceListsItemsListCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3124,7 +3429,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogPriceListsItemsListResponse,
+                data: _response.body as NordletApi.PriceListsItemsListCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3141,6 +3446,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3153,6 +3463,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -3189,35 +3504,37 @@ export class CatalogClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CatalogPriceListsItemsDeleteRequest} request
+     * @param {NordletApi.PriceListsItemsDeleteCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.catalog.postV1CatalogPriceListsItemsDelete({
+     *     await client.catalog.priceListsItemsDelete({
      *         priceListId: "priceListId",
      *         itemId: "itemId"
      *     })
      */
-    public postV1CatalogPriceListsItemsDelete(
-        request: NordletApi.PostV1CatalogPriceListsItemsDeleteRequest,
+    public priceListsItemsDelete(
+        request: NordletApi.PriceListsItemsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CatalogPriceListsItemsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CatalogPriceListsItemsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.PriceListsItemsDeleteCatalogResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__priceListsItemsDelete(request, requestOptions));
     }
 
-    private async __postV1CatalogPriceListsItemsDelete(
-        request: NordletApi.PostV1CatalogPriceListsItemsDeleteRequest,
+    private async __priceListsItemsDelete(
+        request: NordletApi.PriceListsItemsDeleteCatalogRequest,
         requestOptions?: CatalogClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CatalogPriceListsItemsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.PriceListsItemsDeleteCatalogResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -3245,7 +3562,7 @@ export class CatalogClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1CatalogPriceListsItemsDeleteResponse,
+                data: _response.body as NordletApi.PriceListsItemsDeleteCatalogResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -3262,6 +3579,11 @@ export class CatalogClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -3274,6 +3596,11 @@ export class CatalogClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

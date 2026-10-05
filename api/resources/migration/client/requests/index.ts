@@ -1,2 +1,2 @@
-export { PostV1MigrationBooksImportRequest } from "./PostV1MigrationBooksImportRequest.js";
-export { PostV1MigrationBooksValidateRequest } from "./PostV1MigrationBooksValidateRequest.js";
+export { BooksImportMigrationRequest } from "./BooksImportMigrationRequest.js";
+export { BooksValidateMigrationRequest } from "./BooksValidateMigrationRequest.js";

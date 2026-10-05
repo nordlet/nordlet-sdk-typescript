@@ -1,6 +1,6 @@
-export { PostV1WebhooksDeliveriesListRequest } from "./PostV1WebhooksDeliveriesListRequest.js";
-export type { PostV1WebhooksDeliveriesRedeliverRequest } from "./PostV1WebhooksDeliveriesRedeliverRequest.js";
-export type { PostV1WebhooksSubscriptionsCreateRequest } from "./PostV1WebhooksSubscriptionsCreateRequest.js";
-export type { PostV1WebhooksSubscriptionsDeleteRequest } from "./PostV1WebhooksSubscriptionsDeleteRequest.js";
-export { PostV1WebhooksSubscriptionsListRequest } from "./PostV1WebhooksSubscriptionsListRequest.js";
-export type { PostV1WebhooksSubscriptionsUpdateRequest } from "./PostV1WebhooksSubscriptionsUpdateRequest.js";
+export { DeliveriesListWebhooksRequest } from "./DeliveriesListWebhooksRequest.js";
+export type { DeliveriesRedeliverWebhooksRequest } from "./DeliveriesRedeliverWebhooksRequest.js";
+export { SubscriptionsCreateWebhooksRequest } from "./SubscriptionsCreateWebhooksRequest.js";
+export type { SubscriptionsDeleteWebhooksRequest } from "./SubscriptionsDeleteWebhooksRequest.js";
+export { SubscriptionsListWebhooksRequest } from "./SubscriptionsListWebhooksRequest.js";
+export { SubscriptionsUpdateWebhooksRequest } from "./SubscriptionsUpdateWebhooksRequest.js";

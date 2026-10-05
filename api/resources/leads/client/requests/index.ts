@@ -1,0 +1,15 @@
+export { ConvertLeadsRequest } from "./ConvertLeadsRequest.js";
+export { CreateLeadsRequest } from "./CreateLeadsRequest.js";
+export type { DeleteLeadsRequest } from "./DeleteLeadsRequest.js";
+export type { FilesListLeadsRequest } from "./FilesListLeadsRequest.js";
+export type { GetLeadsRequest } from "./GetLeadsRequest.js";
+export { ListLeadsRequest } from "./ListLeadsRequest.js";
+export type { NotesCreateLeadsRequest } from "./NotesCreateLeadsRequest.js";
+export type { NotesDeleteLeadsRequest } from "./NotesDeleteLeadsRequest.js";
+export type { NotesListLeadsRequest } from "./NotesListLeadsRequest.js";
+export type { SourcesCreateLeadsRequest } from "./SourcesCreateLeadsRequest.js";
+export type { SourcesDeleteLeadsRequest } from "./SourcesDeleteLeadsRequest.js";
+export type { SourcesListLeadsRequest } from "./SourcesListLeadsRequest.js";
+export type { SourcesOptionsLeadsRequest } from "./SourcesOptionsLeadsRequest.js";
+export type { SourcesUpdateLeadsRequest } from "./SourcesUpdateLeadsRequest.js";
+export { UpdateLeadsRequest } from "./UpdateLeadsRequest.js";

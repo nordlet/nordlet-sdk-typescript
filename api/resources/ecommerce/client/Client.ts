@@ -24,38 +24,40 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceOrdersCreateRequest} request
+     * @param {NordletApi.OrdersCreateEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceOrdersCreate({
+     *     await client.ecommerce.ordersCreate({
      *         lines: [{
      *                 description: "description",
-     *                 quantity: "quantity",
-     *                 unitPriceExclVat: "unitPriceExclVat"
+     *                 quantity: "121.0000",
+     *                 unitPriceExclVat: "121.0000"
      *             }]
      *     })
      */
-    public postV1EcommerceOrdersCreate(
-        request: NordletApi.PostV1EcommerceOrdersCreateRequest,
+    public ordersCreate(
+        request: NordletApi.OrdersCreateEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceOrdersCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceOrdersCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersCreateEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersCreate(request, requestOptions));
     }
 
-    private async __postV1EcommerceOrdersCreate(
-        request: NordletApi.PostV1EcommerceOrdersCreateRequest,
+    private async __ordersCreate(
+        request: NordletApi.OrdersCreateEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceOrdersCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersCreateEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -83,7 +85,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceOrdersCreateResponse,
+                data: _response.body as NordletApi.OrdersCreateEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -100,6 +102,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -112,6 +119,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -143,34 +155,36 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceOrdersGetRequest} request
+     * @param {NordletApi.OrdersGetEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceOrdersGet({
+     *     await client.ecommerce.ordersGet({
      *         id: "id"
      *     })
      */
-    public postV1EcommerceOrdersGet(
-        request: NordletApi.PostV1EcommerceOrdersGetRequest,
+    public ordersGet(
+        request: NordletApi.OrdersGetEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceOrdersGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceOrdersGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersGetEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersGet(request, requestOptions));
     }
 
-    private async __postV1EcommerceOrdersGet(
-        request: NordletApi.PostV1EcommerceOrdersGetRequest,
+    private async __ordersGet(
+        request: NordletApi.OrdersGetEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceOrdersGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersGetEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -198,7 +212,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceOrdersGetResponse,
+                data: _response.body as NordletApi.OrdersGetEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -215,6 +229,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -227,6 +246,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -258,32 +282,34 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceOrdersListRequest} request
+     * @param {NordletApi.OrdersListEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceOrdersList()
+     *     await client.ecommerce.ordersList()
      */
-    public postV1EcommerceOrdersList(
-        request: NordletApi.PostV1EcommerceOrdersListRequest = {},
+    public ordersList(
+        request: NordletApi.OrdersListEcommerceRequest = {},
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceOrdersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceOrdersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersListEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersList(request, requestOptions));
     }
 
-    private async __postV1EcommerceOrdersList(
-        request: NordletApi.PostV1EcommerceOrdersListRequest = {},
+    private async __ordersList(
+        request: NordletApi.OrdersListEcommerceRequest = {},
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceOrdersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersListEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -311,7 +337,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceOrdersListResponse,
+                data: _response.body as NordletApi.OrdersListEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -328,6 +354,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -340,6 +371,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -371,34 +407,36 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceOrdersReserveRequest} request
+     * @param {NordletApi.OrdersReserveEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceOrdersReserve({
+     *     await client.ecommerce.ordersReserve({
      *         id: "id"
      *     })
      */
-    public postV1EcommerceOrdersReserve(
-        request: NordletApi.PostV1EcommerceOrdersReserveRequest,
+    public ordersReserve(
+        request: NordletApi.OrdersReserveEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceOrdersReserveResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceOrdersReserve(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersReserveEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersReserve(request, requestOptions));
     }
 
-    private async __postV1EcommerceOrdersReserve(
-        request: NordletApi.PostV1EcommerceOrdersReserveRequest,
+    private async __ordersReserve(
+        request: NordletApi.OrdersReserveEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceOrdersReserveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersReserveEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -426,7 +464,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceOrdersReserveResponse,
+                data: _response.body as NordletApi.OrdersReserveEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -443,6 +481,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -455,6 +498,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -486,34 +534,36 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceOrdersFulfillRequest} request
+     * @param {NordletApi.OrdersFulfillEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceOrdersFulfill({
+     *     await client.ecommerce.ordersFulfill({
      *         id: "id"
      *     })
      */
-    public postV1EcommerceOrdersFulfill(
-        request: NordletApi.PostV1EcommerceOrdersFulfillRequest,
+    public ordersFulfill(
+        request: NordletApi.OrdersFulfillEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceOrdersFulfillResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceOrdersFulfill(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersFulfillEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersFulfill(request, requestOptions));
     }
 
-    private async __postV1EcommerceOrdersFulfill(
-        request: NordletApi.PostV1EcommerceOrdersFulfillRequest,
+    private async __ordersFulfill(
+        request: NordletApi.OrdersFulfillEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceOrdersFulfillResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersFulfillEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -541,7 +591,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceOrdersFulfillResponse,
+                data: _response.body as NordletApi.OrdersFulfillEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -558,6 +608,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -570,6 +625,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -601,34 +661,36 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceOrdersCancelRequest} request
+     * @param {NordletApi.OrdersCancelEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceOrdersCancel({
+     *     await client.ecommerce.ordersCancel({
      *         id: "id"
      *     })
      */
-    public postV1EcommerceOrdersCancel(
-        request: NordletApi.PostV1EcommerceOrdersCancelRequest,
+    public ordersCancel(
+        request: NordletApi.OrdersCancelEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceOrdersCancelResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceOrdersCancel(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.OrdersCancelEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ordersCancel(request, requestOptions));
     }
 
-    private async __postV1EcommerceOrdersCancel(
-        request: NordletApi.PostV1EcommerceOrdersCancelRequest,
+    private async __ordersCancel(
+        request: NordletApi.OrdersCancelEcommerceRequest,
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceOrdersCancelResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.OrdersCancelEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -656,7 +718,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceOrdersCancelResponse,
+                data: _response.body as NordletApi.OrdersCancelEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -673,6 +735,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -685,6 +752,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -716,32 +788,34 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceProductsListRequest} request
+     * @param {NordletApi.ProductsListEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceProductsList()
+     *     await client.ecommerce.productsList()
      */
-    public postV1EcommerceProductsList(
-        request: NordletApi.PostV1EcommerceProductsListRequest = {},
+    public productsList(
+        request: NordletApi.ProductsListEcommerceRequest = {},
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceProductsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceProductsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ProductsListEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__productsList(request, requestOptions));
     }
 
-    private async __postV1EcommerceProductsList(
-        request: NordletApi.PostV1EcommerceProductsListRequest = {},
+    private async __productsList(
+        request: NordletApi.ProductsListEcommerceRequest = {},
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceProductsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ProductsListEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -769,7 +843,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceProductsListResponse,
+                data: _response.body as NordletApi.ProductsListEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -786,6 +860,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -798,6 +877,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -829,32 +913,34 @@ export class EcommerceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1EcommerceStockListRequest} request
+     * @param {NordletApi.StockListEcommerceRequest} request
      * @param {EcommerceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.ecommerce.postV1EcommerceStockList()
+     *     await client.ecommerce.stockList()
      */
-    public postV1EcommerceStockList(
-        request: NordletApi.PostV1EcommerceStockListRequest = {},
+    public stockList(
+        request: NordletApi.StockListEcommerceRequest = {},
         requestOptions?: EcommerceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1EcommerceStockListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1EcommerceStockList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.StockListEcommerceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__stockList(request, requestOptions));
     }
 
-    private async __postV1EcommerceStockList(
-        request: NordletApi.PostV1EcommerceStockListRequest = {},
+    private async __stockList(
+        request: NordletApi.StockListEcommerceRequest = {},
         requestOptions?: EcommerceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1EcommerceStockListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.StockListEcommerceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -882,7 +968,7 @@ export class EcommerceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1EcommerceStockListResponse,
+                data: _response.body as NordletApi.StockListEcommerceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -899,6 +985,11 @@ export class EcommerceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -911,6 +1002,11 @@ export class EcommerceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

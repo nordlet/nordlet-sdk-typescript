@@ -24,37 +24,39 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsGroupsCreateRequest} request
+     * @param {NordletApi.GroupsCreateAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsGroupsCreate({
+     *     await client.assets.groupsCreate({
      *         code: "code",
      *         name: "name",
      *         assetAccountCode: "assetAccountCode",
      *         depreciationAccountCode: "depreciationAccountCode"
      *     })
      */
-    public postV1AssetsGroupsCreate(
-        request: NordletApi.PostV1AssetsGroupsCreateRequest,
+    public groupsCreate(
+        request: NordletApi.GroupsCreateAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsGroupsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsGroupsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsCreateAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsCreate(request, requestOptions));
     }
 
-    private async __postV1AssetsGroupsCreate(
-        request: NordletApi.PostV1AssetsGroupsCreateRequest,
+    private async __groupsCreate(
+        request: NordletApi.GroupsCreateAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsGroupsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsCreateAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -82,7 +84,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsGroupsCreateResponse,
+                data: _response.body as NordletApi.GroupsCreateAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -99,6 +101,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -111,6 +118,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -142,32 +154,34 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsGroupsListRequest} request
+     * @param {NordletApi.GroupsListAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsGroupsList()
+     *     await client.assets.groupsList()
      */
-    public postV1AssetsGroupsList(
-        request: NordletApi.PostV1AssetsGroupsListRequest = {},
+    public groupsList(
+        request: NordletApi.GroupsListAssetsRequest = {},
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsGroupsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsGroupsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsListAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsList(request, requestOptions));
     }
 
-    private async __postV1AssetsGroupsList(
-        request: NordletApi.PostV1AssetsGroupsListRequest = {},
+    private async __groupsList(
+        request: NordletApi.GroupsListAssetsRequest = {},
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsGroupsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsListAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -194,10 +208,7 @@ export class AssetsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1AssetsGroupsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.GroupsListAssetsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -209,6 +220,11 @@ export class AssetsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -224,6 +240,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -255,38 +276,40 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsAssetsCreateRequest} request
+     * @param {NordletApi.AssetsCreateAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsAssetsCreate({
+     *     await client.assets.assetsCreate({
      *         groupId: "groupId",
      *         code: "code",
      *         name: "name",
-     *         acquisitionDate: "acquisitionDate",
-     *         acquisitionCost: "acquisitionCost"
+     *         acquisitionDate: "2026-07-01",
+     *         acquisitionCost: "121.0000"
      *     })
      */
-    public postV1AssetsAssetsCreate(
-        request: NordletApi.PostV1AssetsAssetsCreateRequest,
+    public assetsCreate(
+        request: NordletApi.AssetsCreateAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsAssetsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsAssetsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssetsCreateAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsCreate(request, requestOptions));
     }
 
-    private async __postV1AssetsAssetsCreate(
-        request: NordletApi.PostV1AssetsAssetsCreateRequest,
+    private async __assetsCreate(
+        request: NordletApi.AssetsCreateAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsAssetsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssetsCreateAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -314,7 +337,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsAssetsCreateResponse,
+                data: _response.body as NordletApi.AssetsCreateAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -331,6 +354,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -343,6 +371,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -374,34 +407,36 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsAssetsUpdateRequest} request
+     * @param {NordletApi.AssetsUpdateAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsAssetsUpdate({
+     *     await client.assets.assetsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1AssetsAssetsUpdate(
-        request: NordletApi.PostV1AssetsAssetsUpdateRequest,
+    public assetsUpdate(
+        request: NordletApi.AssetsUpdateAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsAssetsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsAssetsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssetsUpdateAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsUpdate(request, requestOptions));
     }
 
-    private async __postV1AssetsAssetsUpdate(
-        request: NordletApi.PostV1AssetsAssetsUpdateRequest,
+    private async __assetsUpdate(
+        request: NordletApi.AssetsUpdateAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsAssetsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssetsUpdateAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -429,7 +464,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsAssetsUpdateResponse,
+                data: _response.body as NordletApi.AssetsUpdateAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -446,6 +481,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -458,6 +498,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -491,40 +536,42 @@ export class AssetsClient {
     /**
      * Record the input VAT facts of a capital good that the annual VAT return needs for the adjustment of the deduction over the adjustment period (Article 187 of the VAT Directive, § 15a UStG): the input VAT on the acquisition, the date of first use, the share of use for deductible turnover at first use, whether it is land or a building (ten-year period instead of five), and every later year in which the share changed or the good was sold or withdrawn. Allowed also after depreciation has been posted.
      *
-     * @param {NordletApi.PostV1AssetsAssetsInputVatRequest} request
+     * @param {NordletApi.AssetsInputVatAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsAssetsInputVat({
+     *     await client.assets.assetsInputVat({
      *         id: "id",
      *         inputVatRealEstate: true,
      *         inputVatUseChanges: [{
      *                 year: 1000000,
-     *                 percent: "percent",
+     *                 percent: "121.00",
      *                 reason: "use_change"
      *             }]
      *     })
      */
-    public postV1AssetsAssetsInputVat(
-        request: NordletApi.PostV1AssetsAssetsInputVatRequest,
+    public assetsInputVat(
+        request: NordletApi.AssetsInputVatAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsAssetsInputVatResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsAssetsInputVat(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssetsInputVatAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsInputVat(request, requestOptions));
     }
 
-    private async __postV1AssetsAssetsInputVat(
-        request: NordletApi.PostV1AssetsAssetsInputVatRequest,
+    private async __assetsInputVat(
+        request: NordletApi.AssetsInputVatAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsAssetsInputVatResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssetsInputVatAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -552,7 +599,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsAssetsInputVatResponse,
+                data: _response.body as NordletApi.AssetsInputVatAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -569,6 +616,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -581,6 +633,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -612,34 +669,36 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsAssetsGetRequest} request
+     * @param {NordletApi.AssetsGetAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsAssetsGet({
+     *     await client.assets.assetsGet({
      *         id: "id"
      *     })
      */
-    public postV1AssetsAssetsGet(
-        request: NordletApi.PostV1AssetsAssetsGetRequest,
+    public assetsGet(
+        request: NordletApi.AssetsGetAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsAssetsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsAssetsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssetsGetAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsGet(request, requestOptions));
     }
 
-    private async __postV1AssetsAssetsGet(
-        request: NordletApi.PostV1AssetsAssetsGetRequest,
+    private async __assetsGet(
+        request: NordletApi.AssetsGetAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsAssetsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssetsGetAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -666,10 +725,7 @@ export class AssetsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1AssetsAssetsGetResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.AssetsGetAssetsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -681,6 +737,11 @@ export class AssetsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -696,6 +757,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -727,32 +793,34 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsAssetsListRequest} request
+     * @param {NordletApi.AssetsListAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsAssetsList()
+     *     await client.assets.assetsList()
      */
-    public postV1AssetsAssetsList(
-        request: NordletApi.PostV1AssetsAssetsListRequest = {},
+    public assetsList(
+        request: NordletApi.AssetsListAssetsRequest = {},
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsAssetsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsAssetsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssetsListAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsList(request, requestOptions));
     }
 
-    private async __postV1AssetsAssetsList(
-        request: NordletApi.PostV1AssetsAssetsListRequest = {},
+    private async __assetsList(
+        request: NordletApi.AssetsListAssetsRequest = {},
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsAssetsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssetsListAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -779,10 +847,7 @@ export class AssetsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1AssetsAssetsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.AssetsListAssetsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -794,6 +859,11 @@ export class AssetsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -809,6 +879,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -840,36 +915,38 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsAssetsModernizeRequest} request
+     * @param {NordletApi.AssetsModernizeAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsAssetsModernize({
+     *     await client.assets.assetsModernize({
      *         id: "id",
-     *         date: "date",
-     *         amount: "amount"
+     *         date: "2026-07-01",
+     *         amount: "121.0000"
      *     })
      */
-    public postV1AssetsAssetsModernize(
-        request: NordletApi.PostV1AssetsAssetsModernizeRequest,
+    public assetsModernize(
+        request: NordletApi.AssetsModernizeAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsAssetsModernizeResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsAssetsModernize(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssetsModernizeAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsModernize(request, requestOptions));
     }
 
-    private async __postV1AssetsAssetsModernize(
-        request: NordletApi.PostV1AssetsAssetsModernizeRequest,
+    private async __assetsModernize(
+        request: NordletApi.AssetsModernizeAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsAssetsModernizeResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssetsModernizeAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -897,7 +974,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsAssetsModernizeResponse,
+                data: _response.body as NordletApi.AssetsModernizeAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -914,6 +991,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -926,6 +1008,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -957,35 +1044,168 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsDepreciationPreviewRequest} request
+     * Dispose of a fixed asset (sold, scrapped or written off). Removes its cost and accumulated depreciation, books the net book value as a disposal loss and the proceeds as a disposal gain (posting rules assets.disposalLoss, assets.disposalGain, assets.disposalProceeds), and stops its depreciation. Depreciation must be posted for every month before the disposal month.
+     *
+     * @param {NordletApi.AssetsDisposeAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsDepreciationPreview({
+     *     await client.assets.assetsDispose({
+     *         id: "id",
+     *         date: "2026-07-01",
+     *         reason: "sold"
+     *     })
+     */
+    public assetsDispose(
+        request: NordletApi.AssetsDisposeAssetsRequest,
+        requestOptions?: AssetsClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.AssetsDisposeAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assetsDispose(request, requestOptions));
+    }
+
+    private async __assetsDispose(
+        request: NordletApi.AssetsDisposeAssetsRequest,
+        requestOptions?: AssetsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.AssetsDisposeAssetsResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/assets/assets/dispose",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.AssetsDisposeAssetsResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/assets/assets/dispose");
+    }
+
+    /**
+     * @param {NordletApi.DepreciationPreviewAssetsRequest} request
+     * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.assets.depreciationPreview({
      *         year: 1000000,
      *         month: 1000000
      *     })
      */
-    public postV1AssetsDepreciationPreview(
-        request: NordletApi.PostV1AssetsDepreciationPreviewRequest,
+    public depreciationPreview(
+        request: NordletApi.DepreciationPreviewAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsDepreciationPreviewResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsDepreciationPreview(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DepreciationPreviewAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__depreciationPreview(request, requestOptions));
     }
 
-    private async __postV1AssetsDepreciationPreview(
-        request: NordletApi.PostV1AssetsDepreciationPreviewRequest,
+    private async __depreciationPreview(
+        request: NordletApi.DepreciationPreviewAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsDepreciationPreviewResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DepreciationPreviewAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1013,7 +1233,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsDepreciationPreviewResponse,
+                data: _response.body as NordletApi.DepreciationPreviewAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1030,6 +1250,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1042,6 +1267,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1078,35 +1308,37 @@ export class AssetsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AssetsDepreciationPostRequest} request
+     * @param {NordletApi.DepreciationPostAssetsRequest} request
      * @param {AssetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.assets.postV1AssetsDepreciationPost({
+     *     await client.assets.depreciationPost({
      *         year: 1000000,
      *         month: 1000000
      *     })
      */
-    public postV1AssetsDepreciationPost(
-        request: NordletApi.PostV1AssetsDepreciationPostRequest,
+    public depreciationPost(
+        request: NordletApi.DepreciationPostAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AssetsDepreciationPostResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AssetsDepreciationPost(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DepreciationPostAssetsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__depreciationPost(request, requestOptions));
     }
 
-    private async __postV1AssetsDepreciationPost(
-        request: NordletApi.PostV1AssetsDepreciationPostRequest,
+    private async __depreciationPost(
+        request: NordletApi.DepreciationPostAssetsRequest,
         requestOptions?: AssetsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AssetsDepreciationPostResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DepreciationPostAssetsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1134,7 +1366,7 @@ export class AssetsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1AssetsDepreciationPostResponse,
+                data: _response.body as NordletApi.DepreciationPostAssetsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1151,6 +1383,11 @@ export class AssetsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1163,6 +1400,11 @@ export class AssetsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

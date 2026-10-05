@@ -24,32 +24,34 @@ export class AuditClient {
     }
 
     /**
-     * @param {NordletApi.PostV1AuditListRequest} request
+     * @param {NordletApi.ListAuditRequest} request
      * @param {AuditClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.audit.postV1AuditList()
+     *     await client.audit.list()
      */
-    public postV1AuditList(
-        request: NordletApi.PostV1AuditListRequest = {},
+    public list(
+        request: NordletApi.ListAuditRequest = {},
         requestOptions?: AuditClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1AuditListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1AuditList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ListAuditResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
-    private async __postV1AuditList(
-        request: NordletApi.PostV1AuditListRequest = {},
+    private async __list(
+        request: NordletApi.ListAuditRequest = {},
         requestOptions?: AuditClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1AuditListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ListAuditResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -76,7 +78,7 @@ export class AuditClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1AuditListResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.ListAuditResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -88,6 +90,11 @@ export class AuditClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -103,6 +110,11 @@ export class AuditClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

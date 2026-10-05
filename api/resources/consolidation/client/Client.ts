@@ -24,34 +24,36 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationGroupsCreateRequest} request
+     * @param {NordletApi.GroupsCreateConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationGroupsCreate({
+     *     await client.consolidation.groupsCreate({
      *         name: "name"
      *     })
      */
-    public postV1ConsolidationGroupsCreate(
-        request: NordletApi.PostV1ConsolidationGroupsCreateRequest,
+    public groupsCreate(
+        request: NordletApi.GroupsCreateConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationGroupsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationGroupsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsCreateConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsCreate(request, requestOptions));
     }
 
-    private async __postV1ConsolidationGroupsCreate(
-        request: NordletApi.PostV1ConsolidationGroupsCreateRequest,
+    private async __groupsCreate(
+        request: NordletApi.GroupsCreateConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationGroupsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsCreateConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -79,7 +81,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationGroupsCreateResponse,
+                data: _response.body as NordletApi.GroupsCreateConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -96,6 +98,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -108,6 +115,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -144,32 +156,34 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationGroupsListRequest} request
+     * @param {NordletApi.GroupsListConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationGroupsList()
+     *     await client.consolidation.groupsList()
      */
-    public postV1ConsolidationGroupsList(
-        request: NordletApi.PostV1ConsolidationGroupsListRequest = {},
+    public groupsList(
+        request: NordletApi.GroupsListConsolidationRequest = {},
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationGroupsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationGroupsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsListConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsList(request, requestOptions));
     }
 
-    private async __postV1ConsolidationGroupsList(
-        request: NordletApi.PostV1ConsolidationGroupsListRequest = {},
+    private async __groupsList(
+        request: NordletApi.GroupsListConsolidationRequest = {},
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationGroupsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsListConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -197,7 +211,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationGroupsListResponse,
+                data: _response.body as NordletApi.GroupsListConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -214,6 +228,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -226,6 +245,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -262,34 +286,36 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationGroupsGetRequest} request
+     * @param {NordletApi.GroupsGetConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationGroupsGet({
+     *     await client.consolidation.groupsGet({
      *         groupId: "groupId"
      *     })
      */
-    public postV1ConsolidationGroupsGet(
-        request: NordletApi.PostV1ConsolidationGroupsGetRequest,
+    public groupsGet(
+        request: NordletApi.GroupsGetConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationGroupsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationGroupsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsGetConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsGet(request, requestOptions));
     }
 
-    private async __postV1ConsolidationGroupsGet(
-        request: NordletApi.PostV1ConsolidationGroupsGetRequest,
+    private async __groupsGet(
+        request: NordletApi.GroupsGetConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationGroupsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsGetConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -317,7 +343,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationGroupsGetResponse,
+                data: _response.body as NordletApi.GroupsGetConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -334,6 +360,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -346,6 +377,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -377,34 +413,36 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationGroupsUpdateRequest} request
+     * @param {NordletApi.GroupsUpdateConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationGroupsUpdate({
+     *     await client.consolidation.groupsUpdate({
      *         groupId: "groupId"
      *     })
      */
-    public postV1ConsolidationGroupsUpdate(
-        request: NordletApi.PostV1ConsolidationGroupsUpdateRequest,
+    public groupsUpdate(
+        request: NordletApi.GroupsUpdateConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationGroupsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationGroupsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsUpdateConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsUpdate(request, requestOptions));
     }
 
-    private async __postV1ConsolidationGroupsUpdate(
-        request: NordletApi.PostV1ConsolidationGroupsUpdateRequest,
+    private async __groupsUpdate(
+        request: NordletApi.GroupsUpdateConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationGroupsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsUpdateConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -432,7 +470,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationGroupsUpdateResponse,
+                data: _response.body as NordletApi.GroupsUpdateConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -449,6 +487,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -461,6 +504,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -497,34 +545,36 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationGroupsDeleteRequest} request
+     * @param {NordletApi.GroupsDeleteConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationGroupsDelete({
+     *     await client.consolidation.groupsDelete({
      *         groupId: "groupId"
      *     })
      */
-    public postV1ConsolidationGroupsDelete(
-        request: NordletApi.PostV1ConsolidationGroupsDeleteRequest,
+    public groupsDelete(
+        request: NordletApi.GroupsDeleteConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationGroupsDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationGroupsDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GroupsDeleteConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__groupsDelete(request, requestOptions));
     }
 
-    private async __postV1ConsolidationGroupsDelete(
-        request: NordletApi.PostV1ConsolidationGroupsDeleteRequest,
+    private async __groupsDelete(
+        request: NordletApi.GroupsDeleteConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationGroupsDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GroupsDeleteConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -552,7 +602,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationGroupsDeleteResponse,
+                data: _response.body as NordletApi.GroupsDeleteConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -569,6 +619,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -581,6 +636,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -617,35 +677,37 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationMembersAddRequest} request
+     * @param {NordletApi.MembersAddConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationMembersAdd({
+     *     await client.consolidation.membersAdd({
      *         groupId: "groupId",
      *         memberCompanyId: "memberCompanyId"
      *     })
      */
-    public postV1ConsolidationMembersAdd(
-        request: NordletApi.PostV1ConsolidationMembersAddRequest,
+    public membersAdd(
+        request: NordletApi.MembersAddConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationMembersAddResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationMembersAdd(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.MembersAddConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__membersAdd(request, requestOptions));
     }
 
-    private async __postV1ConsolidationMembersAdd(
-        request: NordletApi.PostV1ConsolidationMembersAddRequest,
+    private async __membersAdd(
+        request: NordletApi.MembersAddConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationMembersAddResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.MembersAddConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -673,7 +735,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationMembersAddResponse,
+                data: _response.body as NordletApi.MembersAddConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -690,6 +752,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -702,6 +769,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -738,35 +810,37 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationMembersRemoveRequest} request
+     * @param {NordletApi.MembersRemoveConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationMembersRemove({
+     *     await client.consolidation.membersRemove({
      *         groupId: "groupId",
      *         memberCompanyId: "memberCompanyId"
      *     })
      */
-    public postV1ConsolidationMembersRemove(
-        request: NordletApi.PostV1ConsolidationMembersRemoveRequest,
+    public membersRemove(
+        request: NordletApi.MembersRemoveConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationMembersRemoveResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationMembersRemove(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.MembersRemoveConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__membersRemove(request, requestOptions));
     }
 
-    private async __postV1ConsolidationMembersRemove(
-        request: NordletApi.PostV1ConsolidationMembersRemoveRequest,
+    private async __membersRemove(
+        request: NordletApi.MembersRemoveConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationMembersRemoveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.MembersRemoveConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -794,7 +868,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationMembersRemoveResponse,
+                data: _response.body as NordletApi.MembersRemoveConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -811,6 +885,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -823,6 +902,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -861,36 +945,36 @@ export class ConsolidationClient {
     /**
      * Partners in member companies that look like other members of the same group (matched on company code or VAT code), with any existing intercompany link. Confirming a candidate via intercompany/links/set enables invoice mirroring.
      *
-     * @param {NordletApi.PostV1ConsolidationIntercompanyCandidatesRequest} request
+     * @param {NordletApi.IntercompanyCandidatesConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationIntercompanyCandidates({
+     *     await client.consolidation.intercompanyCandidates({
      *         groupId: "groupId"
      *     })
      */
-    public postV1ConsolidationIntercompanyCandidates(
-        request: NordletApi.PostV1ConsolidationIntercompanyCandidatesRequest,
+    public intercompanyCandidates(
+        request: NordletApi.IntercompanyCandidatesConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationIntercompanyCandidatesResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ConsolidationIntercompanyCandidates(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.IntercompanyCandidatesConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__intercompanyCandidates(request, requestOptions));
     }
 
-    private async __postV1ConsolidationIntercompanyCandidates(
-        request: NordletApi.PostV1ConsolidationIntercompanyCandidatesRequest,
+    private async __intercompanyCandidates(
+        request: NordletApi.IntercompanyCandidatesConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationIntercompanyCandidatesResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntercompanyCandidatesConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -918,7 +1002,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationIntercompanyCandidatesResponse,
+                data: _response.body as NordletApi.IntercompanyCandidatesConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -935,6 +1019,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -947,6 +1036,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -985,38 +1079,38 @@ export class ConsolidationClient {
     /**
      * Confirm that a partner record in one member company represents another member company of the group. Once links exist in both directions, issuing an intercompany sale invoice automatically creates the matching draft purchase invoice in the counterparty.
      *
-     * @param {NordletApi.PostV1ConsolidationIntercompanyLinksSetRequest} request
+     * @param {NordletApi.IntercompanyLinksSetConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationIntercompanyLinksSet({
+     *     await client.consolidation.intercompanyLinksSet({
      *         groupId: "groupId",
      *         partnerId: "partnerId",
      *         counterpartyCompanyId: "counterpartyCompanyId"
      *     })
      */
-    public postV1ConsolidationIntercompanyLinksSet(
-        request: NordletApi.PostV1ConsolidationIntercompanyLinksSetRequest,
+    public intercompanyLinksSet(
+        request: NordletApi.IntercompanyLinksSetConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationIntercompanyLinksSetResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ConsolidationIntercompanyLinksSet(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.IntercompanyLinksSetConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__intercompanyLinksSet(request, requestOptions));
     }
 
-    private async __postV1ConsolidationIntercompanyLinksSet(
-        request: NordletApi.PostV1ConsolidationIntercompanyLinksSetRequest,
+    private async __intercompanyLinksSet(
+        request: NordletApi.IntercompanyLinksSetConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationIntercompanyLinksSetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntercompanyLinksSetConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1044,7 +1138,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationIntercompanyLinksSetResponse,
+                data: _response.body as NordletApi.IntercompanyLinksSetConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1061,6 +1155,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1073,6 +1172,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1109,36 +1213,36 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationIntercompanyLinksListRequest} request
+     * @param {NordletApi.IntercompanyLinksListConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationIntercompanyLinksList({
+     *     await client.consolidation.intercompanyLinksList({
      *         groupId: "groupId"
      *     })
      */
-    public postV1ConsolidationIntercompanyLinksList(
-        request: NordletApi.PostV1ConsolidationIntercompanyLinksListRequest,
+    public intercompanyLinksList(
+        request: NordletApi.IntercompanyLinksListConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationIntercompanyLinksListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ConsolidationIntercompanyLinksList(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.IntercompanyLinksListConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__intercompanyLinksList(request, requestOptions));
     }
 
-    private async __postV1ConsolidationIntercompanyLinksList(
-        request: NordletApi.PostV1ConsolidationIntercompanyLinksListRequest,
+    private async __intercompanyLinksList(
+        request: NordletApi.IntercompanyLinksListConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationIntercompanyLinksListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntercompanyLinksListConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1166,7 +1270,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationIntercompanyLinksListResponse,
+                data: _response.body as NordletApi.IntercompanyLinksListConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1183,6 +1287,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1195,6 +1304,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1231,37 +1345,37 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationIntercompanyLinksRemoveRequest} request
+     * @param {NordletApi.IntercompanyLinksRemoveConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationIntercompanyLinksRemove({
+     *     await client.consolidation.intercompanyLinksRemove({
      *         groupId: "groupId",
      *         id: "id"
      *     })
      */
-    public postV1ConsolidationIntercompanyLinksRemove(
-        request: NordletApi.PostV1ConsolidationIntercompanyLinksRemoveRequest,
+    public intercompanyLinksRemove(
+        request: NordletApi.IntercompanyLinksRemoveConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationIntercompanyLinksRemoveResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ConsolidationIntercompanyLinksRemove(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.IntercompanyLinksRemoveConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__intercompanyLinksRemove(request, requestOptions));
     }
 
-    private async __postV1ConsolidationIntercompanyLinksRemove(
-        request: NordletApi.PostV1ConsolidationIntercompanyLinksRemoveRequest,
+    private async __intercompanyLinksRemove(
+        request: NordletApi.IntercompanyLinksRemoveConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationIntercompanyLinksRemoveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntercompanyLinksRemoveConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1289,7 +1403,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationIntercompanyLinksRemoveResponse,
+                data: _response.body as NordletApi.IntercompanyLinksRemoveConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1306,6 +1420,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1318,6 +1437,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1356,38 +1480,38 @@ export class ConsolidationClient {
     /**
      * Intercompany reconciliation for a period: every issued intercompany sale invoice with its mirrored or manually recorded counterpart, unmatched documents on both sides, and per-currency totals with differences. Confirmed pairs are the basis for consolidation eliminations.
      *
-     * @param {NordletApi.PostV1ConsolidationIntercompanyReportRequest} request
+     * @param {NordletApi.IntercompanyReportConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationIntercompanyReport({
+     *     await client.consolidation.intercompanyReport({
      *         groupId: "groupId",
-     *         fromDate: "fromDate",
-     *         toDate: "toDate"
+     *         fromDate: "2026-07-01",
+     *         toDate: "2026-07-01"
      *     })
      */
-    public postV1ConsolidationIntercompanyReport(
-        request: NordletApi.PostV1ConsolidationIntercompanyReportRequest,
+    public intercompanyReport(
+        request: NordletApi.IntercompanyReportConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationIntercompanyReportResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ConsolidationIntercompanyReport(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.IntercompanyReportConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__intercompanyReport(request, requestOptions));
     }
 
-    private async __postV1ConsolidationIntercompanyReport(
-        request: NordletApi.PostV1ConsolidationIntercompanyReportRequest,
+    private async __intercompanyReport(
+        request: NordletApi.IntercompanyReportConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationIntercompanyReportResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntercompanyReportConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1415,7 +1539,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationIntercompanyReportResponse,
+                data: _response.body as NordletApi.IntercompanyReportConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1432,6 +1556,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1444,6 +1573,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1480,36 +1614,38 @@ export class ConsolidationClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ConsolidationReportRequest} request
+     * @param {NordletApi.ReportConsolidationRequest} request
      * @param {ConsolidationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.consolidation.postV1ConsolidationReport({
+     *     await client.consolidation.report({
      *         groupId: "groupId",
-     *         fromDate: "fromDate",
-     *         toDate: "toDate"
+     *         fromDate: "2026-07-01",
+     *         toDate: "2026-07-01"
      *     })
      */
-    public postV1ConsolidationReport(
-        request: NordletApi.PostV1ConsolidationReportRequest,
+    public report(
+        request: NordletApi.ReportConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ConsolidationReportResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ConsolidationReport(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReportConsolidationResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__report(request, requestOptions));
     }
 
-    private async __postV1ConsolidationReport(
-        request: NordletApi.PostV1ConsolidationReportRequest,
+    private async __report(
+        request: NordletApi.ReportConsolidationRequest,
         requestOptions?: ConsolidationClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ConsolidationReportResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReportConsolidationResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1537,7 +1673,7 @@ export class ConsolidationClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ConsolidationReportResponse,
+                data: _response.body as NordletApi.ReportConsolidationResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1554,6 +1690,11 @@ export class ConsolidationClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1566,6 +1707,11 @@ export class ConsolidationClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

@@ -24,32 +24,34 @@ export class CalendarClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CalendarListRequest} request
+     * @param {NordletApi.ListCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.postV1CalendarList()
+     *     await client.calendar.list()
      */
-    public postV1CalendarList(
-        request: NordletApi.PostV1CalendarListRequest = {},
+    public list(
+        request: NordletApi.ListCalendarRequest = {},
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CalendarList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ListCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
-    private async __postV1CalendarList(
-        request: NordletApi.PostV1CalendarListRequest = {},
+    private async __list(
+        request: NordletApi.ListCalendarRequest = {},
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ListCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -76,10 +78,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CalendarListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.ListCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -91,6 +90,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -106,6 +110,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -137,34 +146,36 @@ export class CalendarClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CalendarGetRequest} request
+     * @param {NordletApi.GetCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.postV1CalendarGet({
+     *     await client.calendar.get({
      *         key: "key"
      *     })
      */
-    public postV1CalendarGet(
-        request: NordletApi.PostV1CalendarGetRequest,
+    public get(
+        request: NordletApi.GetCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CalendarGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GetCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
-    private async __postV1CalendarGet(
-        request: NordletApi.PostV1CalendarGetRequest,
+    private async __get(
+        request: NordletApi.GetCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GetCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -191,7 +202,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1CalendarGetResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.GetCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -203,6 +214,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -218,6 +234,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -249,36 +270,38 @@ export class CalendarClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CalendarSubmitRequest} request
+     * With amend: true the return is filed again as a correction of the one already submitted or accepted for the period; only returns whose format has a correction mark accept it.
+     *
+     * @param {NordletApi.SubmitCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.generateTheFilingForADeadlineAndSendItToTheAdministration({
+     *     await client.calendar.submit({
      *         key: "key"
      *     })
      */
-    public generateTheFilingForADeadlineAndSendItToTheAdministration(
-        request: NordletApi.PostV1CalendarSubmitRequest,
+    public submit(
+        request: NordletApi.SubmitCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarSubmitResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__generateTheFilingForADeadlineAndSendItToTheAdministration(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.SubmitCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__submit(request, requestOptions));
     }
 
-    private async __generateTheFilingForADeadlineAndSendItToTheAdministration(
-        request: NordletApi.PostV1CalendarSubmitRequest,
+    private async __submit(
+        request: NordletApi.SubmitCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarSubmitResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SubmitCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -305,10 +328,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CalendarSubmitResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.SubmitCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -320,6 +340,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -335,6 +360,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -368,36 +398,36 @@ export class CalendarClient {
     /**
      * Builds the file of a deadline whose format Nordlet produces but whose administration takes it only through the company's own account or program. Nothing is sent and no filing is recorded.
      *
-     * @param {NordletApi.PostV1CalendarDownloadRequest} request
+     * @param {NordletApi.DownloadCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.generateTheFileOfADeadlineForTheCompanyToSendItself({
+     *     await client.calendar.download({
      *         key: "key"
      *     })
      */
-    public generateTheFileOfADeadlineForTheCompanyToSendItself(
-        request: NordletApi.PostV1CalendarDownloadRequest,
+    public download(
+        request: NordletApi.DownloadCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarDownloadResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__generateTheFileOfADeadlineForTheCompanyToSendItself(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.DownloadCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__download(request, requestOptions));
     }
 
-    private async __generateTheFileOfADeadlineForTheCompanyToSendItself(
-        request: NordletApi.PostV1CalendarDownloadRequest,
+    private async __download(
+        request: NordletApi.DownloadCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarDownloadResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DownloadCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -424,10 +454,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CalendarDownloadResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.DownloadCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -439,6 +466,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -454,6 +486,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -485,35 +522,37 @@ export class CalendarClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CalendarCreateRequest} request
+     * @param {NordletApi.CreateCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.postV1CalendarCreate({
+     *     await client.calendar.create({
      *         title: "title",
-     *         dueDate: "dueDate"
+     *         dueDate: "2026-07-01"
      *     })
      */
-    public postV1CalendarCreate(
-        request: NordletApi.PostV1CalendarCreateRequest,
+    public create(
+        request: NordletApi.CreateCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CalendarCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CreateCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
-    private async __postV1CalendarCreate(
-        request: NordletApi.PostV1CalendarCreateRequest,
+    private async __create(
+        request: NordletApi.CreateCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CreateCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -540,10 +579,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CalendarCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.CreateCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -555,6 +591,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -570,6 +611,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -601,34 +647,36 @@ export class CalendarClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CalendarUpdateRequest} request
+     * @param {NordletApi.UpdateCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.postV1CalendarUpdate({
+     *     await client.calendar.update({
      *         key: "key"
      *     })
      */
-    public postV1CalendarUpdate(
-        request: NordletApi.PostV1CalendarUpdateRequest,
+    public update(
+        request: NordletApi.UpdateCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CalendarUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UpdateCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
-    private async __postV1CalendarUpdate(
-        request: NordletApi.PostV1CalendarUpdateRequest,
+    private async __update(
+        request: NordletApi.UpdateCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UpdateCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -655,10 +703,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CalendarUpdateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.UpdateCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -670,6 +715,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -685,6 +735,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -716,34 +771,36 @@ export class CalendarClient {
     }
 
     /**
-     * @param {NordletApi.PostV1CalendarDeleteRequest} request
+     * @param {NordletApi.DeleteCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.calendar.postV1CalendarDelete({
+     *     await client.calendar.delete({
      *         key: "key"
      *     })
      */
-    public postV1CalendarDelete(
-        request: NordletApi.PostV1CalendarDeleteRequest,
+    public delete(
+        request: NordletApi.DeleteCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1CalendarDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1CalendarDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DeleteCalendarResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
     }
 
-    private async __postV1CalendarDelete(
-        request: NordletApi.PostV1CalendarDeleteRequest,
+    private async __delete(
+        request: NordletApi.DeleteCalendarRequest,
         requestOptions?: CalendarClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1CalendarDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DeleteCalendarResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -770,10 +827,7 @@ export class CalendarClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1CalendarDeleteResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.DeleteCalendarResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -785,6 +839,11 @@ export class CalendarClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -800,6 +859,11 @@ export class CalendarClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

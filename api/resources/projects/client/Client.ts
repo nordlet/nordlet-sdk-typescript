@@ -24,35 +24,37 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsCreateRequest} request
+     * @param {NordletApi.CreateProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsCreate({
+     *     await client.projects.create({
      *         code: "code",
      *         name: "name"
      *     })
      */
-    public postV1ProjectsCreate(
-        request: NordletApi.PostV1ProjectsCreateRequest,
+    public create(
+        request: NordletApi.CreateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CreateProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
-    private async __postV1ProjectsCreate(
-        request: NordletApi.PostV1ProjectsCreateRequest,
+    private async __create(
+        request: NordletApi.CreateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CreateProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -79,10 +81,7 @@ export class ProjectsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1ProjectsCreateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.CreateProjectsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -94,6 +93,11 @@ export class ProjectsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -109,6 +113,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -140,34 +149,36 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsUpdateRequest} request
+     * @param {NordletApi.UpdateProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsUpdate({
+     *     await client.projects.update({
      *         id: "id"
      *     })
      */
-    public postV1ProjectsUpdate(
-        request: NordletApi.PostV1ProjectsUpdateRequest,
+    public update(
+        request: NordletApi.UpdateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UpdateProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
-    private async __postV1ProjectsUpdate(
-        request: NordletApi.PostV1ProjectsUpdateRequest,
+    private async __update(
+        request: NordletApi.UpdateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UpdateProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -194,10 +205,7 @@ export class ProjectsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1ProjectsUpdateResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.UpdateProjectsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -209,6 +217,11 @@ export class ProjectsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -224,6 +237,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -255,34 +273,36 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsGetRequest} request
+     * @param {NordletApi.GetProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsGet({
+     *     await client.projects.get({
      *         id: "id"
      *     })
      */
-    public postV1ProjectsGet(
-        request: NordletApi.PostV1ProjectsGetRequest,
+    public get(
+        request: NordletApi.GetProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GetProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
-    private async __postV1ProjectsGet(
-        request: NordletApi.PostV1ProjectsGetRequest,
+    private async __get(
+        request: NordletApi.GetProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GetProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -309,7 +329,7 @@ export class ProjectsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1ProjectsGetResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.GetProjectsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -321,6 +341,11 @@ export class ProjectsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -336,6 +361,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -367,32 +397,34 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsListRequest} request
+     * @param {NordletApi.ListProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsList()
+     *     await client.projects.list()
      */
-    public postV1ProjectsList(
-        request: NordletApi.PostV1ProjectsListRequest = {},
+    public list(
+        request: NordletApi.ListProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ListProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
-    private async __postV1ProjectsList(
-        request: NordletApi.PostV1ProjectsListRequest = {},
+    private async __list(
+        request: NordletApi.ListProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ListProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -419,10 +451,7 @@ export class ProjectsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1ProjectsListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.ListProjectsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -434,6 +463,11 @@ export class ProjectsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -449,6 +483,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -480,36 +519,38 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsTimeEntriesCreateRequest} request
+     * @param {NordletApi.TimeEntriesCreateProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsTimeEntriesCreate({
+     *     await client.projects.timeEntriesCreate({
      *         projectId: "projectId",
-     *         date: "date",
-     *         hours: "hours"
+     *         date: "2026-07-01",
+     *         hours: "121.00"
      *     })
      */
-    public postV1ProjectsTimeEntriesCreate(
-        request: NordletApi.PostV1ProjectsTimeEntriesCreateRequest,
+    public timeEntriesCreate(
+        request: NordletApi.TimeEntriesCreateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsTimeEntriesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsTimeEntriesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.TimeEntriesCreateProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__timeEntriesCreate(request, requestOptions));
     }
 
-    private async __postV1ProjectsTimeEntriesCreate(
-        request: NordletApi.PostV1ProjectsTimeEntriesCreateRequest,
+    private async __timeEntriesCreate(
+        request: NordletApi.TimeEntriesCreateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsTimeEntriesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.TimeEntriesCreateProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -537,7 +578,7 @@ export class ProjectsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ProjectsTimeEntriesCreateResponse,
+                data: _response.body as NordletApi.TimeEntriesCreateProjectsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -554,6 +595,11 @@ export class ProjectsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -566,6 +612,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -602,34 +653,36 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsTimeEntriesUpdateRequest} request
+     * @param {NordletApi.TimeEntriesUpdateProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsTimeEntriesUpdate({
+     *     await client.projects.timeEntriesUpdate({
      *         id: "id"
      *     })
      */
-    public postV1ProjectsTimeEntriesUpdate(
-        request: NordletApi.PostV1ProjectsTimeEntriesUpdateRequest,
+    public timeEntriesUpdate(
+        request: NordletApi.TimeEntriesUpdateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsTimeEntriesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsTimeEntriesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.TimeEntriesUpdateProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__timeEntriesUpdate(request, requestOptions));
     }
 
-    private async __postV1ProjectsTimeEntriesUpdate(
-        request: NordletApi.PostV1ProjectsTimeEntriesUpdateRequest,
+    private async __timeEntriesUpdate(
+        request: NordletApi.TimeEntriesUpdateProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsTimeEntriesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.TimeEntriesUpdateProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -657,7 +710,7 @@ export class ProjectsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ProjectsTimeEntriesUpdateResponse,
+                data: _response.body as NordletApi.TimeEntriesUpdateProjectsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -674,6 +727,11 @@ export class ProjectsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -686,6 +744,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -722,34 +785,36 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsTimeEntriesDeleteRequest} request
+     * @param {NordletApi.TimeEntriesDeleteProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsTimeEntriesDelete({
+     *     await client.projects.timeEntriesDelete({
      *         id: "id"
      *     })
      */
-    public postV1ProjectsTimeEntriesDelete(
-        request: NordletApi.PostV1ProjectsTimeEntriesDeleteRequest,
+    public timeEntriesDelete(
+        request: NordletApi.TimeEntriesDeleteProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsTimeEntriesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsTimeEntriesDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.TimeEntriesDeleteProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__timeEntriesDelete(request, requestOptions));
     }
 
-    private async __postV1ProjectsTimeEntriesDelete(
-        request: NordletApi.PostV1ProjectsTimeEntriesDeleteRequest,
+    private async __timeEntriesDelete(
+        request: NordletApi.TimeEntriesDeleteProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsTimeEntriesDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.TimeEntriesDeleteProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -777,7 +842,7 @@ export class ProjectsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ProjectsTimeEntriesDeleteResponse,
+                data: _response.body as NordletApi.TimeEntriesDeleteProjectsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -794,6 +859,11 @@ export class ProjectsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -806,6 +876,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -842,32 +917,34 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsTimeEntriesListRequest} request
+     * @param {NordletApi.TimeEntriesListProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsTimeEntriesList()
+     *     await client.projects.timeEntriesList()
      */
-    public postV1ProjectsTimeEntriesList(
-        request: NordletApi.PostV1ProjectsTimeEntriesListRequest = {},
+    public timeEntriesList(
+        request: NordletApi.TimeEntriesListProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsTimeEntriesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsTimeEntriesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.TimeEntriesListProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__timeEntriesList(request, requestOptions));
     }
 
-    private async __postV1ProjectsTimeEntriesList(
-        request: NordletApi.PostV1ProjectsTimeEntriesListRequest = {},
+    private async __timeEntriesList(
+        request: NordletApi.TimeEntriesListProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsTimeEntriesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.TimeEntriesListProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -895,7 +972,7 @@ export class ProjectsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ProjectsTimeEntriesListResponse,
+                data: _response.body as NordletApi.TimeEntriesListProjectsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -912,6 +989,11 @@ export class ProjectsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -924,6 +1006,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -960,34 +1047,36 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsTimeEntriesBillRequest} request
+     * @param {NordletApi.TimeEntriesBillProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsTimeEntriesBill({
+     *     await client.projects.timeEntriesBill({
      *         projectId: "projectId"
      *     })
      */
-    public postV1ProjectsTimeEntriesBill(
-        request: NordletApi.PostV1ProjectsTimeEntriesBillRequest,
+    public timeEntriesBill(
+        request: NordletApi.TimeEntriesBillProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsTimeEntriesBillResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsTimeEntriesBill(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.TimeEntriesBillProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__timeEntriesBill(request, requestOptions));
     }
 
-    private async __postV1ProjectsTimeEntriesBill(
-        request: NordletApi.PostV1ProjectsTimeEntriesBillRequest,
+    private async __timeEntriesBill(
+        request: NordletApi.TimeEntriesBillProjectsRequest,
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsTimeEntriesBillResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.TimeEntriesBillProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1015,7 +1104,7 @@ export class ProjectsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ProjectsTimeEntriesBillResponse,
+                data: _response.body as NordletApi.TimeEntriesBillProjectsResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1032,6 +1121,11 @@ export class ProjectsClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1044,6 +1138,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1080,32 +1179,34 @@ export class ProjectsClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ProjectsReportRequest} request
+     * @param {NordletApi.ReportProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.projects.postV1ProjectsReport()
+     *     await client.projects.report()
      */
-    public postV1ProjectsReport(
-        request: NordletApi.PostV1ProjectsReportRequest = {},
+    public report(
+        request: NordletApi.ReportProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ProjectsReportResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ProjectsReport(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ReportProjectsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__report(request, requestOptions));
     }
 
-    private async __postV1ProjectsReport(
-        request: NordletApi.PostV1ProjectsReportRequest = {},
+    private async __report(
+        request: NordletApi.ReportProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ProjectsReportResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ReportProjectsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1132,10 +1233,7 @@ export class ProjectsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1ProjectsReportResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.ReportProjectsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1147,6 +1245,11 @@ export class ProjectsClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1162,6 +1265,11 @@ export class ProjectsClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

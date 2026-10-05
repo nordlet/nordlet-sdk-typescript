@@ -24,32 +24,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceExchangeRatesSyncRequest} request
+     * @param {NordletApi.ExchangeRatesSyncReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceExchangeRatesSync()
+     *     await client.reference.exchangeRatesSync()
      */
-    public postV1ReferenceExchangeRatesSync(
-        request: NordletApi.PostV1ReferenceExchangeRatesSyncRequest = {},
+    public exchangeRatesSync(
+        request: NordletApi.ExchangeRatesSyncReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceExchangeRatesSyncResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceExchangeRatesSync(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ExchangeRatesSyncReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__exchangeRatesSync(request, requestOptions));
     }
 
-    private async __postV1ReferenceExchangeRatesSync(
-        request: NordletApi.PostV1ReferenceExchangeRatesSyncRequest = {},
+    private async __exchangeRatesSync(
+        request: NordletApi.ExchangeRatesSyncReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceExchangeRatesSyncResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ExchangeRatesSyncReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -77,7 +79,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceExchangeRatesSyncResponse,
+                data: _response.body as NordletApi.ExchangeRatesSyncReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -94,6 +96,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -106,6 +113,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -142,32 +154,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceExchangeRatesListRequest} request
+     * @param {NordletApi.ExchangeRatesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceExchangeRatesList()
+     *     await client.reference.exchangeRatesList()
      */
-    public postV1ReferenceExchangeRatesList(
-        request: NordletApi.PostV1ReferenceExchangeRatesListRequest = {},
+    public exchangeRatesList(
+        request: NordletApi.ExchangeRatesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceExchangeRatesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceExchangeRatesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ExchangeRatesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__exchangeRatesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceExchangeRatesList(
-        request: NordletApi.PostV1ReferenceExchangeRatesListRequest = {},
+    private async __exchangeRatesList(
+        request: NordletApi.ExchangeRatesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceExchangeRatesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ExchangeRatesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -195,7 +209,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceExchangeRatesListResponse,
+                data: _response.body as NordletApi.ExchangeRatesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -212,6 +226,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -224,6 +243,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -260,36 +284,38 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceExchangeRatesSetRequest} request
+     * @param {NordletApi.ExchangeRatesSetReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceExchangeRatesSet({
+     *     await client.reference.exchangeRatesSet({
      *         currency: "currency",
-     *         date: "date",
-     *         rate: "rate"
+     *         date: "2026-07-01",
+     *         rate: "121.00000000"
      *     })
      */
-    public postV1ReferenceExchangeRatesSet(
-        request: NordletApi.PostV1ReferenceExchangeRatesSetRequest,
+    public exchangeRatesSet(
+        request: NordletApi.ExchangeRatesSetReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceExchangeRatesSetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceExchangeRatesSet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ExchangeRatesSetReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__exchangeRatesSet(request, requestOptions));
     }
 
-    private async __postV1ReferenceExchangeRatesSet(
-        request: NordletApi.PostV1ReferenceExchangeRatesSetRequest,
+    private async __exchangeRatesSet(
+        request: NordletApi.ExchangeRatesSetReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceExchangeRatesSetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ExchangeRatesSetReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -317,7 +343,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceExchangeRatesSetResponse,
+                data: _response.body as NordletApi.ExchangeRatesSetReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -334,6 +360,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -346,6 +377,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -382,34 +418,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceExchangeRatesOverridesListRequest} request
+     * @param {NordletApi.ExchangeRatesOverridesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceExchangeRatesOverridesList()
+     *     await client.reference.exchangeRatesOverridesList()
      */
-    public postV1ReferenceExchangeRatesOverridesList(
-        request: NordletApi.PostV1ReferenceExchangeRatesOverridesListRequest = {},
+    public exchangeRatesOverridesList(
+        request: NordletApi.ExchangeRatesOverridesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceExchangeRatesOverridesListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceExchangeRatesOverridesList(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.ExchangeRatesOverridesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__exchangeRatesOverridesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceExchangeRatesOverridesList(
-        request: NordletApi.PostV1ReferenceExchangeRatesOverridesListRequest = {},
+    private async __exchangeRatesOverridesList(
+        request: NordletApi.ExchangeRatesOverridesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceExchangeRatesOverridesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ExchangeRatesOverridesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -437,7 +473,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceExchangeRatesOverridesListResponse,
+                data: _response.body as NordletApi.ExchangeRatesOverridesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -454,6 +490,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -466,6 +507,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -502,37 +548,37 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceExchangeRatesOverridesDeleteRequest} request
+     * @param {NordletApi.ExchangeRatesOverridesDeleteReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceExchangeRatesOverridesDelete({
+     *     await client.reference.exchangeRatesOverridesDelete({
      *         currency: "currency",
-     *         date: "date"
+     *         date: "2026-07-01"
      *     })
      */
-    public postV1ReferenceExchangeRatesOverridesDelete(
-        request: NordletApi.PostV1ReferenceExchangeRatesOverridesDeleteRequest,
+    public exchangeRatesOverridesDelete(
+        request: NordletApi.ExchangeRatesOverridesDeleteReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceExchangeRatesOverridesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceExchangeRatesOverridesDelete(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.ExchangeRatesOverridesDeleteReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__exchangeRatesOverridesDelete(request, requestOptions));
     }
 
-    private async __postV1ReferenceExchangeRatesOverridesDelete(
-        request: NordletApi.PostV1ReferenceExchangeRatesOverridesDeleteRequest,
+    private async __exchangeRatesOverridesDelete(
+        request: NordletApi.ExchangeRatesOverridesDeleteReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceExchangeRatesOverridesDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ExchangeRatesOverridesDeleteReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -560,7 +606,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceExchangeRatesOverridesDeleteResponse,
+                data: _response.body as NordletApi.ExchangeRatesOverridesDeleteReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -577,6 +623,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -589,6 +640,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -625,32 +681,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceCountriesListRequest} request
+     * @param {NordletApi.CountriesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceCountriesList()
+     *     await client.reference.countriesList()
      */
-    public postV1ReferenceCountriesList(
-        request: NordletApi.PostV1ReferenceCountriesListRequest = {},
+    public countriesList(
+        request: NordletApi.CountriesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceCountriesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceCountriesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CountriesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__countriesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceCountriesList(
-        request: NordletApi.PostV1ReferenceCountriesListRequest = {},
+    private async __countriesList(
+        request: NordletApi.CountriesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceCountriesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CountriesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -678,7 +736,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceCountriesListResponse,
+                data: _response.body as NordletApi.CountriesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -695,6 +753,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -707,6 +770,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -738,32 +806,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceLtCountiesListRequest} request
+     * @param {NordletApi.LtCountiesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceLtCountiesList()
+     *     await client.reference.ltCountiesList()
      */
-    public postV1ReferenceLtCountiesList(
-        request: NordletApi.PostV1ReferenceLtCountiesListRequest = {},
+    public ltCountiesList(
+        request: NordletApi.LtCountiesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceLtCountiesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceLtCountiesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LtCountiesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ltCountiesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceLtCountiesList(
-        request: NordletApi.PostV1ReferenceLtCountiesListRequest = {},
+    private async __ltCountiesList(
+        request: NordletApi.LtCountiesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceLtCountiesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LtCountiesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -791,7 +861,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceLtCountiesListResponse,
+                data: _response.body as NordletApi.LtCountiesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -808,6 +878,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -820,6 +895,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -856,34 +936,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceLtMunicipalitiesListRequest} request
+     * @param {NordletApi.LtMunicipalitiesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceLtMunicipalitiesList()
+     *     await client.reference.ltMunicipalitiesList()
      */
-    public postV1ReferenceLtMunicipalitiesList(
-        request: NordletApi.PostV1ReferenceLtMunicipalitiesListRequest = {},
+    public ltMunicipalitiesList(
+        request: NordletApi.LtMunicipalitiesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceLtMunicipalitiesListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceLtMunicipalitiesList(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.LtMunicipalitiesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ltMunicipalitiesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceLtMunicipalitiesList(
-        request: NordletApi.PostV1ReferenceLtMunicipalitiesListRequest = {},
+    private async __ltMunicipalitiesList(
+        request: NordletApi.LtMunicipalitiesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceLtMunicipalitiesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LtMunicipalitiesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -911,7 +991,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceLtMunicipalitiesListResponse,
+                data: _response.body as NordletApi.LtMunicipalitiesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -928,6 +1008,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -940,6 +1025,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -976,32 +1066,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceLtCitiesListRequest} request
+     * @param {NordletApi.LtCitiesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceLtCitiesList()
+     *     await client.reference.ltCitiesList()
      */
-    public postV1ReferenceLtCitiesList(
-        request: NordletApi.PostV1ReferenceLtCitiesListRequest = {},
+    public ltCitiesList(
+        request: NordletApi.LtCitiesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceLtCitiesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceLtCitiesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LtCitiesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ltCitiesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceLtCitiesList(
-        request: NordletApi.PostV1ReferenceLtCitiesListRequest = {},
+    private async __ltCitiesList(
+        request: NordletApi.LtCitiesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceLtCitiesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LtCitiesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1029,7 +1121,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceLtCitiesListResponse,
+                data: _response.body as NordletApi.LtCitiesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1046,6 +1138,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1058,6 +1155,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1089,32 +1191,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceBanksListRequest} request
+     * @param {NordletApi.BanksListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceBanksList()
+     *     await client.reference.banksList()
      */
-    public postV1ReferenceBanksList(
-        request: NordletApi.PostV1ReferenceBanksListRequest = {},
+    public banksList(
+        request: NordletApi.BanksListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceBanksListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceBanksList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BanksListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__banksList(request, requestOptions));
     }
 
-    private async __postV1ReferenceBanksList(
-        request: NordletApi.PostV1ReferenceBanksListRequest = {},
+    private async __banksList(
+        request: NordletApi.BanksListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceBanksListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BanksListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1142,7 +1246,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceBanksListResponse,
+                data: _response.body as NordletApi.BanksListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1159,6 +1263,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1171,6 +1280,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1202,36 +1316,38 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceBanksUpsertRequest} request
+     * @param {NordletApi.BanksUpsertReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceBanksUpsert({
+     *     await client.reference.banksUpsert({
      *         countryCode: "countryCode",
      *         name: "name",
      *         bic: "bic"
      *     })
      */
-    public postV1ReferenceBanksUpsert(
-        request: NordletApi.PostV1ReferenceBanksUpsertRequest,
+    public banksUpsert(
+        request: NordletApi.BanksUpsertReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceBanksUpsertResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceBanksUpsert(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.BanksUpsertReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__banksUpsert(request, requestOptions));
     }
 
-    private async __postV1ReferenceBanksUpsert(
-        request: NordletApi.PostV1ReferenceBanksUpsertRequest,
+    private async __banksUpsert(
+        request: NordletApi.BanksUpsertReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceBanksUpsertResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.BanksUpsertReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1259,7 +1375,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceBanksUpsertResponse,
+                data: _response.body as NordletApi.BanksUpsertReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1276,6 +1392,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1288,6 +1409,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1319,32 +1445,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceLtRegionsListRequest} request
+     * @param {NordletApi.LtRegionsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceLtRegionsList()
+     *     await client.reference.ltRegionsList()
      */
-    public postV1ReferenceLtRegionsList(
-        request: NordletApi.PostV1ReferenceLtRegionsListRequest = {},
+    public ltRegionsList(
+        request: NordletApi.LtRegionsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceLtRegionsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceLtRegionsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.LtRegionsListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__ltRegionsList(request, requestOptions));
     }
 
-    private async __postV1ReferenceLtRegionsList(
-        request: NordletApi.PostV1ReferenceLtRegionsListRequest = {},
+    private async __ltRegionsList(
+        request: NordletApi.LtRegionsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceLtRegionsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.LtRegionsListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1372,7 +1500,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceLtRegionsListResponse,
+                data: _response.body as NordletApi.LtRegionsListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1389,6 +1517,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1401,6 +1534,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1437,32 +1575,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceCurrenciesListRequest} request
+     * @param {NordletApi.CurrenciesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceCurrenciesList()
+     *     await client.reference.currenciesList()
      */
-    public postV1ReferenceCurrenciesList(
-        request: NordletApi.PostV1ReferenceCurrenciesListRequest = {},
+    public currenciesList(
+        request: NordletApi.CurrenciesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceCurrenciesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceCurrenciesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CurrenciesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__currenciesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceCurrenciesList(
-        request: NordletApi.PostV1ReferenceCurrenciesListRequest = {},
+    private async __currenciesList(
+        request: NordletApi.CurrenciesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceCurrenciesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CurrenciesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1490,7 +1630,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceCurrenciesListResponse,
+                data: _response.body as NordletApi.CurrenciesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1507,6 +1647,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1519,6 +1664,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1555,32 +1705,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceVatClassifiersListRequest} request
+     * @param {NordletApi.VatClassifiersListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceVatClassifiersList()
+     *     await client.reference.vatClassifiersList()
      */
-    public postV1ReferenceVatClassifiersList(
-        request: NordletApi.PostV1ReferenceVatClassifiersListRequest = {},
+    public vatClassifiersList(
+        request: NordletApi.VatClassifiersListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceVatClassifiersListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceVatClassifiersList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VatClassifiersListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vatClassifiersList(request, requestOptions));
     }
 
-    private async __postV1ReferenceVatClassifiersList(
-        request: NordletApi.PostV1ReferenceVatClassifiersListRequest = {},
+    private async __vatClassifiersList(
+        request: NordletApi.VatClassifiersListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceVatClassifiersListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VatClassifiersListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1608,7 +1760,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceVatClassifiersListResponse,
+                data: _response.body as NordletApi.VatClassifiersListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1625,6 +1777,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1637,6 +1794,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1673,39 +1835,39 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceVatClassifiersUpsertRequest} request
+     * @param {NordletApi.VatClassifiersUpsertReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceVatClassifiersUpsert({
+     *     await client.reference.vatClassifiersUpsert({
      *         rows: [{
      *                 code: "code",
      *                 name: "name"
      *             }]
      *     })
      */
-    public postV1ReferenceVatClassifiersUpsert(
-        request: NordletApi.PostV1ReferenceVatClassifiersUpsertRequest,
+    public vatClassifiersUpsert(
+        request: NordletApi.VatClassifiersUpsertReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceVatClassifiersUpsertResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceVatClassifiersUpsert(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.VatClassifiersUpsertReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vatClassifiersUpsert(request, requestOptions));
     }
 
-    private async __postV1ReferenceVatClassifiersUpsert(
-        request: NordletApi.PostV1ReferenceVatClassifiersUpsertRequest,
+    private async __vatClassifiersUpsert(
+        request: NordletApi.VatClassifiersUpsertReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceVatClassifiersUpsertResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VatClassifiersUpsertReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1733,7 +1895,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceVatClassifiersUpsertResponse,
+                data: _response.body as NordletApi.VatClassifiersUpsertReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1750,6 +1912,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1762,6 +1929,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1800,32 +1972,34 @@ export class ReferenceClient {
     /**
      * Effective EU VAT rate mapping for this company: EC TEDB defaults, replaced per country by any company overrides. Verify the mapping fits the goods and services you sell before relying on it.
      *
-     * @param {NordletApi.PostV1ReferenceEuVatRatesListRequest} request
+     * @param {NordletApi.EuVatRatesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceEuVatRatesList()
+     *     await client.reference.euVatRatesList()
      */
-    public postV1ReferenceEuVatRatesList(
-        request: NordletApi.PostV1ReferenceEuVatRatesListRequest = {},
+    public euVatRatesList(
+        request: NordletApi.EuVatRatesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceEuVatRatesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceEuVatRatesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.EuVatRatesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__euVatRatesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceEuVatRatesList(
-        request: NordletApi.PostV1ReferenceEuVatRatesListRequest = {},
+    private async __euVatRatesList(
+        request: NordletApi.EuVatRatesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceEuVatRatesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.EuVatRatesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1853,7 +2027,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceEuVatRatesListResponse,
+                data: _response.body as NordletApi.EuVatRatesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1870,6 +2044,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -1882,6 +2061,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -1920,40 +2104,40 @@ export class ReferenceClient {
     /**
      * Replace the VAT rate mapping this company uses for one EU country. Pass an empty rates array to drop the overrides and return to the TEDB defaults. Overrides feed rate suggestions (vat/resolve) and OSS/IOSS return rate classification.
      *
-     * @param {NordletApi.PostV1ReferenceEuVatRatesSetOverridesRequest} request
+     * @param {NordletApi.EuVatRatesSetOverridesReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceEuVatRatesSetOverrides({
+     *     await client.reference.euVatRatesSetOverrides({
      *         countryCode: "countryCode",
      *         rates: [{
      *                 category: "standard",
-     *                 ratePercent: "ratePercent"
+     *                 ratePercent: "121.00"
      *             }]
      *     })
      */
-    public postV1ReferenceEuVatRatesSetOverrides(
-        request: NordletApi.PostV1ReferenceEuVatRatesSetOverridesRequest,
+    public euVatRatesSetOverrides(
+        request: NordletApi.EuVatRatesSetOverridesReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceEuVatRatesSetOverridesResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceEuVatRatesSetOverrides(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.EuVatRatesSetOverridesReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__euVatRatesSetOverrides(request, requestOptions));
     }
 
-    private async __postV1ReferenceEuVatRatesSetOverrides(
-        request: NordletApi.PostV1ReferenceEuVatRatesSetOverridesRequest,
+    private async __euVatRatesSetOverrides(
+        request: NordletApi.EuVatRatesSetOverridesReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceEuVatRatesSetOverridesResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.EuVatRatesSetOverridesReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1981,7 +2165,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceEuVatRatesSetOverridesResponse,
+                data: _response.body as NordletApi.EuVatRatesSetOverridesReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -1998,6 +2182,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2010,6 +2199,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2046,32 +2240,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceVatResolveRequest} request
+     * @param {NordletApi.VatResolveReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceVatResolve()
+     *     await client.reference.vatResolve()
      */
-    public postV1ReferenceVatResolve(
-        request: NordletApi.PostV1ReferenceVatResolveRequest = {},
+    public vatResolve(
+        request: NordletApi.VatResolveReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceVatResolveResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceVatResolve(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VatResolveReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vatResolve(request, requestOptions));
     }
 
-    private async __postV1ReferenceVatResolve(
-        request: NordletApi.PostV1ReferenceVatResolveRequest = {},
+    private async __vatResolve(
+        request: NordletApi.VatResolveReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceVatResolveResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VatResolveReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2099,7 +2295,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceVatResolveResponse,
+                data: _response.body as NordletApi.VatResolveReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2116,6 +2312,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2128,6 +2329,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2159,32 +2365,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceCnCodesListRequest} request
+     * @param {NordletApi.CnCodesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceCnCodesList()
+     *     await client.reference.cnCodesList()
      */
-    public postV1ReferenceCnCodesList(
-        request: NordletApi.PostV1ReferenceCnCodesListRequest = {},
+    public cnCodesList(
+        request: NordletApi.CnCodesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceCnCodesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceCnCodesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CnCodesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__cnCodesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceCnCodesList(
-        request: NordletApi.PostV1ReferenceCnCodesListRequest = {},
+    private async __cnCodesList(
+        request: NordletApi.CnCodesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceCnCodesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CnCodesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2212,7 +2420,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceCnCodesListResponse,
+                data: _response.body as NordletApi.CnCodesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2229,6 +2437,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2241,6 +2454,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2272,37 +2490,39 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceCnCodesUpsertRequest} request
+     * @param {NordletApi.CnCodesUpsertReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceCnCodesUpsert({
+     *     await client.reference.cnCodesUpsert({
      *         rows: [{
      *                 code: "code",
      *                 name: "name"
      *             }]
      *     })
      */
-    public postV1ReferenceCnCodesUpsert(
-        request: NordletApi.PostV1ReferenceCnCodesUpsertRequest,
+    public cnCodesUpsert(
+        request: NordletApi.CnCodesUpsertReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceCnCodesUpsertResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceCnCodesUpsert(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.CnCodesUpsertReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__cnCodesUpsert(request, requestOptions));
     }
 
-    private async __postV1ReferenceCnCodesUpsert(
-        request: NordletApi.PostV1ReferenceCnCodesUpsertRequest,
+    private async __cnCodesUpsert(
+        request: NordletApi.CnCodesUpsertReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceCnCodesUpsertResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.CnCodesUpsertReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2330,7 +2550,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceCnCodesUpsertResponse,
+                data: _response.body as NordletApi.CnCodesUpsertReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2347,6 +2567,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2359,6 +2584,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2395,34 +2625,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceComplianceVersionsListRequest} request
+     * @param {NordletApi.ComplianceVersionsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceComplianceVersionsList()
+     *     await client.reference.complianceVersionsList()
      */
-    public postV1ReferenceComplianceVersionsList(
-        request: NordletApi.PostV1ReferenceComplianceVersionsListRequest = {},
+    public complianceVersionsList(
+        request: NordletApi.ComplianceVersionsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceComplianceVersionsListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceComplianceVersionsList(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.ComplianceVersionsListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__complianceVersionsList(request, requestOptions));
     }
 
-    private async __postV1ReferenceComplianceVersionsList(
-        request: NordletApi.PostV1ReferenceComplianceVersionsListRequest = {},
+    private async __complianceVersionsList(
+        request: NordletApi.ComplianceVersionsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceComplianceVersionsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ComplianceVersionsListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2450,7 +2680,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceComplianceVersionsListResponse,
+                data: _response.body as NordletApi.ComplianceVersionsListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2467,6 +2697,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2479,6 +2714,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2515,34 +2755,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceIntrastatThresholdsListRequest} request
+     * @param {NordletApi.IntrastatThresholdsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceIntrastatThresholdsList()
+     *     await client.reference.intrastatThresholdsList()
      */
-    public postV1ReferenceIntrastatThresholdsList(
-        request: NordletApi.PostV1ReferenceIntrastatThresholdsListRequest = {},
+    public intrastatThresholdsList(
+        request: NordletApi.IntrastatThresholdsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceIntrastatThresholdsListResponse> {
-        return core.HttpResponsePromise.fromPromise(
-            this.__postV1ReferenceIntrastatThresholdsList(request, requestOptions),
-        );
+    ): core.HttpResponsePromise<NordletApi.IntrastatThresholdsListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__intrastatThresholdsList(request, requestOptions));
     }
 
-    private async __postV1ReferenceIntrastatThresholdsList(
-        request: NordletApi.PostV1ReferenceIntrastatThresholdsListRequest = {},
+    private async __intrastatThresholdsList(
+        request: NordletApi.IntrastatThresholdsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceIntrastatThresholdsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.IntrastatThresholdsListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2570,7 +2810,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceIntrastatThresholdsListResponse,
+                data: _response.body as NordletApi.IntrastatThresholdsListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2587,6 +2827,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2599,6 +2844,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2635,32 +2885,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceUnitsListRequest} request
+     * @param {NordletApi.UnitsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceUnitsList()
+     *     await client.reference.unitsList()
      */
-    public postV1ReferenceUnitsList(
-        request: NordletApi.PostV1ReferenceUnitsListRequest = {},
+    public unitsList(
+        request: NordletApi.UnitsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceUnitsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceUnitsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UnitsListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__unitsList(request, requestOptions));
     }
 
-    private async __postV1ReferenceUnitsList(
-        request: NordletApi.PostV1ReferenceUnitsListRequest = {},
+    private async __unitsList(
+        request: NordletApi.UnitsListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceUnitsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UnitsListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2688,7 +2940,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceUnitsListResponse,
+                data: _response.body as NordletApi.UnitsListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2705,6 +2957,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2717,6 +2974,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2748,35 +3010,37 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceSeriesCreateRequest} request
+     * @param {NordletApi.SeriesCreateReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceSeriesCreate({
+     *     await client.reference.seriesCreate({
      *         documentType: "documentType",
      *         year: 1000000
      *     })
      */
-    public postV1ReferenceSeriesCreate(
-        request: NordletApi.PostV1ReferenceSeriesCreateRequest,
+    public seriesCreate(
+        request: NordletApi.SeriesCreateReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceSeriesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceSeriesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SeriesCreateReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__seriesCreate(request, requestOptions));
     }
 
-    private async __postV1ReferenceSeriesCreate(
-        request: NordletApi.PostV1ReferenceSeriesCreateRequest,
+    private async __seriesCreate(
+        request: NordletApi.SeriesCreateReferenceRequest,
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceSeriesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SeriesCreateReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2804,7 +3068,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceSeriesCreateResponse,
+                data: _response.body as NordletApi.SeriesCreateReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2821,6 +3085,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2833,6 +3102,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -2864,32 +3138,34 @@ export class ReferenceClient {
     }
 
     /**
-     * @param {NordletApi.PostV1ReferenceSeriesListRequest} request
+     * @param {NordletApi.SeriesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.reference.postV1ReferenceSeriesList()
+     *     await client.reference.seriesList()
      */
-    public postV1ReferenceSeriesList(
-        request: NordletApi.PostV1ReferenceSeriesListRequest = {},
+    public seriesList(
+        request: NordletApi.SeriesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1ReferenceSeriesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1ReferenceSeriesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.SeriesListReferenceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__seriesList(request, requestOptions));
     }
 
-    private async __postV1ReferenceSeriesList(
-        request: NordletApi.PostV1ReferenceSeriesListRequest = {},
+    private async __seriesList(
+        request: NordletApi.SeriesListReferenceRequest = {},
         requestOptions?: ReferenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1ReferenceSeriesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.SeriesListReferenceResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -2917,7 +3193,7 @@ export class ReferenceClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1ReferenceSeriesListResponse,
+                data: _response.body as NordletApi.SeriesListReferenceResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -2934,6 +3210,11 @@ export class ReferenceClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -2946,6 +3227,11 @@ export class ReferenceClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

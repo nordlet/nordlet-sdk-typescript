@@ -1,2 +1,2 @@
-export * from "./PostV1MigrationBooksImportResponse.js";
-export * from "./PostV1MigrationBooksValidateResponse.js";
+export * from "./BooksImportMigrationResponse.js";
+export * from "./BooksValidateMigrationResponse.js";

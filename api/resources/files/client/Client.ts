@@ -24,37 +24,39 @@ export class FilesClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FilesUploadRequest} request
+     * @param {NordletApi.UploadFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.files.postV1FilesUpload({
+     *     await client.files.upload({
      *         entity: "entity",
      *         fileName: "fileName",
      *         mimeType: "mimeType",
      *         content: "content"
      *     })
      */
-    public postV1FilesUpload(
-        request: NordletApi.PostV1FilesUploadRequest,
+    public upload(
+        request: NordletApi.UploadFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FilesUploadResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FilesUpload(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.UploadFilesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__upload(request, requestOptions));
     }
 
-    private async __postV1FilesUpload(
-        request: NordletApi.PostV1FilesUploadRequest,
+    private async __upload(
+        request: NordletApi.UploadFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FilesUploadResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.UploadFilesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -81,7 +83,7 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1FilesUploadResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.UploadFilesResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -93,6 +95,11 @@ export class FilesClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -108,6 +115,11 @@ export class FilesClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -139,34 +151,36 @@ export class FilesClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FilesGetRequest} request
+     * @param {NordletApi.GetFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.files.postV1FilesGet({
+     *     await client.files.get({
      *         id: "id"
      *     })
      */
-    public postV1FilesGet(
-        request: NordletApi.PostV1FilesGetRequest,
+    public get(
+        request: NordletApi.GetFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FilesGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FilesGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.GetFilesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
-    private async __postV1FilesGet(
-        request: NordletApi.PostV1FilesGetRequest,
+    private async __get(
+        request: NordletApi.GetFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FilesGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.GetFilesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -193,7 +207,7 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1FilesGetResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.GetFilesResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -205,6 +219,11 @@ export class FilesClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -220,6 +239,11 @@ export class FilesClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -251,32 +275,34 @@ export class FilesClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FilesListRequest} request
+     * @param {NordletApi.ListFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.files.postV1FilesList()
+     *     await client.files.list()
      */
-    public postV1FilesList(
-        request: NordletApi.PostV1FilesListRequest = {},
+    public list(
+        request: NordletApi.ListFilesRequest = {},
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FilesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FilesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.ListFilesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
-    private async __postV1FilesList(
-        request: NordletApi.PostV1FilesListRequest = {},
+    private async __list(
+        request: NordletApi.ListFilesRequest = {},
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FilesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.ListFilesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -303,7 +329,7 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1FilesListResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.ListFilesResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -315,6 +341,11 @@ export class FilesClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -330,6 +361,11 @@ export class FilesClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -361,34 +397,36 @@ export class FilesClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FilesDeleteRequest} request
+     * @param {NordletApi.DeleteFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.files.postV1FilesDelete({
+     *     await client.files.delete({
      *         id: "id"
      *     })
      */
-    public postV1FilesDelete(
-        request: NordletApi.PostV1FilesDeleteRequest,
+    public delete(
+        request: NordletApi.DeleteFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FilesDeleteResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FilesDelete(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.DeleteFilesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(request, requestOptions));
     }
 
-    private async __postV1FilesDelete(
-        request: NordletApi.PostV1FilesDeleteRequest,
+    private async __delete(
+        request: NordletApi.DeleteFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FilesDeleteResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.DeleteFilesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -415,7 +453,7 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as NordletApi.PostV1FilesDeleteResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as NordletApi.DeleteFilesResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -427,6 +465,11 @@ export class FilesClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -442,6 +485,11 @@ export class FilesClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

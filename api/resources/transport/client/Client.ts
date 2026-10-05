@@ -24,37 +24,39 @@ export class TransportClient {
     }
 
     /**
-     * @param {NordletApi.PostV1TransportWaybillsCreateRequest} request
+     * @param {NordletApi.WaybillsCreateTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.transport.postV1TransportWaybillsCreate({
+     *     await client.transport.waybillsCreate({
      *         consigneePartnerId: "consigneePartnerId",
      *         dispatchAt: "2024-01-15T09:30:00Z",
      *         loadAddress: "loadAddress",
      *         unloadAddress: "unloadAddress"
      *     })
      */
-    public postV1TransportWaybillsCreate(
-        request: NordletApi.PostV1TransportWaybillsCreateRequest,
+    public waybillsCreate(
+        request: NordletApi.WaybillsCreateTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1TransportWaybillsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1TransportWaybillsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WaybillsCreateTransportResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__waybillsCreate(request, requestOptions));
     }
 
-    private async __postV1TransportWaybillsCreate(
-        request: NordletApi.PostV1TransportWaybillsCreateRequest,
+    private async __waybillsCreate(
+        request: NordletApi.WaybillsCreateTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1TransportWaybillsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WaybillsCreateTransportResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -82,7 +84,7 @@ export class TransportClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1TransportWaybillsCreateResponse,
+                data: _response.body as NordletApi.WaybillsCreateTransportResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -99,6 +101,11 @@ export class TransportClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -111,6 +118,11 @@ export class TransportClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -147,34 +159,36 @@ export class TransportClient {
     }
 
     /**
-     * @param {NordletApi.PostV1TransportWaybillsUpdateRequest} request
+     * @param {NordletApi.WaybillsUpdateTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.transport.postV1TransportWaybillsUpdate({
+     *     await client.transport.waybillsUpdate({
      *         id: "id"
      *     })
      */
-    public postV1TransportWaybillsUpdate(
-        request: NordletApi.PostV1TransportWaybillsUpdateRequest,
+    public waybillsUpdate(
+        request: NordletApi.WaybillsUpdateTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1TransportWaybillsUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1TransportWaybillsUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WaybillsUpdateTransportResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__waybillsUpdate(request, requestOptions));
     }
 
-    private async __postV1TransportWaybillsUpdate(
-        request: NordletApi.PostV1TransportWaybillsUpdateRequest,
+    private async __waybillsUpdate(
+        request: NordletApi.WaybillsUpdateTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1TransportWaybillsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WaybillsUpdateTransportResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -202,7 +216,7 @@ export class TransportClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1TransportWaybillsUpdateResponse,
+                data: _response.body as NordletApi.WaybillsUpdateTransportResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -219,6 +233,11 @@ export class TransportClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -231,6 +250,11 @@ export class TransportClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -267,34 +291,36 @@ export class TransportClient {
     }
 
     /**
-     * @param {NordletApi.PostV1TransportWaybillsIssueRequest} request
+     * @param {NordletApi.WaybillsIssueTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.transport.postV1TransportWaybillsIssue({
+     *     await client.transport.waybillsIssue({
      *         id: "id"
      *     })
      */
-    public postV1TransportWaybillsIssue(
-        request: NordletApi.PostV1TransportWaybillsIssueRequest,
+    public waybillsIssue(
+        request: NordletApi.WaybillsIssueTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1TransportWaybillsIssueResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1TransportWaybillsIssue(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WaybillsIssueTransportResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__waybillsIssue(request, requestOptions));
     }
 
-    private async __postV1TransportWaybillsIssue(
-        request: NordletApi.PostV1TransportWaybillsIssueRequest,
+    private async __waybillsIssue(
+        request: NordletApi.WaybillsIssueTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1TransportWaybillsIssueResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WaybillsIssueTransportResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -322,7 +348,7 @@ export class TransportClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1TransportWaybillsIssueResponse,
+                data: _response.body as NordletApi.WaybillsIssueTransportResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -339,6 +365,11 @@ export class TransportClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -351,6 +382,11 @@ export class TransportClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -382,34 +418,36 @@ export class TransportClient {
     }
 
     /**
-     * @param {NordletApi.PostV1TransportWaybillsCancelRequest} request
+     * @param {NordletApi.WaybillsCancelTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.transport.postV1TransportWaybillsCancel({
+     *     await client.transport.waybillsCancel({
      *         id: "id"
      *     })
      */
-    public postV1TransportWaybillsCancel(
-        request: NordletApi.PostV1TransportWaybillsCancelRequest,
+    public waybillsCancel(
+        request: NordletApi.WaybillsCancelTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1TransportWaybillsCancelResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1TransportWaybillsCancel(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WaybillsCancelTransportResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__waybillsCancel(request, requestOptions));
     }
 
-    private async __postV1TransportWaybillsCancel(
-        request: NordletApi.PostV1TransportWaybillsCancelRequest,
+    private async __waybillsCancel(
+        request: NordletApi.WaybillsCancelTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1TransportWaybillsCancelResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WaybillsCancelTransportResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -437,7 +475,7 @@ export class TransportClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1TransportWaybillsCancelResponse,
+                data: _response.body as NordletApi.WaybillsCancelTransportResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -454,6 +492,11 @@ export class TransportClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -466,6 +509,11 @@ export class TransportClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -502,34 +550,36 @@ export class TransportClient {
     }
 
     /**
-     * @param {NordletApi.PostV1TransportWaybillsGetRequest} request
+     * @param {NordletApi.WaybillsGetTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.transport.postV1TransportWaybillsGet({
+     *     await client.transport.waybillsGet({
      *         id: "id"
      *     })
      */
-    public postV1TransportWaybillsGet(
-        request: NordletApi.PostV1TransportWaybillsGetRequest,
+    public waybillsGet(
+        request: NordletApi.WaybillsGetTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1TransportWaybillsGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1TransportWaybillsGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WaybillsGetTransportResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__waybillsGet(request, requestOptions));
     }
 
-    private async __postV1TransportWaybillsGet(
-        request: NordletApi.PostV1TransportWaybillsGetRequest,
+    private async __waybillsGet(
+        request: NordletApi.WaybillsGetTransportRequest,
         requestOptions?: TransportClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1TransportWaybillsGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WaybillsGetTransportResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -557,7 +607,7 @@ export class TransportClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1TransportWaybillsGetResponse,
+                data: _response.body as NordletApi.WaybillsGetTransportResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -574,6 +624,11 @@ export class TransportClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -586,6 +641,11 @@ export class TransportClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -617,32 +677,34 @@ export class TransportClient {
     }
 
     /**
-     * @param {NordletApi.PostV1TransportWaybillsListRequest} request
+     * @param {NordletApi.WaybillsListTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.transport.postV1TransportWaybillsList()
+     *     await client.transport.waybillsList()
      */
-    public postV1TransportWaybillsList(
-        request: NordletApi.PostV1TransportWaybillsListRequest = {},
+    public waybillsList(
+        request: NordletApi.WaybillsListTransportRequest = {},
         requestOptions?: TransportClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1TransportWaybillsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1TransportWaybillsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.WaybillsListTransportResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__waybillsList(request, requestOptions));
     }
 
-    private async __postV1TransportWaybillsList(
-        request: NordletApi.PostV1TransportWaybillsListRequest = {},
+    private async __waybillsList(
+        request: NordletApi.WaybillsListTransportRequest = {},
         requestOptions?: TransportClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1TransportWaybillsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.WaybillsListTransportResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -670,7 +732,7 @@ export class TransportClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1TransportWaybillsListResponse,
+                data: _response.body as NordletApi.WaybillsListTransportResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -687,6 +749,11 @@ export class TransportClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -699,6 +766,11 @@ export class TransportClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );

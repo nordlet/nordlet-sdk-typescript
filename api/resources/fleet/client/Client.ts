@@ -24,36 +24,38 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetVehiclesCreateRequest} request
+     * @param {NordletApi.VehiclesCreateFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetVehiclesCreate({
+     *     await client.fleet.vehiclesCreate({
      *         plateNumber: "plateNumber",
      *         make: "make",
      *         model: "model"
      *     })
      */
-    public postV1FleetVehiclesCreate(
-        request: NordletApi.PostV1FleetVehiclesCreateRequest,
+    public vehiclesCreate(
+        request: NordletApi.VehiclesCreateFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetVehiclesCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetVehiclesCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VehiclesCreateFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vehiclesCreate(request, requestOptions));
     }
 
-    private async __postV1FleetVehiclesCreate(
-        request: NordletApi.PostV1FleetVehiclesCreateRequest,
+    private async __vehiclesCreate(
+        request: NordletApi.VehiclesCreateFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetVehiclesCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VehiclesCreateFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -81,7 +83,7 @@ export class FleetClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1FleetVehiclesCreateResponse,
+                data: _response.body as NordletApi.VehiclesCreateFleetResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -98,6 +100,11 @@ export class FleetClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -110,6 +117,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -141,34 +153,36 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetVehiclesUpdateRequest} request
+     * @param {NordletApi.VehiclesUpdateFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetVehiclesUpdate({
+     *     await client.fleet.vehiclesUpdate({
      *         id: "id"
      *     })
      */
-    public postV1FleetVehiclesUpdate(
-        request: NordletApi.PostV1FleetVehiclesUpdateRequest,
+    public vehiclesUpdate(
+        request: NordletApi.VehiclesUpdateFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetVehiclesUpdateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetVehiclesUpdate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VehiclesUpdateFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vehiclesUpdate(request, requestOptions));
     }
 
-    private async __postV1FleetVehiclesUpdate(
-        request: NordletApi.PostV1FleetVehiclesUpdateRequest,
+    private async __vehiclesUpdate(
+        request: NordletApi.VehiclesUpdateFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetVehiclesUpdateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VehiclesUpdateFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -196,7 +210,7 @@ export class FleetClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1FleetVehiclesUpdateResponse,
+                data: _response.body as NordletApi.VehiclesUpdateFleetResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -213,6 +227,11 @@ export class FleetClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -225,6 +244,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -256,34 +280,36 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetVehiclesGetRequest} request
+     * @param {NordletApi.VehiclesGetFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetVehiclesGet({
+     *     await client.fleet.vehiclesGet({
      *         id: "id"
      *     })
      */
-    public postV1FleetVehiclesGet(
-        request: NordletApi.PostV1FleetVehiclesGetRequest,
+    public vehiclesGet(
+        request: NordletApi.VehiclesGetFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetVehiclesGetResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetVehiclesGet(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VehiclesGetFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vehiclesGet(request, requestOptions));
     }
 
-    private async __postV1FleetVehiclesGet(
-        request: NordletApi.PostV1FleetVehiclesGetRequest,
+    private async __vehiclesGet(
+        request: NordletApi.VehiclesGetFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetVehiclesGetResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VehiclesGetFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -310,10 +336,7 @@ export class FleetClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1FleetVehiclesGetResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.VehiclesGetFleetResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -325,6 +348,11 @@ export class FleetClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -340,6 +368,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -371,32 +404,34 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetVehiclesListRequest} request
+     * @param {NordletApi.VehiclesListFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetVehiclesList()
+     *     await client.fleet.vehiclesList()
      */
-    public postV1FleetVehiclesList(
-        request: NordletApi.PostV1FleetVehiclesListRequest = {},
+    public vehiclesList(
+        request: NordletApi.VehiclesListFleetRequest = {},
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetVehiclesListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetVehiclesList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.VehiclesListFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__vehiclesList(request, requestOptions));
     }
 
-    private async __postV1FleetVehiclesList(
-        request: NordletApi.PostV1FleetVehiclesListRequest = {},
+    private async __vehiclesList(
+        request: NordletApi.VehiclesListFleetRequest = {},
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetVehiclesListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.VehiclesListFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -423,10 +458,7 @@ export class FleetClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as NordletApi.PostV1FleetVehiclesListResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as NordletApi.VehiclesListFleetResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -438,6 +470,11 @@ export class FleetClient {
                     );
                 case 401:
                     throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -453,6 +490,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -484,36 +526,38 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetAssignmentsCreateRequest} request
+     * @param {NordletApi.AssignmentsCreateFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetAssignmentsCreate({
+     *     await client.fleet.assignmentsCreate({
      *         vehicleId: "vehicleId",
      *         employeeId: "employeeId",
-     *         fromDate: "fromDate"
+     *         fromDate: "2026-07-01"
      *     })
      */
-    public postV1FleetAssignmentsCreate(
-        request: NordletApi.PostV1FleetAssignmentsCreateRequest,
+    public assignmentsCreate(
+        request: NordletApi.AssignmentsCreateFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetAssignmentsCreateResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetAssignmentsCreate(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssignmentsCreateFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assignmentsCreate(request, requestOptions));
     }
 
-    private async __postV1FleetAssignmentsCreate(
-        request: NordletApi.PostV1FleetAssignmentsCreateRequest,
+    private async __assignmentsCreate(
+        request: NordletApi.AssignmentsCreateFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetAssignmentsCreateResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssignmentsCreateFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -541,7 +585,7 @@ export class FleetClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1FleetAssignmentsCreateResponse,
+                data: _response.body as NordletApi.AssignmentsCreateFleetResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -558,6 +602,11 @@ export class FleetClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -570,6 +619,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -601,35 +655,37 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetAssignmentsEndRequest} request
+     * @param {NordletApi.AssignmentsEndFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetAssignmentsEnd({
+     *     await client.fleet.assignmentsEnd({
      *         id: "id",
-     *         toDate: "toDate"
+     *         toDate: "2026-07-01"
      *     })
      */
-    public postV1FleetAssignmentsEnd(
-        request: NordletApi.PostV1FleetAssignmentsEndRequest,
+    public assignmentsEnd(
+        request: NordletApi.AssignmentsEndFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetAssignmentsEndResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetAssignmentsEnd(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssignmentsEndFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assignmentsEnd(request, requestOptions));
     }
 
-    private async __postV1FleetAssignmentsEnd(
-        request: NordletApi.PostV1FleetAssignmentsEndRequest,
+    private async __assignmentsEnd(
+        request: NordletApi.AssignmentsEndFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetAssignmentsEndResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssignmentsEndFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -657,7 +713,7 @@ export class FleetClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1FleetAssignmentsEndResponse,
+                data: _response.body as NordletApi.AssignmentsEndFleetResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -674,6 +730,11 @@ export class FleetClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -686,6 +747,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -717,32 +783,34 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetAssignmentsListRequest} request
+     * @param {NordletApi.AssignmentsListFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetAssignmentsList()
+     *     await client.fleet.assignmentsList()
      */
-    public postV1FleetAssignmentsList(
-        request: NordletApi.PostV1FleetAssignmentsListRequest = {},
+    public assignmentsList(
+        request: NordletApi.AssignmentsListFleetRequest = {},
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetAssignmentsListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetAssignmentsList(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.AssignmentsListFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__assignmentsList(request, requestOptions));
     }
 
-    private async __postV1FleetAssignmentsList(
-        request: NordletApi.PostV1FleetAssignmentsListRequest = {},
+    private async __assignmentsList(
+        request: NordletApi.AssignmentsListFleetRequest = {},
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetAssignmentsListResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.AssignmentsListFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -770,7 +838,7 @@ export class FleetClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1FleetAssignmentsListResponse,
+                data: _response.body as NordletApi.AssignmentsListFleetResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -787,6 +855,11 @@ export class FleetClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -799,6 +872,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -830,35 +908,37 @@ export class FleetClient {
     }
 
     /**
-     * @param {NordletApi.PostV1FleetNaturaPreviewRequest} request
+     * @param {NordletApi.NaturaPreviewFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link NordletApi.BadRequestError}
      * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
      * @throws {@link NordletApi.ForbiddenError}
      * @throws {@link NordletApi.NotFoundError}
      * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
      * @throws {@link NordletApi.UnprocessableEntityError}
      * @throws {@link NordletApi.TooManyRequestsError}
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.fleet.postV1FleetNaturaPreview({
+     *     await client.fleet.naturaPreview({
      *         year: 1000000,
      *         month: 1000000
      *     })
      */
-    public postV1FleetNaturaPreview(
-        request: NordletApi.PostV1FleetNaturaPreviewRequest,
+    public naturaPreview(
+        request: NordletApi.NaturaPreviewFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): core.HttpResponsePromise<NordletApi.PostV1FleetNaturaPreviewResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__postV1FleetNaturaPreview(request, requestOptions));
+    ): core.HttpResponsePromise<NordletApi.NaturaPreviewFleetResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__naturaPreview(request, requestOptions));
     }
 
-    private async __postV1FleetNaturaPreview(
-        request: NordletApi.PostV1FleetNaturaPreviewRequest,
+    private async __naturaPreview(
+        request: NordletApi.NaturaPreviewFleetRequest,
         requestOptions?: FleetClient.RequestOptions,
-    ): Promise<core.WithRawResponse<NordletApi.PostV1FleetNaturaPreviewResponse>> {
+    ): Promise<core.WithRawResponse<NordletApi.NaturaPreviewFleetResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -886,7 +966,7 @@ export class FleetClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as NordletApi.PostV1FleetNaturaPreviewResponse,
+                data: _response.body as NordletApi.NaturaPreviewFleetResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -903,6 +983,11 @@ export class FleetClient {
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 403:
                     throw new NordletApi.ForbiddenError(
                         _response.error.body as NordletApi.ErrorResponse,
@@ -915,6 +1000,11 @@ export class FleetClient {
                     );
                 case 409:
                     throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
                         _response.error.body as NordletApi.ErrorResponse,
                         _response.rawResponse,
                     );
