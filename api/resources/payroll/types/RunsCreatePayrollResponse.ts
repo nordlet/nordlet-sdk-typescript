@@ -5,6 +5,7 @@ export interface RunsCreatePayrollResponse {
     year: number;
     month: number;
     countryCode: string;
+    payDate: string | null;
     status: RunsCreatePayrollResponse.Status;
     grossTotal: string;
     taxAllowanceTotal: string;

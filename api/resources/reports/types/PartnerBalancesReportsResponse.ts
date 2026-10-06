@@ -2,6 +2,7 @@
 
 export interface PartnerBalancesReportsResponse {
     rows: PartnerBalancesReportsResponse.Rows.Item[];
+    totals: PartnerBalancesReportsResponse.Totals;
 }
 
 export namespace PartnerBalancesReportsResponse {
@@ -15,5 +16,10 @@ export namespace PartnerBalancesReportsResponse {
             payable: string;
             net: string;
         }
+    }
+
+    export interface Totals {
+        receivable: string;
+        payable: string;
     }
 }

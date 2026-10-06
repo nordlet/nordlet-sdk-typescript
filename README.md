@@ -3,7 +3,7 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Nordlet%2FTypeScript)
 [![npm shield](https://img.shields.io/npm/v/nordlet)](https://www.npmjs.com/package/nordlet)
 
-The Nordlet TypeScript library provides convenient access to the Nordlet Accounting API from TypeScript and JavaScript (Node.js ≥ 18, browsers, and edge runtimes — anywhere `fetch` is available).
+The Nordlet TypeScript library provides convenient access to the Nordlet Accounting API from TypeScript and JavaScript (Node.js ≥ 18, browsers, and edge runtimes - anywhere `fetch` is available).
 
 ## Installation
 
@@ -53,7 +53,7 @@ await client.sales.postV1SalesInvoicesList({}, { maxRetries: 5, timeoutInSeconds
 
 ## Documentation
 
-The full API reference lives at [docs.nordlet.com](https://docs.nordlet.com) — every endpoint, request/response schema, error envelope, idempotency and webhook conventions.
+The full API reference lives at [docs.nordlet.com](https://docs.nordlet.com) - every endpoint, request/response schema, error envelope, idempotency and webhook conventions.
 
 ## Contributing
 

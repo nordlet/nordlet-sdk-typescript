@@ -14,6 +14,7 @@ export interface CreateLeadsRequest {
     website?: string;
     countryCode?: string;
     sourceId?: string;
+    typeId?: string;
     status?: CreateLeadsRequest.Status;
     estimatedValue?: string;
     currency?: string;

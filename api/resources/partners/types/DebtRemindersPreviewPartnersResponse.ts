@@ -13,10 +13,8 @@ export namespace DebtRemindersPreviewPartnersResponse {
             partnerName: string;
             email: string;
             locale: Item.Locale;
-            currency: string;
             invoices: Item.Invoices.Item[];
-            totalDue: string;
-            interestDue: string;
+            totals: Item.Totals.Item[];
         }
 
         export namespace Item {
@@ -34,9 +32,20 @@ export namespace DebtRemindersPreviewPartnersResponse {
                     fullNumber: string;
                     issueDate: string;
                     dueDate: string;
+                    currency: string;
                     remaining: string;
                     daysLate: number;
                     interest: string;
+                }
+            }
+
+            export type Totals = Totals.Item[];
+
+            export namespace Totals {
+                export interface Item {
+                    currency: string;
+                    totalDue: string;
+                    interestDue: string;
                 }
             }
         }

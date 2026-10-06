@@ -14,6 +14,7 @@ export interface RunsCreatePayrollRequest {
     grossOverrides?: RunsCreatePayrollRequest.GrossOverrides.Item[];
     lines?: RunsCreatePayrollRequest.Lines.Item[];
     notes?: string;
+    payDate?: string;
 }
 
 export namespace RunsCreatePayrollRequest {

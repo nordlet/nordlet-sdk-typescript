@@ -15,6 +15,7 @@ export interface UpdateLeadsRequest {
     website?: string | null;
     countryCode?: string | null;
     sourceId?: string | null;
+    typeId?: string | null;
     status?: UpdateLeadsRequest.Status;
     estimatedValue?: string | null;
     currency?: string;

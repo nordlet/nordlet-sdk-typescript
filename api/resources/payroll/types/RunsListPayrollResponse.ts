@@ -6,6 +6,8 @@ export interface RunsListPayrollResponse {
     pageSize: number;
     total: number;
     totals?: Record<string, string> | undefined;
+    /** The requested totals split by currency code, present when the listed records carry a currency */
+    totalsByCurrency?: Record<string, Record<string, string>> | undefined;
 }
 
 export namespace RunsListPayrollResponse {
@@ -17,6 +19,7 @@ export namespace RunsListPayrollResponse {
             year: number;
             month: number;
             countryCode: string;
+            payDate: string | null;
             status: Item.Status;
             grossTotal: string;
             taxAllowanceTotal: string;

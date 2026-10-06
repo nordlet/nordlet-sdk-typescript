@@ -1,6 +1,7 @@
 export * from "./AccountsCreateBankResponse.js";
 export * from "./AccountsListBankResponse.js";
 export * from "./AccountsUpdateBankResponse.js";
+export * from "./DirectDebitsCandidatesBankResponse.js";
 export * from "./DirectDebitsExportBankResponse.js";
 export * from "./FeedsAccountsConfigureBankResponse.js";
 export * from "./FeedsAccountsLinkBankResponse.js";

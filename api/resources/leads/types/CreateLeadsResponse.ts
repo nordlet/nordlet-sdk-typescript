@@ -10,6 +10,8 @@ export interface CreateLeadsResponse {
     countryCode: string | null;
     sourceId: string | null;
     sourceName: string | null;
+    typeId: string | null;
+    typeName: string | null;
     status: CreateLeadsResponse.Status;
     estimatedValue: string | null;
     currency: string;

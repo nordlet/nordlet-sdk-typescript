@@ -9,7 +9,7 @@ export interface InvoicesEinvoiceSendSalesResponse {
     nationalNumber: string | null;
     status: InvoicesEinvoiceSendSalesResponse.Status;
     detail: string | null;
-    fileId: string;
+    fileId: string | null;
     warnings: string[];
 }
 

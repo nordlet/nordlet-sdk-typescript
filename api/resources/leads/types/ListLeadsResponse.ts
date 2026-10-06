@@ -6,6 +6,8 @@ export interface ListLeadsResponse {
     pageSize: number;
     total: number;
     totals?: Record<string, string> | undefined;
+    /** The requested totals split by currency code, present when the listed records carry a currency */
+    totalsByCurrency?: Record<string, Record<string, string>> | undefined;
 }
 
 export namespace ListLeadsResponse {
@@ -22,6 +24,8 @@ export namespace ListLeadsResponse {
             countryCode: string | null;
             sourceId: string | null;
             sourceName: string | null;
+            typeId: string | null;
+            typeName: string | null;
             status: Item.Status;
             estimatedValue: string | null;
             currency: string;

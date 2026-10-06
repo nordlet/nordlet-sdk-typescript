@@ -4,5 +4,5 @@ export interface InvoicesPeppolSendSalesResponse {
     sent: boolean;
     messageId: string;
     receiverId: string;
-    fileId: string;
+    fileId: string | null;
 }

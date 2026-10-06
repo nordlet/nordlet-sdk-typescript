@@ -16,6 +16,8 @@ export namespace ConvertLeadsResponse {
         countryCode: string | null;
         sourceId: string | null;
         sourceName: string | null;
+        typeId: string | null;
+        typeName: string | null;
         status: Lead.Status;
         estimatedValue: string | null;
         currency: string;

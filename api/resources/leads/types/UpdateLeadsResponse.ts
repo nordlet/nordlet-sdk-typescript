@@ -10,6 +10,8 @@ export interface UpdateLeadsResponse {
     countryCode: string | null;
     sourceId: string | null;
     sourceName: string | null;
+    typeId: string | null;
+    typeName: string | null;
     status: UpdateLeadsResponse.Status;
     estimatedValue: string | null;
     currency: string;
