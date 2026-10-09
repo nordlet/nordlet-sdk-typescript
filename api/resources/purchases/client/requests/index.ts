@@ -1,3 +1,5 @@
+export { DeferralsListPurchasesRequest } from "./DeferralsListPurchasesRequest.js";
+export type { DeferralsPostPurchasesRequest } from "./DeferralsPostPurchasesRequest.js";
 export { InvoicesCreatePurchasesRequest } from "./InvoicesCreatePurchasesRequest.js";
 export type { InvoicesDeletePurchasesRequest } from "./InvoicesDeletePurchasesRequest.js";
 export type { InvoicesGetPurchasesRequest } from "./InvoicesGetPurchasesRequest.js";

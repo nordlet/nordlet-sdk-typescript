@@ -19,12 +19,16 @@ export interface RunsApprovePayrollResponse {
     warnings: string[];
     createdAt: string;
     approvedAt: string | null;
+    reversedAt: string | null;
+    reversalJournalTransactionId: string | null;
+    reversalReason: string | null;
 }
 
 export namespace RunsApprovePayrollResponse {
     export const Status = {
         Draft: "draft",
         Approved: "approved",
+        Reversed: "reversed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
     export type ComponentTotals = ComponentTotals.Item[];

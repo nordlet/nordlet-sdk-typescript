@@ -1,3 +1,8 @@
+export type { BusinessTripsApproveHrRequest } from "./BusinessTripsApproveHrRequest.js";
+export type { BusinessTripsCreateHrRequest } from "./BusinessTripsCreateHrRequest.js";
+export type { BusinessTripsDeleteHrRequest } from "./BusinessTripsDeleteHrRequest.js";
+export type { BusinessTripsGetHrRequest } from "./BusinessTripsGetHrRequest.js";
+export { BusinessTripsListHrRequest } from "./BusinessTripsListHrRequest.js";
 export { ContractsCreateHrRequest } from "./ContractsCreateHrRequest.js";
 export type { ContractsEndHrRequest } from "./ContractsEndHrRequest.js";
 export { ContractsListHrRequest } from "./ContractsListHrRequest.js";
@@ -17,6 +22,9 @@ export type { IncapacityCertificatesCreateHrRequest } from "./IncapacityCertific
 export { IncapacityCertificatesListHrRequest } from "./IncapacityCertificatesListHrRequest.js";
 export type { LeaveBalancesListHrRequest } from "./LeaveBalancesListHrRequest.js";
 export type { LeaveBalancesSetHrRequest } from "./LeaveBalancesSetHrRequest.js";
+export type { PerDiemRatesCreateHrRequest } from "./PerDiemRatesCreateHrRequest.js";
+export type { PerDiemRatesDeleteHrRequest } from "./PerDiemRatesDeleteHrRequest.js";
+export { PerDiemRatesListHrRequest } from "./PerDiemRatesListHrRequest.js";
 export type { PositionsCreateHrRequest } from "./PositionsCreateHrRequest.js";
 export { PositionsListHrRequest } from "./PositionsListHrRequest.js";
 export type { PositionsUpdateHrRequest } from "./PositionsUpdateHrRequest.js";

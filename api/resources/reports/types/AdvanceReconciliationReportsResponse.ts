@@ -17,6 +17,7 @@ export namespace AdvanceReconciliationReportsResponse {
             opening: string;
             issued: string;
             returned: string;
+            settled: string;
             closing: string;
         }
     }

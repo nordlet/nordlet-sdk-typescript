@@ -8,5 +8,7 @@ export * from "./AgreementsUpdateAgreementsResponse.js";
 export * from "./InsurancePoliciesCreateAgreementsResponse.js";
 export * from "./InsurancePoliciesDeleteAgreementsResponse.js";
 export * from "./InsurancePoliciesListAgreementsResponse.js";
+export * from "./SettingsGetAgreementsResponse.js";
+export * from "./SettingsUpdateAgreementsResponse.js";
 export * from "./TypesCreateAgreementsResponse.js";
 export * from "./TypesListAgreementsResponse.js";

@@ -39,6 +39,7 @@ export * from "./StatementsImportBankResponse.js";
 export * from "./TransactionsImportBankResponse.js";
 export * from "./TransactionsListBankResponse.js";
 export * from "./TransactionsMatchBankResponse.js";
+export * from "./TransactionsMatchManyBankResponse.js";
 export * from "./TransactionsRecordBankResponse.js";
 export * from "./TransactionsSuggestMatchesBankResponse.js";
 export * from "./TransactionsUnmatchBankResponse.js";

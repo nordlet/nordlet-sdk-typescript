@@ -8,5 +8,7 @@ export { AgreementsUpdateAgreementsRequest } from "./AgreementsUpdateAgreementsR
 export type { InsurancePoliciesCreateAgreementsRequest } from "./InsurancePoliciesCreateAgreementsRequest.js";
 export type { InsurancePoliciesDeleteAgreementsRequest } from "./InsurancePoliciesDeleteAgreementsRequest.js";
 export { InsurancePoliciesListAgreementsRequest } from "./InsurancePoliciesListAgreementsRequest.js";
+export type { SettingsGetAgreementsRequest } from "./SettingsGetAgreementsRequest.js";
+export type { SettingsUpdateAgreementsRequest } from "./SettingsUpdateAgreementsRequest.js";
 export type { TypesCreateAgreementsRequest } from "./TypesCreateAgreementsRequest.js";
 export { TypesListAgreementsRequest } from "./TypesListAgreementsRequest.js";

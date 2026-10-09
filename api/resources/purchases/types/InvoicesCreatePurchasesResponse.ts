@@ -64,6 +64,8 @@ export namespace InvoicesCreatePurchasesResponse {
             costCenterId: string | null;
             projectId: string | null;
             accountCode: string | null;
+            deferralStartDate: string | null;
+            deferralEndDate: string | null;
             lineNet: string;
             lineVat: string;
             lineGross: string;

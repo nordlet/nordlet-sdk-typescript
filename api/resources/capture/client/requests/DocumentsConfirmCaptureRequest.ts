@@ -44,6 +44,8 @@ export namespace DocumentsConfirmCaptureRequest {
             costCenterId?: string | undefined;
             projectId?: string | undefined;
             accountCode?: string | undefined;
+            deferralStartDate?: string | undefined;
+            deferralEndDate?: string | undefined;
         }
 
         export namespace Item {

@@ -32,6 +32,7 @@ export namespace SubscriptionsUpdateWebhooksRequest {
             LeadCreated: "lead.created",
             PartnerInquiryCreated: "partner_inquiry.created",
             PayrollRunApproved: "payroll_run.approved",
+            PayrollRunReversed: "payroll_run.reversed",
             PosReportCreated: "pos_report.created",
             PriceListUpdated: "price_list.updated",
             PurchaseInvoicePaid: "purchase_invoice.paid",

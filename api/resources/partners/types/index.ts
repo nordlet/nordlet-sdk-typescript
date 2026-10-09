@@ -28,6 +28,7 @@ export * from "./InquiriesGetPartnersResponse.js";
 export * from "./InquiriesListPartnersResponse.js";
 export * from "./InquiriesUpdatePartnersResponse.js";
 export * from "./ListPartnersResponse.js";
+export * from "./MergePartnersResponse.js";
 export * from "./StatusesCreatePartnersResponse.js";
 export * from "./StatusesDeletePartnersResponse.js";
 export * from "./StatusesListPartnersResponse.js";

@@ -15,6 +15,8 @@ export interface OrdersGetCashResponse {
     cashAccountCode: string;
     counterAccountCode: string;
     journalTransactionId: string | null;
+    saleInvoiceId: string | null;
+    purchaseInvoiceId: string | null;
     notes: string | null;
     createdAt: string;
 }

@@ -32,6 +32,7 @@ export namespace PostingRulesUpdateLedgerRequest {
                 PurchasesVatReceivable: "purchases.vatReceivable",
                 PurchasesGoodsForResale: "purchases.goodsForResale",
                 PurchasesDefaultExpense: "purchases.defaultExpense",
+                PurchasesPrepaidExpenses: "purchases.prepaidExpenses",
                 InventoryCogs: "inventory.cogs",
                 InventoryStock: "inventory.stock",
                 ProductionLaborApplied: "production.laborApplied",
@@ -48,6 +49,7 @@ export namespace PostingRulesUpdateLedgerRequest {
                 AssetsDisposalGain: "assets.disposalGain",
                 AssetsDisposalLoss: "assets.disposalLoss",
                 AssetsDisposalProceeds: "assets.disposalProceeds",
+                CashAdvances: "cash.advances",
                 ClosingRetainedEarnings: "closing.retainedEarnings",
             } as const;
             export type Key = (typeof Key)[keyof typeof Key];

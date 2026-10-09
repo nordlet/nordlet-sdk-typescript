@@ -11,4 +11,5 @@ export interface InvoicesIssueSalesRequest {
     series?: string;
     issueDate?: string;
     warehouseId?: string;
+    returnToStock?: boolean;
 }

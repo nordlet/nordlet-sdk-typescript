@@ -6,8 +6,7 @@
  *         type: "receipt",
  *         date: "2026-07-01",
  *         amount: "121.0000",
- *         purpose: "purpose",
- *         counterAccountCode: "counterAccountCode"
+ *         purpose: "purpose"
  *     }
  */
 export interface OrdersCreateCashRequest {
@@ -15,8 +14,10 @@ export interface OrdersCreateCashRequest {
     date: string;
     amount: string;
     purpose: string;
-    counterAccountCode: string;
+    counterAccountCode?: string;
     cashAccountCode?: string;
+    saleInvoiceId?: string;
+    purchaseInvoiceId?: string;
     series?: string;
     partnerId?: string;
     employeeId?: string;

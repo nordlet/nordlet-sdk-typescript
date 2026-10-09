@@ -8,5 +8,6 @@ export * from "./RunsCancelPayrollResponse.js";
 export * from "./RunsCreatePayrollResponse.js";
 export * from "./RunsGetPayrollResponse.js";
 export * from "./RunsListPayrollResponse.js";
+export * from "./RunsReversePayrollResponse.js";
 export * from "./SchedulesCreatePayrollResponse.js";
 export * from "./SchedulesListPayrollResponse.js";

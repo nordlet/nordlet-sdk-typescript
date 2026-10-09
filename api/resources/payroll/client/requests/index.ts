@@ -8,5 +8,6 @@ export type { RunsCancelPayrollRequest } from "./RunsCancelPayrollRequest.js";
 export type { RunsCreatePayrollRequest } from "./RunsCreatePayrollRequest.js";
 export type { RunsGetPayrollRequest } from "./RunsGetPayrollRequest.js";
 export { RunsListPayrollRequest } from "./RunsListPayrollRequest.js";
+export type { RunsReversePayrollRequest } from "./RunsReversePayrollRequest.js";
 export type { SchedulesCreatePayrollRequest } from "./SchedulesCreatePayrollRequest.js";
 export type { SchedulesListPayrollRequest } from "./SchedulesListPayrollRequest.js";

@@ -39,6 +39,7 @@ export { StatementsImportBankRequest } from "./StatementsImportBankRequest.js";
 export type { TransactionsImportBankRequest } from "./TransactionsImportBankRequest.js";
 export { TransactionsListBankRequest } from "./TransactionsListBankRequest.js";
 export { TransactionsMatchBankRequest } from "./TransactionsMatchBankRequest.js";
+export { TransactionsMatchManyBankRequest } from "./TransactionsMatchManyBankRequest.js";
 export { TransactionsRecordBankRequest } from "./TransactionsRecordBankRequest.js";
 export type { TransactionsSuggestMatchesBankRequest } from "./TransactionsSuggestMatchesBankRequest.js";
 export type { TransactionsUnmatchBankRequest } from "./TransactionsUnmatchBankRequest.js";

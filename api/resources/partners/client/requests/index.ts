@@ -28,6 +28,7 @@ export type { InquiriesGetPartnersRequest } from "./InquiriesGetPartnersRequest.
 export { InquiriesListPartnersRequest } from "./InquiriesListPartnersRequest.js";
 export { InquiriesUpdatePartnersRequest } from "./InquiriesUpdatePartnersRequest.js";
 export { ListPartnersRequest } from "./ListPartnersRequest.js";
+export type { MergePartnersRequest } from "./MergePartnersRequest.js";
 export type { StatusesCreatePartnersRequest } from "./StatusesCreatePartnersRequest.js";
 export type { StatusesDeletePartnersRequest } from "./StatusesDeletePartnersRequest.js";
 export type { StatusesListPartnersRequest } from "./StatusesListPartnersRequest.js";

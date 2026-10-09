@@ -1,3 +1,5 @@
+export * from "./DeferralsListPurchasesResponse.js";
+export * from "./DeferralsPostPurchasesResponse.js";
 export * from "./InvoicesCreatePurchasesResponse.js";
 export * from "./InvoicesDeletePurchasesResponse.js";
 export * from "./InvoicesGetPurchasesResponse.js";

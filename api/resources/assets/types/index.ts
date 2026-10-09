@@ -9,3 +9,5 @@ export * from "./DepreciationPostAssetsResponse.js";
 export * from "./DepreciationPreviewAssetsResponse.js";
 export * from "./GroupsCreateAssetsResponse.js";
 export * from "./GroupsListAssetsResponse.js";
+export * from "./SettingsGetAssetsResponse.js";
+export * from "./SettingsUpdateAssetsResponse.js";

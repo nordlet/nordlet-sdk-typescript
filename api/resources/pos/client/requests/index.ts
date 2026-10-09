@@ -1,6 +1,13 @@
 export type { DevicesCreatePosRequest } from "./DevicesCreatePosRequest.js";
 export { DevicesListPosRequest } from "./DevicesListPosRequest.js";
 export type { DevicesUpdatePosRequest } from "./DevicesUpdatePosRequest.js";
+export type { ReceiptsCreatePosRequest } from "./ReceiptsCreatePosRequest.js";
+export type { ReceiptsGetPosRequest } from "./ReceiptsGetPosRequest.js";
+export { ReceiptsListPosRequest } from "./ReceiptsListPosRequest.js";
 export type { ReportsCreatePosRequest } from "./ReportsCreatePosRequest.js";
 export type { ReportsGetPosRequest } from "./ReportsGetPosRequest.js";
 export { ReportsListPosRequest } from "./ReportsListPosRequest.js";
+export type { ShiftsClosePosRequest } from "./ShiftsClosePosRequest.js";
+export type { ShiftsGetPosRequest } from "./ShiftsGetPosRequest.js";
+export { ShiftsListPosRequest } from "./ShiftsListPosRequest.js";
+export type { ShiftsOpenPosRequest } from "./ShiftsOpenPosRequest.js";

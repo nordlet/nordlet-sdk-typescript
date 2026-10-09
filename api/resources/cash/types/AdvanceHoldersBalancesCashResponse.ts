@@ -14,6 +14,7 @@ export namespace AdvanceHoldersBalancesCashResponse {
             lastName: string;
             issued: string;
             returned: string;
+            settled: string;
             balance: string;
         }
     }

@@ -9,3 +9,5 @@ export type { DepreciationPostAssetsRequest } from "./DepreciationPostAssetsRequ
 export type { DepreciationPreviewAssetsRequest } from "./DepreciationPreviewAssetsRequest.js";
 export type { GroupsCreateAssetsRequest } from "./GroupsCreateAssetsRequest.js";
 export { GroupsListAssetsRequest } from "./GroupsListAssetsRequest.js";
+export type { SettingsGetAssetsRequest } from "./SettingsGetAssetsRequest.js";
+export type { SettingsUpdateAssetsRequest } from "./SettingsUpdateAssetsRequest.js";
