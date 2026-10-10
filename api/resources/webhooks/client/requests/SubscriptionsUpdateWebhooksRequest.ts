@@ -21,6 +21,7 @@ export namespace SubscriptionsUpdateWebhooksRequest {
         export const Item = {
             AgreementInvoiceGenerated: "agreement.invoice_generated",
             BankFeedSynced: "bank_feed.synced",
+            DocumentCapturePeppolReceived: "document_capture.peppol_received",
             FilingFailed: "filing.failed",
             FilingRejected: "filing.rejected",
             GoodsReceiptPosted: "goods_receipt.posted",
@@ -48,6 +49,9 @@ export namespace SubscriptionsUpdateWebhooksRequest {
             SaleInvoiceEinvoiceSent: "sale_invoice.einvoice_sent",
             SaleInvoiceIssued: "sale_invoice.issued",
             SaleInvoicePaid: "sale_invoice.paid",
+            SaleInvoicePeppolDelivered: "sale_invoice.peppol_delivered",
+            SaleInvoicePeppolFailed: "sale_invoice.peppol_failed",
+            SaleInvoicePeppolRejected: "sale_invoice.peppol_rejected",
             SaleInvoicePeppolSent: "sale_invoice.peppol_sent",
             SaleInvoiceSent: "sale_invoice.sent",
             SalesOrderCreated: "sales_order.created",

@@ -16,6 +16,10 @@ export interface SettlementsMatchBankResponse {
     reference: string | null;
     matchedInvoiceId: string | null;
     matchStatus: SettlementsMatchBankResponse.MatchStatus;
+    clearingBankAccountId: string | null;
+    clearingBooked: string | null;
+    clearingDifference: string | null;
+    clearingUnposted: boolean;
 }
 
 export namespace SettlementsMatchBankResponse {

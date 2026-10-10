@@ -28,6 +28,7 @@ export namespace RunsListPayrollResponse {
             employerContributionsTotal: string;
             componentTotals: Item.ComponentTotals.Item[];
             netTotal: string;
+            paidAmount: string;
             journalTransactionId: string | null;
             notes: string | null;
             warnings: string[];

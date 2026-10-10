@@ -10,4 +10,5 @@ export interface InvoicesRegisterPurchasesRequest {
     id: string;
     registrationDate?: string;
     warehouseId?: string;
+    returnFromStock?: boolean;
 }

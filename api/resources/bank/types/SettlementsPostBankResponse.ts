@@ -17,6 +17,9 @@ export interface SettlementsPostBankResponse {
     lineCount: number;
     matchedCount: number;
     unmatchedCount: number;
+    clearedNet: string | null;
+    clearingDifference: string | null;
+    clearingOpenCount: number;
     createdAt: string;
     updatedAt: string;
     warnings: string[];
@@ -36,6 +39,7 @@ export namespace SettlementsPostBankResponse {
         sellerAmount: string;
         feeAmount: string;
         suspenseAmount: string;
+        clearedAmount: string;
         fxRate: string;
         exchangeDifference: string;
     }

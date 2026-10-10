@@ -17,6 +17,9 @@ export interface SettlementsGetBankResponse {
     lineCount: number;
     matchedCount: number;
     unmatchedCount: number;
+    clearedNet: string | null;
+    clearingDifference: string | null;
+    clearingOpenCount: number;
     createdAt: string;
     updatedAt: string;
     lines: SettlementsGetBankResponse.Lines.Item[];
@@ -47,6 +50,10 @@ export namespace SettlementsGetBankResponse {
             reference: string | null;
             matchedInvoiceId: string | null;
             matchStatus: Item.MatchStatus;
+            clearingBankAccountId: string | null;
+            clearingBooked: string | null;
+            clearingDifference: string | null;
+            clearingUnposted: boolean;
         }
 
         export namespace Item {

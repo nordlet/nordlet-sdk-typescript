@@ -19,3 +19,4 @@ export * from "./StockTransferInventoryResponse.js";
 export * from "./StockWriteOffInventoryResponse.js";
 export * from "./WarehousesCreateInventoryResponse.js";
 export * from "./WarehousesListInventoryResponse.js";
+export * from "./WarehousesUpdateInventoryResponse.js";

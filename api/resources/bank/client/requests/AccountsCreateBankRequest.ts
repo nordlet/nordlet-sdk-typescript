@@ -8,8 +8,17 @@
  */
 export interface AccountsCreateBankRequest {
     name: string;
+    type?: AccountsCreateBankRequest.Type;
     iban?: string;
     currency?: string;
     accountCode?: string;
     documentRef?: string;
+}
+
+export namespace AccountsCreateBankRequest {
+    export const Type = {
+        Bank: "bank",
+        Stripe: "stripe",
+    } as const;
+    export type Type = (typeof Type)[keyof typeof Type];
 }

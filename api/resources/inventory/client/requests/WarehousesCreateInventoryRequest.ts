@@ -11,4 +11,5 @@ export interface WarehousesCreateInventoryRequest {
     code: string;
     name: string;
     isDefault?: boolean;
+    countryCode?: string | null;
 }

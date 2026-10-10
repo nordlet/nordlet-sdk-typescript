@@ -20,6 +20,7 @@ export * from "./InvoicesPaymentSettingsGetSalesResponse.js";
 export * from "./InvoicesPaymentSettingsUpdateSalesResponse.js";
 export * from "./InvoicesPdfSalesResponse.js";
 export * from "./InvoicesPeppolSendSalesResponse.js";
+export * from "./InvoicesPeppolStatusSalesResponse.js";
 export * from "./InvoicesPeppolXmlSalesResponse.js";
 export * from "./InvoicesSendSalesResponse.js";
 export * from "./InvoicesUnlockSalesResponse.js";

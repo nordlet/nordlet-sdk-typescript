@@ -13,12 +13,15 @@ export interface DocumentsConfirmCaptureRequest {
     id: string;
     partnerId?: string;
     newSupplier?: DocumentsConfirmCaptureRequest.NewSupplier;
+    type?: DocumentsConfirmCaptureRequest.Type;
     documentNumber: string;
     documentDate: string;
     dueDate?: string;
     currency?: string;
     notes?: string;
     lines: DocumentsConfirmCaptureRequest.Lines.Item[];
+    oppositeLines?: DocumentsConfirmCaptureRequest.OppositeLines.Item[];
+    oppositeDocumentNumber?: string;
 }
 
 export namespace DocumentsConfirmCaptureRequest {
@@ -29,9 +32,38 @@ export namespace DocumentsConfirmCaptureRequest {
         countryCode?: string | undefined;
     }
 
+    export const Type = {
+        Invoice: "invoice",
+        CreditNote: "credit_note",
+    } as const;
+    export type Type = (typeof Type)[keyof typeof Type];
     export type Lines = Lines.Item[];
 
     export namespace Lines {
+        export interface Item {
+            itemId?: string | undefined;
+            description?: string | undefined;
+            unit?: string | undefined;
+            quantity?: Item.Quantity | undefined;
+            unitPriceExclVat?: string | undefined;
+            unitPriceInclVat?: string | undefined;
+            vatRatePercent?: string | undefined;
+            vatClassifierCode?: string | undefined;
+            costCenterId?: string | undefined;
+            projectId?: string | undefined;
+            accountCode?: string | undefined;
+            deferralStartDate?: string | undefined;
+            deferralEndDate?: string | undefined;
+        }
+
+        export namespace Item {
+            export type Quantity = number | string;
+        }
+    }
+
+    export type OppositeLines = OppositeLines.Item[];
+
+    export namespace OppositeLines {
         export interface Item {
             itemId?: string | undefined;
             description?: string | undefined;

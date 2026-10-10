@@ -37,6 +37,9 @@ export namespace SettlementsImportBankResponse {
             lineCount: number;
             matchedCount: number;
             unmatchedCount: number;
+            clearedNet: string | null;
+            clearingDifference: string | null;
+            clearingOpenCount: number;
             createdAt: string;
             updatedAt: string;
         }

@@ -3,6 +3,7 @@
 export interface DocumentsConfirmCaptureResponse {
     capture: DocumentsConfirmCaptureResponse.Capture;
     invoice: DocumentsConfirmCaptureResponse.Invoice;
+    oppositeInvoice: DocumentsConfirmCaptureResponse.OppositeInvoice | null;
 }
 
 export namespace DocumentsConfirmCaptureResponse {
@@ -20,6 +21,7 @@ export namespace DocumentsConfirmCaptureResponse {
         matchedPartnerId: string | null;
         purchaseInvoiceId: string | null;
         error: string | null;
+        senderId: string | null;
         createdAt: string;
         updatedAt: string;
     }
@@ -34,6 +36,7 @@ export namespace DocumentsConfirmCaptureResponse {
         export type Status = (typeof Status)[keyof typeof Status];
 
         export interface Extraction {
+            documentType?: Extraction.DocumentType | undefined;
             supplier: Extraction.Supplier;
             documentNumber: string | null;
             documentDate: string | null;
@@ -44,9 +47,16 @@ export namespace DocumentsConfirmCaptureResponse {
             grossTotal: string | null;
             notes: string | null;
             lines: Extraction.Lines.Item[];
+            oppositeLines?: Extraction.OppositeLines.Item[] | undefined;
         }
 
         export namespace Extraction {
+            export const DocumentType = {
+                Invoice: "invoice",
+                CreditNote: "credit_note",
+            } as const;
+            export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+
             export interface Supplier {
                 name: string | null;
                 code: string | null;
@@ -58,6 +68,21 @@ export namespace DocumentsConfirmCaptureResponse {
             export type Lines = Lines.Item[];
 
             export namespace Lines {
+                export interface Item {
+                    description: string;
+                    quantity: string;
+                    unit: string | null;
+                    unitPriceExclVat: string | null;
+                    vatRatePercent: string | null;
+                    lineNet: string | null;
+                    lineVat: string | null;
+                    lineGross: string | null;
+                }
+            }
+
+            export type OppositeLines = OppositeLines.Item[];
+
+            export namespace OppositeLines {
                 export interface Item {
                     description: string;
                     quantity: string;
@@ -104,6 +129,80 @@ export namespace DocumentsConfirmCaptureResponse {
     }
 
     export namespace Invoice {
+        export const Type = {
+            Invoice: "invoice",
+            CreditNote: "credit_note",
+        } as const;
+        export type Type = (typeof Type)[keyof typeof Type];
+        export const Status = {
+            Draft: "draft",
+            Registered: "registered",
+        } as const;
+        export type Status = (typeof Status)[keyof typeof Status];
+        export const PaymentStatus = {
+            Unpaid: "unpaid",
+            Partial: "partial",
+            Paid: "paid",
+        } as const;
+        export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus];
+        export type Lines = Lines.Item[];
+
+        export namespace Lines {
+            export interface Item {
+                id: string;
+                itemId: string | null;
+                description: string;
+                unit: string;
+                quantity: string;
+                unitPriceExclVat: string | null;
+                unitPriceInclVat: string | null;
+                vatRatePercent: string;
+                vatClassifierCode: string | null;
+                costCenterId: string | null;
+                projectId: string | null;
+                accountCode: string | null;
+                deferralStartDate: string | null;
+                deferralEndDate: string | null;
+                lineNet: string;
+                lineVat: string;
+                lineGross: string;
+                sortOrder: number;
+            }
+        }
+    }
+
+    export interface OppositeInvoice {
+        id: string;
+        partnerId: string;
+        type: OppositeInvoice.Type;
+        status: OppositeInvoice.Status;
+        paymentStatus: OppositeInvoice.PaymentStatus;
+        documentNumber: string;
+        documentDate: string;
+        dueDate: string | null;
+        registrationDate: string | null;
+        currency: string;
+        netTotal: string;
+        vatTotal: string;
+        grossTotal: string;
+        paidAmount: string;
+        journalTransactionId: string | null;
+        creditedInvoiceId: string | null;
+        purchaseOrderId: string | null;
+        operationTypeId: string | null;
+        notes: string | null;
+        intrastatTransportMode: string | null;
+        intrastatDeliveryTerms: string | null;
+        intrastatRegion: string | null;
+        intrastatNatureOfTransaction: string | null;
+        einvoiceNumber: string | null;
+        documentRef: string | null;
+        createdAt: string;
+        updatedAt: string;
+        lines: OppositeInvoice.Lines.Item[];
+    }
+
+    export namespace OppositeInvoice {
         export const Type = {
             Invoice: "invoice",
             CreditNote: "credit_note",

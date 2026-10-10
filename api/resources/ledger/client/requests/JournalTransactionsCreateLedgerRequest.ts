@@ -12,6 +12,7 @@
 export interface JournalTransactionsCreateLedgerRequest {
     date: string;
     description?: string;
+    currency?: string;
     entries: JournalTransactionsCreateLedgerRequest.Entries.Item[];
 }
 

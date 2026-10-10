@@ -25,6 +25,8 @@ import { OfficersClient } from "./api/resources/officers/client/Client.js";
 import { OperationTypesClient } from "./api/resources/operationTypes/client/Client.js";
 import { PartnersClient } from "./api/resources/partners/client/Client.js";
 import { PayrollClient } from "./api/resources/payroll/client/Client.js";
+import { PeppolClient } from "./api/resources/peppol/client/Client.js";
+import { PlatformSellersClient } from "./api/resources/platformSellers/client/Client.js";
 import { PosClient } from "./api/resources/pos/client/Client.js";
 import { ProductionClient } from "./api/resources/production/client/Client.js";
 import { ProjectsClient } from "./api/resources/projects/client/Client.js";
@@ -56,9 +58,11 @@ export class NordletApiClient {
     protected _documentSeries: DocumentSeriesClient | undefined;
     protected _purchases: PurchasesClient | undefined;
     protected _capture: CaptureClient | undefined;
+    protected _peppol: PeppolClient | undefined;
     protected _declarations: DeclarationsClient | undefined;
     protected _ledger: LedgerClient | undefined;
     protected _officers: OfficersClient | undefined;
+    protected _platformSellers: PlatformSellersClient | undefined;
     protected _migration: MigrationClient | undefined;
     protected _assets: AssetsClient | undefined;
     protected _hr: HrClient | undefined;
@@ -123,6 +127,10 @@ export class NordletApiClient {
         return (this._capture ??= new CaptureClient(this._options));
     }
 
+    public get peppol(): PeppolClient {
+        return (this._peppol ??= new PeppolClient(this._options));
+    }
+
     public get declarations(): DeclarationsClient {
         return (this._declarations ??= new DeclarationsClient(this._options));
     }
@@ -133,6 +141,10 @@ export class NordletApiClient {
 
     public get officers(): OfficersClient {
         return (this._officers ??= new OfficersClient(this._options));
+    }
+
+    public get platformSellers(): PlatformSellersClient {
+        return (this._platformSellers ??= new PlatformSellersClient(this._options));
     }
 
     public get migration(): MigrationClient {

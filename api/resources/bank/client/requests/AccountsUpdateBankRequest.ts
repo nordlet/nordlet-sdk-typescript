@@ -9,7 +9,16 @@
 export interface AccountsUpdateBankRequest {
     id: string;
     name?: string;
+    type?: AccountsUpdateBankRequest.Type;
     iban?: string;
     accountCode?: string;
     isActive?: boolean;
+}
+
+export namespace AccountsUpdateBankRequest {
+    export const Type = {
+        Bank: "bank",
+        Stripe: "stripe",
+    } as const;
+    export type Type = (typeof Type)[keyof typeof Type];
 }

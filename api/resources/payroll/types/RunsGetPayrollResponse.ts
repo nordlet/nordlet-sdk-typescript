@@ -14,6 +14,7 @@ export interface RunsGetPayrollResponse {
     employerContributionsTotal: string;
     componentTotals: RunsGetPayrollResponse.ComponentTotals.Item[];
     netTotal: string;
+    paidAmount: string;
     journalTransactionId: string | null;
     notes: string | null;
     warnings: string[];

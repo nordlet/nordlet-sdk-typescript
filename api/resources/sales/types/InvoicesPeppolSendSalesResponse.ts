@@ -4,5 +4,17 @@ export interface InvoicesPeppolSendSalesResponse {
     sent: boolean;
     messageId: string;
     receiverId: string;
+    status: InvoicesPeppolSendSalesResponse.Status;
+    detail: string | null;
     fileId: string | null;
+}
+
+export namespace InvoicesPeppolSendSalesResponse {
+    export const Status = {
+        Pending: "pending",
+        Delivered: "delivered",
+        Rejected: "rejected",
+        Failed: "failed",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }

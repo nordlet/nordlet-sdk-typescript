@@ -52,8 +52,15 @@ export interface InvoicesGetSalesResponse {
     einvoiceDetail: string | null;
     einvoiceSentAt: string | null;
     einvoiceCheckedAt: string | null;
+    peppolMessageId: string | null;
+    peppolStatus: string | null;
+    peppolDetail: string | null;
+    peppolSentAt: string | null;
+    peppolCheckedAt: string | null;
     createdAt: string;
     updatedAt: string;
+    /** Gross amount of an advance invoice applied to final invoices so far; null on other documents */
+    advanceAppliedAmount: string | null;
     lines: InvoicesGetSalesResponse.Lines.Item[];
     vatEvidence: InvoicesGetSalesResponse.VatEvidence | null;
 }

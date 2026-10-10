@@ -25,9 +25,13 @@ export { DeReturnsGenerateDeclarationsRequest } from "./DeReturnsGenerateDeclara
 export type { DkSelskabsskatGenerateDeclarationsRequest } from "./DkSelskabsskatGenerateDeclarationsRequest.js";
 export { EeEmploymentRegisterSendDeclarationsRequest } from "./EeEmploymentRegisterSendDeclarationsRequest.js";
 export type { EsVerifactuDeclaracionResponsableDeclarationsRequest } from "./EsVerifactuDeclaracionResponsableDeclarationsRequest.js";
+export type { EuDac7PreviewDeclarationsRequest } from "./EuDac7PreviewDeclarationsRequest.js";
+export type { EuDac7XmlDeclarationsRequest } from "./EuDac7XmlDeclarationsRequest.js";
+export type { EuDigitalReportingListDeclarationsRequest } from "./EuDigitalReportingListDeclarationsRequest.js";
 export type { EuDistanceSalesThresholdGetDeclarationsRequest } from "./EuDistanceSalesThresholdGetDeclarationsRequest.js";
 export type { EuIossComputeDeclarationsRequest } from "./EuIossComputeDeclarationsRequest.js";
 export type { EuOssComputeDeclarationsRequest } from "./EuOssComputeDeclarationsRequest.js";
+export type { EuOwnGoodsTransfersComputeDeclarationsRequest } from "./EuOwnGoodsTransfersComputeDeclarationsRequest.js";
 export type { EuSmeCrossBorderReportComputeDeclarationsRequest } from "./EuSmeCrossBorderReportComputeDeclarationsRequest.js";
 export type { EuSmeThresholdGetDeclarationsRequest } from "./EuSmeThresholdGetDeclarationsRequest.js";
 export type { EuSmeThresholdsListDeclarationsRequest } from "./EuSmeThresholdsListDeclarationsRequest.js";

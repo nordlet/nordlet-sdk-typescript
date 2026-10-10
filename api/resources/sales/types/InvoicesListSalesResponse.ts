@@ -66,6 +66,11 @@ export namespace InvoicesListSalesResponse {
             einvoiceDetail: string | null;
             einvoiceSentAt: string | null;
             einvoiceCheckedAt: string | null;
+            peppolMessageId: string | null;
+            peppolStatus: string | null;
+            peppolDetail: string | null;
+            peppolSentAt: string | null;
+            peppolCheckedAt: string | null;
             createdAt: string;
             updatedAt: string;
             partnerName: string | null;

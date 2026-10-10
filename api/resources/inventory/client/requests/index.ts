@@ -19,3 +19,4 @@ export type { StockTransferInventoryRequest } from "./StockTransferInventoryRequ
 export type { StockWriteOffInventoryRequest } from "./StockWriteOffInventoryRequest.js";
 export type { WarehousesCreateInventoryRequest } from "./WarehousesCreateInventoryRequest.js";
 export { WarehousesListInventoryRequest } from "./WarehousesListInventoryRequest.js";
+export type { WarehousesUpdateInventoryRequest } from "./WarehousesUpdateInventoryRequest.js";

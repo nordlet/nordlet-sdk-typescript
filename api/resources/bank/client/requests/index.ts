@@ -1,6 +1,6 @@
-export type { AccountsCreateBankRequest } from "./AccountsCreateBankRequest.js";
+export { AccountsCreateBankRequest } from "./AccountsCreateBankRequest.js";
 export { AccountsListBankRequest } from "./AccountsListBankRequest.js";
-export type { AccountsUpdateBankRequest } from "./AccountsUpdateBankRequest.js";
+export { AccountsUpdateBankRequest } from "./AccountsUpdateBankRequest.js";
 export { DirectDebitsCandidatesBankRequest } from "./DirectDebitsCandidatesBankRequest.js";
 export type { DirectDebitsExportBankRequest } from "./DirectDebitsExportBankRequest.js";
 export { FeedsAccountsConfigureBankRequest } from "./FeedsAccountsConfigureBankRequest.js";

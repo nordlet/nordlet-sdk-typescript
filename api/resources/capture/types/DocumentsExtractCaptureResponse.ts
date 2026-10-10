@@ -14,6 +14,7 @@ export interface DocumentsExtractCaptureResponse {
     matchedPartnerId: string | null;
     purchaseInvoiceId: string | null;
     error: string | null;
+    senderId: string | null;
     createdAt: string;
     updatedAt: string;
     rawText: string | null;
@@ -29,6 +30,7 @@ export namespace DocumentsExtractCaptureResponse {
     export type Status = (typeof Status)[keyof typeof Status];
 
     export interface Extraction {
+        documentType?: Extraction.DocumentType | undefined;
         supplier: Extraction.Supplier;
         documentNumber: string | null;
         documentDate: string | null;
@@ -39,9 +41,16 @@ export namespace DocumentsExtractCaptureResponse {
         grossTotal: string | null;
         notes: string | null;
         lines: Extraction.Lines.Item[];
+        oppositeLines?: Extraction.OppositeLines.Item[] | undefined;
     }
 
     export namespace Extraction {
+        export const DocumentType = {
+            Invoice: "invoice",
+            CreditNote: "credit_note",
+        } as const;
+        export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+
         export interface Supplier {
             name: string | null;
             code: string | null;
@@ -53,6 +62,21 @@ export namespace DocumentsExtractCaptureResponse {
         export type Lines = Lines.Item[];
 
         export namespace Lines {
+            export interface Item {
+                description: string;
+                quantity: string;
+                unit: string | null;
+                unitPriceExclVat: string | null;
+                vatRatePercent: string | null;
+                lineNet: string | null;
+                lineVat: string | null;
+                lineGross: string | null;
+            }
+        }
+
+        export type OppositeLines = OppositeLines.Item[];
+
+        export namespace OppositeLines {
             export interface Item {
                 description: string;
                 quantity: string;

@@ -9,6 +9,7 @@ export interface LandedCostsGetInventoryResponse {
     sourceInvoiceId: string | null;
     notes: string | null;
     createdAt: string;
+    journalTransactionId: string | null;
     lines: LandedCostsGetInventoryResponse.Lines.Item[];
 }
 

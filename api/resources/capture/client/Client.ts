@@ -1169,6 +1169,8 @@ export class CaptureClient {
     }
 
     /**
+     * Creates the purchase invoice (or credit note, see `type`) from `lines`. Lines with the opposite sign go in `oppositeLines` and are saved as a second document of the opposite type for the same supplier: a purchase credit note against the new invoice, or a purchase invoice next to the new credit note. It is numbered `oppositeDocumentNumber`, by default the document number followed by "-CR" (credit note) or "-INV" (invoice).
+     *
      * @param {NordletApi.DocumentsConfirmCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *

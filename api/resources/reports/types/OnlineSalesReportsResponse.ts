@@ -12,6 +12,7 @@ export namespace OnlineSalesReportsResponse {
     export namespace Rows {
         export interface Item {
             channel: string;
+            currency: string;
             orders: number;
             fulfilled: number;
             cancelled: number;

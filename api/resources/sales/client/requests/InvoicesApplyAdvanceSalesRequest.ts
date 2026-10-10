@@ -11,4 +11,6 @@ export interface InvoicesApplyAdvanceSalesRequest {
     advanceId: string;
     invoiceId: string;
     date?: string;
+    /** Gross amount of the advance to apply; defaults to the unapplied advance or the unpaid balance of the invoice, whichever is smaller */
+    amount?: string;
 }

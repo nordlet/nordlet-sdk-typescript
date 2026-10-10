@@ -17,6 +17,9 @@ export interface SettlementsUnlinkBankResponse {
     lineCount: number;
     matchedCount: number;
     unmatchedCount: number;
+    clearedNet: string | null;
+    clearingDifference: string | null;
+    clearingOpenCount: number;
     createdAt: string;
     updatedAt: string;
 }

@@ -5,5 +5,6 @@ export interface WarehousesCreateInventoryResponse {
     code: string;
     name: string;
     isDefault: boolean;
+    countryCode: string | null;
     createdAt: string;
 }

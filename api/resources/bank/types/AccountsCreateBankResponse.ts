@@ -3,9 +3,18 @@
 export interface AccountsCreateBankResponse {
     id: string;
     name: string;
+    type: AccountsCreateBankResponse.Type;
     iban: string | null;
     currency: string;
     accountCode: string;
     isActive: boolean;
     createdAt: string;
+}
+
+export namespace AccountsCreateBankResponse {
+    export const Type = {
+        Bank: "bank",
+        Stripe: "stripe",
+    } as const;
+    export type Type = (typeof Type)[keyof typeof Type];
 }

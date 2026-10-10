@@ -15,6 +15,12 @@ export interface VatResolveReferenceRequest {
     actingAsMarketplace?: boolean;
     sellerEstablishedInEu?: boolean;
     importedConsignmentValueEur?: string;
+    serviceKind?: VatResolveReferenceRequest.ServiceKind;
+    serviceCountryCode?: string;
+    underlyingSupplierGaveVatNumber?: boolean;
+    underlyingSupplierChargesVat?: boolean;
+    goodsKind?: VatResolveReferenceRequest.GoodsKind;
+    goodsLocationCountryCode?: string;
 }
 
 export namespace VatResolveReferenceRequest {
@@ -24,4 +30,14 @@ export namespace VatResolveReferenceRequest {
         Digital: "digital",
     } as const;
     export type SupplyType = (typeof SupplyType)[keyof typeof SupplyType];
+    export const ServiceKind = {
+        ShortTermAccommodation: "short_term_accommodation",
+        PassengerRoadTransport: "passenger_road_transport",
+    } as const;
+    export type ServiceKind = (typeof ServiceKind)[keyof typeof ServiceKind];
+    export const GoodsKind = {
+        Installed: "installed",
+        EnergyNetwork: "energy_network",
+    } as const;
+    export type GoodsKind = (typeof GoodsKind)[keyof typeof GoodsKind];
 }
