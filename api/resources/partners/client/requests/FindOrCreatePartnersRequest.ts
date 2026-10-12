@@ -31,8 +31,6 @@ export interface FindOrCreatePartnersRequest {
     website?: string;
     fax?: string;
     eoriCode?: string;
-    otherCode?: string;
-    foreignTaxNumber?: string;
     autoDebtReminder?: boolean;
     lateInterestPercent?: string;
     firstCallDate?: string;

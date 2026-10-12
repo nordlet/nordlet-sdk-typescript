@@ -26,10 +26,13 @@ export namespace MeAccountResponse {
         status: Billing.Status;
         plan: string;
         balanceCents: number;
+        overdraftAllowanceCents: number;
         trialEndsAt: string | null;
         payerUserId: string;
         payerEmail: string;
         isPayer: boolean;
+        planChosen: boolean;
+        flatRate: boolean;
     }
 
     export namespace Billing {

@@ -25,6 +25,11 @@ export type { InvoicesPeppolXmlSalesRequest } from "./InvoicesPeppolXmlSalesRequ
 export { InvoicesSendSalesRequest } from "./InvoicesSendSalesRequest.js";
 export type { InvoicesUnlockSalesRequest } from "./InvoicesUnlockSalesRequest.js";
 export { InvoicesUpdateSalesRequest } from "./InvoicesUpdateSalesRequest.js";
+export { InvoiceTemplatesCreateSalesRequest } from "./InvoiceTemplatesCreateSalesRequest.js";
+export type { InvoiceTemplatesDeleteSalesRequest } from "./InvoiceTemplatesDeleteSalesRequest.js";
+export type { InvoiceTemplatesGetSalesRequest } from "./InvoiceTemplatesGetSalesRequest.js";
+export { InvoiceTemplatesListSalesRequest } from "./InvoiceTemplatesListSalesRequest.js";
+export { InvoiceTemplatesUpdateSalesRequest } from "./InvoiceTemplatesUpdateSalesRequest.js";
 export type { RecognitionComputeSalesRequest } from "./RecognitionComputeSalesRequest.js";
 export { RecognitionModifySalesRequest } from "./RecognitionModifySalesRequest.js";
 export type { RecognitionProgressSalesRequest } from "./RecognitionProgressSalesRequest.js";

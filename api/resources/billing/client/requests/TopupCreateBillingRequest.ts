@@ -9,6 +9,7 @@
 export interface TopupCreateBillingRequest {
     amountCents: number;
     locale?: TopupCreateBillingRequest.Locale;
+    returnTo?: TopupCreateBillingRequest.ReturnTo;
 }
 
 export namespace TopupCreateBillingRequest {
@@ -18,4 +19,9 @@ export namespace TopupCreateBillingRequest {
         De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
+    export const ReturnTo = {
+        Credits: "credits",
+        Onboarding: "onboarding",
+    } as const;
+    export type ReturnTo = (typeof ReturnTo)[keyof typeof ReturnTo];
 }

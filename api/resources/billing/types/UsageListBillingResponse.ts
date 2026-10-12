@@ -21,6 +21,7 @@ export namespace UsageListBillingResponse {
                 OcrPage: "ocr_page",
                 FileStorageBytes: "file_storage_bytes",
                 DatabaseBytes: "database_bytes",
+                SaleInvoice: "sale_invoice",
             } as const;
             export type Metric = (typeof Metric)[keyof typeof Metric];
         }

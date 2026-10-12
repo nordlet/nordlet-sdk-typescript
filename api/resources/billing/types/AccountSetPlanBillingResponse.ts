@@ -2,6 +2,7 @@
 
 export interface AccountSetPlanBillingResponse {
     plan: AccountSetPlanBillingResponse.Plan;
+    accountType: AccountSetPlanBillingResponse.AccountType;
     status: AccountSetPlanBillingResponse.Status;
     balanceCents: number;
     trialEndsAt: string | null;
@@ -14,7 +15,11 @@ export interface AccountSetPlanBillingResponse {
     paymentFailedInvoiceUrl: string | null;
     monthToDate: AccountSetPlanBillingResponse.MonthToDate;
     plans: Record<string, AccountSetPlanBillingResponse.Plans.Value>;
+    apiRequestEur: string;
     topUp: AccountSetPlanBillingResponse.TopUp;
+    autoTopUp: AccountSetPlanBillingResponse.AutoTopUp;
+    overdraftCapCents: number;
+    overdraftCapMaxCents: number;
     trialDays: number;
 }
 
@@ -25,6 +30,11 @@ export namespace AccountSetPlanBillingResponse {
         Scale: "scale",
     } as const;
     export type Plan = (typeof Plan)[keyof typeof Plan];
+    export const AccountType = {
+        FlatRate: "flat_rate",
+        PerRequest: "per_request",
+    } as const;
+    export type AccountType = (typeof AccountType)[keyof typeof AccountType];
     export const Status = {
         Trial: "trial",
         Active: "active",
@@ -36,6 +46,7 @@ export namespace AccountSetPlanBillingResponse {
         from: string;
         to: string;
         apiRequests: number;
+        saleInvoices: number;
         ocrPages: number;
         fileBytes: number;
         databaseBytes: number;
@@ -46,8 +57,8 @@ export namespace AccountSetPlanBillingResponse {
     export namespace Plans {
         export interface Value {
             monthlyFeeEur: string;
-            includedRequests: number;
-            requestOverageEur: string;
+            includedInvoices: number;
+            invoiceOverageEur: string;
             includedDatabaseBytes: number;
             includedFileBytes: number;
         }
@@ -56,5 +67,11 @@ export namespace AccountSetPlanBillingResponse {
     export interface TopUp {
         minCents: number;
         maxCents: number;
+    }
+
+    export interface AutoTopUp {
+        enabled: boolean;
+        amountCents: number;
+        pending: boolean;
     }
 }

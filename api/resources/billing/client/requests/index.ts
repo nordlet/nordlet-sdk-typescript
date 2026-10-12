@@ -1,6 +1,12 @@
 export type { AccountGetBillingRequest } from "./AccountGetBillingRequest.js";
+export { AccountSetAccountTypeBillingRequest } from "./AccountSetAccountTypeBillingRequest.js";
+export type { AccountSetAutoTopUpBillingRequest } from "./AccountSetAutoTopUpBillingRequest.js";
+export type { AccountSetOverdraftCapBillingRequest } from "./AccountSetOverdraftCapBillingRequest.js";
 export { AccountSetPlanBillingRequest } from "./AccountSetPlanBillingRequest.js";
+export type { FlatRateConfirmBillingRequest } from "./FlatRateConfirmBillingRequest.js";
+export { FlatRateCreateBillingRequest } from "./FlatRateCreateBillingRequest.js";
 export { PortalCreateBillingRequest } from "./PortalCreateBillingRequest.js";
+export type { TopupConfirmBillingRequest } from "./TopupConfirmBillingRequest.js";
 export { TopupCreateBillingRequest } from "./TopupCreateBillingRequest.js";
 export type { TransactionsListBillingRequest } from "./TransactionsListBillingRequest.js";
 export type { UsageListBillingRequest } from "./UsageListBillingRequest.js";

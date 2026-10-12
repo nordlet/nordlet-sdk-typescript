@@ -27,6 +27,9 @@ export type { MatchRulesDeleteBankRequest } from "./MatchRulesDeleteBankRequest.
 export type { MatchRulesListBankRequest } from "./MatchRulesListBankRequest.js";
 export type { MatchRulesUpdateBankRequest } from "./MatchRulesUpdateBankRequest.js";
 export type { PaymentsExportBankRequest } from "./PaymentsExportBankRequest.js";
+export type { SecuritiesGetBankRequest } from "./SecuritiesGetBankRequest.js";
+export type { SecuritiesImportBankRequest } from "./SecuritiesImportBankRequest.js";
+export { SecuritiesListBankRequest } from "./SecuritiesListBankRequest.js";
 export type { SettlementsCommissionBankRequest } from "./SettlementsCommissionBankRequest.js";
 export type { SettlementsGetBankRequest } from "./SettlementsGetBankRequest.js";
 export { SettlementsImportBankRequest } from "./SettlementsImportBankRequest.js";

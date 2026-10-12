@@ -50,6 +50,14 @@ export namespace PostingRulesUpdateLedgerRequest {
                 AssetsDisposalLoss: "assets.disposalLoss",
                 AssetsDisposalProceeds: "assets.disposalProceeds",
                 CashAdvances: "cash.advances",
+                SecuritiesInvestments: "securities.investments",
+                SecuritiesGain: "securities.gain",
+                SecuritiesLoss: "securities.loss",
+                SecuritiesDividendIncome: "securities.dividendIncome",
+                SecuritiesWithholdingTax: "securities.withholdingTax",
+                SecuritiesInterestIncome: "securities.interestIncome",
+                SecuritiesInterestExpense: "securities.interestExpense",
+                SecuritiesFees: "securities.fees",
                 ClosingRetainedEarnings: "closing.retainedEarnings",
             } as const;
             export type Key = (typeof Key)[keyof typeof Key];

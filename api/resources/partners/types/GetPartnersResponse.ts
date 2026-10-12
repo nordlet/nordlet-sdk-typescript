@@ -28,8 +28,6 @@ export interface GetPartnersResponse {
     website: string | null;
     fax: string | null;
     eoriCode: string | null;
-    otherCode: string | null;
-    foreignTaxNumber: string | null;
     autoDebtReminder: boolean;
     lateInterestPercent: string | null;
     firstCallDate: string | null;

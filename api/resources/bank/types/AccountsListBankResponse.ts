@@ -29,6 +29,7 @@ export namespace AccountsListBankResponse {
             export const Type = {
                 Bank: "bank",
                 Stripe: "stripe",
+                Broker: "broker",
             } as const;
             export type Type = (typeof Type)[keyof typeof Type];
         }
