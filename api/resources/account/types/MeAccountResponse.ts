@@ -33,6 +33,7 @@ export namespace MeAccountResponse {
         isPayer: boolean;
         planChosen: boolean;
         flatRate: boolean;
+        accountType: Billing.AccountType;
     }
 
     export namespace Billing {
@@ -42,6 +43,11 @@ export namespace MeAccountResponse {
             Suspended: "suspended",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
+        export const AccountType = {
+            FlatRate: "flat_rate",
+            PerRequest: "per_request",
+        } as const;
+        export type AccountType = (typeof AccountType)[keyof typeof AccountType];
     }
 
     export interface Consent {
