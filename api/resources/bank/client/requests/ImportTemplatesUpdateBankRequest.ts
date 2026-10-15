@@ -30,6 +30,7 @@ export namespace ImportTemplatesUpdateBankRequest {
         Stripe: "stripe",
         Iso20022: "iso20022",
         BankConnection: "bank_connection",
+        Revolut: "revolut",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
     export type Fields = Fields.Item[];

@@ -18,7 +18,8 @@ export namespace AccountsListLedgerResponse {
             id: string;
             code: string;
             name: string;
-            translations: Record<string, Item.Translations.Value | null> | null;
+            /** The name in the language of the Accept-Language header */
+            displayName: string;
             type: Item.Type;
             parentId: string | null;
             isPostable: boolean;
@@ -26,12 +27,6 @@ export namespace AccountsListLedgerResponse {
         }
 
         export namespace Item {
-            export namespace Translations {
-                export interface Value {
-                    name: string;
-                }
-            }
-
             export const Type = {
                 Asset: "asset",
                 Liability: "liability",

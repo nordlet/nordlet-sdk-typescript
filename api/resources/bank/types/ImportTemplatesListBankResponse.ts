@@ -31,6 +31,8 @@ export namespace ImportTemplatesListBankResponse {
             lenderMetaField: string | null;
             partialRefundLabel: string | null;
             fullRefundLabel: string | null;
+            /** Provided by Nordlet for every company; it cannot be changed or deleted */
+            builtin: boolean;
             createdAt: string;
             updatedAt: string;
         }
@@ -40,6 +42,7 @@ export namespace ImportTemplatesListBankResponse {
                 Stripe: "stripe",
                 Iso20022: "iso20022",
                 BankConnection: "bank_connection",
+                Revolut: "revolut",
             } as const;
             export type Type = (typeof Type)[keyof typeof Type];
             export type Fields = Fields.Item[];

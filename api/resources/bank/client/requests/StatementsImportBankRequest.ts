@@ -21,6 +21,7 @@ export namespace StatementsImportBankRequest {
         Camt053: "camt053",
         Mt940: "mt940",
         StripeCsv: "stripe-csv",
+        RevolutCsv: "revolut-csv",
     } as const;
     export type Format = (typeof Format)[keyof typeof Format];
 }

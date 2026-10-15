@@ -11,19 +11,12 @@
 export interface AccountsCreateLedgerRequest {
     code: string;
     name: string;
-    translations?: Record<string, AccountsCreateLedgerRequest.Translations.Value>;
     type: AccountsCreateLedgerRequest.Type;
     parentId?: string;
     isPostable?: boolean;
 }
 
 export namespace AccountsCreateLedgerRequest {
-    export namespace Translations {
-        export interface Value {
-            name: string;
-        }
-    }
-
     export const Type = {
         Asset: "asset",
         Liability: "liability",

@@ -9,15 +9,6 @@
 export interface AccountsUpdateLedgerRequest {
     id: string;
     name?: string;
-    translations?: Record<string, AccountsUpdateLedgerRequest.Translations.Value | null> | null;
     parentId?: string | null;
     isPostable?: boolean;
-}
-
-export namespace AccountsUpdateLedgerRequest {
-    export namespace Translations {
-        export interface Value {
-            name: string;
-        }
-    }
 }
