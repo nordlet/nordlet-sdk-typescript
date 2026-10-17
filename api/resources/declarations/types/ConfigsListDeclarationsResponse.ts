@@ -28,6 +28,7 @@ export namespace ConfigsListDeclarationsResponse {
                     kind: Item.Kind;
                     multiline?: boolean | undefined;
                     options?: string[] | undefined;
+                    companyField?: Item.CompanyField | undefined;
                 }
 
                 export namespace Item {
@@ -39,6 +40,11 @@ export namespace ConfigsListDeclarationsResponse {
                         Certificate: "certificate",
                     } as const;
                     export type Kind = (typeof Kind)[keyof typeof Kind];
+                    export const CompanyField = {
+                        Code: "code",
+                        VatCode: "vatCode",
+                    } as const;
+                    export type CompanyField = (typeof CompanyField)[keyof typeof CompanyField];
                 }
             }
 

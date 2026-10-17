@@ -31,6 +31,7 @@ export * from "./PaymentsExportBankResponse.js";
 export * from "./SecuritiesGetBankResponse.js";
 export * from "./SecuritiesImportBankResponse.js";
 export * from "./SecuritiesListBankResponse.js";
+export * from "./SecuritiesOperationsListBankResponse.js";
 export * from "./SettlementsCommissionBankResponse.js";
 export * from "./SettlementsGetBankResponse.js";
 export * from "./SettlementsImportBankResponse.js";

@@ -22,6 +22,7 @@ export namespace SecuritiesGetBankResponse {
     export namespace Operations {
         export interface Item {
             id: string;
+            bankAccountId: string;
             kind: string;
             date: string;
             time: string | null;

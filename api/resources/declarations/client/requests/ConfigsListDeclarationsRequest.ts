@@ -4,4 +4,7 @@
  * @example
  *     {}
  */
-export type ConfigsListDeclarationsRequest = {};
+export interface ConfigsListDeclarationsRequest {
+    /** List the systems of this country instead of the company country */
+    country?: string;
+}
