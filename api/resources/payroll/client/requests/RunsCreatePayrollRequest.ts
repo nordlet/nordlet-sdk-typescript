@@ -45,6 +45,8 @@ export namespace RunsCreatePayrollRequest {
                     name: string;
                     amount: string;
                     taxable?: boolean | undefined;
+                    paymentType?: string | undefined;
+                    hours?: string | undefined;
                 }
             }
 

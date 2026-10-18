@@ -30,6 +30,8 @@ export namespace LinesAttendancePayrollResponse {
             name: string;
             amount: string;
             taxable: boolean;
+            paymentType?: string | undefined;
+            hours?: string | undefined;
         }
     }
 
@@ -51,6 +53,7 @@ export namespace LinesAttendancePayrollResponse {
             amount: string;
             rate?: string | undefined;
             base?: string | undefined;
+            paymentType?: string | undefined;
         }
 
         export namespace Item {

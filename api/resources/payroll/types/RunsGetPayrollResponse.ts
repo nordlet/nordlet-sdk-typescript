@@ -42,6 +42,7 @@ export namespace RunsGetPayrollResponse {
             amount: string;
             rate?: string | undefined;
             base?: string | undefined;
+            paymentType?: string | undefined;
         }
 
         export namespace Item {
@@ -89,6 +90,8 @@ export namespace RunsGetPayrollResponse {
                     name: string;
                     amount: string;
                     taxable: boolean;
+                    paymentType?: string | undefined;
+                    hours?: string | undefined;
                 }
             }
 
@@ -110,6 +113,7 @@ export namespace RunsGetPayrollResponse {
                     amount: string;
                     rate?: string | undefined;
                     base?: string | undefined;
+                    paymentType?: string | undefined;
                 }
 
                 export namespace Item {

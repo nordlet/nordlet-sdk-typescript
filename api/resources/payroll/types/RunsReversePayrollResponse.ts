@@ -41,6 +41,7 @@ export namespace RunsReversePayrollResponse {
             amount: string;
             rate?: string | undefined;
             base?: string | undefined;
+            paymentType?: string | undefined;
         }
 
         export namespace Item {

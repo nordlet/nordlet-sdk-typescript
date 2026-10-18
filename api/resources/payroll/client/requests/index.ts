@@ -3,6 +3,7 @@ export type { DepartmentsCreatePayrollRequest } from "./DepartmentsCreatePayroll
 export type { DepartmentsListPayrollRequest } from "./DepartmentsListPayrollRequest.js";
 export type { LinesAttendancePayrollRequest } from "./LinesAttendancePayrollRequest.js";
 export { PaymentsExportPayrollRequest } from "./PaymentsExportPayrollRequest.js";
+export type { PaymentTypesListPayrollRequest } from "./PaymentTypesListPayrollRequest.js";
 export type { RunsApprovePayrollRequest } from "./RunsApprovePayrollRequest.js";
 export type { RunsCancelPayrollRequest } from "./RunsCancelPayrollRequest.js";
 export type { RunsCreatePayrollRequest } from "./RunsCreatePayrollRequest.js";

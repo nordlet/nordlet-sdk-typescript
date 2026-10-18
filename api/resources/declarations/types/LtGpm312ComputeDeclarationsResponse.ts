@@ -43,6 +43,7 @@ export namespace LtGpm312ComputeDeclarationsResponse {
             paymentCode: string;
             paidAmount: string;
             gpmWithheld: string;
+            gpmRatePercent: string;
         }
     }
 

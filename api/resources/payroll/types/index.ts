@@ -3,6 +3,7 @@ export * from "./DepartmentsCreatePayrollResponse.js";
 export * from "./DepartmentsListPayrollResponse.js";
 export * from "./LinesAttendancePayrollResponse.js";
 export * from "./PaymentsExportPayrollResponse.js";
+export * from "./PaymentTypesListPayrollResponse.js";
 export * from "./RunsApprovePayrollResponse.js";
 export * from "./RunsCancelPayrollResponse.js";
 export * from "./RunsCreatePayrollResponse.js";

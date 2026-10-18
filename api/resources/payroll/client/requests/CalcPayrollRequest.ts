@@ -16,4 +16,17 @@ export interface CalcPayrollRequest {
     fixedTerm?: boolean;
     benefitInKind?: string;
     options?: Record<string, string>;
+    payments?: CalcPayrollRequest.Payments.Item[];
+}
+
+export namespace CalcPayrollRequest {
+    export type Payments = Payments.Item[];
+
+    export namespace Payments {
+        export interface Item {
+            paymentType: string;
+            amount: string;
+            hours?: string | undefined;
+        }
+    }
 }
