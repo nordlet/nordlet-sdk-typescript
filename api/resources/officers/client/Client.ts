@@ -148,6 +148,8 @@ export class OfficersClient {
     }
 
     /**
+     * Add an officer to the company's register (`officers/list`); `signsAccounts` defaults to true. Refused with 422 when `resignedOn` is before `appointedOn`.
+     *
      * @param {NordletApi.CreateOfficersRequest} request
      * @param {OfficersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -273,6 +275,8 @@ export class OfficersClient {
     }
 
     /**
+     * Replace the recorded data of an officer; every field is written as sent, so a field left out is cleared and `signsAccounts` falls back to true. Refused with 422 when `resignedOn` is before `appointedOn`.
+     *
      * @param {NordletApi.UpdateOfficersRequest} request
      * @param {OfficersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -399,6 +403,8 @@ export class OfficersClient {
     }
 
     /**
+     * Remove an officer from the company's register.
+     *
      * @param {NordletApi.DeleteOfficersRequest} request
      * @param {OfficersClient.RequestOptions} requestOptions - Request-specific configuration.
      *

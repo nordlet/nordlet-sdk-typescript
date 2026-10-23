@@ -41,6 +41,8 @@ export interface InvoicesUnlockSalesResponse {
     issuedByTitle: string | null;
     receivedByName: string | null;
     receivedByTitle: string | null;
+    locale: string | null;
+    recurringInvoiceId: string | null;
     lockedAt: string | null;
     lockedBy: string | null;
     payToken: string | null;

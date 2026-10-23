@@ -24,6 +24,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Fetches the euro exchange rates the Bank of Lithuania web service publishes for `date` (default: the company's current date) and stores them in the rate table shared by all companies, replacing the rates already stored for that date. Answers 404 when no rates are published for the date.
+     *
      * @param {NordletApi.ExchangeRatesSyncReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -154,6 +156,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the stored euro exchange rates, which are shared by all companies. Filterable by `currencyCode` and `date`; sortable by `date` and `currencyCode`.
+     *
      * @param {NordletApi.ExchangeRatesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -284,6 +288,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Stores a company exchange rate for `currency` on `date`, in units of the currency per one unit of the company's base currency, replacing the company rate stored for that currency and date. Rate lookups use the company rate when it is dated on or after the latest shared rate on or before the lookup date. Answers 422 when `rate` is not positive.
+     *
      * @param {NordletApi.ExchangeRatesSetReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -418,6 +424,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the company's own exchange rates set with `reference/exchange-rates/set`. Filterable by `currencyCode` and `date`; sortable by `date` and `currencyCode`.
+     *
      * @param {NordletApi.ExchangeRatesOverridesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -548,6 +556,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Removes the company's own exchange rate for `currency` on `date`.
+     *
      * @param {NordletApi.ExchangeRatesOverridesDeleteReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -681,6 +691,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists every country code Nordlet knows with its EU and EEA membership and its name in each supported locale.
+     *
      * @param {NordletApi.CountriesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -806,6 +818,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the ten Lithuanian counties (apskritys) with their code and ISO code.
+     *
      * @param {NordletApi.LtCountiesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -936,6 +950,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the Lithuanian municipalities (savivaldybės) with the county each belongs to; `countyCode` limits the list to one county.
+     *
      * @param {NordletApi.LtMunicipalitiesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1066,6 +1082,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists Lithuanian cities with their municipality; `municipalityCode` limits the list to one municipality and `q` to names that start with the given text (case-insensitive).
+     *
      * @param {NordletApi.LtCitiesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1191,6 +1209,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the banks of the bank directory shared by all companies. Filterable by `countryCode`, `name`, `bic` and `bankCode`; sortable by `name`, `bic` and `countryCode`.
+     *
      * @param {NordletApi.BanksListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1316,6 +1336,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Adds a bank to the shared bank directory or, when a bank with the same `countryCode` and `bic` exists, replaces its name, bank code and active flag. Platform administrators only.
+     *
      * @param {NordletApi.BanksUpsertReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1445,6 +1467,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the ten Lithuanian regions (apskritys) with their code and ISO code; the same list as `reference/lt/counties/list`.
+     *
      * @param {NordletApi.LtRegionsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1575,6 +1599,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the currencies known to Nordlet with their minor units. Filterable and sortable by `code` and `name`.
+     *
      * @param {NordletApi.CurrenciesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1705,6 +1731,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the company's VAT classifiers (code, country, name and rate). A document line that names a classifier in `vatClassifierCode` takes its rate from it when neither the line nor the item has a rate. Filterable by `code`, `countryCode` and `ratePercent`; sortable by `code` and `ratePercent`.
+     *
      * @param {NordletApi.VatClassifiersListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1835,6 +1863,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Adds VAT classifiers to the company or replaces the country, name and rate of the ones whose `code` already exists.
+     *
      * @param {NordletApi.VatClassifiersUpsertReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2240,6 +2270,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Works out the VAT treatment of a supply by this company: the scheme (domestic, intra-EU B2B, reverse charge, OSS, IOSS, marketplace deemed supplier, export, out of scope or SME exempt), the country whose VAT applies, its rates with the company's overrides applied, and the legal basis. The customer comes from `partnerId` (country from the partner's address or VAT number, business status from the VAT number) or from `customerCountryCode` and `customerIsBusiness`; `date` defaults to the company's current date; when `belowDistanceSalesThreshold` is not given, the distance-sales threshold is tracked from the company's ledger. Answers 422 when the partner has neither an address country nor a VAT code.
+     *
      * @param {NordletApi.VatResolveReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2365,6 +2397,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the Combined Nomenclature codes of the directory shared by all companies. Filterable by `code`, `name` and `nameLt`; sortable by `code`.
+     *
      * @param {NordletApi.CnCodesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2490,6 +2524,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Adds Combined Nomenclature codes to the shared directory or replaces the names and supplementary unit of the codes that exist. Platform administrators only.
+     *
      * @param {NordletApi.CnCodesUpsertReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2625,6 +2661,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the versions of the filing systems, schemas and forms Nordlet's output was checked against, with the date of the check and the source; `country` limits the list to one country.
+     *
      * @param {NordletApi.ComplianceVersionsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2755,6 +2793,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the Intrastat thresholds stored per year: the reporting and the statistical-value threshold for arrivals and for dispatches.
+     *
      * @param {NordletApi.IntrastatThresholdsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2885,6 +2925,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the measurement units of the directory shared by all companies, with Lithuanian and English names. Filterable by `code`, `nameLt` and `nameEn`; sortable by `code`.
+     *
      * @param {NordletApi.UnitsListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3010,6 +3052,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Creates a numbering series for a document type, prefix and year; the first number the series hands out is at least `startAt`. Answers 409 when a series with the same document type, prefix and year exists.
+     *
      * @param {NordletApi.SeriesCreateReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3138,6 +3182,8 @@ export class ReferenceClient {
     }
 
     /**
+     * Lists the company's numbering series with the next number of each. Filterable and sortable by `documentType`, `prefix` and `year`.
+     *
      * @param {NordletApi.SeriesListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.
      *

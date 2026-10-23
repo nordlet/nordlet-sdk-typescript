@@ -24,6 +24,8 @@ export class LeadsClient {
     }
 
     /**
+     * Creates a lead in status `new`, `contacted`, `qualified` or `lost`. `assignedUserId` must be a member of the company and `sourceId` and `typeId` must exist in it; `countryCode` and `currency` are stored in upper case; `documents` attach uploaded files not yet linked to a record, and `notes` become the lead's first notes with the caller as author. Emits `lead.created`.
+     *
      * @param {NordletApi.CreateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -148,6 +150,8 @@ export class LeadsClient {
     }
 
     /**
+     * Returns one lead with its source and type names.
+     *
      * @param {NordletApi.GetLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -272,6 +276,8 @@ export class LeadsClient {
     }
 
     /**
+     * Changes the given fields of a lead; the clearable fields accept null, `documents` attach more uploaded files, and `countryCode` and `currency` are stored in upper case. A lead that is already converted cannot change `status` (409).
+     *
      * @param {NordletApi.UpdateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -396,6 +402,8 @@ export class LeadsClient {
     }
 
     /**
+     * Deletes a lead with its notes and detaches its files, which stay in the company's files without a record.
+     *
      * @param {NordletApi.DeleteLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -520,6 +528,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists leads with their source and type names; filterable by `name`, `contactName`, `email`, `phone`, `status`, `sourceId`, `typeId`, `countryCode`, `assignedUserId`, `partnerId`, `estimatedValue` and `createdAt`, sortable by `name`, `status`, `estimatedValue`, `createdAt` and `updatedAt`.
+     *
      * @param {NordletApi.ListLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -642,6 +652,8 @@ export class LeadsClient {
     }
 
     /**
+     * Adds a note to a lead with the caller as author and refreshes the lead's `updatedAt`.
+     *
      * @param {NordletApi.NotesCreateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -767,6 +779,8 @@ export class LeadsClient {
     }
 
     /**
+     * Deletes a lead note.
+     *
      * @param {NordletApi.NotesDeleteLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -891,6 +905,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists the notes of a lead, newest first.
+     *
      * @param {NordletApi.NotesListLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1015,6 +1031,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists the files attached to a lead, newest first.
+     *
      * @param {NordletApi.FilesListLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1139,6 +1157,8 @@ export class LeadsClient {
     }
 
     /**
+     * Creates a lead source; a `name` already used by a source of the company is refused with 409.
+     *
      * @param {NordletApi.SourcesCreateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1266,6 +1286,8 @@ export class LeadsClient {
     }
 
     /**
+     * Changes the name or `isActive` flag of a lead source; a name already used by another source of the company is refused with 409.
+     *
      * @param {NordletApi.SourcesUpdateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1393,6 +1415,8 @@ export class LeadsClient {
     }
 
     /**
+     * Deletes a lead source; one still referenced by a lead is refused with 409 and should be deactivated with `leads/sources/update` instead.
+     *
      * @param {NordletApi.SourcesDeleteLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1520,6 +1544,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists all lead sources of the company, active and inactive, ordered by name.
+     *
      * @param {NordletApi.SourcesListLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1642,6 +1668,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists the id and name of the active lead sources, ordered by name.
+     *
      * @param {NordletApi.SourcesOptionsLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1767,6 +1795,8 @@ export class LeadsClient {
     }
 
     /**
+     * Creates a lead type; a `name` already used by a type of the company is refused with 409.
+     *
      * @param {NordletApi.TypesCreateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1891,6 +1921,8 @@ export class LeadsClient {
     }
 
     /**
+     * Changes the name or `isActive` flag of a lead type; a name already used by another type of the company is refused with 409.
+     *
      * @param {NordletApi.TypesUpdateLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2015,6 +2047,8 @@ export class LeadsClient {
     }
 
     /**
+     * Deletes a lead type; one still referenced by a lead is refused with 409 and should be deactivated with `leads/types/update` instead.
+     *
      * @param {NordletApi.TypesDeleteLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2139,6 +2173,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists all lead types of the company, active and inactive, ordered by name.
+     *
      * @param {NordletApi.TypesListLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2261,6 +2297,8 @@ export class LeadsClient {
     }
 
     /**
+     * Lists the id and name of the active lead types, ordered by name.
+     *
      * @param {NordletApi.TypesOptionsLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.
      *

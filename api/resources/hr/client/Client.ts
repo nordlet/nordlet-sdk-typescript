@@ -24,6 +24,8 @@ export class HrClient {
     }
 
     /**
+     * Creates a job position with an optional code and name translations, for use in `hr/contracts/create`.
+     *
      * @param {NordletApi.PositionsCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -148,6 +150,8 @@ export class HrClient {
     }
 
     /**
+     * Changes the code, name or translations of a position; a null `translations` removes them.
+     *
      * @param {NordletApi.PositionsUpdateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -272,6 +276,8 @@ export class HrClient {
     }
 
     /**
+     * Lists the company's positions; filterable and sortable by `name` and `code`.
+     *
      * @param {NordletApi.PositionsListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -394,6 +400,8 @@ export class HrClient {
     }
 
     /**
+     * Creates an employee record. `payrollOptions` holds the country-specific settings the payroll engine reads for the person (see `hr/employees/fields`); `applyAllowance` defaults to true and `pensionAccumulation` to false.
+     *
      * @param {NordletApi.EmployeesCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -519,6 +527,8 @@ export class HrClient {
     }
 
     /**
+     * Changes the given fields of an employee; a null clears the fields that allow it (code, personal code, birth date, contact details, address, IBAN, social insurance number and start, hire date, notes). `status` and `terminationDate` are set here too.
+     *
      * @param {NordletApi.EmployeesUpdateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -643,6 +653,8 @@ export class HrClient {
     }
 
     /**
+     * Reads one employee.
+     *
      * @param {NordletApi.EmployeesGetHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -891,6 +903,8 @@ export class HrClient {
     }
 
     /**
+     * Lists the employees that are not deleted; filterable by `firstName`, `lastName`, `code`, `status` and `email`, sortable by `lastName`, `code` and `createdAt`.
+     *
      * @param {NordletApi.EmployeesListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1013,6 +1027,8 @@ export class HrClient {
     }
 
     /**
+     * Marks the employee deleted; the record stays and no longer appears in lists or payroll runs. `hr/employees/anonymize` also blanks the personal data.
+     *
      * @param {NordletApi.EmployeesDeleteHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1266,6 +1282,8 @@ export class HrClient {
     }
 
     /**
+     * Creates an employment contract for an employee. A `permanent` contract takes no `endDate` and a `fixed_term` one requires it; the number comes from `contractNo` or, with `agreementId`, from the employee's agreement; `workHours` defaults by `salaryType`. Answers 422 when the end date is before the start, and 409 when the employee already has a contract overlapping the period (end it with `hr/contracts/end` first) or the contract number already exists.
+     *
      * @param {NordletApi.ContractsCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1392,6 +1410,8 @@ export class HrClient {
     }
 
     /**
+     * Ends a contract on `endDate` with an optional reason. Answers 422 when the end date is before the contract start.
+     *
      * @param {NordletApi.ContractsEndHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1517,6 +1537,8 @@ export class HrClient {
     }
 
     /**
+     * Lists employment contracts; filterable by `employeeId`, `agreementId`, `status` and `contractNo`, sortable by `startDate` and `contractNo`.
+     *
      * @param {NordletApi.ContractsListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1639,6 +1661,8 @@ export class HrClient {
     }
 
     /**
+     * Creates or replaces the leave entitlement of an employee for a year; `usedDays` is kept unless given (0 on a new row) and `remainingDays` is the entitled days less the used ones.
+     *
      * @param {NordletApi.LeaveBalancesSetHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1768,6 +1792,8 @@ export class HrClient {
     }
 
     /**
+     * Lists leave balances, narrowed to an employee and/or a year when given, oldest year first.
+     *
      * @param {NordletApi.LeaveBalancesListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1893,6 +1919,8 @@ export class HrClient {
     }
 
     /**
+     * Records a sick-leave certificate of an employee. Answers 422 when `toDate` is before `fromDate`. `payroll/runs/create` warns when a certificate covers working days of a month that has no timesheet.
+     *
      * @param {NordletApi.IncapacityCertificatesCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2028,6 +2056,8 @@ export class HrClient {
     }
 
     /**
+     * Lists incapacity certificates; filterable by `employeeId` and `number`, sortable by `fromDate` and `number`.
+     *
      * @param {NordletApi.IncapacityCertificatesListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2158,6 +2188,8 @@ export class HrClient {
     }
 
     /**
+     * Adds the company's daily per diem rate for a destination country from `validFrom`; `hr/business-trips/create` takes the latest rate valid on the trip's start date. Answers 409 when a rate for that country already starts on that date.
+     *
      * @param {NordletApi.PerDiemRatesCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2287,6 +2319,8 @@ export class HrClient {
     }
 
     /**
+     * Lists per diem rates; filterable by `countryCode`, sortable by `countryCode` and `validFrom`.
+     *
      * @param {NordletApi.PerDiemRatesListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2412,6 +2446,8 @@ export class HrClient {
     }
 
     /**
+     * Deletes a per diem rate.
+     *
      * @param {NordletApi.PerDiemRatesDeleteHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2539,6 +2575,8 @@ export class HrClient {
     }
 
     /**
+     * Stores the trip as a draft with `days` counted as calendar days, both ends included, and `perDiemAmount` as the days times the company's rate for the destination valid on the start date (`hr/per-diem-rates/create`). Answers 422 when the trip ends before it starts or no rate covers the destination on that date, and 409 when the employee already has a trip overlapping the dates.
+     *
      * @param {NordletApi.BusinessTripsCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2670,6 +2708,8 @@ export class HrClient {
     }
 
     /**
+     * Reads one business trip.
+     *
      * @param {NordletApi.BusinessTripsGetHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2797,6 +2837,8 @@ export class HrClient {
     }
 
     /**
+     * Lists business trips; filterable by `employeeId`, `status` and `payrollRunId`, sortable by `startDate`.
+     *
      * @param {NordletApi.BusinessTripsListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -2922,6 +2964,8 @@ export class HrClient {
     }
 
     /**
+     * Sets the trip's status to `approved`. `payroll/runs/create` without explicit lines adds the per diem of every approved trip ending in the run month as an untaxed addition and sets the trip's `payrollRunId`; reversing or cancelling the run releases the trip again. Answers 409 when the trip is not a draft.
+     *
      * @param {NordletApi.BusinessTripsApproveHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3054,6 +3098,8 @@ export class HrClient {
     }
 
     /**
+     * Deletes a draft trip; answers 409 when the trip is not a draft.
+     *
      * @param {NordletApi.BusinessTripsDeleteHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3181,6 +3227,8 @@ export class HrClient {
     }
 
     /**
+     * Adds an education, qualification, certificate or training record to an employee, optionally linked to one of the company's uploaded files (`fileId`).
+     *
      * @param {NordletApi.EmployeesRecordsCreateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3315,6 +3363,8 @@ export class HrClient {
     }
 
     /**
+     * Changes the given fields of an employee record; `issuedAt`, `validUntil` and `fileId` can be cleared with null.
+     *
      * @param {NordletApi.EmployeesRecordsUpdateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3447,6 +3497,8 @@ export class HrClient {
     }
 
     /**
+     * Deletes an employee record.
+     *
      * @param {NordletApi.EmployeesRecordsDeleteHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3579,6 +3631,8 @@ export class HrClient {
     }
 
     /**
+     * Lists employee records; filterable by `employeeId`, `type` and `title`, sortable by `createdAt` and `issuedAt`.
+     *
      * @param {NordletApi.EmployeesRecordsListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3709,6 +3763,8 @@ export class HrClient {
     }
 
     /**
+     * Lists the files uploaded against an employee, newest first.
+     *
      * @param {NordletApi.EmployeesAttachmentsListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3841,6 +3897,8 @@ export class HrClient {
     }
 
     /**
+     * Builds the timesheet of the month for every employee with a contract in it, or for one employee with `employeeId`, replacing any existing timesheet: the Monday to Friday days within the contract get the contract's daily hours (its weekly hours over five), and for a Lithuanian company the public holidays are `holiday` days with 0 hours. Answers 422 when no contract covers the month.
+     *
      * @param {NordletApi.TimesheetsGenerateHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -3969,6 +4027,8 @@ export class HrClient {
     }
 
     /**
+     * Creates or replaces the timesheet of an employee for a month from the given days; `workedDays` and `workedHours` count the `work` and `business_trip` days with hours. Answers 422 for a day outside the month, a day given twice or more than 24 hours in a day. `payroll/runs/create` reads the timesheet for the paid days, the days worked and the business-trip days of the month.
+     *
      * @param {NordletApi.TimesheetsUpsertHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -4103,6 +4163,8 @@ export class HrClient {
     }
 
     /**
+     * Reads the timesheet of an employee for a month.
+     *
      * @param {NordletApi.TimesheetsGetHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -4229,6 +4291,8 @@ export class HrClient {
     }
 
     /**
+     * Lists the timesheets of a month, ordered by employee name.
+     *
      * @param {NordletApi.TimesheetsListHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -4354,6 +4418,8 @@ export class HrClient {
     }
 
     /**
+     * Deletes a timesheet.
+     *
      * @param {NordletApi.TimesheetsDeleteHrRequest} request
      * @param {HrClient.RequestOptions} requestOptions - Request-specific configuration.
      *

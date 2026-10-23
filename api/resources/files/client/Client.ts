@@ -24,6 +24,8 @@ export class FilesClient {
     }
 
     /**
+     * Store a base64-encoded file of up to 10 MB (413 above that) under an `entity` and optional `entityId`, and return its record with the SHA-256 of the content and its `storageKey`, which other calls take as `documentRef`.
+     *
      * @param {NordletApi.UploadFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -151,6 +153,8 @@ export class FilesClient {
     }
 
     /**
+     * Return a file record with its content, base64-encoded.
+     *
      * @param {NordletApi.GetFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -275,6 +279,8 @@ export class FilesClient {
     }
 
     /**
+     * List the company's files. Filterable by `entity`, `entityId` and `fileName`; sortable by `createdAt`, `fileName` and `sizeBytes`.
+     *
      * @param {NordletApi.ListFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -397,6 +403,8 @@ export class FilesClient {
     }
 
     /**
+     * Delete a file record and its stored content.
+     *
      * @param {NordletApi.DeleteFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *

@@ -21,6 +21,7 @@ export interface InvoicesUpdateSalesRequest {
     vatCountryCode?: string | null;
     deemedSupplier?: boolean;
     notes?: string;
+    locale?: InvoicesUpdateSalesRequest.Locale | null;
     operationTypeId?: string | null;
     documentSeriesId?: string | null;
     seriesLabel?: string | null;
@@ -46,6 +47,12 @@ export namespace InvoicesUpdateSalesRequest {
         SmeExempt: "sme_exempt",
     } as const;
     export type VatScheme = (typeof VatScheme)[keyof typeof VatScheme];
+    export const Locale = {
+        En: "en",
+        Lt: "lt",
+        De: "de",
+    } as const;
+    export type Locale = (typeof Locale)[keyof typeof Locale];
     export type Lines = Lines.Item[];
 
     export namespace Lines {

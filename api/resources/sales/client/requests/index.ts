@@ -37,5 +37,12 @@ export type { RecognitionRunSalesRequest } from "./RecognitionRunSalesRequest.js
 export { RecognitionRunsListSalesRequest } from "./RecognitionRunsListSalesRequest.js";
 export { RecognitionSchedulesListSalesRequest } from "./RecognitionSchedulesListSalesRequest.js";
 export type { RecognitionSummarySalesRequest } from "./RecognitionSummarySalesRequest.js";
+export { RecurringInvoicesCreateSalesRequest } from "./RecurringInvoicesCreateSalesRequest.js";
+export type { RecurringInvoicesDeleteSalesRequest } from "./RecurringInvoicesDeleteSalesRequest.js";
+export type { RecurringInvoicesGenerateSalesRequest } from "./RecurringInvoicesGenerateSalesRequest.js";
+export type { RecurringInvoicesGetSalesRequest } from "./RecurringInvoicesGetSalesRequest.js";
+export { RecurringInvoicesListSalesRequest } from "./RecurringInvoicesListSalesRequest.js";
+export type { RecurringInvoicesRunSalesRequest } from "./RecurringInvoicesRunSalesRequest.js";
+export { RecurringInvoicesUpdateSalesRequest } from "./RecurringInvoicesUpdateSalesRequest.js";
 export { RefundLiabilityListSalesRequest } from "./RefundLiabilityListSalesRequest.js";
 export type { RefundLiabilityTrueUpSalesRequest } from "./RefundLiabilityTrueUpSalesRequest.js";

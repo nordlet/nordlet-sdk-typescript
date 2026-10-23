@@ -24,6 +24,8 @@ export class TransportClient {
     }
 
     /**
+     * Create a draft waybill to the consignee. The cargo lines are `lines` or, when none are given and `saleInvoiceId` is set, the product lines of that sale invoice (422 when it has none); a line without `description`, `unit` or `productCode` takes them from its item. `documentDate` defaults to the company's today and `series` to `VAZ`.
+     *
      * @param {NordletApi.WaybillsCreateTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -159,6 +161,8 @@ export class TransportClient {
     }
 
     /**
+     * Change a draft waybill; omitted fields keep their value, the optional ones can be cleared with null, and `lines`, when given, replace all existing lines. A waybill that is already issued or cancelled is refused with 409.
+     *
      * @param {NordletApi.WaybillsUpdateTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -291,6 +295,8 @@ export class TransportClient {
     }
 
     /**
+     * Issue a draft waybill: it takes the next number of its `series` for the year of `documentDate` and becomes `issued`. Without a vehicle plate or without lines the call is refused with 422, a waybill that is not a draft with 409. Only issued waybills can go into the Lithuanian i.VAZ file (`declarations/lt/ivaz/generate`) and the Romanian e-Transport declaration (`declarations/ro/etransport/build`).
+     *
      * @param {NordletApi.WaybillsIssueTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -418,6 +424,8 @@ export class TransportClient {
     }
 
     /**
+     * Cancel a draft or issued waybill. An already cancelled one is refused with 409.
+     *
      * @param {NordletApi.WaybillsCancelTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -550,6 +558,8 @@ export class TransportClient {
     }
 
     /**
+     * Read one waybill with its lines.
+     *
      * @param {NordletApi.WaybillsGetTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -677,6 +687,8 @@ export class TransportClient {
     }
 
     /**
+     * List waybills with the consignee's name. Filterable by `status`, `consigneePartnerId`, `documentDate`, `fullNumber` and `dispatchAt`; sortable by `createdAt`, `dispatchAt` and `fullNumber`.
+     *
      * @param {NordletApi.WaybillsListTransportRequest} request
      * @param {TransportClient.RequestOptions} requestOptions - Request-specific configuration.
      *

@@ -40,6 +40,7 @@ export namespace SubscriptionsUpdateWebhooksRequest {
             PurchaseInvoiceRegistered: "purchase_invoice.registered",
             PurchaseOrderApproved: "purchase_order.approved",
             PurchaseOrderReceived: "purchase_order.received",
+            RecurringInvoiceGenerated: "recurring_invoice.generated",
             RefundLiabilityActual: "refund_liability.actual",
             RefundLiabilityTruedUp: "refund_liability.trued_up",
             ReportCompleted: "report.completed",

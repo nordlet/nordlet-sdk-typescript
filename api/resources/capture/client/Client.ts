@@ -24,6 +24,8 @@ export class CaptureClient {
     }
 
     /**
+     * Return the company's document capture settings: whether intake by e-mail is enabled, whether e-mailed documents are read on arrival, the company's intake e-mail address and whether a reading provider is configured. The intake token behind the address is created on the first call.
+     *
      * @param {NordletApi.SettingsGetCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -149,6 +151,8 @@ export class CaptureClient {
     }
 
     /**
+     * Switch `intakeEnabled` (documents sent to the intake address are accepted) and `captureAutoExtract` (they are read on arrival) on or off; at least one field is required.
+     *
      * @param {NordletApi.SettingsUpdateCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -274,6 +278,8 @@ export class CaptureClient {
     }
 
     /**
+     * Replace the company's intake token, so the previous intake e-mail address stops working and the settings come back with the new one.
+     *
      * @param {NordletApi.SettingsRegenerateIntakeCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -404,6 +410,8 @@ export class CaptureClient {
     }
 
     /**
+     * Endpoint for the inbound e-mail provider (Postmark field names or the generic `to`, `from`, `subject` and `attachments` form). It needs the `x-inbound-secret` header and finds the company by the `intake+<token>@` recipient address (404 when unknown, 403 when intake is disabled). Every PDF, image, Word or PowerPoint attachment up to 10 MB becomes a `pending` capture (`accepted`), anything else is `skipped`; when the company has automatic reading on, is not on trial and a reading provider is configured, each capture is read at once.
+     *
      * @param {NordletApi.InboundEmailCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -529,6 +537,8 @@ export class CaptureClient {
     }
 
     /**
+     * Upload a supplier document (PDF, image, Word or PowerPoint, up to 10 MB; 422 for any other type) as a capture and read it at once. The result holds the extracted supplier, dates, totals and lines, the partner matched by VAT code, then partner code, then name, the raw text, and `status` `extracted` or `failed` with `error`. Needs a configured reading provider, is refused with 402 for a company on trial until its first top-up, and counts every page read as `ocr_page` usage. The draft is reviewed and saved with `capture/documents/confirm`.
+     *
      * @param {NordletApi.DocumentsUploadCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -658,6 +668,8 @@ export class CaptureClient {
     }
 
     /**
+     * Read a stored capture again and replace its draft (supplier, totals, lines, matched partner). A capture received over Peppol is parsed from its document again without a reading provider; any other needs the provider and, for a company on trial, the first top-up (402). Refused with 409 once the capture is linked to a purchase invoice.
+     *
      * @param {NordletApi.DocumentsExtractCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -790,6 +802,8 @@ export class CaptureClient {
     }
 
     /**
+     * Return one capture with its extraction and raw text.
+     *
      * @param {NordletApi.DocumentsGetCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -917,6 +931,8 @@ export class CaptureClient {
     }
 
     /**
+     * List captures without raw text. Filterable by `status`, `matchedPartnerId` and `purchaseInvoiceId`; sortable by `createdAt` and `updatedAt`.
+     *
      * @param {NordletApi.DocumentsListCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1042,6 +1058,8 @@ export class CaptureClient {
     }
 
     /**
+     * Delete a capture and its stored file (409 once it is linked to a purchase invoice).
+     *
      * @param {NordletApi.DocumentsDeleteCaptureRequest} request
      * @param {CaptureClient.RequestOptions} requestOptions - Request-specific configuration.
      *

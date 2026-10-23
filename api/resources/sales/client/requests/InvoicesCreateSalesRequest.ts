@@ -28,6 +28,8 @@ export interface InvoicesCreateSalesRequest {
     deemedSupplier?: boolean;
     notes?: string;
     documentRef?: string;
+    /** Language of the PDF and of the e-mail the invoice is sent with; unset means the language asked for when the PDF is made */
+    locale?: InvoicesCreateSalesRequest.Locale;
     operationTypeId?: string;
     documentSeriesId?: string;
     seriesLabel?: string;
@@ -60,6 +62,13 @@ export namespace InvoicesCreateSalesRequest {
         SmeExempt: "sme_exempt",
     } as const;
     export type VatScheme = (typeof VatScheme)[keyof typeof VatScheme];
+    /** Language of the PDF and of the e-mail the invoice is sent with; unset means the language asked for when the PDF is made */
+    export const Locale = {
+        En: "en",
+        Lt: "lt",
+        De: "de",
+    } as const;
+    export type Locale = (typeof Locale)[keyof typeof Locale];
     export type Lines = Lines.Item[];
 
     export namespace Lines {
