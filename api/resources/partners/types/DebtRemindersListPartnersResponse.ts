@@ -17,6 +17,7 @@ export namespace DebtRemindersListPartnersResponse {
         export interface Item {
             id: string;
             partnerId: string;
+            kind: Item.Kind;
             sentTo: string;
             invoiceCount: number;
             totalDue: string;
@@ -24,6 +25,14 @@ export namespace DebtRemindersListPartnersResponse {
             currency: string;
             invoiceIds: string[];
             sentAt: string;
+        }
+
+        export namespace Item {
+            export const Kind = {
+                BeforeDue: "before_due",
+                Overdue: "overdue",
+            } as const;
+            export type Kind = (typeof Kind)[keyof typeof Kind];
         }
     }
 }

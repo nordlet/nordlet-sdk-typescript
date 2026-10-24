@@ -12,6 +12,7 @@ export interface LoginLinkRequestAccountRequest {
     acceptTerms?: boolean;
     acceptDpa?: boolean;
     referralCode?: string;
+    app?: LoginLinkRequestAccountRequest.App;
 }
 
 export namespace LoginLinkRequestAccountRequest {
@@ -21,4 +22,8 @@ export namespace LoginLinkRequestAccountRequest {
         De: "de",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
+    export const App = {
+        Invoice: "invoice",
+    } as const;
+    export type App = (typeof App)[keyof typeof App];
 }
