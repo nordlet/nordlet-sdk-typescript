@@ -54,6 +54,7 @@ export namespace SubscriptionsUpdateWebhooksRequest {
             SaleInvoicePeppolFailed: "sale_invoice.peppol_failed",
             SaleInvoicePeppolRejected: "sale_invoice.peppol_rejected",
             SaleInvoicePeppolSent: "sale_invoice.peppol_sent",
+            SaleInvoiceQuoteSent: "sale_invoice.quote_sent",
             SaleInvoiceSent: "sale_invoice.sent",
             SalesOrderCreated: "sales_order.created",
             SalesOrderFulfilled: "sales_order.fulfilled",

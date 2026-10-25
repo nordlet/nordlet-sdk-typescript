@@ -30,6 +30,8 @@ export namespace InvoicesListSalesResponse {
             netTotal: string;
             vatTotal: string;
             grossTotal: string;
+            salesTaxPercent: string | null;
+            salesTaxTotal: string;
             paidAmount: string;
             journalTransactionId: string | null;
             appliedToInvoiceId: string | null;
@@ -60,6 +62,8 @@ export namespace InvoicesListSalesResponse {
             lockedAt: string | null;
             lockedBy: string | null;
             payToken: string | null;
+            payLinkEnabled: boolean;
+            debtRemindersEnabled: boolean;
             einvoiceSystem: string | null;
             einvoiceTransport: string | null;
             einvoiceMessageId: string | null;

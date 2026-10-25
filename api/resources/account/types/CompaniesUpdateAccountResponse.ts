@@ -21,6 +21,16 @@ export interface CompaniesUpdateAccountResponse {
     phone: string | null;
     iban: string | null;
     bankName: string | null;
+    bankBic: string | null;
+    bankCode: string | null;
+    bankBranchCode: string | null;
+    bankAccountNumber: string | null;
+    /** Prefix of the numbers of invoices issued without a document series (SF when none was set) */
+    invoicePrefix: string;
+    /** Number the next invoice issued without a document series gets, before any country-specific format */
+    nextInvoiceNumber: string;
+    defaultInvoiceLocale: string | null;
+    defaultInvoiceNote: string | null;
     peppolId: string | null;
     sepaCreditorId: string | null;
     logoFileId: string | null;

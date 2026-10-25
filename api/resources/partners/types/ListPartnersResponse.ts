@@ -28,6 +28,8 @@ export namespace ListPartnersResponse {
             isCustomer: boolean;
             isSupplier: boolean;
             paymentTermDays: number | null;
+            invoiceCurrency: string | null;
+            invoiceLocale: string | null;
             creditLimit: string | null;
             priceListId: string | null;
             groupId: string | null;

@@ -6,6 +6,7 @@ export { AccountSetPlanBillingRequest } from "./AccountSetPlanBillingRequest.js"
 export type { FlatRateConfirmBillingRequest } from "./FlatRateConfirmBillingRequest.js";
 export { FlatRateCreateBillingRequest } from "./FlatRateCreateBillingRequest.js";
 export { PortalCreateBillingRequest } from "./PortalCreateBillingRequest.js";
+export type { SubscriptionCancelBillingRequest } from "./SubscriptionCancelBillingRequest.js";
 export type { TopupConfirmBillingRequest } from "./TopupConfirmBillingRequest.js";
 export { TopupCreateBillingRequest } from "./TopupCreateBillingRequest.js";
 export type { TransactionsListBillingRequest } from "./TransactionsListBillingRequest.js";

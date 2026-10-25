@@ -6,6 +6,7 @@ export * from "./AccountSetPlanBillingResponse.js";
 export * from "./FlatRateConfirmBillingResponse.js";
 export * from "./FlatRateCreateBillingResponse.js";
 export * from "./PortalCreateBillingResponse.js";
+export * from "./SubscriptionCancelBillingResponse.js";
 export * from "./TopupConfirmBillingResponse.js";
 export * from "./TopupCreateBillingResponse.js";
 export * from "./TransactionsListBillingResponse.js";

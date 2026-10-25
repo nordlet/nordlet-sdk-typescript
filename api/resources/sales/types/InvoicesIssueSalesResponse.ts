@@ -16,6 +16,8 @@ export interface InvoicesIssueSalesResponse {
     netTotal: string;
     vatTotal: string;
     grossTotal: string;
+    salesTaxPercent: string | null;
+    salesTaxTotal: string;
     paidAmount: string;
     journalTransactionId: string | null;
     appliedToInvoiceId: string | null;
@@ -46,6 +48,8 @@ export interface InvoicesIssueSalesResponse {
     lockedAt: string | null;
     lockedBy: string | null;
     payToken: string | null;
+    payLinkEnabled: boolean;
+    debtRemindersEnabled: boolean;
     einvoiceSystem: string | null;
     einvoiceTransport: string | null;
     einvoiceMessageId: string | null;

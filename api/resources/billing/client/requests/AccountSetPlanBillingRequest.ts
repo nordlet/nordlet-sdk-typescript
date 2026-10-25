@@ -15,6 +15,7 @@ export namespace AccountSetPlanBillingRequest {
         Starter: "starter",
         Business: "business",
         Scale: "scale",
+        Invoicing: "invoicing",
     } as const;
     export type Plan = (typeof Plan)[keyof typeof Plan];
 }

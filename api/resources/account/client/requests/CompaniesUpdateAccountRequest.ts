@@ -19,6 +19,18 @@ export interface CompaniesUpdateAccountRequest {
     phone?: string | null;
     iban?: string | null;
     bankName?: string | null;
+    bankBic?: string | null;
+    /** Sort code, routing number, BSB, IFSC or institution number */
+    bankCode?: string | null;
+    /** Transit number (Canada) */
+    bankBranchCode?: string | null;
+    bankAccountNumber?: string | null;
+    /** Prefix of the numbers of invoices issued without a document series; SF when not set */
+    invoicePrefix?: string | null;
+    /** Language a new invoice starts with when neither the invoice nor its partner names one */
+    defaultInvoiceLocale?: CompaniesUpdateAccountRequest.DefaultInvoiceLocale | null;
+    /** Note a new invoice, proforma or advance invoice starts with when it names no notes */
+    defaultInvoiceNote?: string | null;
     peppolId?: string | null;
     sepaCreditorId?: string | null;
     defaultInvoiceCurrency?: string;
@@ -51,6 +63,42 @@ export namespace CompaniesUpdateAccountRequest {
         countryCode?: string | undefined;
     }
 
+    /** Language a new invoice starts with when neither the invoice nor its partner names one */
+    export const DefaultInvoiceLocale = {
+        En: "en",
+        Lt: "lt",
+        De: "de",
+        Fr: "fr",
+        Es: "es",
+        It: "it",
+        Pt: "pt",
+        Nl: "nl",
+        Pl: "pl",
+        Sv: "sv",
+        Da: "da",
+        No: "no",
+        Fi: "fi",
+        Et: "et",
+        Lv: "lv",
+        Cs: "cs",
+        Sk: "sk",
+        Hu: "hu",
+        Ro: "ro",
+        Bg: "bg",
+        Hr: "hr",
+        Sl: "sl",
+        El: "el",
+        Mt: "mt",
+        Is: "is",
+        Ga: "ga",
+        Zh: "zh",
+        Ja: "ja",
+        Ar: "ar",
+        Hi: "hi",
+        Ru: "ru",
+        Tr: "tr",
+    } as const;
+    export type DefaultInvoiceLocale = (typeof DefaultInvoiceLocale)[keyof typeof DefaultInvoiceLocale];
     export const AccountsKeptBy = {
         Company: "company",
         External: "external",

@@ -11,6 +11,8 @@ export interface AccountSetOverdraftCapBillingResponse {
     paymentsConfigured: boolean;
     hasPaymentAccount: boolean;
     hasSubscription: boolean;
+    /** When the Stripe subscription ends after `subscription/cancel`; null while it renews */
+    subscriptionCancelAt: string | null;
     paymentFailedAt: string | null;
     paymentFailedInvoiceUrl: string | null;
     monthToDate: AccountSetOverdraftCapBillingResponse.MonthToDate;
@@ -28,6 +30,7 @@ export namespace AccountSetOverdraftCapBillingResponse {
         Starter: "starter",
         Business: "business",
         Scale: "scale",
+        Invoicing: "invoicing",
     } as const;
     export type Plan = (typeof Plan)[keyof typeof Plan];
     export const AccountType = {

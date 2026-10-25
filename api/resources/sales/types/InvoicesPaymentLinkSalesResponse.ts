@@ -7,6 +7,7 @@ export interface InvoicesPaymentLinkSalesResponse {
 
 export namespace InvoicesPaymentLinkSalesResponse {
     export const Source = {
+        Stripe: "stripe",
         Template: "template",
     } as const;
     export type Source = (typeof Source)[keyof typeof Source];

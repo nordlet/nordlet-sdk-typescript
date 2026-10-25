@@ -11,6 +11,8 @@ export interface AccountSetAccountTypeBillingResponse {
     paymentsConfigured: boolean;
     hasPaymentAccount: boolean;
     hasSubscription: boolean;
+    /** When the Stripe subscription ends after `subscription/cancel`; null while it renews */
+    subscriptionCancelAt: string | null;
     paymentFailedAt: string | null;
     paymentFailedInvoiceUrl: string | null;
     monthToDate: AccountSetAccountTypeBillingResponse.MonthToDate;
@@ -28,6 +30,7 @@ export namespace AccountSetAccountTypeBillingResponse {
         Starter: "starter",
         Business: "business",
         Scale: "scale",
+        Invoicing: "invoicing",
     } as const;
     export type Plan = (typeof Plan)[keyof typeof Plan];
     export const AccountType = {

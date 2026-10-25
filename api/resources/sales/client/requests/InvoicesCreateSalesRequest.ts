@@ -30,6 +30,10 @@ export interface InvoicesCreateSalesRequest {
     documentRef?: string;
     /** Language of the PDF and of the e-mail the invoice is sent with; unset means the language asked for when the PDF is made */
     locale?: InvoicesCreateSalesRequest.Locale;
+    /** Whether the PDF and the e-mail carry the payment link of the company payment link template */
+    payLinkEnabled?: boolean;
+    /** Whether automatic debt reminders include this invoice when its partner has them turned on */
+    debtRemindersEnabled?: boolean;
     operationTypeId?: string;
     documentSeriesId?: string;
     seriesLabel?: string;
@@ -39,6 +43,8 @@ export interface InvoicesCreateSalesRequest {
     receivedByName?: string;
     receivedByTitle?: string;
     discountPercent?: string;
+    /** Sales tax as a percent of the net total, added to the invoice total. It is not posted to the ledger and is left out of VAT and national tax reports. Invoices only. */
+    salesTaxPercent?: string;
     lines: InvoicesCreateSalesRequest.Lines.Item[];
 }
 
@@ -67,6 +73,35 @@ export namespace InvoicesCreateSalesRequest {
         En: "en",
         Lt: "lt",
         De: "de",
+        Fr: "fr",
+        Es: "es",
+        It: "it",
+        Pt: "pt",
+        Nl: "nl",
+        Pl: "pl",
+        Sv: "sv",
+        Da: "da",
+        No: "no",
+        Fi: "fi",
+        Et: "et",
+        Lv: "lv",
+        Cs: "cs",
+        Sk: "sk",
+        Hu: "hu",
+        Ro: "ro",
+        Bg: "bg",
+        Hr: "hr",
+        Sl: "sl",
+        El: "el",
+        Mt: "mt",
+        Is: "is",
+        Ga: "ga",
+        Zh: "zh",
+        Ja: "ja",
+        Ar: "ar",
+        Hi: "hi",
+        Ru: "ru",
+        Tr: "tr",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
     export type Lines = Lines.Item[];

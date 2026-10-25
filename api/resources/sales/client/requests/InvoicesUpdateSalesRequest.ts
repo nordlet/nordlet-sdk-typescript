@@ -22,6 +22,8 @@ export interface InvoicesUpdateSalesRequest {
     deemedSupplier?: boolean;
     notes?: string;
     locale?: InvoicesUpdateSalesRequest.Locale | null;
+    payLinkEnabled?: boolean;
+    debtRemindersEnabled?: boolean;
     operationTypeId?: string | null;
     documentSeriesId?: string | null;
     seriesLabel?: string | null;
@@ -31,6 +33,7 @@ export interface InvoicesUpdateSalesRequest {
     issuedByTitle?: string | null;
     receivedByName?: string | null;
     receivedByTitle?: string | null;
+    salesTaxPercent?: string | null;
     lines?: InvoicesUpdateSalesRequest.Lines.Item[];
 }
 
@@ -51,6 +54,35 @@ export namespace InvoicesUpdateSalesRequest {
         En: "en",
         Lt: "lt",
         De: "de",
+        Fr: "fr",
+        Es: "es",
+        It: "it",
+        Pt: "pt",
+        Nl: "nl",
+        Pl: "pl",
+        Sv: "sv",
+        Da: "da",
+        No: "no",
+        Fi: "fi",
+        Et: "et",
+        Lv: "lv",
+        Cs: "cs",
+        Sk: "sk",
+        Hu: "hu",
+        Ro: "ro",
+        Bg: "bg",
+        Hr: "hr",
+        Sl: "sl",
+        El: "el",
+        Mt: "mt",
+        Is: "is",
+        Ga: "ga",
+        Zh: "zh",
+        Ja: "ja",
+        Ar: "ar",
+        Hi: "hi",
+        Ru: "ru",
+        Tr: "tr",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
     export type Lines = Lines.Item[];

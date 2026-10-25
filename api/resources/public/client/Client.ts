@@ -160,7 +160,7 @@ export class PublicClient {
     }
 
     /**
-     * Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice or the company has no template, and 409 when the invoice is already paid.
+     * Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no template, and 409 when the invoice is already paid.
      *
      * @param {NordletApi.PayPublicRequest} request
      * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -281,5 +281,386 @@ export class PublicClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/public/pay/{token}");
+    }
+
+    /**
+     * Return the issued sale document that carries this customer token (`token` of `sales/invoices/view`), in the shape of `sales/invoices/view` without the token. Answers 404 when the token matches no issued document.
+     *
+     * @param {NordletApi.InvoicesGetPublicRequest} request
+     * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.public.invoicesGet({
+     *         token: "token"
+     *     })
+     */
+    public invoicesGet(
+        request: NordletApi.InvoicesGetPublicRequest,
+        requestOptions?: PublicClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.InvoicesGetPublicResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__invoicesGet(request, requestOptions));
+    }
+
+    private async __invoicesGet(
+        request: NordletApi.InvoicesGetPublicRequest,
+        requestOptions?: PublicClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.InvoicesGetPublicResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/public/invoices/get",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as NordletApi.InvoicesGetPublicResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/public/invoices/get");
+    }
+
+    /**
+     * Open a Stripe Checkout page on the company's connected Stripe account for the amount still unpaid on the issued invoice that carries this customer token, and return its `url`. Stripe sends the customer back to the public invoice page. Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no Stripe account that can take charges, 409 when the invoice is already paid and 422 when Stripe cannot take the amount in the invoice currency.
+     *
+     * @param {NordletApi.InvoicesCheckoutPublicRequest} request
+     * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.public.invoicesCheckout({
+     *         token: "token"
+     *     })
+     */
+    public invoicesCheckout(
+        request: NordletApi.InvoicesCheckoutPublicRequest,
+        requestOptions?: PublicClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.InvoicesCheckoutPublicResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__invoicesCheckout(request, requestOptions));
+    }
+
+    private async __invoicesCheckout(
+        request: NordletApi.InvoicesCheckoutPublicRequest,
+        requestOptions?: PublicClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.InvoicesCheckoutPublicResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/public/invoices/checkout",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.InvoicesCheckoutPublicResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/public/invoices/checkout");
+    }
+
+    /**
+     * Return the PDF of the issued sale document that carries this customer token, base64-encoded, as `sales/invoices/pdf` renders it in the document's own language, English when it has none. Answers 404 when the token matches no issued document.
+     *
+     * @param {NordletApi.InvoicesPdfPublicRequest} request
+     * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.public.invoicesPdf({
+     *         token: "token"
+     *     })
+     */
+    public invoicesPdf(
+        request: NordletApi.InvoicesPdfPublicRequest,
+        requestOptions?: PublicClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.InvoicesPdfPublicResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__invoicesPdf(request, requestOptions));
+    }
+
+    private async __invoicesPdf(
+        request: NordletApi.InvoicesPdfPublicRequest,
+        requestOptions?: PublicClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.InvoicesPdfPublicResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/public/invoices/pdf",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as NordletApi.InvoicesPdfPublicResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/public/invoices/pdf");
     }
 }
