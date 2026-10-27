@@ -21,6 +21,7 @@ export namespace DeReturnsGenerateDeclarationsRequest {
         DeAnnualVatReturn: "de-annual-vat-return",
         DePayrollWithholding: "de-payroll-withholding",
         DePayrollStatements: "de-payroll-statements",
+        DeEuer: "de-euer",
     } as const;
     export type RuleKey = (typeof RuleKey)[keyof typeof RuleKey];
 }

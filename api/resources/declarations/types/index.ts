@@ -19,6 +19,7 @@ export * from "./CyHe32GenerateDeclarationsResponse.js";
 export * from "./CyTd4GenerateDeclarationsResponse.js";
 export * from "./DeBeitragsnachweisGenerateDeclarationsResponse.js";
 export * from "./DeDeuevGenerateDeclarationsResponse.js";
+export * from "./DeEuerGetDeclarationsResponse.js";
 export * from "./DeReturnFactsGetDeclarationsResponse.js";
 export * from "./DeReturnFactsSetDeclarationsResponse.js";
 export * from "./DeReturnsGenerateDeclarationsResponse.js";

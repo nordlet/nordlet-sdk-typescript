@@ -70,6 +70,7 @@ export namespace MeAccountResponse {
             vatCode: string | null;
             role: string;
             isSandbox: boolean;
+            cashBasis: boolean;
             status: Item.Status;
             deletedAt: string | null;
         }

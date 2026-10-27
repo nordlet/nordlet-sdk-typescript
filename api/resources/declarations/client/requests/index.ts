@@ -19,6 +19,7 @@ export type { CyHe32GenerateDeclarationsRequest } from "./CyHe32GenerateDeclarat
 export type { CyTd4GenerateDeclarationsRequest } from "./CyTd4GenerateDeclarationsRequest.js";
 export type { DeBeitragsnachweisGenerateDeclarationsRequest } from "./DeBeitragsnachweisGenerateDeclarationsRequest.js";
 export type { DeDeuevGenerateDeclarationsRequest } from "./DeDeuevGenerateDeclarationsRequest.js";
+export type { DeEuerGetDeclarationsRequest } from "./DeEuerGetDeclarationsRequest.js";
 export type { DeReturnFactsGetDeclarationsRequest } from "./DeReturnFactsGetDeclarationsRequest.js";
 export { DeReturnFactsSetDeclarationsRequest } from "./DeReturnFactsSetDeclarationsRequest.js";
 export { DeReturnsGenerateDeclarationsRequest } from "./DeReturnsGenerateDeclarationsRequest.js";

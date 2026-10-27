@@ -8,6 +8,7 @@ export interface CompaniesProfileAccountResponse {
     smeExemptionNumber: string | null;
     isVatPayer: boolean;
     isSandbox: boolean;
+    cashBasis: boolean;
     countryCode: string;
     /** Chart of accounts template the company was seeded with */
     chartTemplate: string;

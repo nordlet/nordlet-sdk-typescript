@@ -39,6 +39,9 @@ export namespace DeReturnFactsSetDeclarationsRequest {
         representative?: (Facts.Representative | null) | undefined;
         singleTransportTax?: string | undefined;
         distanceSales?: string | undefined;
+        euerEinkunftsart?: Facts.EuerEinkunftsart | undefined;
+        euerEntnahmen?: string | undefined;
+        euerEinlagen?: string | undefined;
     }
 
     export namespace Facts {
@@ -169,5 +172,12 @@ export namespace DeReturnFactsSetDeclarationsRequest {
             } as const;
             export type Role = (typeof Role)[keyof typeof Role];
         }
+
+        export const EuerEinkunftsart = {
+            One: "1",
+            Two: "2",
+            Three: "3",
+        } as const;
+        export type EuerEinkunftsart = (typeof EuerEinkunftsart)[keyof typeof EuerEinkunftsart];
     }
 }

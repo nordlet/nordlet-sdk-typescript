@@ -7,4 +7,5 @@ export interface CompaniesCreateAccountResponse {
     vatCode: string | null;
     role: string;
     isSandbox: boolean;
+    cashBasis: boolean;
 }
