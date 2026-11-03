@@ -1731,7 +1731,7 @@ export class ReferenceClient {
     }
 
     /**
-     * Lists the company's VAT classifiers (code, country, name and rate). A document line that names a classifier in `vatClassifierCode` takes its rate from it when neither the line nor the item has a rate. Filterable by `code`, `countryCode` and `ratePercent`; sortable by `code` and `ratePercent`.
+     * Lists the company's VAT types (code, country, name and rate). A document line names one in `vatClassifierCode` and takes its rate, VAT scheme and return boxes from it; a company that has VAT types refuses a line without one (422). `side` says whether the type is for sale lines, purchase lines or both, `scheme` is its VAT scheme and `nameEn` its English name; both are null for a type the company added itself. A type without a rate takes the line's `vatRatePercent` on the sides where `rateFromLine` is true, and 0% elsewhere. Filterable by `code`, `countryCode` and `ratePercent`; sortable by `code` and `ratePercent`.
      *
      * @param {NordletApi.VatClassifiersListReferenceRequest} request
      * @param {ReferenceClient.RequestOptions} requestOptions - Request-specific configuration.

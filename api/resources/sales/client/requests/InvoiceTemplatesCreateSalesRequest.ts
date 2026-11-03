@@ -66,6 +66,7 @@ export namespace InvoiceTemplatesCreateSalesRequest {
             quantity?: string | undefined;
             unitPriceExclVat?: string | undefined;
             vatRatePercent?: string | undefined;
+            vatClassifierCode?: string | undefined;
             vatExemptionBasis?: string | undefined;
             projectId?: string | undefined;
             unit?: string | undefined;

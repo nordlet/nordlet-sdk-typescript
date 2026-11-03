@@ -106,6 +106,7 @@ export namespace CompaniesCreateAccountRequest {
         Hi: "hi",
         Ru: "ru",
         Tr: "tr",
+        Uk: "uk",
     } as const;
     export type DefaultInvoiceLocale = (typeof DefaultInvoiceLocale)[keyof typeof DefaultInvoiceLocale];
     export const AccountsKeptBy = {

@@ -10,12 +10,18 @@ export namespace UsageListBillingResponse {
     export namespace Rows {
         export interface Item {
             companyId: string;
+            site: Item.Site;
             date: string;
             metric: Item.Metric;
             quantity: number;
         }
 
         export namespace Item {
+            export const Site = {
+                App: "app",
+                Invoice: "invoice",
+            } as const;
+            export type Site = (typeof Site)[keyof typeof Site];
             export const Metric = {
                 ApiRequest: "api_request",
                 OcrPage: "ocr_page",

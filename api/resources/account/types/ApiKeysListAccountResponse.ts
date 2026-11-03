@@ -15,7 +15,6 @@ export namespace ApiKeysListAccountResponse {
             lastUsedAt: string | null;
             expiresAt: string | null;
             replacedByKeyId: string | null;
-            createdByUserId: string | null;
             revokedAt: string | null;
             createdAt: string;
         }

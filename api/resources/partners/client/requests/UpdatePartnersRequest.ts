@@ -177,6 +177,7 @@ export namespace UpdatePartnersRequest {
         Hi: "hi",
         Ru: "ru",
         Tr: "tr",
+        Uk: "uk",
     } as const;
     export type InvoiceLocale = (typeof InvoiceLocale)[keyof typeof InvoiceLocale];
 

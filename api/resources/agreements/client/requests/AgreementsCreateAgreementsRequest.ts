@@ -60,6 +60,7 @@ export namespace AgreementsCreateAgreementsRequest {
             quantity?: string | undefined;
             unitPrice?: string | undefined;
             vatRatePercent?: string | undefined;
+            vatClassifierCode?: string | undefined;
         }
     }
 }

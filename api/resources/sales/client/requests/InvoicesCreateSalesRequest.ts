@@ -102,6 +102,7 @@ export namespace InvoicesCreateSalesRequest {
         Hi: "hi",
         Ru: "ru",
         Tr: "tr",
+        Uk: "uk",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
     export type Lines = Lines.Item[];

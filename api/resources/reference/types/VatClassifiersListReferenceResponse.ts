@@ -18,7 +18,37 @@ export namespace VatClassifiersListReferenceResponse {
             code: string;
             countryCode: string;
             name: string;
+            nameEn: string | null;
             ratePercent: string | null;
+            side: Item.Side;
+            scheme: Item.Scheme | null;
+            rateFromLine: Item.RateFromLine;
+        }
+
+        export namespace Item {
+            export const Side = {
+                Sale: "sale",
+                Purchase: "purchase",
+                Both: "both",
+            } as const;
+            export type Side = (typeof Side)[keyof typeof Side];
+            export const Scheme = {
+                Domestic: "domestic",
+                IntraEuB2B: "intra_eu_b2b",
+                ReverseCharge: "reverse_charge",
+                OssUnion: "oss_union",
+                Ioss: "ioss",
+                MarketplaceDeemed: "marketplace_deemed",
+                Export: "export",
+                OutOfScope: "out_of_scope",
+                SmeExempt: "sme_exempt",
+            } as const;
+            export type Scheme = (typeof Scheme)[keyof typeof Scheme];
+
+            export interface RateFromLine {
+                sale: boolean;
+                purchase: boolean;
+            }
         }
     }
 }

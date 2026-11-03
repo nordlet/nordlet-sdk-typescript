@@ -8,6 +8,7 @@ export interface ImportTemplatesUpdateBankResponse {
     metaFields: string[];
     invoiceMetaField: string | null;
     invoiceVatRatePercent: string | null;
+    invoiceVatClassifierCode: string | null;
     companyMetaField: string | null;
     invoiceItemId: string | null;
     advanceInvoices: boolean;

@@ -39,6 +39,7 @@ export namespace OrdersCreateEcommerceRequest {
             quantity: string;
             unitPriceExclVat: string;
             vatRatePercent?: string | undefined;
+            vatClassifierCode?: string | undefined;
         }
     }
 }

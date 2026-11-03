@@ -56,6 +56,7 @@ export namespace AgreementsCreateAgreementsResponse {
             quantity: string | null;
             unitPrice: string | null;
             vatRatePercent: string | null;
+            vatClassifierCode: string | null;
         }
     }
 }

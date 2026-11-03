@@ -7,6 +7,7 @@ export interface ExportAccountResponse {
     memberships: ExportAccountResponse.Memberships.Item[];
     sessions: ExportAccountResponse.Sessions.Item[];
     billing: ExportAccountResponse.Billing | null;
+    billingAccounts: ExportAccountResponse.BillingAccounts.Item[];
     creditTransactions: ExportAccountResponse.CreditTransactions.Item[];
     auditEntries: ExportAccountResponse.AuditEntries.Item[];
 }
@@ -65,16 +66,46 @@ export namespace ExportAccountResponse {
         firstTopUpAt: string | null;
     }
 
+    export type BillingAccounts = BillingAccounts.Item[];
+
+    export namespace BillingAccounts {
+        export interface Item {
+            site: Item.Site;
+            status: string;
+            plan: string;
+            balanceCents: number;
+            trialEndsAt: string | null;
+            firstTopUpAt: string | null;
+        }
+
+        export namespace Item {
+            export const Site = {
+                App: "app",
+                Invoice: "invoice",
+            } as const;
+            export type Site = (typeof Site)[keyof typeof Site];
+        }
+    }
+
     export type CreditTransactions = CreditTransactions.Item[];
 
     export namespace CreditTransactions {
         export interface Item {
             id: string;
+            site: Item.Site;
             type: string;
             amountCents: number;
             balanceAfterCents: number;
             description: string;
             createdAt: string;
+        }
+
+        export namespace Item {
+            export const Site = {
+                App: "app",
+                Invoice: "invoice",
+            } as const;
+            export type Site = (typeof Site)[keyof typeof Site];
         }
     }
 

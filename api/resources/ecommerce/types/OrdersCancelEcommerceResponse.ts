@@ -34,6 +34,7 @@ export namespace OrdersCancelEcommerceResponse {
             quantity: string;
             unitPriceExclVat: string;
             vatRatePercent: string;
+            vatClassifierCode: string | null;
         }
     }
 }
