@@ -37,6 +37,7 @@ export namespace ItemsListCatalogResponse {
             documentRef: string | null;
             translations: Record<string, Item.Translations.Value | null> | null;
             components: Item.Components.Item[];
+            alternativeUnits: Item.AlternativeUnits.Item[];
             kindId: string | null;
             saleAccountCode: string | null;
             purchaseAccountCode: string | null;
@@ -96,6 +97,19 @@ export namespace ItemsListCatalogResponse {
                     itemId: string;
                     itemName: string;
                     quantity: string;
+                }
+            }
+
+            export type AlternativeUnits = AlternativeUnits.Item[];
+
+            export namespace AlternativeUnits {
+                export interface Item {
+                    unitCode: string;
+                    factor: string;
+                    isDefaultSale: boolean;
+                    isDefaultPurchase: boolean;
+                    salePriceExclVat: string | null;
+                    purchasePriceExclVat: string | null;
                 }
             }
         }

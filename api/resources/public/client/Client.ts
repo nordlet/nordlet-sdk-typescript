@@ -160,7 +160,7 @@ export class PublicClient {
     }
 
     /**
-     * Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no template, and 409 when the invoice is already paid.
+     * Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice, the document is a credit note, the invoice has `payLinkEnabled` false or the company has no template, and 409 when the invoice is already paid.
      *
      * @param {NordletApi.PayPublicRequest} request
      * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -410,7 +410,7 @@ export class PublicClient {
     }
 
     /**
-     * Open a Stripe Checkout page on the company's connected Stripe account for the amount still unpaid on the issued invoice that carries this customer token, and return its `url`. Stripe sends the customer back to the public invoice page. Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no Stripe account that can take charges, 409 when the invoice is already paid and 422 when Stripe cannot take the amount in the invoice currency.
+     * Open a Stripe Checkout page on the company's connected Stripe account for the amount still unpaid on the issued invoice that carries this customer token, and return its `url`. Stripe sends the customer back to the public invoice page. Answers 404 when the token matches no issued invoice, the document is a credit note, the invoice has `payLinkEnabled` false or the company has no Stripe account that can take charges, 409 when the invoice is already paid or a completed card payment for it was received and waits for the payout, and 422 when Stripe cannot take the amount in the invoice currency.
      *
      * @param {NordletApi.InvoicesCheckoutPublicRequest} request
      * @param {PublicClient.RequestOptions} requestOptions - Request-specific configuration.

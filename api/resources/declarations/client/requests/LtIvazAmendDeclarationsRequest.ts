@@ -9,4 +9,33 @@
 export interface LtIvazAmendDeclarationsRequest {
     waybillIds: string[];
     persist?: boolean;
+    corrections?: LtIvazAmendDeclarationsRequest.Corrections.Item[];
+}
+
+export namespace LtIvazAmendDeclarationsRequest {
+    export type Corrections = Corrections.Item[];
+
+    export namespace Corrections {
+        export interface Item {
+            waybillId: string;
+            consigneePartnerId?: string | undefined;
+            unloadAddress?: string | undefined;
+            vehiclePlate?: string | undefined;
+            trailerPlate?: (string | null) | undefined;
+            driverName?: (string | null) | undefined;
+            driverSurname?: (string | null) | undefined;
+            lines?: Item.Lines.Item[] | undefined;
+        }
+
+        export namespace Item {
+            export type Lines = Lines.Item[];
+
+            export namespace Lines {
+                export interface Item {
+                    id: string;
+                    quantity: string;
+                }
+            }
+        }
+    }
 }

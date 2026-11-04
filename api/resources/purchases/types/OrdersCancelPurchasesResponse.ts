@@ -41,6 +41,8 @@ export namespace OrdersCancelPurchasesResponse {
             description: string;
             unit: string;
             quantity: string;
+            unitFactor: string;
+            baseQuantity: string;
             receivedQty: string;
             remainingQty: string;
             unitPriceExclVat: string | null;

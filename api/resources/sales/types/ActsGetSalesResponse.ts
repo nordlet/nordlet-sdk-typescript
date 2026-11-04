@@ -40,6 +40,8 @@ export namespace ActsGetSalesResponse {
             description: string;
             unit: string;
             quantity: string;
+            unitFactor: string;
+            baseQuantity: string;
             unitPriceExclVat: string | null;
             lineNet: string | null;
             sortOrder: number;

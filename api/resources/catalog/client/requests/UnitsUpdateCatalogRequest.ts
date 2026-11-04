@@ -10,5 +10,6 @@ export interface UnitsUpdateCatalogRequest {
     id: string;
     code?: string;
     name?: string;
+    rec20Code?: string;
     isActive?: boolean;
 }

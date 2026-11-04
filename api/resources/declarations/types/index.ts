@@ -81,6 +81,7 @@ export * from "./PlZusDraPdfDeclarationsResponse.js";
 export * from "./RoEtransportBuildDeclarationsResponse.js";
 export * from "./RoEtransportStatusDeclarationsResponse.js";
 export * from "./RoEtransportSubmitDeclarationsResponse.js";
+export * from "./SubmissionsConfirmDeclarationsResponse.js";
 export * from "./SubmissionsCreateDeclarationsResponse.js";
 export * from "./SubmissionsListDeclarationsResponse.js";
 export * from "./SubmissionsMarkDeclarationsResponse.js";

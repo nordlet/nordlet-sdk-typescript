@@ -20,6 +20,7 @@ export interface VehiclesCreateFleetRequest {
     fixedAssetId?: string;
     technicalInspectionDue?: string;
     insuranceDue?: string;
+    disposalDate?: string;
     notes?: string;
     documents?: VehiclesCreateFleetRequest.Documents.Item[];
 }

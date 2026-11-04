@@ -59,6 +59,7 @@ export namespace ListCalendarResponse {
                 nextCheckAt: string | null;
                 attempts: number;
                 deliveryError: string | null;
+                confirmationPending: boolean;
                 sentSha256: string | null;
                 certificateFingerprint: string | null;
                 submittedByActorType: string | null;
@@ -110,6 +111,7 @@ export namespace ListCalendarResponse {
                     nextCheckAt: string | null;
                     attempts: number;
                     deliveryError: string | null;
+                    confirmationPending: boolean;
                     sentSha256: string | null;
                     certificateFingerprint: string | null;
                     submittedByActorType: string | null;

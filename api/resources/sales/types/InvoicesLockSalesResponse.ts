@@ -111,6 +111,8 @@ export namespace InvoicesLockSalesResponse {
             description: string;
             unit: string;
             quantity: string;
+            unitFactor: string;
+            baseQuantity: string;
             unitPriceExclVat: string | null;
             unitPriceInclVat: string | null;
             vatRatePercent: string;

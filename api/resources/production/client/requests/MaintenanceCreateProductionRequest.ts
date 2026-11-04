@@ -13,6 +13,7 @@ export interface MaintenanceCreateProductionRequest {
     type: MaintenanceCreateProductionRequest.Type;
     plannedDate: string;
     description?: string;
+    purchaseInvoiceId?: string;
     notes?: string;
 }
 

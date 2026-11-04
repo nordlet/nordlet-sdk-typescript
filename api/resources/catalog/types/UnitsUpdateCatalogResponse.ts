@@ -4,6 +4,7 @@ export interface UnitsUpdateCatalogResponse {
     id: string;
     code: string;
     name: string;
+    rec20Code: string | null;
     isActive: boolean;
     createdAt: string;
 }

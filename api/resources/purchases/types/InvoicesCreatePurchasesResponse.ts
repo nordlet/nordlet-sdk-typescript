@@ -57,6 +57,8 @@ export namespace InvoicesCreatePurchasesResponse {
             description: string;
             unit: string;
             quantity: string;
+            unitFactor: string;
+            baseQuantity: string;
             unitPriceExclVat: string | null;
             unitPriceInclVat: string | null;
             vatRatePercent: string;
@@ -66,6 +68,8 @@ export namespace InvoicesCreatePurchasesResponse {
             accountCode: string | null;
             deferralStartDate: string | null;
             deferralEndDate: string | null;
+            lotNumber: string | null;
+            expiryDate: string | null;
             lineNet: string;
             lineVat: string;
             lineGross: string;

@@ -35,6 +35,8 @@ export namespace OrdersUpdatePurchasesRequest {
             accountCode?: string | undefined;
             deferralStartDate?: string | undefined;
             deferralEndDate?: string | undefined;
+            lotNumber?: string | undefined;
+            expiryDate?: string | undefined;
         }
 
         export namespace Item {

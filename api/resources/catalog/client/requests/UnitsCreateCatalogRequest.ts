@@ -10,5 +10,6 @@
 export interface UnitsCreateCatalogRequest {
     code: string;
     name: string;
+    rec20Code?: string;
     isActive?: boolean;
 }

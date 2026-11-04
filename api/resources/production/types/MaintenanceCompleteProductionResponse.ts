@@ -10,6 +10,7 @@ export interface MaintenanceCompleteProductionResponse {
     description: string | null;
     downtimeHours: string | null;
     cost: string | null;
+    purchaseInvoiceId: string | null;
     notes: string | null;
     createdAt: string;
 }

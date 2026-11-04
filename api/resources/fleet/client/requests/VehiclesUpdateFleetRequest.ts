@@ -20,6 +20,7 @@ export interface VehiclesUpdateFleetRequest {
     technicalInspectionDue?: string | null;
     insuranceDue?: string | null;
     status?: VehiclesUpdateFleetRequest.Status;
+    disposalDate?: string | null;
     notes?: string | null;
 }
 

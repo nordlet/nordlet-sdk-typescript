@@ -81,6 +81,7 @@ export type { PlZusDraPdfDeclarationsRequest } from "./PlZusDraPdfDeclarationsRe
 export type { RoEtransportBuildDeclarationsRequest } from "./RoEtransportBuildDeclarationsRequest.js";
 export type { RoEtransportStatusDeclarationsRequest } from "./RoEtransportStatusDeclarationsRequest.js";
 export type { RoEtransportSubmitDeclarationsRequest } from "./RoEtransportSubmitDeclarationsRequest.js";
+export type { SubmissionsConfirmDeclarationsRequest } from "./SubmissionsConfirmDeclarationsRequest.js";
 export { SubmissionsCreateDeclarationsRequest } from "./SubmissionsCreateDeclarationsRequest.js";
 export { SubmissionsListDeclarationsRequest } from "./SubmissionsListDeclarationsRequest.js";
 export { SubmissionsMarkDeclarationsRequest } from "./SubmissionsMarkDeclarationsRequest.js";

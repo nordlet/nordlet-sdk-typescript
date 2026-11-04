@@ -37,6 +37,8 @@ export namespace PostingRulesUpdateLedgerRequest {
                 InventoryStock: "inventory.stock",
                 ProductionLaborApplied: "production.laborApplied",
                 ProductionScrap: "production.scrap",
+                PosCashShortage: "pos.cashShortage",
+                PosCashSurplus: "pos.cashSurplus",
                 BankFxGain: "bank.fxGain",
                 BankFxLoss: "bank.fxLoss",
                 BankFees: "bank.fees",

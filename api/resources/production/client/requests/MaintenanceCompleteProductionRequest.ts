@@ -12,5 +12,6 @@ export interface MaintenanceCompleteProductionRequest {
     completedDate: string;
     downtimeHours?: string;
     cost?: string;
+    purchaseInvoiceId?: string;
     notes?: string;
 }

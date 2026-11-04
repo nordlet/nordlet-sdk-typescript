@@ -28,6 +28,7 @@ export namespace VehiclesListFleetResponse {
             technicalInspectionDue: string | null;
             insuranceDue: string | null;
             status: Item.Status;
+            disposalDate: string | null;
             notes: string | null;
             documents: Item.Documents.Item[] | null;
             currentAssignment: Item.CurrentAssignment | null;

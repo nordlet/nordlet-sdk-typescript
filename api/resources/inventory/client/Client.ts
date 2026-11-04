@@ -819,7 +819,7 @@ export class InventoryClient {
     }
 
     /**
-     * Consume a quantity of an item from a warehouse, oldest layers first (from one lot when `lotNumber` is given), and post a journal entry: debit the expense account (`expenseAccountCode`, default the chart's inventory expense account), credit the stock account each consumed layer was received on (the chart's inventory account for layers without one), or `inventoryAccountCode` for the whole cost when given. 409 when the accounting period of `date` is locked; 422 when the stock is insufficient under the `reject` policy or in the named lot. Emits `stock.changed` and, when the consumption takes the available quantity from above a reorder rule's minimum to at or below it, `stock.reorder_needed`.
+     * Consume a quantity of an item from a warehouse, first-expiring lot first (lots without an expiry date after those with one, then the oldest layers first; expired lots included) or from one lot when `lotNumber` is given, and post a journal entry: debit the expense account (`expenseAccountCode`, default the chart's inventory expense account), credit the stock account each consumed layer was received on (the `inventory.stock` posting rule account for layers without one), or `inventoryAccountCode` for the whole cost when given. 409 when the accounting period of `date` is locked; 422 when the stock is insufficient under the `reject` policy or in the named lot. Emits `stock.changed` and, when the consumption takes the available quantity from above a reorder rule's minimum to at or below it, `stock.reorder_needed`.
      *
      * @param {NordletApi.StockWriteOffInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -956,7 +956,7 @@ export class InventoryClient {
     }
 
     /**
-     * Move a quantity of an item from one warehouse to another: the source layers are consumed oldest first (from one lot when `lotNumber` is given) and received in the target with the same quantities, costs, lots and stock accounts (document type `warehouse_transfer`). 422 when both warehouses are the same or the source stock is insufficient under the `reject` policy. `inMovementId` is the first receipt when the consumption spans several lots or stock accounts. Emits `stock.changed` for both warehouses and `stock.reorder_needed` as `inventory/stock/write-off` does.
+     * Move a quantity of an item from one warehouse to another: the source layers are consumed as `inventory/stock/write-off` consumes them, except that expired lots are left out unless `lotNumber` names one, and received in the target with the same quantities, costs, lots and stock accounts, one receipt per lot and stock account (document type `warehouse_transfer`). 422 when both warehouses are the same or the source stock is insufficient under the `reject` policy. `inMovementId` is the first receipt when the consumption spans several lots or stock accounts. Emits `stock.changed` for both warehouses and `stock.reorder_needed` as `inventory/stock/write-off` does.
      *
      * @param {NordletApi.StockTransferInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1089,7 +1089,7 @@ export class InventoryClient {
     }
 
     /**
-     * Post a stock count for a warehouse. Each line names an item by `itemId` or `barcode` with its `countedQty`; the difference to the quantity on hand in the warehouse (all lots together) is written off oldest layers first or received as a surplus at `unitCost` (the item's purchase price when omitted; 422 when neither is set), with document type `stock_take`, and a surplus of a lot- or serial-tracked item needs `lotNumber` (422). The shortage cost less the surplus cost is posted in one journal entry between the expense account (`expenseAccountCode`, default the chart's inventory expense account) and the stock accounts (`inventoryAccountCode` for everything when given, else the accounts of the consumed layers and the chart's inventory account for the surpluses); nothing is posted and `journalTransactionId` is null when the net is zero. 409 when the accounting period of `date` is locked. Emits `stock.changed` per adjusted item.
+     * Post a stock count for a warehouse. Each line names an item by `itemId` or `barcode` with its `countedQty`; the difference to the quantity on hand in the warehouse (all lots together) is written off as `inventory/stock/write-off` consumes stock or received as a surplus at `unitCost` (the item's purchase price when omitted; 422 when neither is set), with document type `stock_take`, and a surplus of a lot- or serial-tracked item needs `lotNumber` (422). The shortage cost less the surplus cost is posted in one journal entry between the expense account (`expenseAccountCode`, default the chart's inventory expense account) and the stock accounts (`inventoryAccountCode` for everything when given, else the accounts of the consumed layers and the `inventory.stock` posting rule account for the surpluses); nothing is posted and `journalTransactionId` is null when the net is zero. 409 when the accounting period of `date` is locked. Emits `stock.changed` per adjusted item.
      *
      * @param {NordletApi.StockTakeInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1605,7 +1605,7 @@ export class InventoryClient {
     }
 
     /**
-     * Return a lot with its quantity on hand and its movements in date order.
+     * Return a lot with its quantity on hand and its movements in date order, the outgoing movement before the incoming one when one posting made both (a transfer).
      *
      * @param {NordletApi.LotsGetInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1860,7 +1860,7 @@ export class InventoryClient {
     }
 
     /**
-     * Allocate an extra cost `amount` (positive, whole cents; 422 otherwise) over incoming stock movements, named by `movementIds` or taken from the lines of a goods receipt (`goodsReceiptId`; 422 when the receipt has no stock movements), in proportion to their cost (`by_value`) or quantity (`by_quantity`), largest remainder to the cent. The part of each share that belongs to the quantity still on hand raises the movement's remaining cost and recomputes its unit cost; the part that belongs to quantity already consumed is posted in a journal entry dated `date` debiting `inventory.cogs` and crediting the movement's stock account (`inventory.stock` when it has none), 409 when that period is locked. 422 when a movement is not incoming or the weights sum to zero. `sourceInvoiceId` records the purchase invoice the cost came from. Goods receipts come from `purchases/receipts/create`.
+     * Allocate an extra cost `amount` (positive, whole cents; 422 otherwise) over incoming stock movements, named by `movementIds` or taken from the lines of a goods receipt (`goodsReceiptId`; 422 when the receipt has no stock movements), in proportion to their cost (`by_value`) or quantity (`by_quantity`), largest remainder to the cent. The part of each share that belongs to the quantity still on hand raises the movement's remaining cost and recomputes its unit cost; the part that belongs to quantity moved to another warehouse by `inventory/stock/transfer` follows it to the receipts the transfer made there and is allocated on them the same way; the part that belongs to quantity already consumed is posted in a journal entry dated `date` debiting `inventory.cogs` and crediting the movement's stock account (`inventory.stock` when it has none), 409 when that period is locked. 422 when a movement is not incoming or the weights sum to zero. `sourceInvoiceId` records the purchase invoice the cost came from. Goods receipts come from `purchases/receipts/create`.
      *
      * @param {NordletApi.LandedCostsCreateInventoryRequest} request
      * @param {InventoryClient.RequestOptions} requestOptions - Request-specific configuration.

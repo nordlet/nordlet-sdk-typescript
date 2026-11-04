@@ -17,6 +17,7 @@ export interface InvoicesViewSalesResponse {
     paidOn: string | null;
     notes: string | null;
     payUrl: string | null;
+    cardPaymentReceived: boolean;
     seller: InvoicesViewSalesResponse.Seller;
     buyer: InvoicesViewSalesResponse.Buyer;
     lines: InvoicesViewSalesResponse.Lines.Item[];

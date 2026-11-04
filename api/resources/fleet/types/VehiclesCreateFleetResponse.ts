@@ -14,6 +14,7 @@ export interface VehiclesCreateFleetResponse {
     technicalInspectionDue: string | null;
     insuranceDue: string | null;
     status: VehiclesCreateFleetResponse.Status;
+    disposalDate: string | null;
     notes: string | null;
     documents: VehiclesCreateFleetResponse.Documents.Item[] | null;
     currentAssignment: VehiclesCreateFleetResponse.CurrentAssignment | null;

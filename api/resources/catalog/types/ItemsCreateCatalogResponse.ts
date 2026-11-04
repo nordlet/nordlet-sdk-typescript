@@ -23,6 +23,7 @@ export interface ItemsCreateCatalogResponse {
     documentRef: string | null;
     translations: Record<string, ItemsCreateCatalogResponse.Translations.Value | null> | null;
     components: ItemsCreateCatalogResponse.Components.Item[];
+    alternativeUnits: ItemsCreateCatalogResponse.AlternativeUnits.Item[];
     kindId: string | null;
     saleAccountCode: string | null;
     purchaseAccountCode: string | null;
@@ -82,6 +83,19 @@ export namespace ItemsCreateCatalogResponse {
             itemId: string;
             itemName: string;
             quantity: string;
+        }
+    }
+
+    export type AlternativeUnits = AlternativeUnits.Item[];
+
+    export namespace AlternativeUnits {
+        export interface Item {
+            unitCode: string;
+            factor: string;
+            isDefaultSale: boolean;
+            isDefaultPurchase: boolean;
+            salePriceExclVat: string | null;
+            purchasePriceExclVat: string | null;
         }
     }
 }

@@ -80,6 +80,8 @@ export namespace InvoicesListSalesResponse {
             createdAt: string;
             updatedAt: string;
             partnerName: string | null;
+            /** Gross amount of an advance invoice not yet applied or credited; null on other documents */
+            advanceUnappliedAmount: string | null;
         }
 
         export namespace Item {

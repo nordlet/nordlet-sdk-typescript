@@ -41,6 +41,8 @@ export namespace WaybillsCreateTransportResponse {
             description: string;
             unit: string;
             quantity: string;
+            unitFactor: string;
+            baseQuantity: string;
             productCode: string | null;
             sortOrder: number;
         }
