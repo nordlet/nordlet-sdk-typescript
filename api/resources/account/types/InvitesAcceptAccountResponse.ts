@@ -3,6 +3,7 @@
 export interface InvitesAcceptAccountResponse {
     token: string;
     expiresAt: string;
+    twoFactorRequired: boolean;
     user: InvitesAcceptAccountResponse.User;
 }
 

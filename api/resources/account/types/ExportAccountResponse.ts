@@ -10,6 +10,10 @@ export interface ExportAccountResponse {
     billingAccounts: ExportAccountResponse.BillingAccounts.Item[];
     creditTransactions: ExportAccountResponse.CreditTransactions.Item[];
     auditEntries: ExportAccountResponse.AuditEntries.Item[];
+    authEvents: ExportAccountResponse.AuthEvents.Item[];
+    apiKeys: ExportAccountResponse.ApiKeys.Item[];
+    oauthGrants: ExportAccountResponse.OauthGrants.Item[];
+    referralPoints: ExportAccountResponse.ReferralPoints.Item[];
 }
 
 export namespace ExportAccountResponse {
@@ -118,6 +122,53 @@ export namespace ExportAccountResponse {
             action: string;
             entity: string;
             entityId: string | null;
+            createdAt: string;
+        }
+    }
+
+    export type AuthEvents = AuthEvents.Item[];
+
+    export namespace AuthEvents {
+        export interface Item {
+            action: string;
+            ipAddress: string | null;
+            userAgent: string | null;
+            createdAt: string;
+        }
+    }
+
+    export type ApiKeys = ApiKeys.Item[];
+
+    export namespace ApiKeys {
+        export interface Item {
+            id: string;
+            name: string;
+            lastFour: string | null;
+            scopes: string[];
+            lastUsedAt: string | null;
+            expiresAt: string | null;
+            revokedAt: string | null;
+            createdAt: string;
+        }
+    }
+
+    export type OauthGrants = OauthGrants.Item[];
+
+    export namespace OauthGrants {
+        export interface Item {
+            apiKeyId: string;
+            clientId: string;
+            clientName: string;
+            createdAt: string;
+        }
+    }
+
+    export type ReferralPoints = ReferralPoints.Item[];
+
+    export namespace ReferralPoints {
+        export interface Item {
+            points: number;
+            reason: string;
             createdAt: string;
         }
     }

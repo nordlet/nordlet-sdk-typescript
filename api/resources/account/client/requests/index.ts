@@ -39,3 +39,9 @@ export type { SessionsRevokeOthersAccountRequest } from "./SessionsRevokeOthersA
 export type { TableSettingsGetAccountRequest } from "./TableSettingsGetAccountRequest.js";
 export type { TableSettingsListAccountRequest } from "./TableSettingsListAccountRequest.js";
 export type { TableSettingsSetAccountRequest } from "./TableSettingsSetAccountRequest.js";
+export type { TwoFactorDisableAccountRequest } from "./TwoFactorDisableAccountRequest.js";
+export type { TwoFactorEnableAccountRequest } from "./TwoFactorEnableAccountRequest.js";
+export type { TwoFactorGetAccountRequest } from "./TwoFactorGetAccountRequest.js";
+export type { TwoFactorRecoveryCodesRegenerateAccountRequest } from "./TwoFactorRecoveryCodesRegenerateAccountRequest.js";
+export type { TwoFactorSetupAccountRequest } from "./TwoFactorSetupAccountRequest.js";
+export type { TwoFactorVerifyAccountRequest } from "./TwoFactorVerifyAccountRequest.js";

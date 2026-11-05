@@ -3,6 +3,7 @@
 export interface LoginLinkConsumeAccountResponse {
     token: string;
     expiresAt: string;
+    twoFactorRequired: boolean;
     user: LoginLinkConsumeAccountResponse.User;
     isNewUser: boolean;
 }

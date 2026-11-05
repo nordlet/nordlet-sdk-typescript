@@ -11,6 +11,7 @@ export namespace ApiKeysListAccountResponse {
         export interface Item {
             id: string;
             name: string;
+            lastFour: string | null;
             scopes: string[];
             lastUsedAt: string | null;
             expiresAt: string | null;

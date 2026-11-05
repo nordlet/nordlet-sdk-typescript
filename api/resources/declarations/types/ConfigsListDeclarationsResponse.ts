@@ -37,6 +37,7 @@ export namespace ConfigsListDeclarationsResponse {
                         Secret: "secret",
                         Select: "select",
                         Url: "url",
+                        Host: "host",
                         Certificate: "certificate",
                     } as const;
                     export type Kind = (typeof Kind)[keyof typeof Kind];

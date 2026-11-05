@@ -3,4 +3,5 @@ export type { DeliveriesRedeliverWebhooksRequest } from "./DeliveriesRedeliverWe
 export { SubscriptionsCreateWebhooksRequest } from "./SubscriptionsCreateWebhooksRequest.js";
 export type { SubscriptionsDeleteWebhooksRequest } from "./SubscriptionsDeleteWebhooksRequest.js";
 export { SubscriptionsListWebhooksRequest } from "./SubscriptionsListWebhooksRequest.js";
+export type { SubscriptionsRotateSecretWebhooksRequest } from "./SubscriptionsRotateSecretWebhooksRequest.js";
 export { SubscriptionsUpdateWebhooksRequest } from "./SubscriptionsUpdateWebhooksRequest.js";
