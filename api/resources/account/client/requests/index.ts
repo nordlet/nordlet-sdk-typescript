@@ -4,6 +4,7 @@ export type { ApiKeysRevokeAccountRequest } from "./ApiKeysRevokeAccountRequest.
 export type { ApiKeysRotateAccountRequest } from "./ApiKeysRotateAccountRequest.js";
 export type { CompaniesActivateAccountRequest } from "./CompaniesActivateAccountRequest.js";
 export type { CompaniesArchiveAccountRequest } from "./CompaniesArchiveAccountRequest.js";
+export type { CompaniesConvertToLiveAccountRequest } from "./CompaniesConvertToLiveAccountRequest.js";
 export { CompaniesCreateAccountRequest } from "./CompaniesCreateAccountRequest.js";
 export type { CompaniesDeleteAccountRequest } from "./CompaniesDeleteAccountRequest.js";
 export type { CompaniesProfileAccountRequest } from "./CompaniesProfileAccountRequest.js";

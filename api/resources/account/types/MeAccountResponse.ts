@@ -32,6 +32,8 @@ export namespace MeAccountResponse {
         payerEmail: string;
         isPayer: boolean;
         planChosen: boolean;
+        /** The payer has no paid plan and has started the free sandbox plan (running or ended) */
+        freeSandbox: boolean;
         flatRate: boolean;
         accountType: Billing.AccountType;
     }

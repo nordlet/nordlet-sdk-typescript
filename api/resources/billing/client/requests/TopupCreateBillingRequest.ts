@@ -10,6 +10,7 @@ export interface TopupCreateBillingRequest {
     amountCents: number;
     locale?: TopupCreateBillingRequest.Locale;
     returnTo?: TopupCreateBillingRequest.ReturnTo;
+    convertCompanyId?: string;
 }
 
 export namespace TopupCreateBillingRequest {

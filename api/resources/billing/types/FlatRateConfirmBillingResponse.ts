@@ -8,6 +8,8 @@ export interface FlatRateConfirmBillingResponse {
     status: FlatRateConfirmBillingResponse.Status;
     balanceCents: number;
     trialEndsAt: string | null;
+    /** When the free sandbox plan was started; it ends at `trialEndsAt` */
+    freeSandboxStartedAt: string | null;
     firstTopUpAt: string | null;
     lastChargedDate: string | null;
     paymentsConfigured: boolean;

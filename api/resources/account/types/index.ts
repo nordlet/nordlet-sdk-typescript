@@ -4,6 +4,7 @@ export * from "./ApiKeysRevokeAccountResponse.js";
 export * from "./ApiKeysRotateAccountResponse.js";
 export * from "./CompaniesActivateAccountResponse.js";
 export * from "./CompaniesArchiveAccountResponse.js";
+export * from "./CompaniesConvertToLiveAccountResponse.js";
 export * from "./CompaniesCreateAccountResponse.js";
 export * from "./CompaniesDeleteAccountResponse.js";
 export * from "./CompaniesProfileAccountResponse.js";

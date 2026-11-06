@@ -5,6 +5,7 @@ export type { AccountSetOverdraftCapBillingRequest } from "./AccountSetOverdraft
 export { AccountSetPlanBillingRequest } from "./AccountSetPlanBillingRequest.js";
 export type { FlatRateConfirmBillingRequest } from "./FlatRateConfirmBillingRequest.js";
 export { FlatRateCreateBillingRequest } from "./FlatRateCreateBillingRequest.js";
+export type { FreeSandboxStartBillingRequest } from "./FreeSandboxStartBillingRequest.js";
 export { PortalCreateBillingRequest } from "./PortalCreateBillingRequest.js";
 export type { SubscriptionCancelBillingRequest } from "./SubscriptionCancelBillingRequest.js";
 export type { TopupConfirmBillingRequest } from "./TopupConfirmBillingRequest.js";

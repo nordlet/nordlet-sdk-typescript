@@ -7,6 +7,7 @@
 export interface FlatRateCreateBillingRequest {
     locale?: FlatRateCreateBillingRequest.Locale;
     plan?: FlatRateCreateBillingRequest.Plan;
+    convertCompanyId?: string;
 }
 
 export namespace FlatRateCreateBillingRequest {
