@@ -69,6 +69,7 @@ export interface InvoicesCreateSalesResponse {
     advanceAppliedAmount: string | null;
     lines: InvoicesCreateSalesResponse.Lines.Item[];
     vatEvidence: InvoicesCreateSalesResponse.VatEvidence | null;
+    warnings: InvoicesCreateSalesResponse.Warnings.Item[];
 }
 
 export namespace InvoicesCreateSalesResponse {
@@ -208,6 +209,15 @@ export namespace InvoicesCreateSalesResponse {
                 country: string;
                 category: string | null;
             }
+        }
+    }
+
+    export type Warnings = Warnings.Item[];
+
+    export namespace Warnings {
+        export interface Item {
+            code: string;
+            message: string;
         }
     }
 }

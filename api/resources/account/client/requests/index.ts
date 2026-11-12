@@ -2,6 +2,8 @@ export type { ApiKeysCreateAccountRequest } from "./ApiKeysCreateAccountRequest.
 export type { ApiKeysListAccountRequest } from "./ApiKeysListAccountRequest.js";
 export type { ApiKeysRevokeAccountRequest } from "./ApiKeysRevokeAccountRequest.js";
 export type { ApiKeysRotateAccountRequest } from "./ApiKeysRotateAccountRequest.js";
+export type { BrandGetAccountRequest } from "./BrandGetAccountRequest.js";
+export type { BrandUpdateAccountRequest } from "./BrandUpdateAccountRequest.js";
 export type { CompaniesActivateAccountRequest } from "./CompaniesActivateAccountRequest.js";
 export type { CompaniesArchiveAccountRequest } from "./CompaniesArchiveAccountRequest.js";
 export type { CompaniesConvertToLiveAccountRequest } from "./CompaniesConvertToLiveAccountRequest.js";

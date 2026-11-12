@@ -1068,7 +1068,7 @@ export class PartnersClient {
     }
 
     /**
-     * Adds a bank account to the partner in `partnerId`. The IBAN is stored without spaces in upper case; an IBAN the partner already has is refused with 409. With `isDefault` true the partner's other accounts lose their default mark.
+     * Adds a bank account to the partner in `partnerId`. The IBAN is stored without spaces in upper case; an IBAN whose check digits fail (ISO 13616) is refused with 422 and one the partner already has with 409. With `isDefault` true the partner's other accounts lose their default mark.
      *
      * @param {NordletApi.BankAccountsCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1203,7 +1203,7 @@ export class PartnersClient {
     }
 
     /**
-     * Changes the given fields of a partner bank account. A new IBAN is stored without spaces in upper case and is refused with 409 when the partner already has it; when the account is the default after the change, the partner's other accounts lose their default mark.
+     * Changes the given fields of a partner bank account. A new IBAN is stored without spaces in upper case and is refused with 422 when its check digits fail (ISO 13616) and with 409 when the partner already has it; when the account is the default after the change, the partner's other accounts lose their default mark.
      *
      * @param {NordletApi.BankAccountsUpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -2909,7 +2909,7 @@ export class PartnersClient {
     }
 
     /**
-     * Returns the live partner matched by `code`, then `vatCode`, then `email` (at least one is required), or creates one from the body with the same validation and VIES check as `partners/create`; `created` says which happened. A creation that loses a race on the partner code returns the partner the other call created.
+     * Returns the live partner matched by `code`, then `vatCode` (compared without spaces, dots and dashes and without regard to case), then `email` (at least one is required), or creates one from the body with the same validation and VIES check as `partners/create`; `created` says which happened. Without `isCustomer` a new partner is a customer unless `isSupplier` is true. A creation that loses a race on the partner code returns the partner the other call created.
      *
      * @param {NordletApi.FindOrCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.

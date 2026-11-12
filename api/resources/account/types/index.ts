@@ -2,6 +2,8 @@ export * from "./ApiKeysCreateAccountResponse.js";
 export * from "./ApiKeysListAccountResponse.js";
 export * from "./ApiKeysRevokeAccountResponse.js";
 export * from "./ApiKeysRotateAccountResponse.js";
+export * from "./BrandGetAccountResponse.js";
+export * from "./BrandUpdateAccountResponse.js";
 export * from "./CompaniesActivateAccountResponse.js";
 export * from "./CompaniesArchiveAccountResponse.js";
 export * from "./CompaniesConvertToLiveAccountResponse.js";

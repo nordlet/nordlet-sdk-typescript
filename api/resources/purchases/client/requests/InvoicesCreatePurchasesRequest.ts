@@ -27,6 +27,9 @@ export interface InvoicesCreatePurchasesRequest {
     einvoiceNumber?: string;
     documentRef?: string;
     lines: InvoicesCreatePurchasesRequest.Lines.Item[];
+    netTotal?: string;
+    vatTotal?: string;
+    grossTotal?: string;
 }
 
 export namespace InvoicesCreatePurchasesRequest {

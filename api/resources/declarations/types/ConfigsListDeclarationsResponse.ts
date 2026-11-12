@@ -25,9 +25,12 @@ export namespace ConfigsListDeclarationsResponse {
             export namespace Fields {
                 export interface Item {
                     key: string;
+                    label?: string | undefined;
                     kind: Item.Kind;
                     multiline?: boolean | undefined;
+                    /** The allowed values of a `select` field */
                     options?: string[] | undefined;
+                    /** The company profile field the value is taken from; change it with `account/companies/update` */
                     companyField?: Item.CompanyField | undefined;
                 }
 
@@ -41,6 +44,7 @@ export namespace ConfigsListDeclarationsResponse {
                         Certificate: "certificate",
                     } as const;
                     export type Kind = (typeof Kind)[keyof typeof Kind];
+                    /** The company profile field the value is taken from; change it with `account/companies/update` */
                     export const CompanyField = {
                         Code: "code",
                         VatCode: "vatCode",

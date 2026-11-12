@@ -3,8 +3,3 @@ export * from "./DocumentsDeleteCaptureResponse.js";
 export * from "./DocumentsExtractCaptureResponse.js";
 export * from "./DocumentsGetCaptureResponse.js";
 export * from "./DocumentsListCaptureResponse.js";
-export * from "./DocumentsUploadCaptureResponse.js";
-export * from "./InboundEmailCaptureResponse.js";
-export * from "./SettingsGetCaptureResponse.js";
-export * from "./SettingsRegenerateIntakeCaptureResponse.js";
-export * from "./SettingsUpdateCaptureResponse.js";

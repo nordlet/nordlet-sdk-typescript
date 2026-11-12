@@ -5,6 +5,7 @@ export interface PeriodsLockLedgerResponse {
     year: number;
     month: number;
     status: PeriodsLockLedgerResponse.Status;
+    warnings: PeriodsLockLedgerResponse.Warnings.Item[];
 }
 
 export namespace PeriodsLockLedgerResponse {
@@ -13,4 +14,29 @@ export namespace PeriodsLockLedgerResponse {
         Locked: "locked",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type Warnings = Warnings.Item[];
+
+    export namespace Warnings {
+        export interface Item {
+            code: Item.Code;
+            count: number;
+            message: string;
+            ids: string[];
+        }
+
+        export namespace Item {
+            export const Code = {
+                DraftSaleDocuments: "draft_sale_documents",
+                DraftPurchaseDocuments: "draft_purchase_documents",
+                UnbookedBankLines: "unbooked_bank_lines",
+                DepreciationNotPosted: "depreciation_not_posted",
+                DeferralsNotPosted: "deferrals_not_posted",
+                RecurringInvoicesNotGenerated: "recurring_invoices_not_generated",
+                PayrollRunsNotApproved: "payroll_runs_not_approved",
+                OpenFxReceivables: "open_fx_receivables",
+                OpenFxPayables: "open_fx_payables",
+            } as const;
+            export type Code = (typeof Code)[keyof typeof Code];
+        }
+    }
 }

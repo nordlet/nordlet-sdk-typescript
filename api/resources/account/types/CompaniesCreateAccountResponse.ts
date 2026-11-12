@@ -8,4 +8,20 @@ export interface CompaniesCreateAccountResponse {
     role: string;
     isSandbox: boolean;
     cashBasis: boolean;
+    countryCode: string;
+    baseCurrency: string;
+    isVatPayer: boolean;
+    vatPeriod: CompaniesCreateAccountResponse.VatPeriod | null;
+    fiscalYearEndMonth: number | null;
+}
+
+export namespace CompaniesCreateAccountResponse {
+    export const VatPeriod = {
+        Monthly: "monthly",
+        Bimonthly: "bimonthly",
+        Quarterly: "quarterly",
+        Semiannual: "semiannual",
+        Annual: "annual",
+    } as const;
+    export type VatPeriod = (typeof VatPeriod)[keyof typeof VatPeriod];
 }

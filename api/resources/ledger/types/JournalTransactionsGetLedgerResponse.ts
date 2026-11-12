@@ -10,6 +10,7 @@ export interface JournalTransactionsGetLedgerResponse {
     status: JournalTransactionsGetLedgerResponse.Status;
     createdAt: string;
     postedAt: string | null;
+    reversedByTransactionId: string | null;
     entries: JournalTransactionsGetLedgerResponse.Entries.Item[];
 }
 

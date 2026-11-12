@@ -3,8 +3,3 @@ export type { DocumentsDeleteCaptureRequest } from "./DocumentsDeleteCaptureRequ
 export type { DocumentsExtractCaptureRequest } from "./DocumentsExtractCaptureRequest.js";
 export type { DocumentsGetCaptureRequest } from "./DocumentsGetCaptureRequest.js";
 export { DocumentsListCaptureRequest } from "./DocumentsListCaptureRequest.js";
-export type { DocumentsUploadCaptureRequest } from "./DocumentsUploadCaptureRequest.js";
-export type { InboundEmailCaptureRequest } from "./InboundEmailCaptureRequest.js";
-export type { SettingsGetCaptureRequest } from "./SettingsGetCaptureRequest.js";
-export type { SettingsRegenerateIntakeCaptureRequest } from "./SettingsRegenerateIntakeCaptureRequest.js";
-export type { SettingsUpdateCaptureRequest } from "./SettingsUpdateCaptureRequest.js";

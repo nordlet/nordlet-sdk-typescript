@@ -13,6 +13,7 @@ export * from "./CostCentersUpdateLedgerResponse.js";
 export * from "./JournalTransactionsCreateLedgerResponse.js";
 export * from "./JournalTransactionsGetLedgerResponse.js";
 export * from "./JournalTransactionsListLedgerResponse.js";
+export * from "./JournalTransactionsReverseLedgerResponse.js";
 export * from "./OwnersCreateLedgerResponse.js";
 export * from "./OwnersDeleteLedgerResponse.js";
 export * from "./OwnersListLedgerResponse.js";

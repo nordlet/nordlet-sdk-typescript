@@ -6,6 +6,7 @@ export type { InvoicesGetPurchasesRequest } from "./InvoicesGetPurchasesRequest.
 export { InvoicesListPurchasesRequest } from "./InvoicesListPurchasesRequest.js";
 export type { InvoicesMatchPurchasesRequest } from "./InvoicesMatchPurchasesRequest.js";
 export type { InvoicesRegisterPurchasesRequest } from "./InvoicesRegisterPurchasesRequest.js";
+export type { InvoicesReversePurchasesRequest } from "./InvoicesReversePurchasesRequest.js";
 export type { InvoicesUpdatePurchasesRequest } from "./InvoicesUpdatePurchasesRequest.js";
 export type { OrdersApprovePurchasesRequest } from "./OrdersApprovePurchasesRequest.js";
 export type { OrdersCancelPurchasesRequest } from "./OrdersCancelPurchasesRequest.js";

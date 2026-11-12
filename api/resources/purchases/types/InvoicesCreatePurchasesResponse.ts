@@ -16,6 +16,9 @@ export interface InvoicesCreatePurchasesResponse {
     grossTotal: string;
     paidAmount: string;
     journalTransactionId: string | null;
+    reversedAt: string | null;
+    reversalJournalTransactionId: string | null;
+    reversalReason: string | null;
     creditedInvoiceId: string | null;
     purchaseOrderId: string | null;
     operationTypeId: string | null;
@@ -29,6 +32,7 @@ export interface InvoicesCreatePurchasesResponse {
     createdAt: string;
     updatedAt: string;
     lines: InvoicesCreatePurchasesResponse.Lines.Item[];
+    warnings: InvoicesCreatePurchasesResponse.Warnings.Item[];
 }
 
 export namespace InvoicesCreatePurchasesResponse {
@@ -40,6 +44,7 @@ export namespace InvoicesCreatePurchasesResponse {
     export const Status = {
         Draft: "draft",
         Registered: "registered",
+        Reversed: "reversed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
     export const PaymentStatus = {
@@ -74,6 +79,15 @@ export namespace InvoicesCreatePurchasesResponse {
             lineVat: string;
             lineGross: string;
             sortOrder: number;
+        }
+    }
+
+    export type Warnings = Warnings.Item[];
+
+    export namespace Warnings {
+        export interface Item {
+            code: string;
+            message: string;
         }
     }
 }

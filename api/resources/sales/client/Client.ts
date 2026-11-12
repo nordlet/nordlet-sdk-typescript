@@ -24,7 +24,7 @@ export class SalesClient {
     }
 
     /**
-     * Create a draft sale document - an invoice, credit note, proforma or advance invoice (`type`) - with its lines; the totals are computed from the lines and `discountPercent`, and the number is assigned by `sales/invoices/issue`. Answers 422 when a credit note credits a proforma, another credit note or a document that is not issued, when the credited document has another partner or currency, when an OSS or IOSS document has no EU `vatCountryCode`, when the lines carry VAT but the company is not a VAT payer or the VAT scheme charges none, or when the operation type or document series is for another document type.
+     * Create a draft sale document - an invoice, credit note, proforma or advance invoice (`type`) - with its lines; the totals are computed from the lines and `discountPercent`, and the number is assigned by `sales/invoices/issue`. Answers 422 when a credit note credits a proforma, another credit note or a document that is not issued, when the credited document has another partner or currency, when an OSS or IOSS document has no EU `vatCountryCode`, when the lines carry VAT but the company is not a VAT payer or the VAT scheme charges none, or when the operation type or document series is for another document type. `warnings` lists what does not refuse the document but needs a look: `vat_type_not_valid_on_date` (a line VAT type is not valid on the issue date, else today), `vat_type_domestic_for_eu_partner` (a domestic VAT type for a partner VAT-registered in another EU country), `vat_type_intra_eu_for_domestic_partner` (an intra-EU VAT type for a partner in the company country) and `vat_type_intra_eu_without_vat_number` (an intra-EU VAT type for a partner without a VAT number).
      *
      * @param {NordletApi.InvoicesCreateSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -406,7 +406,7 @@ export class SalesClient {
     }
 
     /**
-     * Return a sale document as its customer sees it: the seller as printed on it (the snapshot taken at issue, else the company), the buyer with address and e-mail, the lines, the totals, `paidOn` (the date of the latest payment once the document is paid), `payUrl` (as in `sales/invoices/payment-link`; null while `cardPaymentReceived`), `cardPaymentReceived` (a completed card payment was received and the invoice waits for the payout settlement) and `token`, the document's customer token for `public/invoices/get` and `public/invoices/pdf`, created on first use; `token` is null on a draft.
+     * Return a sale document as its customer sees it: the seller as printed on it (the snapshot taken at issue, else the company), the buyer with address and e-mail, the lines, the totals, `paidOn` (the date of the latest payment once the document is paid), `payUrl` (as in `sales/invoices/payment-link`; null while `cardPaymentReceived`), `cardPaymentReceived` (a completed card payment was received and the invoice waits for the payout settlement), `sentWith` (the name the public invoice page prints in its "Sent with" line: Nordlet, or the brand name of the white-label partner who pays for the company, null when that partner has set no name) and `token`, the document's customer token for `public/invoices/get` and `public/invoices/pdf`, created on first use; `token` is null on a draft.
      *
      * @param {NordletApi.InvoicesViewSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1060,7 +1060,7 @@ export class SalesClient {
     }
 
     /**
-     * Render an issued invoice as the national e-invoicing payload for the company country: FatturaPA (IT), KSeF FA(3) (PL) or UBL CIUS-RO (RO). Review the warnings - data the invoice does not carry is flagged, never invented.
+     * Render an issued invoice as the national e-invoicing payload for the company country: SII or Veri*Factu (ES), Factur-X (FR), myDATA (GR), Fiskalizacija (HR), NAV Online Számla (HU), FatturaPA (IT), KSeF FA(3) (PL), AT comunicação de faturas (PT) or UBL CIUS-RO (RO). Review the warnings - data the invoice does not carry is flagged, never invented.
      *
      * @param {NordletApi.InvoicesEinvoiceXmlSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1720,7 +1720,7 @@ export class SalesClient {
     }
 
     /**
-     * Issue a draft sale document: assigns the next number (from its document series, else from `series` or the type's default prefix and the year), the issue date (`issueDate`, else the draft's, else today) and a missing due date from the partner's payment term, and for an invoice, credit note or advance invoice posts the journal entry and stores the VAT evidence. `warehouseId` (or the series' warehouse) takes the sold goods of an invoice out of stock, the first-expiring lot first (lots without an expiry date after those with one, then the oldest layers first), leaving out expired lots, with a cost of goods sold entry; `returnToStock` puts them back for a credit note that credits an invoice. A credit note is set against the unpaid balance of the credited document. Emits `sale_invoice.issued`, `sale_invoice.paid` when a credit note settles the credited invoice in full, and `intercompany.invoice_mirrored` when the partner is linked to another company of the group (a draft purchase invoice is created there). Answers 409 when the document is already issued or locked or the accounting period is locked, 422 when the lines carry VAT under a scheme that charges none, when credit notes would exceed the credited total, or when `returnToStock` is used on anything but a credit note of an invoice.
+     * Issue a draft sale document: assigns the next number (from its document series, else from `series` or the type's default prefix and the year), the issue date (`issueDate`, else the draft's, else today) and a missing due date from the partner's payment term, and for an invoice, credit note or advance invoice posts the journal entry and stores the VAT evidence. `warehouseId` (or the series' warehouse) takes the sold goods of an invoice out of stock, the first-expiring lot first (lots without an expiry date after those with one, then the oldest layers first), leaving out expired lots, with a cost of goods sold entry; `returnToStock` puts them back for a credit note that credits an invoice. A credit note is set against the unpaid balance of the credited document. Emits `sale_invoice.issued`, `sale_invoice.paid` when a credit note settles the credited invoice in full, and `intercompany.invoice_mirrored` when the partner is linked to another company of the group (a draft purchase invoice is created there). Answers 409 when the document is already issued or locked or the accounting period is locked, 422 when the lines carry VAT under a scheme that charges none, when credit notes would exceed the credited total, or when `returnToStock` is used on anything but a credit note of an invoice. `warnings` carries the VAT type warnings of `sales/invoices/create` and `document_date_before_last_number` when the document is dated before the last number issued in its series.
      *
      * @param {NordletApi.InvoicesIssueSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -4978,7 +4978,7 @@ export class SalesClient {
     }
 
     /**
-     * Generate the next invoice of a schedule now, dated its `nextRunDate`: creates a draft from the template (due date from the template's payment term, VAT scheme from the template or else resolved for the partner and supply type), issues it when `autoIssue` is set and e-mails it when `autoSend` is set, then moves the schedule to its next occurrence (or to `finished` after the last one) and emits `recurring_invoice.generated`. A failure to issue or send comes back in `error` and is stored as `lastError`; the draft stays. Answers 409 when the schedule is finished, 422 when the template is a credit note template or has no lines.
+     * Generate the next invoice of a schedule now, dated its `nextRunDate`: creates a draft from the template (due date from the template's payment term, VAT scheme from the template or else resolved for the partner and supply type), issues it when `autoIssue` is set and e-mails it when `autoSend` is set, then moves the schedule to its next occurrence (or to `finished` after the last one) and emits `recurring_invoice.generated`. A failure to issue or send comes back in `error` and is stored as `lastError`; the draft stays. Answers 409 when the schedule is finished or its `nextRunDate` is after the company's current date, 422 when the template is a credit note template or has no lines.
      *
      * @param {NordletApi.RecurringInvoicesGenerateSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.

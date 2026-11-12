@@ -13,6 +13,7 @@ export interface TransactionsMatchBankRequest {
     documentType: TransactionsMatchBankRequest.DocumentType;
     documentId: string;
     invoiceAmount?: string;
+    remainder?: TransactionsMatchBankRequest.Remainder;
 }
 
 export namespace TransactionsMatchBankRequest {
@@ -22,4 +23,18 @@ export namespace TransactionsMatchBankRequest {
         PayrollRun: "payroll_run",
     } as const;
     export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+
+    export interface Remainder {
+        treatment: Remainder.Treatment;
+        accountCode?: string | undefined;
+    }
+
+    export namespace Remainder {
+        export const Treatment = {
+            Advance: "advance",
+            LeaveOpen: "leave_open",
+            WriteOff: "write_off",
+        } as const;
+        export type Treatment = (typeof Treatment)[keyof typeof Treatment];
+    }
 }

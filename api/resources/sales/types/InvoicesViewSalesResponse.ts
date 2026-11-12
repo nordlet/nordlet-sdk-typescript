@@ -18,6 +18,7 @@ export interface InvoicesViewSalesResponse {
     notes: string | null;
     payUrl: string | null;
     cardPaymentReceived: boolean;
+    sentWith: string | null;
     seller: InvoicesViewSalesResponse.Seller;
     buyer: InvoicesViewSalesResponse.Buyer;
     lines: InvoicesViewSalesResponse.Lines.Item[];

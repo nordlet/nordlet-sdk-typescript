@@ -6,6 +6,7 @@ export * from "./InvoicesGetPurchasesResponse.js";
 export * from "./InvoicesListPurchasesResponse.js";
 export * from "./InvoicesMatchPurchasesResponse.js";
 export * from "./InvoicesRegisterPurchasesResponse.js";
+export * from "./InvoicesReversePurchasesResponse.js";
 export * from "./InvoicesUpdatePurchasesResponse.js";
 export * from "./OrdersApprovePurchasesResponse.js";
 export * from "./OrdersCancelPurchasesResponse.js";

@@ -20,6 +20,7 @@ export namespace MeAccountResponse {
         locale: string;
         plan: string;
         isSuperAdmin: boolean;
+        whiteLabel: boolean;
     }
 
     export interface Billing {
@@ -73,11 +74,24 @@ export namespace MeAccountResponse {
             role: string;
             isSandbox: boolean;
             cashBasis: boolean;
+            countryCode: string;
+            baseCurrency: string;
+            isVatPayer: boolean;
+            vatPeriod: Item.VatPeriod | null;
+            fiscalYearEndMonth: number | null;
             status: Item.Status;
             deletedAt: string | null;
         }
 
         export namespace Item {
+            export const VatPeriod = {
+                Monthly: "monthly",
+                Bimonthly: "bimonthly",
+                Quarterly: "quarterly",
+                Semiannual: "semiannual",
+                Annual: "annual",
+            } as const;
+            export type VatPeriod = (typeof VatPeriod)[keyof typeof VatPeriod];
             export const Status = {
                 Active: "active",
                 Archived: "archived",

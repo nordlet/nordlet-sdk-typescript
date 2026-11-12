@@ -9,6 +9,7 @@ export interface VatResolveReferenceRequest {
     customerCountryCode?: string;
     customerIsBusiness?: boolean;
     supplyType?: VatResolveReferenceRequest.SupplyType;
+    side?: VatResolveReferenceRequest.Side;
     date?: string;
     belowDistanceSalesThreshold?: boolean;
     facilitatedByMarketplace?: boolean;
@@ -30,6 +31,11 @@ export namespace VatResolveReferenceRequest {
         Digital: "digital",
     } as const;
     export type SupplyType = (typeof SupplyType)[keyof typeof SupplyType];
+    export const Side = {
+        Sale: "sale",
+        Purchase: "purchase",
+    } as const;
+    export type Side = (typeof Side)[keyof typeof Side];
     export const ServiceKind = {
         ShortTermAccommodation: "short_term_accommodation",
         PassengerRoadTransport: "passenger_road_transport",

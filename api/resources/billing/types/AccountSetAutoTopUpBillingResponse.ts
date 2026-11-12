@@ -60,7 +60,6 @@ export namespace AccountSetAutoTopUpBillingResponse {
         to: string;
         apiRequests: number;
         saleInvoices: number;
-        ocrPages: number;
         fileBytes: number;
         databaseBytes: number;
         archivedCompanies: number;

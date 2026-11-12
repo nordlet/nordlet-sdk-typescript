@@ -13,6 +13,7 @@ export type { CostCentersUpdateLedgerRequest } from "./CostCentersUpdateLedgerRe
 export type { JournalTransactionsCreateLedgerRequest } from "./JournalTransactionsCreateLedgerRequest.js";
 export type { JournalTransactionsGetLedgerRequest } from "./JournalTransactionsGetLedgerRequest.js";
 export { JournalTransactionsListLedgerRequest } from "./JournalTransactionsListLedgerRequest.js";
+export type { JournalTransactionsReverseLedgerRequest } from "./JournalTransactionsReverseLedgerRequest.js";
 export { OwnersCreateLedgerRequest } from "./OwnersCreateLedgerRequest.js";
 export type { OwnersDeleteLedgerRequest } from "./OwnersDeleteLedgerRequest.js";
 export { OwnersListLedgerRequest } from "./OwnersListLedgerRequest.js";

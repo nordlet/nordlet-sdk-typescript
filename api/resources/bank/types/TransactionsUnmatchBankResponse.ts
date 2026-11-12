@@ -14,6 +14,7 @@ export interface TransactionsUnmatchBankResponse {
     matchedDocumentType: string | null;
     matchedDocumentId: string | null;
     journalTransactionId: string | null;
+    ignoreReason: string | null;
     createdAt: string;
 }
 
@@ -21,6 +22,7 @@ export namespace TransactionsUnmatchBankResponse {
     export const Status = {
         New: "new",
         Matched: "matched",
+        Ignored: "ignored",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }

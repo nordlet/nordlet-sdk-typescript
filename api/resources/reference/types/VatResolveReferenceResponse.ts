@@ -9,6 +9,7 @@ export interface VatResolveReferenceResponse {
     rates: VatResolveReferenceResponse.Rates.Item[];
     legalBasis: string;
     notes: string[];
+    vatTypeCodes: string[];
 }
 
 export namespace VatResolveReferenceResponse {

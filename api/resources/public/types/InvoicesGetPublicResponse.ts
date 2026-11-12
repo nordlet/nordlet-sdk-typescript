@@ -18,6 +18,7 @@ export interface InvoicesGetPublicResponse {
     notes: string | null;
     payUrl: string | null;
     cardPaymentReceived: boolean;
+    sentWith: string | null;
     seller: InvoicesGetPublicResponse.Seller;
     buyer: InvoicesGetPublicResponse.Buyer;
     lines: InvoicesGetPublicResponse.Lines.Item[];

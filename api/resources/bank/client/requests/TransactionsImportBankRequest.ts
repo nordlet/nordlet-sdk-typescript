@@ -13,6 +13,8 @@
 export interface TransactionsImportBankRequest {
     bankAccountId: string;
     transactions: TransactionsImportBankRequest.Transactions.Item[];
+    openingBalance?: string;
+    closingBalance?: string;
 }
 
 export namespace TransactionsImportBankRequest {

@@ -3,4 +3,18 @@
 export interface TransactionsImportBankResponse {
     imported: number;
     skipped: number;
+    duplicates: TransactionsImportBankResponse.Duplicates.Item[];
+}
+
+export namespace TransactionsImportBankResponse {
+    export type Duplicates = Duplicates.Item[];
+
+    export namespace Duplicates {
+        export interface Item {
+            index: number;
+            existingTransactionId: string;
+            date: string;
+            amount: string;
+        }
+    }
 }

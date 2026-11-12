@@ -4,4 +4,4 @@
  * @example
  *     {}
  */
-export type SettingsGetCaptureRequest = {};
+export type BrandGetAccountRequest = {};

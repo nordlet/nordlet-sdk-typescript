@@ -30,6 +30,9 @@ export namespace InvoicesListPurchasesResponse {
             grossTotal: string;
             paidAmount: string;
             journalTransactionId: string | null;
+            reversedAt: string | null;
+            reversalJournalTransactionId: string | null;
+            reversalReason: string | null;
             creditedInvoiceId: string | null;
             purchaseOrderId: string | null;
             operationTypeId: string | null;
@@ -54,6 +57,7 @@ export namespace InvoicesListPurchasesResponse {
             export const Status = {
                 Draft: "draft",
                 Registered: "registered",
+                Reversed: "reversed",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
             export const PaymentStatus = {

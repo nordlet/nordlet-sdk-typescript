@@ -28,6 +28,7 @@ export type { MatchRulesDeleteBankRequest } from "./MatchRulesDeleteBankRequest.
 export type { MatchRulesListBankRequest } from "./MatchRulesListBankRequest.js";
 export type { MatchRulesUpdateBankRequest } from "./MatchRulesUpdateBankRequest.js";
 export type { PaymentsExportBankRequest } from "./PaymentsExportBankRequest.js";
+export type { ReconciliationGetBankRequest } from "./ReconciliationGetBankRequest.js";
 export type { SecuritiesGetBankRequest } from "./SecuritiesGetBankRequest.js";
 export type { SecuritiesImportBankRequest } from "./SecuritiesImportBankRequest.js";
 export { SecuritiesListBankRequest } from "./SecuritiesListBankRequest.js";
@@ -41,10 +42,13 @@ export type { SettlementsMatchBankRequest } from "./SettlementsMatchBankRequest.
 export type { SettlementsPostBankRequest } from "./SettlementsPostBankRequest.js";
 export type { SettlementsUnlinkBankRequest } from "./SettlementsUnlinkBankRequest.js";
 export { StatementsImportBankRequest } from "./StatementsImportBankRequest.js";
+export type { TransactionsIgnoreBankRequest } from "./TransactionsIgnoreBankRequest.js";
 export type { TransactionsImportBankRequest } from "./TransactionsImportBankRequest.js";
 export { TransactionsListBankRequest } from "./TransactionsListBankRequest.js";
 export { TransactionsMatchBankRequest } from "./TransactionsMatchBankRequest.js";
 export { TransactionsMatchManyBankRequest } from "./TransactionsMatchManyBankRequest.js";
+export type { TransactionsPostBankRequest } from "./TransactionsPostBankRequest.js";
 export { TransactionsRecordBankRequest } from "./TransactionsRecordBankRequest.js";
 export type { TransactionsSuggestMatchesBankRequest } from "./TransactionsSuggestMatchesBankRequest.js";
+export type { TransactionsUnignoreBankRequest } from "./TransactionsUnignoreBankRequest.js";
 export type { TransactionsUnmatchBankRequest } from "./TransactionsUnmatchBankRequest.js";

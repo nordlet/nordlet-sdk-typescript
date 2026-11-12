@@ -17,6 +17,7 @@ export type { MonthlySummaryReportsRequest } from "./MonthlySummaryReportsReques
 export type { OnlineSalesReportsRequest } from "./OnlineSalesReportsRequest.js";
 export type { OssReportsRequest } from "./OssReportsRequest.js";
 export type { PartnerBalancesReportsRequest } from "./PartnerBalancesReportsRequest.js";
+export type { PeriodChecklistReportsRequest } from "./PeriodChecklistReportsRequest.js";
 export type { PosSalesReportsRequest } from "./PosSalesReportsRequest.js";
 export type { SieReportsRequest } from "./SieReportsRequest.js";
 export type { SizeCategoryReportsRequest } from "./SizeCategoryReportsRequest.js";

@@ -22,6 +22,9 @@ export interface InvoicesUpdatePurchasesRequest {
     intrastatNatureOfTransaction?: string | null;
     einvoiceNumber?: string | null;
     lines?: InvoicesUpdatePurchasesRequest.Lines.Item[];
+    netTotal?: string;
+    vatTotal?: string;
+    grossTotal?: string;
 }
 
 export namespace InvoicesUpdatePurchasesRequest {
