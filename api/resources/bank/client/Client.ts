@@ -669,7 +669,7 @@ export class BankClient {
     }
 
     /**
-     * List the bank transactions of the company. Filterable by id, bankAccountId, status, matchedDocumentId, date, amount, counterpartyIban, counterpartyName and externalId; sortable by date, createdAt and amount.
+     * List the bank transactions of the company. Filterable by id, bankAccountId, status, matchedDocumentId, date, amount, counterpartyIban, counterpartyName, partnerId and externalId; sortable by date, createdAt and amount. `counterpartyName` is the name as the bank wrote it; `partnerId` and `partnerName` are the partner the line belongs to.
      *
      * @param {NordletApi.TransactionsListBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.

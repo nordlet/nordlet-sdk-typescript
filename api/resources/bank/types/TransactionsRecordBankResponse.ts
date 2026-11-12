@@ -8,6 +8,8 @@ export interface TransactionsRecordBankResponse {
     currency: string;
     counterpartyName: string | null;
     counterpartyIban: string | null;
+    partnerId: string | null;
+    partnerName: string | null;
     description: string | null;
     externalId: string | null;
     status: TransactionsRecordBankResponse.Status;
