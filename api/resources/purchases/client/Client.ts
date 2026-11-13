@@ -424,7 +424,7 @@ export class PurchasesClient {
     }
 
     /**
-     * Mark a draft purchase invoice as deleted (409 once registered). A document capture linked to it goes back to `extracted` (or `pending` when it has no extraction) and can be confirmed again.
+     * Mark a draft, registered or reversed purchase invoice as deleted. Deleting a registered invoice also removes its registration journal transaction and cancels its pending prepaid-expense releases; it answers 409 in the cases where `purchases/invoices/reverse` does (registered credit notes credit it, payments are matched to it, it moved stock or is the source of a landed cost). Deleting a reversed invoice also removes its registration and reversal journal transactions. Both answer 409 when the date of a removed journal transaction is in a locked period or when prepaid-expense releases of the invoice were posted. A document capture linked to it goes back to `extracted` (or `pending` when it has no extraction) and can be confirmed again.
      *
      * @param {NordletApi.InvoicesDeletePurchasesRequest} request
      * @param {PurchasesClient.RequestOptions} requestOptions - Request-specific configuration.

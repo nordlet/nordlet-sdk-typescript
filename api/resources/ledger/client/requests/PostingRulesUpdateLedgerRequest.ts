@@ -41,6 +41,8 @@ export namespace PostingRulesUpdateLedgerRequest {
                 PosCashSurplus: "pos.cashSurplus",
                 BankFxGain: "bank.fxGain",
                 BankFxLoss: "bank.fxLoss",
+                BankPaymentDifferenceGain: "bank.paymentDifferenceGain",
+                BankPaymentDifferenceLoss: "bank.paymentDifferenceLoss",
                 BankFees: "bank.fees",
                 BankCardPayments: "bank.cardPayments",
                 BankTopUps: "bank.topUps",
