@@ -14,6 +14,8 @@ export interface AssetsDisposeAssetsRequest {
     reason: AssetsDisposeAssetsRequest.Reason;
     /** Sale price excluding VAT; 0 when scrapped or written off */
     proceeds?: string;
+    /** The issued sales invoice that sold the asset */
+    saleInvoiceId?: string;
     notes?: string;
 }
 

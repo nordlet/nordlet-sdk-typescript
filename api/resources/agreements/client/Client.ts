@@ -1079,7 +1079,7 @@ export class AgreementsClient {
     }
 
     /**
-     * List the company's agreements without their items, each with `partnerName`. Filterable by `number`, `name`, `partnerId`, `employeeId`, `bankAccountId`, `kind`, `typeId`, `status`, `startDate`, `endDate` and `value`; sortable by `number`, `startDate` and `createdAt` (default `startDate` descending).
+     * List the company's agreements without their items, each with `partnerName`. Filterable by `number`, `name`, `partnerId`, `employeeId`, `bankAccountId`, `kind`, `typeId`, `status`, `startDate`, `endDate` and `value`; sortable by `number`, `startDate`, `createdAt`, `name`, `partyName` (the partner name, else the employee name, else the bank account name), `kind`, `endDate`, `status`, `value` and `documentRef` (default `startDate` descending).
      *
      * @param {NordletApi.AgreementsListAgreementsRequest} request
      * @param {AgreementsClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -20,6 +20,9 @@ export interface InvoicesApplyAdvanceSalesResponse {
     salesTaxTotal: string;
     paidAmount: string;
     journalTransactionId: string | null;
+    reversedAt: string | null;
+    reversalJournalTransactionId: string | null;
+    reversalReason: string | null;
     appliedToInvoiceId: string | null;
     creditedInvoiceId: string | null;
     creditedInvoiceReference: string | null;
@@ -82,6 +85,7 @@ export namespace InvoicesApplyAdvanceSalesResponse {
     export const Status = {
         Draft: "draft",
         Issued: "issued",
+        Reversed: "reversed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
     export const PaymentStatus = {
@@ -118,6 +122,7 @@ export namespace InvoicesApplyAdvanceSalesResponse {
             vatRatePercent: string;
             vatClassifierCode: string | null;
             vatExemptionBasis: string | null;
+            assetId: string | null;
             costCenterId: string | null;
             projectId: string | null;
             lineNet: string;

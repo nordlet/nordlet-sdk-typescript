@@ -15,6 +15,8 @@ export interface SubmissionsMarkDeclarationsResponse {
     period: string | null;
     documentKey: string | null;
     amendment: number;
+    authorityRef: string | null;
+    correctionInput: SubmissionsMarkDeclarationsResponse.CorrectionInput | null;
     origin: string;
     transportSystem: string | null;
     environment: SubmissionsMarkDeclarationsResponse.Environment | null;
@@ -42,6 +44,14 @@ export namespace SubmissionsMarkDeclarationsResponse {
         Rejected: "rejected",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+
+    export interface CorrectionInput {
+        reason?: string | undefined;
+        reasonCode?: string | undefined;
+        authorityReference?: string | undefined;
+        discoveredOn?: string | undefined;
+    }
+
     export const Environment = {
         Test: "test",
         Production: "production",

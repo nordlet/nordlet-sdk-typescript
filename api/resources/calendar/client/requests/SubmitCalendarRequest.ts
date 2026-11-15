@@ -9,4 +9,15 @@
 export interface SubmitCalendarRequest {
     key: string;
     amend?: boolean;
+    correction?: SubmitCalendarRequest.Correction;
+    documentKeys?: string[];
+}
+
+export namespace SubmitCalendarRequest {
+    export interface Correction {
+        reason?: string | undefined;
+        reasonCode?: string | undefined;
+        authorityReference?: string | undefined;
+        discoveredOn?: string | undefined;
+    }
 }

@@ -6,6 +6,7 @@ export * from "./BrandGetAccountResponse.js";
 export * from "./BrandUpdateAccountResponse.js";
 export * from "./CompaniesActivateAccountResponse.js";
 export * from "./CompaniesArchiveAccountResponse.js";
+export * from "./CompaniesContextAccountResponse.js";
 export * from "./CompaniesConvertToLiveAccountResponse.js";
 export * from "./CompaniesCreateAccountResponse.js";
 export * from "./CompaniesDeleteAccountResponse.js";

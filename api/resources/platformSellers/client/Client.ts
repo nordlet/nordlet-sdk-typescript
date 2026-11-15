@@ -24,7 +24,7 @@ export class PlatformSellersClient {
     }
 
     /**
-     * Individuals and entities that sell goods, rent out property or transport, or perform personal services through the platform the company operates. The yearly DAC7 report is built from them.
+     * Individuals and entities that sell goods, rent out property or transport, or perform personal services through the platform the company operates. The yearly DAC7 report is built from them. Filterable by kind and vatCode; sortable by createdAt, lastName, entityName, name (the full name of an individual, else the entity name), kind, country (the country code of the address) and vatCode.
      *
      * @param {NordletApi.ListPlatformSellersRequest} request
      * @param {PlatformSellersClient.RequestOptions} requestOptions - Request-specific configuration.

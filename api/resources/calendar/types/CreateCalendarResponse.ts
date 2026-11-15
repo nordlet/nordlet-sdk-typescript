@@ -15,6 +15,7 @@ export interface CreateCalendarResponse {
     submissions: CreateCalendarResponse.Submissions.Item[];
     canSubmit: boolean;
     canAmend: boolean;
+    correction: CreateCalendarResponse.Correction | null;
     canDownload: boolean;
     automated: boolean;
 }
@@ -41,6 +42,8 @@ export namespace CreateCalendarResponse {
         period: string | null;
         documentKey: string | null;
         amendment: number;
+        authorityRef: string | null;
+        correctionInput: Submission.CorrectionInput | null;
         origin: string;
         transportSystem: string | null;
         environment: Submission.Environment | null;
@@ -68,6 +71,14 @@ export namespace CreateCalendarResponse {
             Rejected: "rejected",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
+
+        export interface CorrectionInput {
+            reason?: string | undefined;
+            reasonCode?: string | undefined;
+            authorityReference?: string | undefined;
+            discoveredOn?: string | undefined;
+        }
+
         export const Environment = {
             Test: "test",
             Production: "production",
@@ -93,6 +104,8 @@ export namespace CreateCalendarResponse {
             period: string | null;
             documentKey: string | null;
             amendment: number;
+            authorityRef: string | null;
+            correctionInput: Item.CorrectionInput | null;
             origin: string;
             transportSystem: string | null;
             environment: Item.Environment | null;
@@ -120,11 +133,61 @@ export namespace CreateCalendarResponse {
                 Rejected: "rejected",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
+
+            export interface CorrectionInput {
+                reason?: string | undefined;
+                reasonCode?: string | undefined;
+                authorityReference?: string | undefined;
+                discoveredOn?: string | undefined;
+            }
+
             export const Environment = {
                 Test: "test",
                 Production: "production",
             } as const;
             export type Environment = (typeof Environment)[keyof typeof Environment];
+        }
+    }
+
+    export interface Correction {
+        required: Correction.Required.Item[];
+        optional: Correction.Optional.Item[];
+        reasonCodes: Correction.ReasonCodes.Item[];
+        carry: boolean;
+    }
+
+    export namespace Correction {
+        export type Required = Required.Item[];
+
+        export namespace Required {
+            export const Item = {
+                Reason: "reason",
+                ReasonCode: "reasonCode",
+                AuthorityReference: "authorityReference",
+                DiscoveredOn: "discoveredOn",
+            } as const;
+            export type Item = (typeof Item)[keyof typeof Item];
+        }
+
+        export type Optional = Optional.Item[];
+
+        export namespace Optional {
+            export const Item = {
+                Reason: "reason",
+                ReasonCode: "reasonCode",
+                AuthorityReference: "authorityReference",
+                DiscoveredOn: "discoveredOn",
+            } as const;
+            export type Item = (typeof Item)[keyof typeof Item];
+        }
+
+        export type ReasonCodes = ReasonCodes.Item[];
+
+        export namespace ReasonCodes {
+            export interface Item {
+                code: string;
+                label: string;
+            }
         }
     }
 }

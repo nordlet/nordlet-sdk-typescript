@@ -26,6 +26,7 @@ export { InvoicesPdfSalesRequest } from "./InvoicesPdfSalesRequest.js";
 export type { InvoicesPeppolSendSalesRequest } from "./InvoicesPeppolSendSalesRequest.js";
 export type { InvoicesPeppolStatusSalesRequest } from "./InvoicesPeppolStatusSalesRequest.js";
 export type { InvoicesPeppolXmlSalesRequest } from "./InvoicesPeppolXmlSalesRequest.js";
+export type { InvoicesReverseSalesRequest } from "./InvoicesReverseSalesRequest.js";
 export { InvoicesSendSalesRequest } from "./InvoicesSendSalesRequest.js";
 export type { InvoicesUnlockSalesRequest } from "./InvoicesUnlockSalesRequest.js";
 export { InvoicesUpdateSalesRequest } from "./InvoicesUpdateSalesRequest.js";

@@ -30,6 +30,7 @@ export namespace JournalTransactionsGetLedgerResponse {
             accountName: string;
             costCenterId: string | null;
             projectId: string | null;
+            partnerId: string | null;
             debit: string;
             credit: string;
             description: string | null;

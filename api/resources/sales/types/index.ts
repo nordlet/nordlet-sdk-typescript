@@ -26,6 +26,7 @@ export * from "./InvoicesPdfSalesResponse.js";
 export * from "./InvoicesPeppolSendSalesResponse.js";
 export * from "./InvoicesPeppolStatusSalesResponse.js";
 export * from "./InvoicesPeppolXmlSalesResponse.js";
+export * from "./InvoicesReverseSalesResponse.js";
 export * from "./InvoicesSendSalesResponse.js";
 export * from "./InvoicesUnlockSalesResponse.js";
 export * from "./InvoicesUpdateSalesResponse.js";

@@ -24,7 +24,7 @@ export class SalesClient {
     }
 
     /**
-     * Create a draft sale document - an invoice, credit note, proforma or advance invoice (`type`) - with its lines; the totals are computed from the lines and `discountPercent`, and the number is assigned by `sales/invoices/issue`. Answers 422 when a credit note credits a proforma, another credit note or a document that is not issued, when the credited document has another partner or currency, when an OSS or IOSS document has no EU `vatCountryCode`, when the lines carry VAT but the company is not a VAT payer or the VAT scheme charges none, or when the operation type or document series is for another document type. `warnings` lists what does not refuse the document but needs a look: `vat_type_not_valid_on_date` (a line VAT type is not valid on the issue date, else today), `vat_type_domestic_for_eu_partner` (a domestic VAT type for a partner VAT-registered in another EU country), `vat_type_intra_eu_for_domestic_partner` (an intra-EU VAT type for a partner in the company country) and `vat_type_intra_eu_without_vat_number` (an intra-EU VAT type for a partner without a VAT number).
+     * Create a draft sale document - an invoice, credit note, proforma or advance invoice (`type`) - with its lines; the totals are computed from the lines and `discountPercent`, and the number is assigned by `sales/invoices/issue`. Answers 422 when a credit note credits a proforma, another credit note or a document that is not issued, when the credited document has another partner or currency, when an OSS or IOSS document has no EU `vatCountryCode`, when the lines carry VAT but the company is not a VAT payer or the VAT scheme charges none, or when the operation type or document series is for another document type. `warnings` lists what does not refuse the document but needs a look, each with a `fix` naming the call or field that resolves it: `partner_vat_invalid` (the VAT number of the partner failed its VIES check), `vat_type_not_valid_on_date` (a line VAT type is not valid on the issue date, else today), `vat_type_domestic_for_eu_partner` (a domestic VAT type for a partner VAT-registered in another EU country), `vat_type_intra_eu_for_domestic_partner` (an intra-EU VAT type for a partner in the company country) and `vat_type_intra_eu_without_vat_number` (an intra-EU VAT type for a partner without a VAT number).
      *
      * @param {NordletApi.InvoicesCreateSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1720,7 +1720,7 @@ export class SalesClient {
     }
 
     /**
-     * Issue a draft sale document: assigns the next number (from its document series, else from `series` or the type's default prefix and the year), the issue date (`issueDate`, else the draft's, else today) and a missing due date from the partner's payment term, and for an invoice, credit note or advance invoice posts the journal entry and stores the VAT evidence. `warehouseId` (or the series' warehouse) takes the sold goods of an invoice out of stock, the first-expiring lot first (lots without an expiry date after those with one, then the oldest layers first), leaving out expired lots, with a cost of goods sold entry; `returnToStock` puts them back for a credit note that credits an invoice. A credit note is set against the unpaid balance of the credited document. Emits `sale_invoice.issued`, `sale_invoice.paid` when a credit note settles the credited invoice in full, and `intercompany.invoice_mirrored` when the partner is linked to another company of the group (a draft purchase invoice is created there). Answers 409 when the document is already issued or locked or the accounting period is locked, 422 when the lines carry VAT under a scheme that charges none, when credit notes would exceed the credited total, or when `returnToStock` is used on anything but a credit note of an invoice. `warnings` carries the VAT type warnings of `sales/invoices/create` and `document_date_before_last_number` when the document is dated before the last number issued in its series.
+     * Issue a draft sale document: assigns the next number (from its document series, else from `series` or the type's default prefix and the year), the issue date (`issueDate`, else the draft's, else today) and a missing due date from the partner's payment term, and for an invoice, credit note or advance invoice posts the journal entry and stores the VAT evidence. `warehouseId` (or the series' warehouse) takes the sold goods of an invoice out of stock, the first-expiring lot first (lots without an expiry date after those with one, then the oldest layers first), leaving out expired lots, with a cost of goods sold entry; `returnToStock` puts them back for a credit note that credits an invoice. A credit note is set against the unpaid balance of the credited document. Emits `sale_invoice.issued`, `sale_invoice.paid` when a credit note settles the credited invoice in full, and `intercompany.invoice_mirrored` when the partner is linked to another company of the group (a draft purchase invoice is created there). Answers 409 when the document is already issued or locked, the accounting period is locked or the credited invoice is reversed, 422 when the lines carry VAT under a scheme that charges none, when credit notes would exceed the credited total, or when `returnToStock` is used on anything but a credit note of an invoice. `warnings` carries the VAT type warnings of `sales/invoices/create` and `document_date_before_last_number` when the document is dated before the last number issued in its series.
      *
      * @param {NordletApi.InvoicesIssueSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1846,6 +1846,136 @@ export class SalesClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/sales/invoices/issue");
+    }
+
+    /**
+     * Undoes an issued invoice or advance invoice: posts a journal entry dated the issue date that mirrors the invoice's entry (debits and credits swapped), cancels its pending revenue recognition and sets the status to `reversed` with the reason. The invoice keeps its number, which stays used, and leaves the VAT returns, the national lists, the reports, partner balances and debt aging. Emits `sale_invoice.reversed`. Answers 409 pointing to a credit note when the document is not issued, is a credit note, is locked, was e-mailed, was sent over Peppol or to an e-invoicing or tax authority system (or carries national marks registered at issue), has payments matched to it, is credited by a credit note, has an advance applied, moved goods in or out of stock, has revenue recognised or a refund liability, is the sale invoice of an asset disposal (naming the asset), was mirrored to another company of the group, or when the accounting period of its issue date is locked (naming the period).
+     *
+     * @param {NordletApi.InvoicesReverseSalesRequest} request
+     * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.sales.invoicesReverse({
+     *         id: "id",
+     *         reason: "reason"
+     *     })
+     */
+    public invoicesReverse(
+        request: NordletApi.InvoicesReverseSalesRequest,
+        requestOptions?: SalesClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.InvoicesReverseSalesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__invoicesReverse(request, requestOptions));
+    }
+
+    private async __invoicesReverse(
+        request: NordletApi.InvoicesReverseSalesRequest,
+        requestOptions?: SalesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.InvoicesReverseSalesResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/sales/invoices/reverse",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.InvoicesReverseSalesResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/sales/invoices/reverse");
     }
 
     /**
@@ -2769,7 +2899,7 @@ export class SalesClient {
     }
 
     /**
-     * List the sale documents of the company with the partner name. An advance invoice also carries `advanceUnappliedAmount`: its gross total less the amounts applied with `sales/invoices/apply-advance` and the issued credit notes on it (null on other documents). Filterable by partnerId, type, status, paymentStatus, fullNumber, issueDate, currency, agreementId, creditedInvoiceId, operationTypeId, documentSeriesId, lockedAt, grossTotal, netTotal, vatTotal, dueDate, orderNumber, seriesLabel, locale and recurringInvoiceId; sortable by createdAt, issueDate, fullNumber, grossTotal, netTotal, vatTotal, status and paymentStatus.
+     * List the sale documents of the company with the partner name. An advance invoice also carries `advanceUnappliedAmount`: its gross total less the amounts applied with `sales/invoices/apply-advance` and the issued credit notes on it (null on other documents). Filterable by partnerId, type, status, paymentStatus, fullNumber, issueDate, currency, agreementId, creditedInvoiceId, operationTypeId, documentSeriesId, lockedAt, grossTotal, netTotal, vatTotal, dueDate, orderNumber, seriesLabel, locale and recurringInvoiceId; sortable by createdAt, issueDate, fullNumber, grossTotal, netTotal, vatTotal, status, paymentStatus, seriesLabel, partnerName (the name of the partner) and creditedInvoiceReference (the reference of the credited invoice).
      *
      * @param {NordletApi.InvoicesListSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -4309,7 +4439,7 @@ export class SalesClient {
     }
 
     /**
-     * List invoice templates. Filterable by name, documentType and partnerId; sortable by name, documentType and createdAt.
+     * List invoice templates. Filterable by name, documentType and partnerId; sortable by name, documentType, createdAt, currency, paymentTermDays and lines (the number of lines).
      *
      * @param {NordletApi.InvoiceTemplatesListSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -5112,7 +5242,7 @@ export class SalesClient {
     }
 
     /**
-     * Generate every invoice due up to `asOfDate` (default today) from the active schedules of the company, catching up to 60 missed occurrences per schedule, as `sales/recurring-invoices/generate` does for one; each generated invoice emits `recurring_invoice.generated`. The answer lists what was generated and the schedules that failed; a failure is also stored as the schedule's `lastError`.
+     * Generate every invoice due up to `asOfDate` (default today) from the active schedules of the company, catching up to 60 missed occurrences per schedule, as `sales/recurring-invoices/generate` does for one (409 when `asOfDate` is after the company's current date); each generated invoice emits `recurring_invoice.generated`. The answer lists what was generated and the schedules that failed; a failure is also stored as the schedule's `lastError`.
      *
      * @param {NordletApi.RecurringInvoicesRunSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -5244,7 +5374,7 @@ export class SalesClient {
     }
 
     /**
-     * List recurring invoice schedules with the names of their template and partner. Filterable by status, partnerId, templateId, frequency, nextRunDate and autoIssue; sortable by nextRunDate, startDate, status, frequency and createdAt.
+     * List recurring invoice schedules with the names of their template and partner. Filterable by status, partnerId, templateId, frequency, nextRunDate and autoIssue; sortable by nextRunDate, startDate, status, frequency, createdAt, templateName (the name of the template), partnerName (the name of the partner), interval and occurrences.
      *
      * @param {NordletApi.RecurringInvoicesListSalesRequest} request
      * @param {SalesClient.RequestOptions} requestOptions - Request-specific configuration.

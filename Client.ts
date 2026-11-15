@@ -34,6 +34,7 @@ import { PublicClient } from "./api/resources/public/client/Client.js";
 import { PurchasesClient } from "./api/resources/purchases/client/Client.js";
 import { ReferenceClient } from "./api/resources/reference/client/Client.js";
 import { ReportsClient } from "./api/resources/reports/client/Client.js";
+import { ReviewClient } from "./api/resources/review/client/Client.js";
 import { SalesClient } from "./api/resources/sales/client/Client.js";
 import { TransportClient } from "./api/resources/transport/client/Client.js";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client.js";
@@ -64,6 +65,7 @@ export class NordletApiClient {
     protected _officers: OfficersClient | undefined;
     protected _platformSellers: PlatformSellersClient | undefined;
     protected _migration: MigrationClient | undefined;
+    protected _review: ReviewClient | undefined;
     protected _assets: AssetsClient | undefined;
     protected _hr: HrClient | undefined;
     protected _fleet: FleetClient | undefined;
@@ -149,6 +151,10 @@ export class NordletApiClient {
 
     public get migration(): MigrationClient {
         return (this._migration ??= new MigrationClient(this._options));
+    }
+
+    public get review(): ReviewClient {
+        return (this._review ??= new ReviewClient(this._options));
     }
 
     public get assets(): AssetsClient {

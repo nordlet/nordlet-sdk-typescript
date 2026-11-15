@@ -6,6 +6,7 @@ export type { BrandGetAccountRequest } from "./BrandGetAccountRequest.js";
 export type { BrandUpdateAccountRequest } from "./BrandUpdateAccountRequest.js";
 export type { CompaniesActivateAccountRequest } from "./CompaniesActivateAccountRequest.js";
 export type { CompaniesArchiveAccountRequest } from "./CompaniesArchiveAccountRequest.js";
+export type { CompaniesContextAccountRequest } from "./CompaniesContextAccountRequest.js";
 export type { CompaniesConvertToLiveAccountRequest } from "./CompaniesConvertToLiveAccountRequest.js";
 export { CompaniesCreateAccountRequest } from "./CompaniesCreateAccountRequest.js";
 export type { CompaniesDeleteAccountRequest } from "./CompaniesDeleteAccountRequest.js";

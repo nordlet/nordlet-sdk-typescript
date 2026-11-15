@@ -24,7 +24,7 @@ export class AuditClient {
     }
 
     /**
-     * List the audit log of the company: who did what to which entity, with the recorded change in `diff`. Filterable by `action`, `entity`, `entityId`, `actorType` and `actorId`; sortable by `createdAt` and `id`, newest first by default.
+     * List the audit log of the company: who did what to which entity, with the recorded change in `diff`. Filterable by `action`, `entity`, `entityId`, `actorType` and `actorId`; sortable by `createdAt`, `id`, `actor` (the actor type, then the start of the actor id), `action`, `entity` (the entity, then the start of the entity id) and `diff` (the recorded change as text), newest first by default.
      *
      * @param {NordletApi.ListAuditRequest} request
      * @param {AuditClient.RequestOptions} requestOptions - Request-specific configuration.

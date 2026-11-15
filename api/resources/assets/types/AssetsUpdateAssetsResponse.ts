@@ -27,6 +27,7 @@ export interface AssetsUpdateAssetsResponse {
     disposalReason: AssetsUpdateAssetsResponse.DisposalReason | null;
     disposalProceeds: string | null;
     disposalJournalTransactionId: string | null;
+    disposalSaleInvoiceId: string | null;
     createdAt: string;
 }
 

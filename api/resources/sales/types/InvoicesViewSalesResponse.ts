@@ -36,6 +36,7 @@ export namespace InvoicesViewSalesResponse {
     export const Status = {
         Draft: "draft",
         Issued: "issued",
+        Reversed: "reversed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
     export const PaymentStatus = {

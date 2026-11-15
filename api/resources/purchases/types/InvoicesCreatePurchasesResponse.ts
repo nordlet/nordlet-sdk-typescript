@@ -88,6 +88,7 @@ export namespace InvoicesCreatePurchasesResponse {
         export interface Item {
             code: string;
             message: string;
+            fix: string;
         }
     }
 }

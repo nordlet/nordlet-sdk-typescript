@@ -21,6 +21,7 @@ export namespace TransactionsMatchBankRequest {
         SaleInvoice: "sale_invoice",
         PurchaseInvoice: "purchase_invoice",
         PayrollRun: "payroll_run",
+        ExpenseReport: "expense_report",
     } as const;
     export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
 

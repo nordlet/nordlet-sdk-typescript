@@ -82,6 +82,7 @@ export type { RoEtransportBuildDeclarationsRequest } from "./RoEtransportBuildDe
 export type { RoEtransportStatusDeclarationsRequest } from "./RoEtransportStatusDeclarationsRequest.js";
 export type { RoEtransportSubmitDeclarationsRequest } from "./RoEtransportSubmitDeclarationsRequest.js";
 export type { SubmissionsConfirmDeclarationsRequest } from "./SubmissionsConfirmDeclarationsRequest.js";
+export type { SubmissionsCorrectionPreviewDeclarationsRequest } from "./SubmissionsCorrectionPreviewDeclarationsRequest.js";
 export { SubmissionsCreateDeclarationsRequest } from "./SubmissionsCreateDeclarationsRequest.js";
 export { SubmissionsListDeclarationsRequest } from "./SubmissionsListDeclarationsRequest.js";
 export { SubmissionsMarkDeclarationsRequest } from "./SubmissionsMarkDeclarationsRequest.js";
@@ -94,3 +95,6 @@ export { TaxPaymentsCreateDeclarationsRequest } from "./TaxPaymentsCreateDeclara
 export type { TaxPaymentsDeleteDeclarationsRequest } from "./TaxPaymentsDeleteDeclarationsRequest.js";
 export { TaxPaymentsListDeclarationsRequest } from "./TaxPaymentsListDeclarationsRequest.js";
 export { TaxPaymentsUpdateDeclarationsRequest } from "./TaxPaymentsUpdateDeclarationsRequest.js";
+export type { VatProrataGetDeclarationsRequest } from "./VatProrataGetDeclarationsRequest.js";
+export type { VatProrataListDeclarationsRequest } from "./VatProrataListDeclarationsRequest.js";
+export type { VatProrataSetDeclarationsRequest } from "./VatProrataSetDeclarationsRequest.js";

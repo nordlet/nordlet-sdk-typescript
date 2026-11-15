@@ -528,7 +528,7 @@ export class LeadsClient {
     }
 
     /**
-     * Lists leads with their source and type names; filterable by `name`, `contactName`, `email`, `phone`, `status`, `sourceId`, `typeId`, `countryCode`, `assignedUserId`, `partnerId`, `estimatedValue` and `createdAt`, sortable by `name`, `status`, `estimatedValue`, `createdAt` and `updatedAt`.
+     * Lists leads with their source and type names; filterable by `name`, `contactName`, `email`, `phone`, `status`, `sourceId`, `typeId`, `countryCode`, `assignedUserId`, `partnerId`, `estimatedValue` and `createdAt`, sortable by `name`, `contactName`, `email`, `phone`, `status`, `typeName` (the name of the lead type), `sourceName` (the name of the lead source), `estimatedValue`, `createdAt` and `updatedAt`.
      *
      * @param {NordletApi.ListLeadsRequest} request
      * @param {LeadsClient.RequestOptions} requestOptions - Request-specific configuration.

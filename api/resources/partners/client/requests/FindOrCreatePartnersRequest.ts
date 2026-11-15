@@ -45,6 +45,7 @@ export interface FindOrCreatePartnersRequest {
     isGroupMember?: boolean;
     isActive?: boolean;
     legalCountryClass?: FindOrCreatePartnersRequest.LegalCountryClass;
+    iban?: string;
 }
 
 export namespace FindOrCreatePartnersRequest {

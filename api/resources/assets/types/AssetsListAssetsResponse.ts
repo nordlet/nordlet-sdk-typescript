@@ -41,6 +41,7 @@ export namespace AssetsListAssetsResponse {
             disposalReason: Item.DisposalReason | null;
             disposalProceeds: string | null;
             disposalJournalTransactionId: string | null;
+            disposalSaleInvoiceId: string | null;
             createdAt: string;
         }
 

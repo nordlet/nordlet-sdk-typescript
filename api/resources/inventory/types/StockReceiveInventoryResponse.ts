@@ -3,4 +3,18 @@
 export interface StockReceiveInventoryResponse {
     movementId: string;
     totalCost: string;
+    journalTransactionId?: string | undefined;
+    warnings: StockReceiveInventoryResponse.Warnings.Item[];
+}
+
+export namespace StockReceiveInventoryResponse {
+    export type Warnings = Warnings.Item[];
+
+    export namespace Warnings {
+        export interface Item {
+            code: string;
+            message: string;
+            fix: string;
+        }
+    }
 }

@@ -34,6 +34,9 @@ export namespace InvoicesListSalesResponse {
             salesTaxTotal: string;
             paidAmount: string;
             journalTransactionId: string | null;
+            reversedAt: string | null;
+            reversalJournalTransactionId: string | null;
+            reversalReason: string | null;
             appliedToInvoiceId: string | null;
             creditedInvoiceId: string | null;
             creditedInvoiceReference: string | null;
@@ -95,6 +98,7 @@ export namespace InvoicesListSalesResponse {
             export const Status = {
                 Draft: "draft",
                 Issued: "issued",
+                Reversed: "reversed",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
             export const PaymentStatus = {

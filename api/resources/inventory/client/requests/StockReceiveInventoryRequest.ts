@@ -16,6 +16,7 @@ export interface StockReceiveInventoryRequest {
     date: string;
     quantity: string;
     unitCost: string;
+    counterAccountCode?: string;
     lotNumber?: string;
     expiryDate?: string;
     notes?: string;

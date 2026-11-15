@@ -410,7 +410,7 @@ export class FleetClient {
     }
 
     /**
-     * List vehicles with their current assignment. Filterable by `plateNumber`, `make`, `model` and `status`; sortable by `plateNumber`, `make` and `createdAt`.
+     * List vehicles with their current assignment. Filterable by `plateNumber`, `make`, `model` and `status`; sortable by `plateNumber`, `make`, `createdAt`, `fixedAssetCode` (the code of the linked fixed asset), `fuelType`, `marketValue`, `technicalInspectionDue`, `insuranceDue`, `status` and `assignedEmployeeName` (the name of the employee the vehicle is assigned to today).
      *
      * @param {NordletApi.VehiclesListFleetRequest} request
      * @param {FleetClient.RequestOptions} requestOptions - Request-specific configuration.

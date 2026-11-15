@@ -27,6 +27,7 @@ export interface AssetsModernizeAssetsResponse {
     disposalReason: AssetsModernizeAssetsResponse.DisposalReason | null;
     disposalProceeds: string | null;
     disposalJournalTransactionId: string | null;
+    disposalSaleInvoiceId: string | null;
     createdAt: string;
 }
 

@@ -11,6 +11,8 @@ export interface RunsApprovePayrollRequest {
     wageAccountCode?: string;
     employerAccountCode?: string;
     payableAccountCode?: string;
+    incomeTaxAccountCode?: string;
+    socialContributionsAccountCode?: string;
     gpmAccountCode?: string;
     sodraAccountCode?: string;
     employerSocialAccountCode?: string;
