@@ -18,6 +18,7 @@ export * from "./ImportTemplatesGetBankResponse.js";
 export * from "./ImportTemplatesListBankResponse.js";
 export * from "./ImportTemplatesListBuiltinBankResponse.js";
 export * from "./ImportTemplatesUpdateBankResponse.js";
+export * from "./MandatesAuddisExportBankResponse.js";
 export * from "./MandatesCancelBankResponse.js";
 export * from "./MandatesCreateBankResponse.js";
 export * from "./MandatesGetBankResponse.js";

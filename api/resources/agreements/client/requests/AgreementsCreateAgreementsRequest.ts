@@ -20,6 +20,7 @@ export interface AgreementsCreateAgreementsRequest {
     autoRenew?: boolean;
     value?: string;
     billingPeriod?: AgreementsCreateAgreementsRequest.BillingPeriod;
+    /** Defaults to the company's base currency */
     currency?: string;
     status?: AgreementsCreateAgreementsRequest.Status;
     notes?: string;

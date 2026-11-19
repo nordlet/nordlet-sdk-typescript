@@ -7,6 +7,7 @@ export * from "./BankAccountsCreatePartnersResponse.js";
 export * from "./BankAccountsDeletePartnersResponse.js";
 export * from "./BankAccountsListPartnersResponse.js";
 export * from "./BankAccountsUpdatePartnersResponse.js";
+export * from "./CompaniesHouseGetPartnersResponse.js";
 export * from "./ContactsCreatePartnersResponse.js";
 export * from "./ContactsDeletePartnersResponse.js";
 export * from "./ContactsListPartnersResponse.js";

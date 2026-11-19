@@ -25,6 +25,10 @@ export namespace EmployeesListHrResponse {
             phone: string | null;
             address: Item.Address | null;
             iban: string | null;
+            bankCode: string | null;
+            bankAccountNumber: string | null;
+            /** Checking or savings account; a US ACH file needs it */
+            bankAccountType: Item.BankAccountType | null;
             socialInsuranceNo: string | null;
             socialInsuranceStart: string | null;
             hireDate: string | null;
@@ -45,8 +49,16 @@ export namespace EmployeesListHrResponse {
                 city?: string | undefined;
                 postalCode?: string | undefined;
                 countryCode?: string | undefined;
+                /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+                subdivision?: string | undefined;
             }
 
+            /** Checking or savings account; a US ACH file needs it */
+            export const BankAccountType = {
+                Checking: "checking",
+                Savings: "savings",
+            } as const;
+            export type BankAccountType = (typeof BankAccountType)[keyof typeof BankAccountType];
             export const Status = {
                 Active: "active",
                 Terminated: "terminated",

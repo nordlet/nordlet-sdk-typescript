@@ -16,6 +16,12 @@ export interface EmployeesUpdateHrRequest {
     phone?: string | null;
     address?: EmployeesUpdateHrRequest.Address | null;
     iban?: string | null;
+    /** Sort code, routing number or other national bank code, for an account without an IBAN */
+    bankCode?: string | null;
+    /** Account number, for an account without an IBAN */
+    bankAccountNumber?: string | null;
+    /** Checking or savings account; a US ACH file needs it */
+    bankAccountType?: EmployeesUpdateHrRequest.BankAccountType | null;
     socialInsuranceNo?: string | null;
     socialInsuranceStart?: string | null;
     hireDate?: string | null;
@@ -36,8 +42,16 @@ export namespace EmployeesUpdateHrRequest {
         city?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
     }
 
+    /** Checking or savings account; a US ACH file needs it */
+    export const BankAccountType = {
+        Checking: "checking",
+        Savings: "savings",
+    } as const;
+    export type BankAccountType = (typeof BankAccountType)[keyof typeof BankAccountType];
     export type Attributes = Attributes.Item[];
 
     export namespace Attributes {

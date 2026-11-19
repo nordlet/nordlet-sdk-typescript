@@ -15,6 +15,7 @@ export namespace ExchangeRatesListReferenceResponse {
 
     export namespace Rows {
         export interface Item {
+            baseCurrency: string;
             currencyCode: string;
             date: string;
             rate: string;

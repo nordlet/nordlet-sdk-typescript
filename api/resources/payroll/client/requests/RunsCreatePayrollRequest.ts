@@ -2,14 +2,13 @@
 
 /**
  * @example
- *     {
- *         year: 1000000,
- *         month: 1000000
- *     }
+ *     {}
  */
 export interface RunsCreatePayrollRequest {
-    year: number;
-    month: number;
+    frequency?: RunsCreatePayrollRequest.Frequency;
+    year?: number;
+    month?: number;
+    periodStart?: string;
     includeNatura?: boolean;
     grossOverrides?: RunsCreatePayrollRequest.GrossOverrides.Item[];
     lines?: RunsCreatePayrollRequest.Lines.Item[];
@@ -18,6 +17,14 @@ export interface RunsCreatePayrollRequest {
 }
 
 export namespace RunsCreatePayrollRequest {
+    export const Frequency = {
+        Monthly: "monthly",
+        Semimonthly: "semimonthly",
+        FourWeekly: "four_weekly",
+        Biweekly: "biweekly",
+        Weekly: "weekly",
+    } as const;
+    export type Frequency = (typeof Frequency)[keyof typeof Frequency];
     export type GrossOverrides = GrossOverrides.Item[];
 
     export namespace GrossOverrides {

@@ -3,10 +3,11 @@ export type { AddressesDeletePartnersRequest } from "./AddressesDeletePartnersRe
 export { AddressesListPartnersRequest } from "./AddressesListPartnersRequest.js";
 export { AddressesUpdatePartnersRequest } from "./AddressesUpdatePartnersRequest.js";
 export type { AnonymizePartnersRequest } from "./AnonymizePartnersRequest.js";
-export type { BankAccountsCreatePartnersRequest } from "./BankAccountsCreatePartnersRequest.js";
+export { BankAccountsCreatePartnersRequest } from "./BankAccountsCreatePartnersRequest.js";
 export type { BankAccountsDeletePartnersRequest } from "./BankAccountsDeletePartnersRequest.js";
 export { BankAccountsListPartnersRequest } from "./BankAccountsListPartnersRequest.js";
-export type { BankAccountsUpdatePartnersRequest } from "./BankAccountsUpdatePartnersRequest.js";
+export { BankAccountsUpdatePartnersRequest } from "./BankAccountsUpdatePartnersRequest.js";
+export type { CompaniesHouseGetPartnersRequest } from "./CompaniesHouseGetPartnersRequest.js";
 export type { ContactsCreatePartnersRequest } from "./ContactsCreatePartnersRequest.js";
 export type { ContactsDeletePartnersRequest } from "./ContactsDeletePartnersRequest.js";
 export { ContactsListPartnersRequest } from "./ContactsListPartnersRequest.js";

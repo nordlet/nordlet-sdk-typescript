@@ -2,5 +2,6 @@
 
 export interface ExchangeRatesSyncReferenceResponse {
     date: string;
+    baseCurrency: string;
     imported: number;
 }

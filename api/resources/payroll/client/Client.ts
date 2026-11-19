@@ -675,6 +675,133 @@ export class PayrollClient {
     }
 
     /**
+     * Reads the pay frequencies the company country's payroll engine calculates, the values `payroll/runs/create` takes as `frequency` and `hr/contracts/create` as `payFrequency`. Answers 422 when Nordlet has no payroll engine for the company's country.
+     *
+     * @param {NordletApi.FrequenciesListPayrollRequest} request
+     * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.payroll.frequenciesList()
+     */
+    public frequenciesList(
+        request: NordletApi.FrequenciesListPayrollRequest = {},
+        requestOptions?: PayrollClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.FrequenciesListPayrollResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__frequenciesList(request, requestOptions));
+    }
+
+    private async __frequenciesList(
+        request: NordletApi.FrequenciesListPayrollRequest = {},
+        requestOptions?: PayrollClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.FrequenciesListPayrollResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/payroll/frequencies/list",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.FrequenciesListPayrollResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/payroll/frequencies/list");
+    }
+
+    /**
      * Runs the company country's payroll engine once on a taxable base at a date, with the employee settings given in the body instead of an employee record, and returns the allowance, income tax, contributions, components and net; nothing is saved. `payments` passes typed payments to the engine; each `paymentType` must be a code from `payroll/payment-types/list` (422 otherwise). Answers 422 when Nordlet has no payroll engine for the company's country.
      *
      * @param {NordletApi.CalcPayrollRequest} request
@@ -802,7 +929,7 @@ export class PayrollClient {
     }
 
     /**
-     * Creates a draft payroll run for a month, computing each line with the company country's payroll engine, the employee's approved runs of the year so far and of the two previous years, the month's timesheet and `payDate` (default the last day of the month). Without `lines`, every employee whose contract overlaps the month gets a line, whatever the employee's status: the gross is the contract's monthly salary reduced to the paid working days of the contract and the timesheet, unless `grossOverrides` sets it; the per diems of approved business trips ending in the month are added untaxed and the trips linked to the run; for a Lithuanian company the car benefit in kind (`includeNatura`) and the compensation for unused leave of a contract ending in the month are added. With `lines`, only the given employees are computed with their gross, additions and deductions, and the per diems of their approved, unlinked business trips ending in the month are added untaxed and the trips linked to the run; a taxable addition may carry a `paymentType` from `payroll/payment-types/list` and `hours`. Answers 422 when the country has no engine, an employee is given twice, has two contracts in the month, has no contract and no gross, or is paid by the hour or day without a gross; 409 when a run for the month already exists or the accounting period is locked.
+     * Creates a draft payroll run for a pay period, computing each line with the company country's payroll engine, the employee's approved runs of the tax year before the period and of the two previous tax years, the timesheets of the period and `payDate` (default the last day of the period). A `monthly` run (the default `frequency`) takes `year` and `month`; a `semimonthly` run takes a `periodStart` on the 1st (to the 15th) or the 16th (to the month end), and a `weekly`, `biweekly` or `four_weekly` run a `periodStart` from which the period runs 7, 14 or 28 days. `payroll/frequencies/list` gives the frequencies the company country's engine calculates; the engine also sets the run's `taxYear` and `taxPeriod` (by default the calendar year and the month). A run of a frequency other than monthly gets the year and month of its period end. Without `lines`, every employee whose contract has the run's pay frequency and overlaps the period gets a line, whatever the employee's status: the gross is the contract's salary for one period (a monthly, weekly or yearly salary brought to a year and divided by the periods of the year: 12, 24, 13, 26 or 52) reduced to the paid working days of the contract and the timesheets, unless `grossOverrides` sets it; the per diems of approved business trips ending in the period are added untaxed and the trips linked to the run; for a Lithuanian company the car benefit in kind (`includeNatura`) and the compensation for unused leave of a contract ending in the period are added. The timesheets count only when every month the period touches has one. With `lines`, only the given employees are computed with their gross, additions and deductions, and the per diems of their approved, unlinked business trips ending in the period are added untaxed and the trips linked to the run; a taxable addition may carry a `paymentType` from `payroll/payment-types/list` and `hours`. Answers 422 when the country has no engine or its engine does not calculate the frequency, the period is not given the way its frequency needs, an employee is given twice, has two contracts in the period, has no contract and no gross, or is paid by the hour or day without a gross; 409 when a run of the same frequency already covers part of the period or the accounting period is locked.
      *
      * @param {NordletApi.RunsCreatePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -819,20 +946,17 @@ export class PayrollClient {
      * @throws {@link NordletApi.InternalServerError}
      *
      * @example
-     *     await client.payroll.runsCreate({
-     *         year: 1000000,
-     *         month: 1000000
-     *     })
+     *     await client.payroll.runsCreate()
      */
     public runsCreate(
-        request: NordletApi.RunsCreatePayrollRequest,
+        request: NordletApi.RunsCreatePayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
     ): core.HttpResponsePromise<NordletApi.RunsCreatePayrollResponse> {
         return core.HttpResponsePromise.fromPromise(this.__runsCreate(request, requestOptions));
     }
 
     private async __runsCreate(
-        request: NordletApi.RunsCreatePayrollRequest,
+        request: NordletApi.RunsCreatePayrollRequest = {},
         requestOptions?: PayrollClient.RequestOptions,
     ): Promise<core.WithRawResponse<NordletApi.RunsCreatePayrollResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -1055,7 +1179,7 @@ export class PayrollClient {
     }
 
     /**
-     * Lists payroll runs without their lines; filterable by `status`, `year` and `month`, sortable by `createdAt`, `year`, `month`, `period` (the year, then the month), `status`, `grossTotal`, `incomeTaxTotal`, `contributions` (the employee plus the employer contributions) and `netTotal`.
+     * Lists payroll runs without their lines; filterable by `status`, `year`, `month`, `frequency` and `taxYear`, sortable by `createdAt`, `year`, `month`, `period` (the year, then the month), `periodStart`, `status`, `grossTotal`, `incomeTaxTotal`, `contributions` (the employee plus the employer contributions) and `netTotal`.
      *
      * @param {NordletApi.RunsListPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1308,7 +1432,7 @@ export class PayrollClient {
     }
 
     /**
-     * Posts the run's journal entry dated the last day of the month and sets the status to `approved`: the wage expense (net pay, income tax, employee contributions and deductions) and the employer contributions are debited; the net payable, the income tax, the social contributions (on one account, or split between the employee and employer accounts when their codes differ) and the deductions are credited. The accounts default to the payroll accounts of the company's chart template; each can be given per call (`incomeTaxAccountCode` and `socialContributionsAccountCode`; the older names `gpmAccountCode` and `sodraAccountCode` are still accepted). Answers 409 when the run is not a draft or the accounting period is locked, 422 when the run has no lines or nothing to post, and emits `payroll_run.approved`. For an Irish company with the automation of the `ie-payroll-withholding` deadline switched on, the month's payroll submission is sent at once and a failure is added to the run's `warnings`. For a Lithuanian company the unused leave days a line paid as compensation, recorded per balance year when the run was created, are added to the used days of the leave balances. Undo with `payroll/runs/reverse`, pay with `payroll/payments/export`.
+     * Posts the run's journal entry dated the last day of the run's period and sets the status to `approved`: the wage expense (net pay, income tax, employee contributions and deductions) and the employer contributions are debited; the net payable, the income tax, the social contributions (on one account, or split between the employee and employer accounts when their codes differ) and the deductions are credited. The accounts default to the payroll accounts of the company's chart template; each can be given per call (`incomeTaxAccountCode` and `socialContributionsAccountCode` among them). Answers 409 when the run is not a draft or the accounting period is locked, 422 when the run has no lines or nothing to post, and emits `payroll_run.approved`. For an Irish company with the automation of the `ie-payroll-withholding` deadline switched on, the month's payroll submission is sent at once and a failure is added to the run's `warnings`. For a Lithuanian company the unused leave days a line paid as compensation, recorded per balance year when the run was created, are added to the used days of the leave balances. For a US company whose filing option `usDepositSchedule` is `semiweekly`, the federal tax deposit of the run's pay date is added to the calendar (`us-tax-deposit-semiweekly`, the pay date as period), due on the Wednesday after a Wednesday to Friday payday and the Friday after a Saturday to Tuesday payday, moved past District of Columbia legal holidays. Undo with `payroll/runs/reverse`, pay with `payroll/payments/export`.
      *
      * @param {NordletApi.RunsApprovePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1437,7 +1561,7 @@ export class PayrollClient {
     }
 
     /**
-     * Posts a journal entry dated the last day of the month that mirrors the run's entry (debits and credits swapped), sets the status to `reversed` with the reason, and releases the business trips the run paid so the next run picks them up again; the leave days the run marked used as compensation for unused leave are given back to the leave balances. Answers 409 when the run is not approved, when part of it is matched to bank payments (`paidAmount`, unmatch them first) or when the accounting period is locked. Emits `payroll_run.reversed`.
+     * Posts a journal entry dated the last day of the run's period that mirrors the run's entry (debits and credits swapped), sets the status to `reversed` with the reason, and releases the business trips the run paid so the next run picks them up again; the leave days the run marked used as compensation for unused leave are given back to the leave balances. A US run removes the semiweekly federal tax deposit of its pay date from the calendar unless another approved run has the same pay date. Answers 409 when the run is not approved, when part of it is matched to bank payments (`paidAmount`, unmatch them first) or when the accounting period is locked. Emits `payroll_run.reversed`.
      *
      * @param {NordletApi.RunsReversePayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1693,7 +1817,7 @@ export class PayrollClient {
     }
 
     /**
-     * Builds a credit transfer file (ISO 20022 pain.001.001.03) for an approved run, a SEPA credit transfer in EUR and a generic pain.001 without the SEPA service level in any other currency, in the currency of the bank account: one transfer from the chosen bank account to each employee's IBAN for the line's net when it is positive, with a remittance text in `locale` (default the locale of the calling user) and the run period, executed on `executionDate` (default the company's current date). Answers 409 when the run is not approved, and 422 when the bank account has no IBAN or is not in the company's base currency, an employee has no IBAN (`hr/employees/update`) or no line has a positive net. The file is returned in `xml`; nothing is sent to the bank.
+     * Builds a payment file for an approved run: one transfer from the chosen bank account to each employee's account for the line's net when it is positive, with a remittance text in `locale` (default the locale of the calling user) and the run period. The format follows the bank account: a GBP account of a UK company with a sort code and account number gets a Bacs Standard 18 Direct Credit file (needs `paymentFileSettings.serviceUserNumber`; the employee's `bankCode` is the 6-digit sort code and `bankAccountNumber` the 8-digit account number; `executionDate` is the day the pay arrives, a Bacs working day whose processing day is after today, default the earliest), a USD account of a US company with a routing number and account number gets a Nacha ACH file of PPD credits with the entry description PAYROLL (needs `paymentFileSettings.immediateOrigin` and `companyIdentification`; the employee's `bankCode` is the 9-digit routing number, plus `bankAccountNumber` and `bankAccountType`; default `executionDate` the company's current date), and an account with an IBAN gets ISO 20022 pain.001.001.03, a SEPA credit transfer in EUR and a generic pain.001 in other currencies (the employee's IBAN; default `executionDate` the company's current date). Answers 409 when the run is not approved, and 422 when the bank account fits no format or is not in the company's base currency, an employee lacks the account details the format needs (`hr/employees/update`) or no line has a positive net. The file is returned in `content`, with `format`, `fileName` and `contentType`; nothing is sent to the bank.
      *
      * @param {NordletApi.PaymentsExportPayrollRequest} request
      * @param {PayrollClient.RequestOptions} requestOptions - Request-specific configuration.

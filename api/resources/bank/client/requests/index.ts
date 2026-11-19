@@ -18,6 +18,7 @@ export type { ImportTemplatesGetBankRequest } from "./ImportTemplatesGetBankRequ
 export { ImportTemplatesListBankRequest } from "./ImportTemplatesListBankRequest.js";
 export type { ImportTemplatesListBuiltinBankRequest } from "./ImportTemplatesListBuiltinBankRequest.js";
 export { ImportTemplatesUpdateBankRequest } from "./ImportTemplatesUpdateBankRequest.js";
+export type { MandatesAuddisExportBankRequest } from "./MandatesAuddisExportBankRequest.js";
 export type { MandatesCancelBankRequest } from "./MandatesCancelBankRequest.js";
 export { MandatesCreateBankRequest } from "./MandatesCreateBankRequest.js";
 export type { MandatesGetBankRequest } from "./MandatesGetBankRequest.js";

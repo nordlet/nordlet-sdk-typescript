@@ -18,6 +18,11 @@ export namespace RunsListPayrollResponse {
             id: string;
             year: number;
             month: number;
+            frequency: Item.Frequency;
+            periodStart: string;
+            periodEnd: string;
+            taxYear: number;
+            taxPeriod: number | null;
             countryCode: string;
             payDate: string | null;
             status: Item.Status;
@@ -40,6 +45,14 @@ export namespace RunsListPayrollResponse {
         }
 
         export namespace Item {
+            export const Frequency = {
+                Monthly: "monthly",
+                Semimonthly: "semimonthly",
+                FourWeekly: "four_weekly",
+                Biweekly: "biweekly",
+                Weekly: "weekly",
+            } as const;
+            export type Frequency = (typeof Frequency)[keyof typeof Frequency];
             export const Status = {
                 Draft: "draft",
                 Approved: "approved",

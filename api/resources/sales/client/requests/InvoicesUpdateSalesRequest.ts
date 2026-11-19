@@ -43,6 +43,7 @@ export namespace InvoicesUpdateSalesRequest {
         IntraEuB2B: "intra_eu_b2b",
         ReverseCharge: "reverse_charge",
         OssUnion: "oss_union",
+        OssNonUnion: "oss_non_union",
         Ioss: "ioss",
         MarketplaceDeemed: "marketplace_deemed",
         Export: "export",

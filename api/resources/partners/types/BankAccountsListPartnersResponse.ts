@@ -17,12 +17,25 @@ export namespace BankAccountsListPartnersResponse {
         export interface Item {
             id: string;
             partnerId: string;
-            iban: string;
+            iban: string | null;
+            bankCode: string | null;
+            bankAccountNumber: string | null;
+            /** Checking or savings account; a US ACH file needs it */
+            accountType: Item.AccountType | null;
             bankName: string | null;
             bic: string | null;
             currency: string;
             isDefault: boolean;
             createdAt: string;
+        }
+
+        export namespace Item {
+            /** Checking or savings account; a US ACH file needs it */
+            export const AccountType = {
+                Checking: "checking",
+                Savings: "savings",
+            } as const;
+            export type AccountType = (typeof AccountType)[keyof typeof AccountType];
         }
     }
 }

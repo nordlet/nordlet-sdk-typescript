@@ -17,6 +17,7 @@ export namespace FindOrCreatePartnersResponse {
         phone: string | null;
         selfEmploymentCertNo: string | null;
         birthDate: string | null;
+        isBusiness: boolean | null;
         isCustomer: boolean;
         isSupplier: boolean;
         paymentTermDays: number | null;
@@ -64,6 +65,8 @@ export namespace FindOrCreatePartnersResponse {
             county?: string | undefined;
             postalCode?: string | undefined;
             countryCode?: string | undefined;
+            /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+            subdivision?: string | undefined;
         }
 
         export interface CorrespondenceAddress {
@@ -73,6 +76,8 @@ export namespace FindOrCreatePartnersResponse {
             county?: string | undefined;
             postalCode?: string | undefined;
             countryCode?: string | undefined;
+            /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+            subdivision?: string | undefined;
         }
 
         export const LegalCountryClass = {

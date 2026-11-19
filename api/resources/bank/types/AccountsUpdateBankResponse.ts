@@ -5,6 +5,9 @@ export interface AccountsUpdateBankResponse {
     name: string;
     type: AccountsUpdateBankResponse.Type;
     iban: string | null;
+    bankCode: string | null;
+    bankAccountNumber: string | null;
+    paymentFileSettings: AccountsUpdateBankResponse.PaymentFileSettings;
     currency: string;
     accountCode: string;
     isActive: boolean;
@@ -18,4 +21,23 @@ export namespace AccountsUpdateBankResponse {
         Broker: "broker",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
+
+    export interface PaymentFileSettings {
+        /** Bacs: the service user number (SUN) of the company for this account */
+        serviceUserNumber?: string | undefined;
+        /** Bacs: the service user's short name; defaults to the company name */
+        serviceUserName?: string | undefined;
+        /** Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode */
+        odfiRoutingNumber?: string | undefined;
+        /** Nacha: the Immediate Origin the bank gave the company */
+        immediateOrigin?: string | undefined;
+        /** Nacha: the name of the bank that receives the file */
+        immediateDestinationName?: string | undefined;
+        /** Nacha: the Company Identification the bank gave the company */
+        companyIdentification?: string | undefined;
+        /** Nacha: the company name shown to the receiver; defaults to the company name */
+        companyName?: string | undefined;
+        /** Nacha: the Company Discretionary Data the bank asks for */
+        companyDiscretionaryData?: string | undefined;
+    }
 }

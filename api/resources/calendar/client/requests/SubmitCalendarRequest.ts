@@ -11,6 +11,8 @@ export interface SubmitCalendarRequest {
     amend?: boolean;
     correction?: SubmitCalendarRequest.Correction;
     documentKeys?: string[];
+    /** Facts of the browser the user files from, which HMRC requires with every VAT (MTD) API call: `navigator.userAgent`, a UUID the browser keeps for the device, every screen (width, height, scaling factor, colour depth in bits), the window size in pixels and the time zone as `UTC±hh:mm`. */
+    device?: SubmitCalendarRequest.Device;
 }
 
 export namespace SubmitCalendarRequest {
@@ -19,5 +21,34 @@ export namespace SubmitCalendarRequest {
         reasonCode?: string | undefined;
         authorityReference?: string | undefined;
         discoveredOn?: string | undefined;
+    }
+
+    /**
+     * Facts of the browser the user files from, which HMRC requires with every VAT (MTD) API call: `navigator.userAgent`, a UUID the browser keeps for the device, every screen (width, height, scaling factor, colour depth in bits), the window size in pixels and the time zone as `UTC±hh:mm`.
+     */
+    export interface Device {
+        userAgent: string;
+        deviceId: string;
+        screens: Device.Screens.Item[];
+        windowSize: Device.WindowSize;
+        timezone: string;
+    }
+
+    export namespace Device {
+        export type Screens = Screens.Item[];
+
+        export namespace Screens {
+            export interface Item {
+                width: number;
+                height: number;
+                scalingFactor: number;
+                colourDepth: number;
+            }
+        }
+
+        export interface WindowSize {
+            width: number;
+            height: number;
+        }
     }
 }

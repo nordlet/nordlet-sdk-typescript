@@ -127,6 +127,7 @@ export namespace CompaniesContextAccountResponse {
         name: string;
         code: string | null;
         vatCode: string | null;
+        identifiers: Record<string, string>;
         smeExemptionNumber: string | null;
         isVatPayer: boolean;
         isSandbox: boolean;
@@ -134,8 +135,8 @@ export namespace CompaniesContextAccountResponse {
         countryCode: string;
         /** Chart of accounts template the company was seeded with */
         chartTemplate: string;
-        /** Chart of accounts template of the company country */
-        countryChartTemplate: string;
+        /** Chart of accounts template of the company country; null when Nordlet has no chart for it */
+        countryChartTemplate: string | null;
         baseCurrency: string;
         defaultInvoiceCurrency: string;
         status: Profile.Status;
@@ -163,7 +164,11 @@ export namespace CompaniesContextAccountResponse {
         shareCapital: string | null;
         accountsKeptBy: Profile.AccountsKeptBy | null;
         vatPeriod: Profile.VatPeriod | null;
+        vatPeriodEndMonth: number | null;
         fiscalYearEndMonth: number | null;
+        fiscalYearEndDay: number | null;
+        fiscalYearWeekday: number | null;
+        fiscalYearWeekRule: Profile.FiscalYearWeekRule | null;
         timeZone: string;
         filingOptions: Record<string, string | null> | null;
         bookkeeperName: string | null;
@@ -185,6 +190,8 @@ export namespace CompaniesContextAccountResponse {
             city?: string | undefined;
             postalCode?: string | undefined;
             countryCode?: string | undefined;
+            /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+            subdivision?: string | undefined;
         }
 
         export const AccountsKeptBy = {
@@ -200,5 +207,10 @@ export namespace CompaniesContextAccountResponse {
             Annual: "annual",
         } as const;
         export type VatPeriod = (typeof VatPeriod)[keyof typeof VatPeriod];
+        export const FiscalYearWeekRule = {
+            Last: "last",
+            Nearest: "nearest",
+        } as const;
+        export type FiscalYearWeekRule = (typeof FiscalYearWeekRule)[keyof typeof FiscalYearWeekRule];
     }
 }

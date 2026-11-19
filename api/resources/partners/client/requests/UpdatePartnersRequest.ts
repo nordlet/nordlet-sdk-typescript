@@ -17,6 +17,8 @@ export interface UpdatePartnersRequest {
     phone?: string | null;
     selfEmploymentCertNo?: string | null;
     birthDate?: string | null;
+    /** Whether the partner acts as a business for VAT; when not set, a partner with a VAT code is a business. Regulation (EU) 282/2011 art. 18 lets a customer without a VAT number be treated as a business on other proof */
+    isBusiness?: boolean | null;
     isCustomer?: boolean;
     isSupplier?: boolean;
     paymentTermDays?: number | null;
@@ -188,6 +190,8 @@ export namespace UpdatePartnersRequest {
         county?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
     }
 
     export interface CorrespondenceAddress {
@@ -197,6 +201,8 @@ export namespace UpdatePartnersRequest {
         county?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
     }
 
     export const LegalCountryClass = {

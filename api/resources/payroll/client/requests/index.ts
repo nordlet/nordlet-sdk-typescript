@@ -1,12 +1,13 @@
 export type { CalcPayrollRequest } from "./CalcPayrollRequest.js";
 export type { DepartmentsCreatePayrollRequest } from "./DepartmentsCreatePayrollRequest.js";
 export type { DepartmentsListPayrollRequest } from "./DepartmentsListPayrollRequest.js";
+export type { FrequenciesListPayrollRequest } from "./FrequenciesListPayrollRequest.js";
 export type { LinesAttendancePayrollRequest } from "./LinesAttendancePayrollRequest.js";
 export { PaymentsExportPayrollRequest } from "./PaymentsExportPayrollRequest.js";
 export type { PaymentTypesListPayrollRequest } from "./PaymentTypesListPayrollRequest.js";
 export type { RunsApprovePayrollRequest } from "./RunsApprovePayrollRequest.js";
 export type { RunsCancelPayrollRequest } from "./RunsCancelPayrollRequest.js";
-export type { RunsCreatePayrollRequest } from "./RunsCreatePayrollRequest.js";
+export { RunsCreatePayrollRequest } from "./RunsCreatePayrollRequest.js";
 export type { RunsGetPayrollRequest } from "./RunsGetPayrollRequest.js";
 export { RunsListPayrollRequest } from "./RunsListPayrollRequest.js";
 export type { RunsReversePayrollRequest } from "./RunsReversePayrollRequest.js";

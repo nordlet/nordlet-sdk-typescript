@@ -9,9 +9,19 @@ export interface CompaniesUpdateAccountRequest {
     code?: string | null;
     vatCode?: string | null;
     smeExemptionNumber?: string | null;
+    /** Registration numbers of the company other than `code` and `vatCode`, by key: `utr` (GB, Corporation Tax Unique Taxpayer Reference (UTR), 10 digits); `taxOfficeNumber` (GB, PAYE tax office number, 3 digits); `taxOfficeReference` (GB, PAYE tax office reference, 1 to 10 letters, digits or punctuation, not starting with a space); `accountsOfficeReference` (GB, Accounts Office reference, 13 characters: 3 digits, P, a letter, 7 digits and a digit or X); `ein` (US, Employer Identification Number (EIN), 9 digits whose first two are a prefix the IRS assigns); `deBusinessLicense` (US, Delaware business license number); `deWithholdingAccount` (US, Delaware withholding account number, 9 digits, the federal EIN); `deUnemploymentAccount` (US, Delaware unemployment insurance account number); `deUnemploymentRate` (US, Delaware unemployment insurance tax rate (%), a percentage from 0 to 100 with at most 4 decimals); `deEntityFileNumber` (US, Delaware Division of Corporations file number (formed in Delaware)); `deForeignEntityFileNumber` (US, Delaware Division of Corporations file number (formed in another state)) */
+    identifiers?: Record<string, string | null> | null;
     isVatPayer?: boolean;
     vatPeriod?: CompaniesUpdateAccountRequest.VatPeriod | null;
+    /** A month in which a VAT period ends, for VAT periods that do not follow the calendar quarters */
+    vatPeriodEndMonth?: number | null;
     fiscalYearEndMonth?: number | null;
+    /** Day of `fiscalYearEndMonth` the fiscal year ends on; the last day of the month when omitted */
+    fiscalYearEndDay?: number | null;
+    /** For a 52-53-week fiscal year: the weekday it always ends on, 0 Sunday to 6 Saturday */
+    fiscalYearWeekday?: number | null;
+    /** With `fiscalYearWeekday`: `last` ends the year on the last such weekday of `fiscalYearEndMonth`, `nearest` on the one nearest the last day of that month */
+    fiscalYearWeekRule?: CompaniesUpdateAccountRequest.FiscalYearWeekRule | null;
     timeZone?: string;
     filingOptions?: Record<string, string | null> | null;
     address?: CompaniesUpdateAccountRequest.Address;
@@ -55,12 +65,20 @@ export namespace CompaniesUpdateAccountRequest {
         Annual: "annual",
     } as const;
     export type VatPeriod = (typeof VatPeriod)[keyof typeof VatPeriod];
+    /** With `fiscalYearWeekday`: `last` ends the year on the last such weekday of `fiscalYearEndMonth`, `nearest` on the one nearest the last day of that month */
+    export const FiscalYearWeekRule = {
+        Last: "last",
+        Nearest: "nearest",
+    } as const;
+    export type FiscalYearWeekRule = (typeof FiscalYearWeekRule)[keyof typeof FiscalYearWeekRule];
 
     export interface Address {
         street?: string | undefined;
         city?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
     }
 
     /** Language a new invoice starts with when neither the invoice nor its partner names one */

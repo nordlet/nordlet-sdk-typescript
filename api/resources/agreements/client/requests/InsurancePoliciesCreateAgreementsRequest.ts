@@ -16,6 +16,7 @@ export interface InsurancePoliciesCreateAgreementsRequest {
     fromDate: string;
     toDate: string;
     premium?: string;
+    /** Defaults to the company's base currency */
     currency?: string;
     notes?: string;
 }

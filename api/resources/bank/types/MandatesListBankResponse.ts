@@ -22,12 +22,18 @@ export namespace MandatesListBankResponse {
             sequenceType: Item.SequenceType;
             status: Item.Status;
             debtorName: string;
-            iban: string;
+            iban: string | null;
             bic: string | null;
+            bankCode: string | null;
+            bankAccountNumber: string | null;
+            /** Checking or savings account; a US ACH file needs it */
+            accountType: Item.AccountType | null;
             signatureDate: string;
             collectionsCount: number;
             lastCollectionDate: string | null;
-            expiresOn: string;
+            expiresOn: string | null;
+            lodgedOn: string | null;
+            cancellationLodgedOn: string | null;
             cancelledAt: string | null;
             notes: string | null;
             createdAt: string;
@@ -37,6 +43,9 @@ export namespace MandatesListBankResponse {
             export const Scheme = {
                 Core: "CORE",
                 B2B: "B2B",
+                Bacs: "BACS",
+                Ppd: "PPD",
+                Ccd: "CCD",
             } as const;
             export type Scheme = (typeof Scheme)[keyof typeof Scheme];
             export const SequenceType = {
@@ -50,6 +59,12 @@ export namespace MandatesListBankResponse {
                 Completed: "completed",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];
+            /** Checking or savings account; a US ACH file needs it */
+            export const AccountType = {
+                Checking: "checking",
+                Savings: "savings",
+            } as const;
+            export type AccountType = (typeof AccountType)[keyof typeof AccountType];
         }
     }
 }

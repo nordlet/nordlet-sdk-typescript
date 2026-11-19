@@ -17,6 +17,7 @@ export interface CreateLeadsRequest {
     typeId?: string;
     status?: CreateLeadsRequest.Status;
     estimatedValue?: string;
+    /** Defaults to the company's base currency */
     currency?: string;
     description?: string;
     assignedUserId?: string;

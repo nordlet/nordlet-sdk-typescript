@@ -28,6 +28,7 @@ export namespace ContractsListHrResponse {
             endReason: string | null;
             baseSalary: string;
             salaryType: Item.SalaryType;
+            payFrequency: Item.PayFrequency;
             workHours: string;
             workHoursUnit: Item.WorkHoursUnit;
             status: Item.Status;
@@ -49,6 +50,14 @@ export namespace ContractsListHrResponse {
                 Yearly: "yearly",
             } as const;
             export type SalaryType = (typeof SalaryType)[keyof typeof SalaryType];
+            export const PayFrequency = {
+                Monthly: "monthly",
+                Semimonthly: "semimonthly",
+                FourWeekly: "four_weekly",
+                Biweekly: "biweekly",
+                Weekly: "weekly",
+            } as const;
+            export type PayFrequency = (typeof PayFrequency)[keyof typeof PayFrequency];
             export const WorkHoursUnit = {
                 Day: "day",
                 Week: "week",

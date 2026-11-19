@@ -1068,7 +1068,7 @@ export class PartnersClient {
     }
 
     /**
-     * Adds a bank account to the partner in `partnerId`. The IBAN is stored without spaces in upper case; an IBAN whose check digits fail (ISO 13616) is refused with 422 and one the partner already has with 409. With `isDefault` true the partner's other accounts lose their default mark.
+     * Adds a bank account to the partner in `partnerId`, identified by `iban` or, where the country has no IBAN, by `bankAccountNumber` with `bankCode` (sort code, routing number); one of them is required (422). The IBAN is stored without spaces in upper case and the bank code and account number without spaces and hyphens; an IBAN whose check digits fail (ISO 13616) is refused with 422 and an account the partner already has with 409. With `isDefault` true the partner's other accounts lose their default mark.
      *
      * @param {NordletApi.BankAccountsCreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1086,7 +1086,6 @@ export class PartnersClient {
      *
      * @example
      *     await client.partners.bankAccountsCreate({
-     *         iban: "iban",
      *         partnerId: "partnerId"
      *     })
      */
@@ -2389,7 +2388,7 @@ export class PartnersClient {
     }
 
     /**
-     * Checks a VAT number against VIES, either a free `vatCode` or the VAT code of the partner in `partnerId` (exactly one of the two); a code without an EU country prefix and 2 to 12 alphanumeric characters is refused with 422, as is a partner without a VAT code, and a VIES outage answers 503. With a partner the outcome is written to it (`vatValid`, `vatValidatedAt`): an invalid number or a VIES name that shares no word with the partner's name opens or refreshes the partner's VAT review (`vat_review.opened`), a VIES failure opens one with reason `service_error`, and a valid matching number resolves the open review as `revalidated` (`vat_review.resolved`). Reviews are listed and closed with `partners/vat-reviews/list` and `partners/vat-reviews/resolve`.
+     * Checks a VAT number against VIES, or a UK number (`GB` and 9 or 12 digits) with HMRC's Check a UK VAT number service, either a free `vatCode` or the VAT code of the partner in `partnerId` (exactly one of the two); a code without an EU country prefix and 2 to 12 alphanumeric characters or a UK prefix and 9 or 12 digits is refused with 422, as is a partner without a VAT code, and a VIES or HMRC outage, or a UK check that is not set up, answers 503. A UK check gives HMRC's consultation number as `requestIdentifier` when the company's own `vatCode` is a UK number HMRC knows. With a partner the outcome is written to it (`vatValid`, `vatValidatedAt`): an invalid number or a VIES name that shares no word with the partner's name opens or refreshes the partner's VAT review (`vat_review.opened`), a VIES failure opens one with reason `service_error`, and a valid matching number resolves the open review as `revalidated` (`vat_review.resolved`). Reviews are listed and closed with `partners/vat-reviews/list` and `partners/vat-reviews/resolve`.
      *
      * @param {NordletApi.ValidateVatPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -2513,6 +2512,140 @@ export class PartnersClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/partners/validate-vat");
+    }
+
+    /**
+     * Reads a UK company from the Companies House register by `companyNumber` (letters and digits; spaces are removed and letters upper-cased): its name, status, type, incorporation and cessation dates, registered office address (`subdivision` from the office's country: England, Wales, Scotland or Northern Ireland), accounting reference date, the next due dates of its accounts and confirmation statement, and SIC codes. Nothing is stored. A number Companies House does not know answers 404; a lookup that is not set up, Companies House being unreachable or its rate limit answers 503.
+     *
+     * @param {NordletApi.CompaniesHouseGetPartnersRequest} request
+     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.partners.companiesHouseGet({
+     *         companyNumber: "companyNumber"
+     *     })
+     */
+    public companiesHouseGet(
+        request: NordletApi.CompaniesHouseGetPartnersRequest,
+        requestOptions?: PartnersClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.CompaniesHouseGetPartnersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__companiesHouseGet(request, requestOptions));
+    }
+
+    private async __companiesHouseGet(
+        request: NordletApi.CompaniesHouseGetPartnersRequest,
+        requestOptions?: PartnersClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.CompaniesHouseGetPartnersResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/partners/companies-house/get",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.CompaniesHouseGetPartnersResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/partners/companies-house/get",
+        );
     }
 
     /**
@@ -2783,7 +2916,7 @@ export class PartnersClient {
     }
 
     /**
-     * Creates a partner; without `isCustomer` it is a customer unless `isSupplier` is true. `groupId`, `statusId` and `priceListId` must belong to the company; without `legalCountryClass` the class is derived from the address country (`lt`, `eu` or `non_eu`); `documentRef` attaches an uploaded file that is not yet linked to a record; a `code` already used by a live partner of the company is refused with 409. A `vatCode` is checked against VIES at once and the result stored on the partner: an invalid number, a VIES name that shares no word with the partner's name, or a VIES failure opens a VAT review (`vat_review.opened`), while a code that is not an EU VAT number is stored unchecked (see `partners/validate-vat`).
+     * Creates a partner; without `isCustomer` it is a customer unless `isSupplier` is true. `groupId`, `statusId` and `priceListId` must belong to the company; without `legalCountryClass` the class is derived from the address country (`lt`, `eu` or `non_eu`); `documentRef` attaches an uploaded file that is not yet linked to a record; a `code` already used by a live partner of the company is refused with 409. A `vatCode` is checked at once against VIES, or a UK number with HMRC and the result stored on the partner: an invalid number, a VIES name that shares no word with the partner's name, or a VIES failure opens a VAT review (`vat_review.opened`), while a code that neither service can check is stored unchecked (see `partners/validate-vat`).
      *
      * @param {NordletApi.CreatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -3164,7 +3297,7 @@ export class PartnersClient {
     }
 
     /**
-     * Changes the given fields of a partner; the clearable fields accept null. A new address country re-derives `legalCountryClass` unless the class is given, and a `code` already used by another live partner of the company is refused with 409. A changed `vatCode` resets the VIES result and is checked at once as in `partners/create`; a removed code, or one that is not an EU VAT number, resolves the partner's open VAT review as `superseded` (`vat_review.resolved`).
+     * Changes the given fields of a partner; the clearable fields accept null. A new address country re-derives `legalCountryClass` unless the class is given, and a `code` already used by another live partner of the company is refused with 409. A changed `vatCode` resets the VIES result and is checked at once as in `partners/create`; a removed code, or one that neither service can check, resolves the partner's open VAT review as `superseded` (`vat_review.resolved`).
      *
      * @param {NordletApi.UpdatePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.

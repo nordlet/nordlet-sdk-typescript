@@ -30,8 +30,8 @@ export namespace ConfigsListDeclarationsResponse {
                     multiline?: boolean | undefined;
                     /** The allowed values of a `select` field */
                     options?: string[] | undefined;
-                    /** The company profile field the value is taken from; change it with `account/companies/update` */
-                    companyField?: Item.CompanyField | undefined;
+                    /** The company profile field the value is taken from: `code`, `vatCode`, or `identifiers.<key>` for an entry of `identifiers`; change it with `account/companies/update` */
+                    companyField?: string | undefined;
                 }
 
                 export namespace Item {
@@ -44,12 +44,6 @@ export namespace ConfigsListDeclarationsResponse {
                         Certificate: "certificate",
                     } as const;
                     export type Kind = (typeof Kind)[keyof typeof Kind];
-                    /** The company profile field the value is taken from; change it with `account/companies/update` */
-                    export const CompanyField = {
-                        Code: "code",
-                        VatCode: "vatCode",
-                    } as const;
-                    export type CompanyField = (typeof CompanyField)[keyof typeof CompanyField];
                 }
             }
 

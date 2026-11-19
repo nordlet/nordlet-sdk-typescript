@@ -4,6 +4,11 @@ export interface RunsGetPayrollResponse {
     id: string;
     year: number;
     month: number;
+    frequency: RunsGetPayrollResponse.Frequency;
+    periodStart: string;
+    periodEnd: string;
+    taxYear: number;
+    taxPeriod: number | null;
     countryCode: string;
     payDate: string | null;
     status: RunsGetPayrollResponse.Status;
@@ -27,6 +32,14 @@ export interface RunsGetPayrollResponse {
 }
 
 export namespace RunsGetPayrollResponse {
+    export const Frequency = {
+        Monthly: "monthly",
+        Semimonthly: "semimonthly",
+        FourWeekly: "four_weekly",
+        Biweekly: "biweekly",
+        Weekly: "weekly",
+    } as const;
+    export type Frequency = (typeof Frequency)[keyof typeof Frequency];
     export const Status = {
         Draft: "draft",
         Approved: "approved",

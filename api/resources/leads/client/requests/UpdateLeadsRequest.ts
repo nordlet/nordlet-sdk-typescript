@@ -18,6 +18,7 @@ export interface UpdateLeadsRequest {
     typeId?: string | null;
     status?: UpdateLeadsRequest.Status;
     estimatedValue?: string | null;
+    /** Defaults to the company's base currency */
     currency?: string;
     description?: string | null;
     assignedUserId?: string | null;

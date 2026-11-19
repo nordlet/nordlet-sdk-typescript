@@ -10,6 +10,12 @@ export interface AccountsCreateBankRequest {
     name: string;
     type?: AccountsCreateBankRequest.Type;
     iban?: string;
+    /** Sort code, routing number or other national bank code, for an account without an IBAN */
+    bankCode?: string;
+    /** Account number, for an account without an IBAN */
+    bankAccountNumber?: string;
+    /** What the bank gave the company for payment files from this account: the Bacs service user number for a UK account, the ACH Immediate Origin and Company Identification for a US account */
+    paymentFileSettings?: AccountsCreateBankRequest.PaymentFileSettings;
     currency?: string;
     accountCode?: string;
     documentRef?: string;
@@ -22,4 +28,26 @@ export namespace AccountsCreateBankRequest {
         Broker: "broker",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
+
+    /**
+     * What the bank gave the company for payment files from this account: the Bacs service user number for a UK account, the ACH Immediate Origin and Company Identification for a US account
+     */
+    export interface PaymentFileSettings {
+        /** Bacs: the service user number (SUN) of the company for this account */
+        serviceUserNumber?: string | undefined;
+        /** Bacs: the service user's short name; defaults to the company name */
+        serviceUserName?: string | undefined;
+        /** Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode */
+        odfiRoutingNumber?: string | undefined;
+        /** Nacha: the Immediate Origin the bank gave the company */
+        immediateOrigin?: string | undefined;
+        /** Nacha: the name of the bank that receives the file */
+        immediateDestinationName?: string | undefined;
+        /** Nacha: the Company Identification the bank gave the company */
+        companyIdentification?: string | undefined;
+        /** Nacha: the company name shown to the receiver; defaults to the company name */
+        companyName?: string | undefined;
+        /** Nacha: the Company Discretionary Data the bank asks for */
+        companyDiscretionaryData?: string | undefined;
+    }
 }

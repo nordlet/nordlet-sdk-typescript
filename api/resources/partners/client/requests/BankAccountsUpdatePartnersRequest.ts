@@ -8,9 +8,25 @@
  */
 export interface BankAccountsUpdatePartnersRequest {
     iban?: string;
+    /** Sort code, routing number or other national bank code, for an account without an IBAN */
+    bankCode?: string;
+    /** Account number, for an account without an IBAN */
+    bankAccountNumber?: string;
+    /** Checking or savings account; a US ACH file needs it */
+    accountType?: BankAccountsUpdatePartnersRequest.AccountType;
     bankName?: string;
     bic?: string;
+    /** Defaults to the company's base currency */
     currency?: string;
     isDefault?: boolean;
     id: string;
+}
+
+export namespace BankAccountsUpdatePartnersRequest {
+    /** Checking or savings account; a US ACH file needs it */
+    export const AccountType = {
+        Checking: "checking",
+        Savings: "savings",
+    } as const;
+    export type AccountType = (typeof AccountType)[keyof typeof AccountType];
 }

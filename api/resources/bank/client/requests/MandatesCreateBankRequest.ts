@@ -4,14 +4,19 @@
  * @example
  *     {
  *         partnerId: "partnerId",
- *         iban: "iban",
  *         signatureDate: "2026-07-01"
  *     }
  */
 export interface MandatesCreateBankRequest {
     partnerId: string;
-    iban: string;
+    iban?: string;
     bic?: string;
+    /** Sort code (Bacs) or routing number (ACH), for a mandate without an IBAN */
+    bankCode?: string;
+    /** Account number, for a mandate without an IBAN */
+    bankAccountNumber?: string;
+    /** Checking or savings account; a US ACH file needs it */
+    accountType?: MandatesCreateBankRequest.AccountType;
     scheme?: MandatesCreateBankRequest.Scheme;
     sequenceType?: MandatesCreateBankRequest.SequenceType;
     signatureDate: string;
@@ -21,9 +26,18 @@ export interface MandatesCreateBankRequest {
 }
 
 export namespace MandatesCreateBankRequest {
+    /** Checking or savings account; a US ACH file needs it */
+    export const AccountType = {
+        Checking: "checking",
+        Savings: "savings",
+    } as const;
+    export type AccountType = (typeof AccountType)[keyof typeof AccountType];
     export const Scheme = {
         Core: "CORE",
         B2B: "B2B",
+        Bacs: "BACS",
+        Ppd: "PPD",
+        Ccd: "CCD",
     } as const;
     export type Scheme = (typeof Scheme)[keyof typeof Scheme];
     export const SequenceType = {

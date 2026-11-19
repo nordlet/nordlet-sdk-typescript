@@ -24,7 +24,7 @@ export class BankClient {
     }
 
     /**
-     * Create a bank, Stripe or broker account. `currency` defaults to the company base currency and `accountCode` to the default bank account of the chart of accounts. A `documentRef` also creates a bank agreement with that document attached. A Stripe account with an `iban` is refused with 422; an account with the same IBAN already existing answers 409.
+     * Create a bank, Stripe or broker account. `currency` defaults to the company base currency and `accountCode` to the default bank account of the chart of accounts. Where the country has no IBAN the account is identified by `bankCode` (sort code, routing number) and `bankAccountNumber`, stored without spaces and hyphens. A `documentRef` also creates a bank agreement with that document attached. A Stripe account with an `iban` or an account number is refused with 422; an account with the same IBAN already existing answers 409.
      *
      * @param {NordletApi.AccountsCreateBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -277,7 +277,7 @@ export class BankClient {
     }
 
     /**
-     * Change the name, type, IBAN, ledger account code or active flag of a bank account. Setting type to stripe clears the IBAN, and sending an `iban` together with it is refused with 422.
+     * Change the name, type, IBAN, bank code and account number, payment file settings (`paymentFileSettings` replaces the stored settings as a whole), ledger account code or active flag of a bank account. Setting type to stripe clears the IBAN and the account number, and sending an `iban` together with it is refused with 422.
      *
      * @param {NordletApi.AccountsUpdateBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -1857,7 +1857,7 @@ export class BankClient {
     }
 
     /**
-     * Build a credit transfer file (ISO 20022 pain.001.001.03) that pays the remaining amount of each registered purchase invoice from the bank account on `executionDate` (default: today), to the partner's default bank account. The bank account needs an IBAN and every invoice must be in the currency of the bank account and have a partner bank account on file (422 otherwise, see `partners/bank-accounts/create`); an invoice that is already paid answers 409. A file in EUR is a SEPA credit transfer (service level SEPA); a file in another currency is a generic pain.001 without the SEPA service level, in the currency of the account. The file is returned as `xml`; nothing is posted or marked paid.
+     * Build a payment file that pays the remaining amount of each registered purchase invoice from the bank account on `executionDate`, to the partner's default bank account that the format can use. The format follows the bank account: a GBP account of a UK company with a sort code and account number gets a Bacs Standard 18 Direct Credit file (needs `paymentFileSettings.serviceUserNumber`; `executionDate` is the day the money arrives, a Bacs working day whose processing day is after today, default the earliest), a USD account of a US company with a routing number and account number gets a Nacha ACH credit file (needs `paymentFileSettings.immediateOrigin` and `companyIdentification`; CCD for a business partner, PPD for a partner that is not one, see `partners/update` `isBusiness`; default `executionDate` today), and an account with an IBAN gets ISO 20022 pain.001.001.03, a SEPA credit transfer in EUR and a generic pain.001 in other currencies (default `executionDate` today). Every invoice must be in the currency of the bank account and the partner must have a bank account the format can use (IBAN; sort code and account number; routing number, account number and `accountType`), 422 otherwise, see `partners/bank-accounts/create`; an invoice that is already paid answers 409. The file is returned in `content`, with `format`, `fileName` and `contentType`; nothing is posted or marked paid.
      *
      * @param {NordletApi.PaymentsExportBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -3303,7 +3303,7 @@ export class BankClient {
     }
 
     /**
-     * Record a SEPA direct debit mandate a partner has signed: debtor IBAN and BIC, scheme (CORE or B2B), recurrent or one-off, and the signature date. `reference` is the mandate reference written into the collection files; without one `MNDT-` followed by a generated id is used. `debtorName` defaults to the partner name. A reference already in use answers 409.
+     * Record a direct debit mandate a partner has signed, with the signature date. Schemes: `CORE` and `B2B` are SEPA mandates on the debtor's IBAN (and BIC), recurrent or one-off; `BACS` is a UK Direct Debit Instruction on a 6-digit sort code (`bankCode`) and an 8-digit account number, recurrent only, lodged with AUDDIS through `bank/mandates/auddis-export` before the first collection; `PPD` (consumer) and `CCD` (business) are US ACH debit authorizations on a 9-digit routing number (`bankCode`), an account number and `accountType`. Without `scheme`, an IBAN gives `CORE`, a UK company `BACS`, and a US company `CCD` for a business partner or `PPD` for one that is not (see `partners/update` `isBusiness`). `reference` is the mandate reference written into the collection files; without one `MNDT-` followed by a generated id is used (for `BACS` `MNDT` and the start of a generated id, upper case; a Bacs reference has 6 to 18 characters of A-Z, 0-9, . & / - and space, with at least six letters or digits, not one repeated character, not starting with DDIC). `debtorName` defaults to the partner name. A reference already in use answers 409.
      *
      * @param {NordletApi.MandatesCreateBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -3322,7 +3322,6 @@ export class BankClient {
      * @example
      *     await client.bank.mandatesCreate({
      *         partnerId: "partnerId",
-     *         iban: "iban",
      *         signatureDate: "2026-07-01"
      *     })
      */
@@ -3563,7 +3562,7 @@ export class BankClient {
     }
 
     /**
-     * Cancel an active mandate. A mandate that is already cancelled or completed answers 409.
+     * Cancel an active mandate. A BACS mandate that was lodged with AUDDIS is then reported cancelled by the next `bank/mandates/auddis-export`. A mandate that is already cancelled or completed answers 409.
      *
      * @param {NordletApi.MandatesCancelBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -3942,7 +3941,7 @@ export class BankClient {
     }
 
     /**
-     * List the issued EUR sale invoices that are unpaid or partly paid and whose partner holds an active mandate, each with the mandate `bank/direct-debits/export` would use (the most recently signed active one). Filterable by partnerId, fullNumber, issueDate and dueDate; sortable by issueDate, dueDate, fullNumber, grossTotal, createdAt, partnerName (the name of the partner), remaining (the gross total less the paid amount) and mandateReference (the reference of the mandate shown).
+     * List the issued sale invoices that are unpaid or partly paid and whose partner holds an active mandate of a scheme in the invoice currency (CORE and B2B for EUR, BACS for GBP, PPD and CCD for USD), each with the mandate `bank/direct-debits/export` would use (the most recently signed active one of those schemes). Filterable by partnerId, fullNumber, issueDate and dueDate; sortable by issueDate, dueDate, fullNumber, grossTotal, createdAt, partnerName (the name of the partner), remaining (the gross total less the paid amount) and mandateReference (the reference of the mandate shown).
      *
      * @param {NordletApi.DirectDebitsCandidatesBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -4074,7 +4073,7 @@ export class BankClient {
     }
 
     /**
-     * Build a SEPA direct debit file (pain.008.001.02) that collects the remaining amount of each issued EUR sale invoice into the bank account on `collectionDate` (default: today) under the partner's most recently signed active mandate. The bank account needs an IBAN and the company a valid `sepaCreditorId` (422, see `account/companies/update`); an invoice whose partner has no active mandate, or whose mandate expired (36 months without a collection), answers 422; an invoice already paid, or a one-off mandate asked to collect more than one invoice, answers 409. The sequence type is OOFF for a one-off mandate, FRST for the first collection under a recurrent one and RCUR after that. On success the collection count and last collection date of each mandate are advanced and a one-off mandate is completed; nothing is posted.
+     * Build a direct debit file that collects the remaining amount of each issued sale invoice into the bank account on `collectionDate` under the partner's most recently signed active mandate of a scheme the file carries. The format follows the bank account: a GBP account of a UK company with a sort code and account number gets a Bacs Standard 18 Direct Debit file (BACS mandates; needs `paymentFileSettings.serviceUserNumber`; each mandate must have been lodged with `bank/mandates/auddis-export` and the collection processed at least two Bacs working days after the lodgement; `collectionDate` is the day the money is collected, a Bacs working day whose processing day is after today, default the earliest; transaction code 01 for the first collection under a mandate and 17 after that), a USD account of a US company with a routing number and account number gets a Nacha ACH debit file (PPD and CCD mandates; needs `paymentFileSettings.immediateOrigin` and `companyIdentification`; `collectionDate` not before the mandate's signature date; default today), and an account with an IBAN gets a SEPA direct debit file pain.008.001.02 (CORE and B2B mandates; needs a valid `sepaCreditorId`, see `account/companies/update`; a mandate expires after 36 months without a collection; sequence type OOFF for a one-off mandate, FRST for the first collection under a recurrent one and RCUR after that; default today). Each invoice must be in the currency of the format (EUR, GBP, USD), 422 otherwise; an invoice whose partner has no usable active mandate answers 422; an invoice already paid, or a one-off mandate asked to collect more than one invoice, answers 409. On success the collection count and last collection date of each mandate are advanced and a one-off mandate is completed; nothing is posted. The file is returned in `content`, with `format`, `fileName`, `contentType` and the `collectionDate` used.
      *
      * @param {NordletApi.DirectDebitsExportBankRequest} request
      * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -4205,6 +4204,140 @@ export class BankClient {
             _response.rawResponse,
             "POST",
             "/v1/bank/direct-debits/export",
+        );
+    }
+
+    /**
+     * Build a Bacs AUDDIS file that lodges new Bacs Direct Debit Instructions (transaction code 0N, each active BACS mandate not yet lodged) and cancels lodged ones (0C, each cancelled BACS mandate whose cancellation was not yet lodged) with the paying banks. Without `mandateIds` every such mandate of the company is included. The bank account must be a GBP account of a UK company with a sort code, an account number and `paymentFileSettings.serviceUserNumber` (422 otherwise). `processingDate` is the Bacs processing day of the file, a Bacs working day after today (default the next one); it is stored as the mandate's `lodgedOn` or `cancellationLodgedOn`, and a first collection can be processed two Bacs working days after `lodgedOn`. Nothing to lodge answers 409. The file is returned in `content`, with `format`, `fileName` and `contentType`; nothing is sent to the bank.
+     *
+     * @param {NordletApi.MandatesAuddisExportBankRequest} request
+     * @param {BankClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link NordletApi.BadRequestError}
+     * @throws {@link NordletApi.UnauthorizedError}
+     * @throws {@link NordletApi.PaymentRequiredError}
+     * @throws {@link NordletApi.ForbiddenError}
+     * @throws {@link NordletApi.NotFoundError}
+     * @throws {@link NordletApi.ConflictError}
+     * @throws {@link NordletApi.ContentTooLargeError}
+     * @throws {@link NordletApi.UnprocessableEntityError}
+     * @throws {@link NordletApi.TooManyRequestsError}
+     * @throws {@link NordletApi.InternalServerError}
+     *
+     * @example
+     *     await client.bank.mandatesAuddisExport({
+     *         bankAccountId: "bankAccountId"
+     *     })
+     */
+    public mandatesAuddisExport(
+        request: NordletApi.MandatesAuddisExportBankRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): core.HttpResponsePromise<NordletApi.MandatesAuddisExportBankResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__mandatesAuddisExport(request, requestOptions));
+    }
+
+    private async __mandatesAuddisExport(
+        request: NordletApi.MandatesAuddisExportBankRequest,
+        requestOptions?: BankClient.RequestOptions,
+    ): Promise<core.WithRawResponse<NordletApi.MandatesAuddisExportBankResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.NordletApiEnvironment.Production,
+                "v1/bank/mandates/auddis-export",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as NordletApi.MandatesAuddisExportBankResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new NordletApi.BadRequestError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new NordletApi.UnauthorizedError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 402:
+                    throw new NordletApi.PaymentRequiredError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new NordletApi.ForbiddenError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new NordletApi.NotFoundError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 409:
+                    throw new NordletApi.ConflictError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 413:
+                    throw new NordletApi.ContentTooLargeError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 422:
+                    throw new NordletApi.UnprocessableEntityError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 429:
+                    throw new NordletApi.TooManyRequestsError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new NordletApi.InternalServerError(
+                        _response.error.body as NordletApi.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.NordletApiError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/bank/mandates/auddis-export",
         );
     }
 

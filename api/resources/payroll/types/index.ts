@@ -1,6 +1,7 @@
 export * from "./CalcPayrollResponse.js";
 export * from "./DepartmentsCreatePayrollResponse.js";
 export * from "./DepartmentsListPayrollResponse.js";
+export * from "./FrequenciesListPayrollResponse.js";
 export * from "./LinesAttendancePayrollResponse.js";
 export * from "./PaymentsExportPayrollResponse.js";
 export * from "./PaymentTypesListPayrollResponse.js";

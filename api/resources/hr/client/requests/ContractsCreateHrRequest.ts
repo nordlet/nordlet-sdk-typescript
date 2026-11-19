@@ -20,6 +20,7 @@ export interface ContractsCreateHrRequest {
     endDate?: string;
     baseSalary: string;
     salaryType?: ContractsCreateHrRequest.SalaryType;
+    payFrequency?: ContractsCreateHrRequest.PayFrequency;
     workHours?: string;
     notes?: string;
 }
@@ -38,4 +39,12 @@ export namespace ContractsCreateHrRequest {
         Yearly: "yearly",
     } as const;
     export type SalaryType = (typeof SalaryType)[keyof typeof SalaryType];
+    export const PayFrequency = {
+        Monthly: "monthly",
+        Semimonthly: "semimonthly",
+        FourWeekly: "four_weekly",
+        Biweekly: "biweekly",
+        Weekly: "weekly",
+    } as const;
+    export type PayFrequency = (typeof PayFrequency)[keyof typeof PayFrequency];
 }

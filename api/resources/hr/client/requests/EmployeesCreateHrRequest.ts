@@ -17,6 +17,12 @@ export interface EmployeesCreateHrRequest {
     phone?: string;
     address?: EmployeesCreateHrRequest.Address;
     iban?: string;
+    /** Sort code, routing number or other national bank code, for an account without an IBAN */
+    bankCode?: string;
+    /** Account number, for an account without an IBAN */
+    bankAccountNumber?: string;
+    /** Checking or savings account; a US ACH file needs it */
+    bankAccountType?: EmployeesCreateHrRequest.BankAccountType;
     socialInsuranceNo?: string;
     socialInsuranceStart?: string;
     hireDate?: string;
@@ -34,8 +40,16 @@ export namespace EmployeesCreateHrRequest {
         city?: string | undefined;
         postalCode?: string | undefined;
         countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
     }
 
+    /** Checking or savings account; a US ACH file needs it */
+    export const BankAccountType = {
+        Checking: "checking",
+        Savings: "savings",
+    } as const;
+    export type BankAccountType = (typeof BankAccountType)[keyof typeof BankAccountType];
     export type Attributes = Attributes.Item[];
 
     export namespace Attributes {

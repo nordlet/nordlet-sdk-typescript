@@ -8,7 +8,7 @@ export type { ContractsEndHrRequest } from "./ContractsEndHrRequest.js";
 export { ContractsListHrRequest } from "./ContractsListHrRequest.js";
 export type { EmployeesAnonymizeHrRequest } from "./EmployeesAnonymizeHrRequest.js";
 export type { EmployeesAttachmentsListHrRequest } from "./EmployeesAttachmentsListHrRequest.js";
-export type { EmployeesCreateHrRequest } from "./EmployeesCreateHrRequest.js";
+export { EmployeesCreateHrRequest } from "./EmployeesCreateHrRequest.js";
 export type { EmployeesDeleteHrRequest } from "./EmployeesDeleteHrRequest.js";
 export type { EmployeesFieldsHrRequest } from "./EmployeesFieldsHrRequest.js";
 export type { EmployeesGetHrRequest } from "./EmployeesGetHrRequest.js";
