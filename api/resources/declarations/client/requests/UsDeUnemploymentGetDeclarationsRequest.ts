@@ -10,4 +10,7 @@
 export interface UsDeUnemploymentGetDeclarationsRequest {
     year: number;
     quarter: number;
+    approvedCredit?: string;
+    interest?: string;
+    penalty?: string;
 }

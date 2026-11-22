@@ -33,6 +33,9 @@ export { InquiriesListPartnersRequest } from "./InquiriesListPartnersRequest.js"
 export { InquiriesUpdatePartnersRequest } from "./InquiriesUpdatePartnersRequest.js";
 export { ListPartnersRequest } from "./ListPartnersRequest.js";
 export type { MergePartnersRequest } from "./MergePartnersRequest.js";
+export type { SalesTaxExemptionsCancelPartnersRequest } from "./SalesTaxExemptionsCancelPartnersRequest.js";
+export { SalesTaxExemptionsCreatePartnersRequest } from "./SalesTaxExemptionsCreatePartnersRequest.js";
+export type { SalesTaxExemptionsListPartnersRequest } from "./SalesTaxExemptionsListPartnersRequest.js";
 export type { StatusesCreatePartnersRequest } from "./StatusesCreatePartnersRequest.js";
 export type { StatusesDeletePartnersRequest } from "./StatusesDeletePartnersRequest.js";
 export type { StatusesListPartnersRequest } from "./StatusesListPartnersRequest.js";

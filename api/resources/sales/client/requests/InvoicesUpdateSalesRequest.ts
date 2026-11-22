@@ -34,6 +34,9 @@ export interface InvoicesUpdateSalesRequest {
     receivedByName?: string | null;
     receivedByTitle?: string | null;
     salesTaxPercent?: string | null;
+    /** The US state the sales tax is collected for, as an ISO 3166-2 code such as `US-CA` */
+    salesTaxJurisdiction?: string | null;
+    deliveryAddress?: InvoicesUpdateSalesRequest.DeliveryAddress | null;
     lines?: InvoicesUpdateSalesRequest.Lines.Item[];
 }
 
@@ -87,6 +90,16 @@ export namespace InvoicesUpdateSalesRequest {
         Uk: "uk",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
+
+    export interface DeliveryAddress {
+        street?: string | undefined;
+        city?: string | undefined;
+        postalCode?: string | undefined;
+        countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
+    }
+
     export type Lines = Lines.Item[];
 
     export namespace Lines {

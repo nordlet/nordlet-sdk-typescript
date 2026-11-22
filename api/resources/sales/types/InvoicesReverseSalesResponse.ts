@@ -18,6 +18,9 @@ export interface InvoicesReverseSalesResponse {
     grossTotal: string;
     salesTaxPercent: string | null;
     salesTaxTotal: string;
+    salesTaxJurisdiction: string | null;
+    salesTaxExemptionId: string | null;
+    deliveryAddress: InvoicesReverseSalesResponse.DeliveryAddress | null;
     paidAmount: string;
     journalTransactionId: string | null;
     reversedAt: string | null;
@@ -94,6 +97,16 @@ export namespace InvoicesReverseSalesResponse {
         Paid: "paid",
     } as const;
     export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus];
+
+    export interface DeliveryAddress {
+        street?: string | undefined;
+        city?: string | undefined;
+        postalCode?: string | undefined;
+        countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
+    }
+
     export const VatScheme = {
         Domestic: "domestic",
         IntraEuB2B: "intra_eu_b2b",

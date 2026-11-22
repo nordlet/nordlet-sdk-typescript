@@ -43,8 +43,12 @@ export interface InvoicesCreateSalesRequest {
     receivedByName?: string;
     receivedByTitle?: string;
     discountPercent?: string;
-    /** Sales tax as a percent of the net total, added to the invoice total. It is not posted to the ledger and is left out of VAT and national tax reports. Invoices only. */
+    /** Sales tax as a percent of the net total, added to the document total and posted to the sales tax payable account when the document is issued. US companies only (422 otherwise); invoices and credit notes only. */
     salesTaxPercent?: string;
+    /** The US state the sales tax is collected for, as an ISO 3166-2 code such as `US-CA`; unset means the state of `deliveryAddress` (422 when it has none), else the credited invoice's state for a credit note, else the state of the customer's address (422 without one). When the customer has a certificate of exemption for that state (`partners/sales-tax-exemptions/create`) that covers the sale, no sales tax is charged and the document keeps the certificate's id in `salesTaxExemptionId`. */
+    salesTaxJurisdiction?: string;
+    /** Where the goods or services are delivered, when not at the customer's address; it decides the state of the sales tax when `salesTaxJurisdiction` is not given. */
+    deliveryAddress?: InvoicesCreateSalesRequest.DeliveryAddress;
     lines: InvoicesCreateSalesRequest.Lines.Item[];
 }
 
@@ -106,6 +110,19 @@ export namespace InvoicesCreateSalesRequest {
         Uk: "uk",
     } as const;
     export type Locale = (typeof Locale)[keyof typeof Locale];
+
+    /**
+     * Where the goods or services are delivered, when not at the customer's address; it decides the state of the sales tax when `salesTaxJurisdiction` is not given.
+     */
+    export interface DeliveryAddress {
+        street?: string | undefined;
+        city?: string | undefined;
+        postalCode?: string | undefined;
+        countryCode?: string | undefined;
+        /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+        subdivision?: string | undefined;
+    }
+
     export type Lines = Lines.Item[];
 
     export namespace Lines {

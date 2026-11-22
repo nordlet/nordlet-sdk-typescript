@@ -47,6 +47,7 @@ export namespace FindOrCreatePartnersResponse {
         isGroupMember: boolean;
         isActive: boolean;
         legalCountryClass: Partner.LegalCountryClass | null;
+        identifiers: Record<string, string>;
         createdAt: string;
         updatedAt: string;
     }

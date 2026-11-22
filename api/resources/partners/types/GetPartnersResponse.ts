@@ -41,6 +41,7 @@ export interface GetPartnersResponse {
     isGroupMember: boolean;
     isActive: boolean;
     legalCountryClass: GetPartnersResponse.LegalCountryClass | null;
+    identifiers: Record<string, string>;
     createdAt: string;
     updatedAt: string;
 }

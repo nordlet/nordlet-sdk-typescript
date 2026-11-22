@@ -42,6 +42,12 @@ export type { EuVatReturnPacksListDeclarationsRequest } from "./EuVatReturnPacks
 export type { GbCorporationTaxComputeDeclarationsRequest } from "./GbCorporationTaxComputeDeclarationsRequest.js";
 export type { GbHmrcAuthorizeUrlGetDeclarationsRequest } from "./GbHmrcAuthorizeUrlGetDeclarationsRequest.js";
 export type { GbHmrcConnectDeclarationsRequest } from "./GbHmrcConnectDeclarationsRequest.js";
+export type { GbP11DItemsCreateDeclarationsRequest } from "./GbP11DItemsCreateDeclarationsRequest.js";
+export type { GbP11DItemsDeleteDeclarationsRequest } from "./GbP11DItemsDeleteDeclarationsRequest.js";
+export type { GbP11DItemsListDeclarationsRequest } from "./GbP11DItemsListDeclarationsRequest.js";
+export type { GbP45GetDeclarationsRequest } from "./GbP45GetDeclarationsRequest.js";
+export type { GbReturnFactsGetDeclarationsRequest } from "./GbReturnFactsGetDeclarationsRequest.js";
+export type { GbReturnFactsSetDeclarationsRequest } from "./GbReturnFactsSetDeclarationsRequest.js";
 export type { GbVatLiabilitiesListDeclarationsRequest } from "./GbVatLiabilitiesListDeclarationsRequest.js";
 export { GbVatObligationsListDeclarationsRequest } from "./GbVatObligationsListDeclarationsRequest.js";
 export type { GbVatPaymentsListDeclarationsRequest } from "./GbVatPaymentsListDeclarationsRequest.js";
@@ -105,10 +111,15 @@ export { TaxPaymentsListDeclarationsRequest } from "./TaxPaymentsListDeclaration
 export { TaxPaymentsUpdateDeclarationsRequest } from "./TaxPaymentsUpdateDeclarationsRequest.js";
 export type { Us940GetDeclarationsRequest } from "./Us940GetDeclarationsRequest.js";
 export type { Us941GetDeclarationsRequest } from "./Us941GetDeclarationsRequest.js";
+export type { Us1099NecListDeclarationsRequest } from "./Us1099NecListDeclarationsRequest.js";
 export type { UsDeFranchiseTaxComputeDeclarationsRequest } from "./UsDeFranchiseTaxComputeDeclarationsRequest.js";
 export { UsDeGrossReceiptsGetDeclarationsRequest } from "./UsDeGrossReceiptsGetDeclarationsRequest.js";
 export type { UsDeUnemploymentGetDeclarationsRequest } from "./UsDeUnemploymentGetDeclarationsRequest.js";
 export type { UsDeWithholdingGetDeclarationsRequest } from "./UsDeWithholdingGetDeclarationsRequest.js";
+export type { UsDeWithholdingReconciliationGetDeclarationsRequest } from "./UsDeWithholdingReconciliationGetDeclarationsRequest.js";
+export type { UsFlsaRecordsListDeclarationsRequest } from "./UsFlsaRecordsListDeclarationsRequest.js";
+export type { UsIncomeTaxReturnGetDeclarationsRequest } from "./UsIncomeTaxReturnGetDeclarationsRequest.js";
+export type { UsSalesTaxGetDeclarationsRequest } from "./UsSalesTaxGetDeclarationsRequest.js";
 export type { UsStateSalesGetDeclarationsRequest } from "./UsStateSalesGetDeclarationsRequest.js";
 export type { UsW2ListDeclarationsRequest } from "./UsW2ListDeclarationsRequest.js";
 export type { UsWorkweeksListDeclarationsRequest } from "./UsWorkweeksListDeclarationsRequest.js";

@@ -32,6 +32,9 @@ export namespace InvoicesListSalesResponse {
             grossTotal: string;
             salesTaxPercent: string | null;
             salesTaxTotal: string;
+            salesTaxJurisdiction: string | null;
+            salesTaxExemptionId: string | null;
+            deliveryAddress: Item.DeliveryAddress | null;
             paidAmount: string;
             journalTransactionId: string | null;
             reversedAt: string | null;
@@ -107,6 +110,16 @@ export namespace InvoicesListSalesResponse {
                 Paid: "paid",
             } as const;
             export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus];
+
+            export interface DeliveryAddress {
+                street?: string | undefined;
+                city?: string | undefined;
+                postalCode?: string | undefined;
+                countryCode?: string | undefined;
+                /** ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT */
+                subdivision?: string | undefined;
+            }
+
             export const VatScheme = {
                 Domestic: "domestic",
                 IntraEuB2B: "intra_eu_b2b",

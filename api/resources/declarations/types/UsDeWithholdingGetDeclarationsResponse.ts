@@ -6,4 +6,15 @@ export interface UsDeWithholdingGetDeclarationsResponse {
     employees: number;
     wages: string;
     taxWithheld: string;
+    wthTax: UsDeWithholdingGetDeclarationsResponse.WthTax;
+}
+
+export namespace UsDeWithholdingGetDeclarationsResponse {
+    export interface WthTax {
+        taxpayerId: string | null;
+        taxPeriodBeginning: string;
+        taxPeriodEnding: string;
+        line1: string;
+        line2: string;
+    }
 }

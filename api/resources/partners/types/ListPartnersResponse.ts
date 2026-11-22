@@ -55,6 +55,7 @@ export namespace ListPartnersResponse {
             isGroupMember: boolean;
             isActive: boolean;
             legalCountryClass: Item.LegalCountryClass | null;
+            identifiers: Record<string, string>;
             createdAt: string;
             updatedAt: string;
         }

@@ -8,6 +8,10 @@ export interface UsDeUnemploymentGetDeclarationsResponse {
     taxableWages: string;
     contributions: string;
     employees: UsDeUnemploymentGetDeclarationsResponse.Employees.Item[];
+    uc8: UsDeUnemploymentGetDeclarationsResponse.Uc8;
+    uc8a: UsDeUnemploymentGetDeclarationsResponse.Uc8A;
+    warnings: string[];
+    source: string;
 }
 
 export namespace UsDeUnemploymentGetDeclarationsResponse {
@@ -20,6 +24,55 @@ export namespace UsDeUnemploymentGetDeclarationsResponse {
             firstName: string;
             lastName: string;
             wages: string;
+        }
+    }
+
+    export interface Uc8 {
+        reportingPeriod: string;
+        accountNo: string | null;
+        federalIdNumber: string | null;
+        taxRate: string | null;
+        line1: number[];
+        line2: string;
+        line3: string;
+        line4: string;
+        line5: string;
+        line6: string | null;
+        line7: string;
+        line8: string | null;
+        line9: string | null;
+        line10: string;
+    }
+
+    export interface Uc8A {
+        pages: Uc8A.Pages.Item[];
+        line32: string;
+        line33: string;
+    }
+
+    export namespace Uc8A {
+        export type Pages = Pages.Item[];
+
+        export namespace Pages {
+            export interface Item {
+                rows: Item.Rows.Item[];
+                line31: string;
+            }
+
+            export namespace Item {
+                export type Rows = Rows.Item[];
+
+                export namespace Rows {
+                    export interface Item {
+                        line: number;
+                        socialSecurityNumber: string | null;
+                        firstInitial: string;
+                        middleInitial: string | null;
+                        lastName: string;
+                        grossCoveredWages: string;
+                    }
+                }
+            }
         }
     }
 }
