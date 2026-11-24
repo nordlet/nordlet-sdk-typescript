@@ -1,4 +1,5 @@
 export type { AssetsCreateAssetsRequest } from "./AssetsCreateAssetsRequest.js";
+export type { AssetsCreateFromPurchaseAssetsRequest } from "./AssetsCreateFromPurchaseAssetsRequest.js";
 export { AssetsDisposeAssetsRequest } from "./AssetsDisposeAssetsRequest.js";
 export type { AssetsGetAssetsRequest } from "./AssetsGetAssetsRequest.js";
 export { AssetsInputVatAssetsRequest } from "./AssetsInputVatAssetsRequest.js";

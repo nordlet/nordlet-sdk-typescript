@@ -24,7 +24,10 @@ export type { DeReturnFactsGetDeclarationsRequest } from "./DeReturnFactsGetDecl
 export { DeReturnFactsSetDeclarationsRequest } from "./DeReturnFactsSetDeclarationsRequest.js";
 export { DeReturnsGenerateDeclarationsRequest } from "./DeReturnsGenerateDeclarationsRequest.js";
 export type { DkSelskabsskatGenerateDeclarationsRequest } from "./DkSelskabsskatGenerateDeclarationsRequest.js";
+export { EeEmploymentRegisterGenerateDeclarationsRequest } from "./EeEmploymentRegisterGenerateDeclarationsRequest.js";
 export { EeEmploymentRegisterSendDeclarationsRequest } from "./EeEmploymentRegisterSendDeclarationsRequest.js";
+export type { EeTsdAnnexesGetDeclarationsRequest } from "./EeTsdAnnexesGetDeclarationsRequest.js";
+export { EeTsdAnnexesSetDeclarationsRequest } from "./EeTsdAnnexesSetDeclarationsRequest.js";
 export type { EsVerifactuDeclaracionResponsableDeclarationsRequest } from "./EsVerifactuDeclaracionResponsableDeclarationsRequest.js";
 export type { EuDac7PreviewDeclarationsRequest } from "./EuDac7PreviewDeclarationsRequest.js";
 export type { EuDac7XmlDeclarationsRequest } from "./EuDac7XmlDeclarationsRequest.js";
@@ -32,6 +35,7 @@ export type { EuDigitalReportingListDeclarationsRequest } from "./EuDigitalRepor
 export type { EuDistanceSalesThresholdGetDeclarationsRequest } from "./EuDistanceSalesThresholdGetDeclarationsRequest.js";
 export type { EuIossComputeDeclarationsRequest } from "./EuIossComputeDeclarationsRequest.js";
 export type { EuOssComputeDeclarationsRequest } from "./EuOssComputeDeclarationsRequest.js";
+export { EuOssNonUnionComputeDeclarationsRequest } from "./EuOssNonUnionComputeDeclarationsRequest.js";
 export type { EuOwnGoodsTransfersComputeDeclarationsRequest } from "./EuOwnGoodsTransfersComputeDeclarationsRequest.js";
 export type { EuSmeCrossBorderReportComputeDeclarationsRequest } from "./EuSmeCrossBorderReportComputeDeclarationsRequest.js";
 export type { EuSmeThresholdGetDeclarationsRequest } from "./EuSmeThresholdGetDeclarationsRequest.js";
@@ -55,8 +59,15 @@ export type { GbVatPenaltiesGetDeclarationsRequest } from "./GbVatPenaltiesGetDe
 export type { GbVatReturnsGetDeclarationsRequest } from "./GbVatReturnsGetDeclarationsRequest.js";
 export type { IeB1GenerateDeclarationsRequest } from "./IeB1GenerateDeclarationsRequest.js";
 export type { IeCt1GenerateDeclarationsRequest } from "./IeCt1GenerateDeclarationsRequest.js";
+export type { IeRtdGenerateDeclarationsRequest } from "./IeRtdGenerateDeclarationsRequest.js";
+export type { ItInailAutoliquidazioneComputeDeclarationsRequest } from "./ItInailAutoliquidazioneComputeDeclarationsRequest.js";
+export type { ItInailAutoliquidazioneF24DeclarationsRequest } from "./ItInailAutoliquidazioneF24DeclarationsRequest.js";
 export { ItSdiPurchasePreviewDeclarationsRequest } from "./ItSdiPurchasePreviewDeclarationsRequest.js";
 export { ItSdiPurchaseSendDeclarationsRequest } from "./ItSdiPurchaseSendDeclarationsRequest.js";
+export type { ItTfrAccrualComputeDeclarationsRequest } from "./ItTfrAccrualComputeDeclarationsRequest.js";
+export type { ItTfrAccrualPostDeclarationsRequest } from "./ItTfrAccrualPostDeclarationsRequest.js";
+export type { ItTfrRevaluationComputeDeclarationsRequest } from "./ItTfrRevaluationComputeDeclarationsRequest.js";
+export type { ItTfrRevaluationPostDeclarationsRequest } from "./ItTfrRevaluationPostDeclarationsRequest.js";
 export type { LiLohndeklarationGenerateDeclarationsRequest } from "./LiLohndeklarationGenerateDeclarationsRequest.js";
 export type { LiLohnlistenGenerateDeclarationsRequest } from "./LiLohnlistenGenerateDeclarationsRequest.js";
 export type { LtFr0564ComputeDeclarationsRequest } from "./LtFr0564ComputeDeclarationsRequest.js";
@@ -76,8 +87,10 @@ export { LtSaftSendDeclarationsRequest } from "./LtSaftSendDeclarationsRequest.j
 export type { LtSamComputeDeclarationsRequest } from "./LtSamComputeDeclarationsRequest.js";
 export { LtSdFfdataDeclarationsRequest } from "./LtSdFfdataDeclarationsRequest.js";
 export { LtSdGenerateDeclarationsRequest } from "./LtSdGenerateDeclarationsRequest.js";
+export { LvEmployeeNoticeGenerateDeclarationsRequest } from "./LvEmployeeNoticeGenerateDeclarationsRequest.js";
 export type { MtAnnualReturnGenerateDeclarationsRequest } from "./MtAnnualReturnGenerateDeclarationsRequest.js";
 export type { MtCompanyTaxGenerateDeclarationsRequest } from "./MtCompanyTaxGenerateDeclarationsRequest.js";
+export type { MtFs7GenerateDeclarationsRequest } from "./MtFs7GenerateDeclarationsRequest.js";
 export type { PlCit8GenerateDeclarationsRequest } from "./PlCit8GenerateDeclarationsRequest.js";
 export { PlIntrastatGenerateDeclarationsRequest } from "./PlIntrastatGenerateDeclarationsRequest.js";
 export type { PlJpkFaGenerateDeclarationsRequest } from "./PlJpkFaGenerateDeclarationsRequest.js";
@@ -123,6 +136,8 @@ export type { UsSalesTaxGetDeclarationsRequest } from "./UsSalesTaxGetDeclaratio
 export type { UsStateSalesGetDeclarationsRequest } from "./UsStateSalesGetDeclarationsRequest.js";
 export type { UsW2ListDeclarationsRequest } from "./UsW2ListDeclarationsRequest.js";
 export type { UsWorkweeksListDeclarationsRequest } from "./UsWorkweeksListDeclarationsRequest.js";
+export type { VatProrataAdjustmentGetDeclarationsRequest } from "./VatProrataAdjustmentGetDeclarationsRequest.js";
+export type { VatProrataAdjustmentPostDeclarationsRequest } from "./VatProrataAdjustmentPostDeclarationsRequest.js";
 export type { VatProrataGetDeclarationsRequest } from "./VatProrataGetDeclarationsRequest.js";
 export type { VatProrataListDeclarationsRequest } from "./VatProrataListDeclarationsRequest.js";
 export type { VatProrataSetDeclarationsRequest } from "./VatProrataSetDeclarationsRequest.js";

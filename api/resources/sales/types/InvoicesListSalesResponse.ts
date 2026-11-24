@@ -36,6 +36,8 @@ export namespace InvoicesListSalesResponse {
             salesTaxExemptionId: string | null;
             deliveryAddress: Item.DeliveryAddress | null;
             paidAmount: string;
+            /** True for an issued advance invoice whose VAT is due when it is paid, and for its credit notes: the VAT is posted and declared with each payment, not at issue */
+            advanceVatOnPayment: boolean;
             journalTransactionId: string | null;
             reversedAt: string | null;
             reversalJournalTransactionId: string | null;

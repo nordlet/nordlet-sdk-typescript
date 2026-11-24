@@ -27,6 +27,8 @@ export namespace ExpenseReportsCreateCashRequest {
             description: string;
             documentNumber?: string | undefined;
             accountCode: string;
+            partnerId?: string | undefined;
+            vatClassifierCode?: string | undefined;
             netAmount: string;
             vatAmount?: string | undefined;
         }

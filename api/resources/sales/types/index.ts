@@ -31,6 +31,7 @@ export * from "./InvoicesSendSalesResponse.js";
 export * from "./InvoicesUnlockSalesResponse.js";
 export * from "./InvoicesUpdateSalesResponse.js";
 export * from "./InvoicesViewSalesResponse.js";
+export * from "./InvoicesZugferdPdfSalesResponse.js";
 export * from "./InvoiceTemplatesCreateSalesResponse.js";
 export * from "./InvoiceTemplatesDeleteSalesResponse.js";
 export * from "./InvoiceTemplatesGetSalesResponse.js";

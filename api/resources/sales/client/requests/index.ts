@@ -31,6 +31,7 @@ export { InvoicesSendSalesRequest } from "./InvoicesSendSalesRequest.js";
 export type { InvoicesUnlockSalesRequest } from "./InvoicesUnlockSalesRequest.js";
 export { InvoicesUpdateSalesRequest } from "./InvoicesUpdateSalesRequest.js";
 export type { InvoicesViewSalesRequest } from "./InvoicesViewSalesRequest.js";
+export { InvoicesZugferdPdfSalesRequest } from "./InvoicesZugferdPdfSalesRequest.js";
 export { InvoiceTemplatesCreateSalesRequest } from "./InvoiceTemplatesCreateSalesRequest.js";
 export type { InvoiceTemplatesDeleteSalesRequest } from "./InvoiceTemplatesDeleteSalesRequest.js";
 export type { InvoiceTemplatesGetSalesRequest } from "./InvoiceTemplatesGetSalesRequest.js";

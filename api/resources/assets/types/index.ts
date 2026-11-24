@@ -1,4 +1,5 @@
 export * from "./AssetsCreateAssetsResponse.js";
+export * from "./AssetsCreateFromPurchaseAssetsResponse.js";
 export * from "./AssetsDisposeAssetsResponse.js";
 export * from "./AssetsGetAssetsResponse.js";
 export * from "./AssetsInputVatAssetsResponse.js";

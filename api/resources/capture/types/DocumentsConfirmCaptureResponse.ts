@@ -125,7 +125,10 @@ export namespace DocumentsConfirmCaptureResponse {
         intrastatRegion: string | null;
         intrastatNatureOfTransaction: string | null;
         einvoiceNumber: string | null;
+        paymentReference: string | null;
         documentRef: string | null;
+        agreementId: string | null;
+        agreementPeriodStart: string | null;
         createdAt: string;
         updatedAt: string;
         lines: Invoice.Lines.Item[];
@@ -164,6 +167,7 @@ export namespace DocumentsConfirmCaptureResponse {
                 unitPriceInclVat: string | null;
                 vatRatePercent: string;
                 vatClassifierCode: string | null;
+                deductiblePercent: number | null;
                 costCenterId: string | null;
                 projectId: string | null;
                 accountCode: string | null;
@@ -171,6 +175,7 @@ export namespace DocumentsConfirmCaptureResponse {
                 deferralEndDate: string | null;
                 lotNumber: string | null;
                 expiryDate: string | null;
+                chassisNumbers: string[] | null;
                 lineNet: string;
                 lineVat: string;
                 lineGross: string;
@@ -207,7 +212,10 @@ export namespace DocumentsConfirmCaptureResponse {
         intrastatRegion: string | null;
         intrastatNatureOfTransaction: string | null;
         einvoiceNumber: string | null;
+        paymentReference: string | null;
         documentRef: string | null;
+        agreementId: string | null;
+        agreementPeriodStart: string | null;
         createdAt: string;
         updatedAt: string;
         lines: OppositeInvoice.Lines.Item[];
@@ -246,6 +254,7 @@ export namespace DocumentsConfirmCaptureResponse {
                 unitPriceInclVat: string | null;
                 vatRatePercent: string;
                 vatClassifierCode: string | null;
+                deductiblePercent: number | null;
                 costCenterId: string | null;
                 projectId: string | null;
                 accountCode: string | null;
@@ -253,6 +262,7 @@ export namespace DocumentsConfirmCaptureResponse {
                 deferralEndDate: string | null;
                 lotNumber: string | null;
                 expiryDate: string | null;
+                chassisNumbers: string[] | null;
                 lineNet: string;
                 lineVat: string;
                 lineGross: string;

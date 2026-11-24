@@ -23,8 +23,11 @@ export namespace ExpenseReportsCreateCashResponse {
             description: string;
             documentNumber: string | null;
             accountCode: string;
+            partnerId: string | null;
+            vatClassifierCode: string | null;
             netAmount: string;
             vatAmount: string;
+            deductibleVat: string | null;
         }
     }
 }

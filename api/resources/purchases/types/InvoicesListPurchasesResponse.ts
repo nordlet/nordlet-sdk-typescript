@@ -42,7 +42,10 @@ export namespace InvoicesListPurchasesResponse {
             intrastatRegion: string | null;
             intrastatNatureOfTransaction: string | null;
             einvoiceNumber: string | null;
+            paymentReference: string | null;
             documentRef: string | null;
+            agreementId: string | null;
+            agreementPeriodStart: string | null;
             createdAt: string;
             updatedAt: string;
             partnerName: string | null;

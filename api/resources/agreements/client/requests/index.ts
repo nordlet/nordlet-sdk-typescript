@@ -1,9 +1,12 @@
 export type { AgreementsBillingRunAgreementsRequest } from "./AgreementsBillingRunAgreementsRequest.js";
 export { AgreementsCreateAgreementsRequest } from "./AgreementsCreateAgreementsRequest.js";
 export type { AgreementsDeleteAgreementsRequest } from "./AgreementsDeleteAgreementsRequest.js";
+export type { AgreementsExpectedInvoicesAgreementsRequest } from "./AgreementsExpectedInvoicesAgreementsRequest.js";
 export type { AgreementsGenerateInvoiceAgreementsRequest } from "./AgreementsGenerateInvoiceAgreementsRequest.js";
 export type { AgreementsGetAgreementsRequest } from "./AgreementsGetAgreementsRequest.js";
 export { AgreementsListAgreementsRequest } from "./AgreementsListAgreementsRequest.js";
+export type { AgreementsPaymentScheduleGetAgreementsRequest } from "./AgreementsPaymentScheduleGetAgreementsRequest.js";
+export type { AgreementsPaymentScheduleSetAgreementsRequest } from "./AgreementsPaymentScheduleSetAgreementsRequest.js";
 export { AgreementsUpdateAgreementsRequest } from "./AgreementsUpdateAgreementsRequest.js";
 export type { InsurancePoliciesCreateAgreementsRequest } from "./InsurancePoliciesCreateAgreementsRequest.js";
 export type { InsurancePoliciesDeleteAgreementsRequest } from "./InsurancePoliciesDeleteAgreementsRequest.js";

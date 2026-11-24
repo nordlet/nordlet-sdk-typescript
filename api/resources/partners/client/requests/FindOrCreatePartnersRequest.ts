@@ -208,7 +208,7 @@ export namespace FindOrCreatePartnersRequest {
     }
 
     export const LegalCountryClass = {
-        Lt: "lt",
+        Domestic: "domestic",
         Eu: "eu",
         NonEu: "non_eu",
     } as const;

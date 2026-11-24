@@ -35,6 +35,9 @@ export namespace PeriodsLockLedgerResponse {
                 PayrollRunsNotApproved: "payroll_runs_not_approved",
                 OpenFxReceivables: "open_fx_receivables",
                 OpenFxPayables: "open_fx_payables",
+                BankLedgerDiffersFromStatement: "bank_ledger_differs_from_statement",
+                VatOutsideReturns: "vat_outside_returns",
+                FilingSettingsMissing: "filing_settings_missing",
             } as const;
             export type Code = (typeof Code)[keyof typeof Code];
         }

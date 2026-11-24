@@ -11,7 +11,7 @@ export namespace QueueListReviewResponse {
     export namespace Items {
         export interface Item {
             kind: Item.Kind;
-            /** The id of the draft, bank transaction or partner, or the key of the filing */
+            /** The id of the draft, bank transaction, partner or file, or the key of the filing */
             id: string;
             message: string;
             fix: string;
@@ -25,6 +25,7 @@ export namespace QueueListReviewResponse {
                 BankTransactionUnbooked: "bank_transaction_unbooked",
                 PartnerVatInvalid: "partner_vat_invalid",
                 FilingSettingsMissing: "filing_settings_missing",
+                FileUnattached: "file_unattached",
             } as const;
             export type Kind = (typeof Kind)[keyof typeof Kind];
         }

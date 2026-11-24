@@ -9,6 +9,7 @@
 export interface InvoicesIssueSalesRequest {
     id: string;
     series?: string;
+    number?: string;
     issueDate?: string;
     warehouseId?: string;
     returnToStock?: boolean;

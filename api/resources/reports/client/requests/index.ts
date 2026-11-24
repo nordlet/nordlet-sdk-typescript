@@ -19,6 +19,7 @@ export type { OssReportsRequest } from "./OssReportsRequest.js";
 export type { PartnerBalancesReportsRequest } from "./PartnerBalancesReportsRequest.js";
 export type { PeriodChecklistReportsRequest } from "./PeriodChecklistReportsRequest.js";
 export type { PosSalesReportsRequest } from "./PosSalesReportsRequest.js";
+export type { SaftNoReportsRequest } from "./SaftNoReportsRequest.js";
 export type { SieReportsRequest } from "./SieReportsRequest.js";
 export type { SizeCategoryReportsRequest } from "./SizeCategoryReportsRequest.js";
 export type { StockAgingReportsRequest } from "./StockAgingReportsRequest.js";
@@ -26,6 +27,7 @@ export type { StockBalanceReportsRequest } from "./StockBalanceReportsRequest.js
 export type { StockMovementReportsRequest } from "./StockMovementReportsRequest.js";
 export type { StockShortageReportsRequest } from "./StockShortageReportsRequest.js";
 export type { TrialBalanceReportsRequest } from "./TrialBalanceReportsRequest.js";
+export type { VatAccountsReportsRequest } from "./VatAccountsReportsRequest.js";
 export { VatDetailReportsRequest } from "./VatDetailReportsRequest.js";
 export { VatSummaryReportsRequest } from "./VatSummaryReportsRequest.js";
 export type { WriteOffActsReportsRequest } from "./WriteOffActsReportsRequest.js";

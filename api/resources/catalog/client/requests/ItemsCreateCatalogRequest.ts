@@ -12,12 +12,15 @@ export interface ItemsCreateCatalogRequest {
     name: string;
     code?: string;
     barcode?: string;
+    /** Unit of measure; without it `vnt` for a Lithuanian company and `pcs` for any other */
     unit?: string;
     vatClassifierCode?: string;
     vatRatePercent?: string;
     salePriceExclVat?: string;
     purchasePriceExclVat?: string;
     cnCode?: string;
+    /** CPA code of a service, six digits without dots (62.01.11 is 620111); the Italian Intrastat list of services needs it */
+    cpaCode?: string;
     originCountry?: string;
     netMassKg?: string;
     supplementaryUnit?: string;

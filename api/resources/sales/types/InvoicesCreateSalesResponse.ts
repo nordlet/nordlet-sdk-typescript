@@ -22,6 +22,8 @@ export interface InvoicesCreateSalesResponse {
     salesTaxExemptionId: string | null;
     deliveryAddress: InvoicesCreateSalesResponse.DeliveryAddress | null;
     paidAmount: string;
+    /** True for an issued advance invoice whose VAT is due when it is paid, and for its credit notes: the VAT is posted and declared with each payment, not at issue */
+    advanceVatOnPayment: boolean;
     journalTransactionId: string | null;
     reversedAt: string | null;
     reversalJournalTransactionId: string | null;
@@ -137,6 +139,7 @@ export namespace InvoicesCreateSalesResponse {
             vatRatePercent: string;
             vatClassifierCode: string | null;
             vatExemptionBasis: string | null;
+            accountCode: string | null;
             assetId: string | null;
             costCenterId: string | null;
             projectId: string | null;

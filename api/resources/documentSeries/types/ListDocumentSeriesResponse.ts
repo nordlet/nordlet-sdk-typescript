@@ -27,6 +27,7 @@ export namespace ListDocumentSeriesResponse {
             allocatedTo: number | null;
             warehouseId: string | null;
             printSeries: boolean;
+            suffix: string;
             isDefault: boolean;
             isActive: boolean;
             createdAt: string;

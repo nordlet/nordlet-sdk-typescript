@@ -4,6 +4,7 @@ export interface SizeCategoryReportsResponse {
     year: number;
     criteria: SizeCategoryReportsResponse.Criteria;
     category: SizeCategoryReportsResponse.Category;
+    currency: string;
     thresholds: Record<string, SizeCategoryReportsResponse.Thresholds.Value>;
 }
 

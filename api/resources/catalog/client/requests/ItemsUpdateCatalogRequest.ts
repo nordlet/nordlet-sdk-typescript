@@ -13,12 +13,15 @@ export interface ItemsUpdateCatalogRequest {
     name?: string;
     code?: string | null;
     barcode?: string | null;
+    /** Unit of measure; without it `vnt` for a Lithuanian company and `pcs` for any other */
     unit?: string;
     vatClassifierCode?: string | null;
     vatRatePercent?: string | null;
     salePriceExclVat?: string | null;
     purchasePriceExclVat?: string | null;
     cnCode?: string | null;
+    /** CPA code of a service, six digits without dots (62.01.11 is 620111); the Italian Intrastat list of services needs it */
+    cpaCode?: string | null;
     originCountry?: string | null;
     netMassKg?: string | null;
     supplementaryUnit?: string | null;

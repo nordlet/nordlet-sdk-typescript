@@ -27,6 +27,7 @@ export namespace PostingRulesUpdateLedgerRequest {
                 SalesRevenueProducts: "sales.revenueProducts",
                 SalesRevenueServices: "sales.revenueServices",
                 SalesVatPayable: "sales.vatPayable",
+                SalesOssVatPayable: "sales.ossVatPayable",
                 SalesAdvancesReceived: "sales.advancesReceived",
                 PurchasesPayables: "purchases.payables",
                 PurchasesAdvancesPaid: "purchases.advancesPaid",

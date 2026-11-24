@@ -24,7 +24,7 @@ export class CatalogClient {
     }
 
     /**
-     * Create a catalog item: a product, a service or a set of other items. `unit` must be `vnt`, a global measurement unit or one of the company's own units (`catalog/units/options`), the sale, purchase and expense account codes must be postable accounts of the chart, and `priceFrom`/`priceTo` and `validFrom`/`validTo` must be in order; otherwise 422. A `set` needs at least one component and none of them may be a set; `components` on any other type is refused with 422. 409 when an active item already carries the `code`. `documentRef` is the storage key of a file uploaded with `files/upload`, which is attached to the item. Emits `item.created`.
+     * Create a catalog item: a product, a service or a set of other items. `unit` must be a global measurement unit or one of the company's own units (`catalog/units/options`; create one with `catalog/units/create`), the sale, purchase and expense account codes must be postable accounts of the chart, and `priceFrom`/`priceTo` and `validFrom`/`validTo` must be in order; otherwise 422. A `set` needs at least one component and none of them may be a set; `components` on any other type is refused with 422. 409 when an active item already carries the `code`. `documentRef` is the storage key of a file uploaded with `files/upload`, which is attached to the item. Emits `item.created`.
      *
      * @param {NordletApi.ItemsCreateCatalogRequest} request
      * @param {CatalogClient.RequestOptions} requestOptions - Request-specific configuration.

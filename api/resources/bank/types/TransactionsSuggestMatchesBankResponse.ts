@@ -2,6 +2,8 @@
 
 export interface TransactionsSuggestMatchesBankResponse {
     suggestions: TransactionsSuggestMatchesBankResponse.Suggestions.Item[];
+    allocations: TransactionsSuggestMatchesBankResponse.Allocations.Item[] | null;
+    postingRules: TransactionsSuggestMatchesBankResponse.PostingRules.Item[];
 }
 
 export namespace TransactionsSuggestMatchesBankResponse {
@@ -27,6 +29,35 @@ export namespace TransactionsSuggestMatchesBankResponse {
                 PayrollRun: "payroll_run",
             } as const;
             export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+        }
+    }
+
+    export type Allocations = Allocations.Item[];
+
+    export namespace Allocations {
+        export interface Item {
+            documentType: Item.DocumentType;
+            documentId: string;
+            number: string;
+            amount: string;
+        }
+
+        export namespace Item {
+            export const DocumentType = {
+                SaleInvoice: "sale_invoice",
+                PurchaseInvoice: "purchase_invoice",
+            } as const;
+            export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+        }
+    }
+
+    export type PostingRules = PostingRules.Item[];
+
+    export namespace PostingRules {
+        export interface Item {
+            ruleId: string;
+            accountCode: string;
+            partnerId: string | null;
         }
     }
 }

@@ -13,6 +13,10 @@ export { CostCentersListLedgerRequest } from "./CostCentersListLedgerRequest.js"
 export type { CostCentersUpdateLedgerRequest } from "./CostCentersUpdateLedgerRequest.js";
 export type { FxRevaluationReverseLedgerRequest } from "./FxRevaluationReverseLedgerRequest.js";
 export type { FxRevaluationRunLedgerRequest } from "./FxRevaluationRunLedgerRequest.js";
+export { JournalTemplatesCreateLedgerRequest } from "./JournalTemplatesCreateLedgerRequest.js";
+export type { JournalTemplatesDeleteLedgerRequest } from "./JournalTemplatesDeleteLedgerRequest.js";
+export { JournalTemplatesListLedgerRequest } from "./JournalTemplatesListLedgerRequest.js";
+export type { JournalTemplatesPostLedgerRequest } from "./JournalTemplatesPostLedgerRequest.js";
 export type { JournalTransactionsCreateLedgerRequest } from "./JournalTransactionsCreateLedgerRequest.js";
 export type { JournalTransactionsGetLedgerRequest } from "./JournalTransactionsGetLedgerRequest.js";
 export { JournalTransactionsListLedgerRequest } from "./JournalTransactionsListLedgerRequest.js";

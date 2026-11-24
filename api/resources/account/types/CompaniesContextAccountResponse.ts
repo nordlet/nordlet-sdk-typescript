@@ -149,7 +149,7 @@ export namespace CompaniesContextAccountResponse {
         bankCode: string | null;
         bankBranchCode: string | null;
         bankAccountNumber: string | null;
-        /** Prefix of the numbers of invoices issued without a document series (SF when none was set) */
+        /** Prefix of the numbers of invoices issued without a document series (SF when none was set; empty in Bulgaria, where invoices and notes share one ten-digit number range) */
         invoicePrefix: string;
         /** Number the next invoice issued without a document series gets, before any country-specific format */
         nextInvoiceNumber: string;

@@ -141,6 +141,8 @@ export namespace InvoicesCreateSalesRequest {
             /** A fixed asset sold on this line: the line net is booked to the assets.disposalProceeds posting rule account and `assets/assets/dispose` takes the proceeds from the issued invoice. Only on an invoice (422), only for an asset that is not disposed, and not with revenue recognition over time. */
             assetId?: string | undefined;
             vatExemptionBasis?: string | undefined;
+            /** The revenue account the line is credited to at issue, a postable account of the company's chart (422 otherwise); without it the operation type's income account, else the item's sale account, else the services revenue posting rule account for a service item or a line without an item and the products revenue posting rule account for a product item. A line that sells a fixed asset always goes to `assets.disposalProceeds`. */
+            accountCode?: string | undefined;
             standaloneSellingPrice?: string | undefined;
             refundEstimatePercent?: string | undefined;
         }

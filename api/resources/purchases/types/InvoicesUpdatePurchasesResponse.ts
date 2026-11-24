@@ -28,7 +28,10 @@ export interface InvoicesUpdatePurchasesResponse {
     intrastatRegion: string | null;
     intrastatNatureOfTransaction: string | null;
     einvoiceNumber: string | null;
+    paymentReference: string | null;
     documentRef: string | null;
+    agreementId: string | null;
+    agreementPeriodStart: string | null;
     createdAt: string;
     updatedAt: string;
     lines: InvoicesUpdatePurchasesResponse.Lines.Item[];
@@ -67,6 +70,7 @@ export namespace InvoicesUpdatePurchasesResponse {
             unitPriceInclVat: string | null;
             vatRatePercent: string;
             vatClassifierCode: string | null;
+            deductiblePercent: number | null;
             costCenterId: string | null;
             projectId: string | null;
             accountCode: string | null;
@@ -74,6 +78,7 @@ export namespace InvoicesUpdatePurchasesResponse {
             deferralEndDate: string | null;
             lotNumber: string | null;
             expiryDate: string | null;
+            chassisNumbers: string[] | null;
             lineNet: string;
             lineVat: string;
             lineGross: string;

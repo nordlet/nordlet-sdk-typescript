@@ -39,5 +39,9 @@ export namespace AccountsUpdateBankResponse {
         companyName?: string | undefined;
         /** Nacha: the Company Discretionary Data the bank asks for */
         companyDiscretionaryData?: string | undefined;
+        /** pain.001: the BIC of the bank that holds this account, written as the debtor agent; required for a SEK supplier file from a Swedish account */
+        bic?: string | undefined;
+        /** pain.001: the identifier the bank gave the company for file payments (at Swedbank the agreement ID), written as InitgPty/Id/OrgId/Othr with scheme BANK */
+        initiatingPartyBankId?: string | undefined;
     }
 }

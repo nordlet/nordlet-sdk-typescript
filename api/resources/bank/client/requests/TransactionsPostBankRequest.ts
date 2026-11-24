@@ -16,4 +16,12 @@ export interface TransactionsPostBankRequest {
     projectId?: string;
     description?: string;
     vatClassifierCode?: string;
+    saveRule?: TransactionsPostBankRequest.SaveRule;
+}
+
+export namespace TransactionsPostBankRequest {
+    export interface SaveRule {
+        counterpartyContains?: string | undefined;
+        descriptionContains?: string | undefined;
+    }
 }

@@ -28,6 +28,7 @@ export interface AssetsInputVatAssetsResponse {
     disposalProceeds: string | null;
     disposalJournalTransactionId: string | null;
     disposalSaleInvoiceId: string | null;
+    purchaseInvoiceLineId: string | null;
     createdAt: string;
 }
 

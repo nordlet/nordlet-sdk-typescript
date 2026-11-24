@@ -13,6 +13,7 @@ export interface ItemsCreateCatalogResponse {
     salePriceExclVat: string | null;
     purchasePriceExclVat: string | null;
     cnCode: string | null;
+    cpaCode: string | null;
     originCountry: string | null;
     netMassKg: string | null;
     supplementaryUnit: string | null;

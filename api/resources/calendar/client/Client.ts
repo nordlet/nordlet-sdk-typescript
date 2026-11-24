@@ -400,7 +400,7 @@ export class CalendarClient {
     }
 
     /**
-     * Builds the file of a deadline whose format Nordlet produces but whose administration takes it only through the company's own account or program. Nothing is sent and no filing is recorded. `key` is `<ruleKey>:<period>` as `calendar/list` returns it. Answers 404 for an unknown rule or an invalid period, and 422 with the reason when Nordlet builds no single file for the deadline.
+     * Builds the file of a deadline whose format Nordlet produces but whose administration takes it only through the company's own account or program. Nothing is sent and no filing is recorded. `key` is `<ruleKey>:<period>` as `calendar/list` returns it. A deadline filed as one document per person or flow (REK-O, Intrastat, PIT-11, FPS) comes as one zip of its documents when there are several. Answers 404 for an unknown rule or an invalid period, and 422 with the reason when Nordlet builds no file for the deadline.
      *
      * @param {NordletApi.DownloadCalendarRequest} request
      * @param {CalendarClient.RequestOptions} requestOptions - Request-specific configuration.
